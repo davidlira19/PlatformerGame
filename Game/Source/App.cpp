@@ -24,6 +24,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures();
 	audio = new Audio();
 	scene = new Scene();
+	map = new Map();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -270,6 +271,21 @@ const char* App::GetOrganization() const
 {
 	return organization.GetString();
 }
+
+// Load / Save
+void App::LoadGameRequest()
+{
+	// NOTE: We should check if SAVE_STATE_FILENAME actually exist
+	loadGameRequested = true;
+}
+
+// ---------------------------------------
+void App::SaveGameRequest() const
+{
+	// NOTE: We should check if SAVE_STATE_FILENAME actually exist and... should we overwriten
+	saveGameRequested = true;
+}
+
 void App::LoadGame() {
 	ListItem<Module*>* item = nullptr;
 	pugi::xml_document LoadFile;
