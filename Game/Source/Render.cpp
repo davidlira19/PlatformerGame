@@ -202,12 +202,16 @@ bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b,
 
 	return ret;
 }
+// L02: TODO 6: Implement a method to load the state
+// for now load camera's x and y
 bool Render::LoadState(pugi::xml_node* nodo) {
 	camera.x = nodo->child("camera").attribute("x").as_int(0);
 	camera.y = nodo->child("camera").attribute("y").as_int(0);
 	
 	return true;
 }
+// L02: TODO 8: Create a method to save the state of the renderer
+// using append_child and append_attribute
 bool Render::SaveState(pugi::xml_node* nodo) {
 	pugi::xml_node node;
 	node = nodo->append_child("camera");

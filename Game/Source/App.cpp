@@ -273,6 +273,7 @@ const char* App::GetOrganization() const
 }
 
 // Load / Save
+// L02: TODO 7: Implement the xml save method for current state
 void App::LoadGameRequest()
 {
 	// NOTE: We should check if SAVE_STATE_FILENAME actually exist
@@ -285,7 +286,8 @@ void App::SaveGameRequest() const
 	// NOTE: We should check if SAVE_STATE_FILENAME actually exist and... should we overwriten
 	saveGameRequested = true;
 }
-
+// L02: TODO 5: Create a method to actually load an xml file
+// then call all the modules to load themselves
 void App::LoadGame() {
 	ListItem<Module*>* item = nullptr;
 	pugi::xml_document LoadFile;
