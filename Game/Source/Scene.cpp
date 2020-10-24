@@ -5,13 +5,14 @@
 #include "Render.h"
 #include "Window.h"
 #include "Scene.h"
+#include "Map.h"
 
 #include "Defs.h"
 #include "Log.h"
 
 Scene::Scene() : Module()
 {
-	name.create("scene");
+	name.Create("scene");
 }
 
 // Destructor
