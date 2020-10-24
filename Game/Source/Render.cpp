@@ -202,7 +202,21 @@ bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b,
 
 	return ret;
 }
+bool Render::LoadState(pugi::xml_node* nodo) {
+	camera.x = nodo->child("camera").attribute("x").as_int(0);
+	camera.y = nodo->child("camera").attribute("y").as_int(0);
+	
+	return true;
+}
+bool Render::SaveState(pugi::xml_node* nodo) {
+	pugi::xml_node node;
+	node = nodo->append_child("camera");
+	node.append_attribute("x") = camera.x;
+	node.append_attribute("y") = camera.y;
+	return true;
 
+
+}
 bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
 {
 	bool ret = true;

@@ -21,7 +21,8 @@ public:
 
 	// Called before the first frame
 	bool Start();
-
+	bool LoadState(pugi::xml_node* nodo);
+	bool SaveState(pugi::xml_node* nodo);
 	// Called each loop iteration
 	bool PreUpdate();
 	bool Update(float dt);

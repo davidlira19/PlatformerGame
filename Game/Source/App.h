@@ -17,7 +17,8 @@ class Scene;
 class App
 {
 public:
-
+	void LoadGame();
+	void SaveGame();
 	// Constructor
 	App(int argc, char* args[]);
 

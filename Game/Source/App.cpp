@@ -269,5 +269,27 @@ const char* App::GetOrganization() const
 {
 	return organization.GetString();
 }
+void App::LoadGame() {
+	ListItem<Module*>* item = nullptr;
+	pugi::xml_document LoadFile;
+	pugi::xml_node load;
+	LoadFile.load_file(loadedGame.GetString());
+	load = LoadFile.child("save_state");
 
+	for (item = modules.start; item != nullptr; item = item->next) {
+		item->data->LoadState(&load.child(item->data->name.GetString()));
+	}
+	loadGameRequested = false;
+}
+void App::SaveGame() {
+	ListItem<Module*>* item = nullptr;
+	pugi::xml_document SaveFile;
+	pugi::xml_node Save;
+	SaveFile.load_file(savedGame.GetString());
+	Save = SaveFile.append_child("save_state");
 
+	for (item = modules.start; item != nullptr; item = item->next) {
+		item->data->SaveState(&Save.child(item->data->name.GetString()));
+	}
+	saveGameRequested = false;
+}
