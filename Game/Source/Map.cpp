@@ -174,10 +174,10 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	rect.h = tileHeight;
 
 	//ISOMETRIC
-	int res = id / 2;
-	int hond = id % 2;
+	int res = id / 4;
+	int hond = id % 4;
 	if (hond == 0) {
-		hond = 2;
+		hond = 4;
 		res = res - 1;
 	}
 	hond = hond - 1;
