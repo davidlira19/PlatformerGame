@@ -133,8 +133,19 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	int relativeId = id - firstgid;
 	rect.w = tileWidth;
 	rect.h = tileHeight;
-	/*rect.x = margin + ((rect.w + spacing) * (relativeId % numTilesWidth));
-	rect.y = margin + ((rect.h + spacing) * (relativeId / numTilesWidth));*/
+
+	//ISOMETRIC
+	/*int res = id / 4;
+	int hond = id % 4;
+	if (hond == 0) {
+		hond = 4;
+		res = res - 1;
+	}
+	hond = hond - 1;
+	rect.x = hond * rect.w;
+	rect.y = res * rect.h;*/
+
+	//ORTHOGONAL
 	int res = id / 8;
 	int hond = id % 8;
 	if (hond == 0) {
