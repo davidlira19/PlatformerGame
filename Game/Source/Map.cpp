@@ -10,7 +10,7 @@
 
 Map::Map() : Module(), mapLoaded(false)
 {
-    name.Create("map");
+	name.Create("map");
 }
 
 // Destructor
@@ -28,47 +28,49 @@ int Properties::GetProperty(const char* value, int defaultValue) const
 // Called before render is available
 bool Map::Awake(pugi::xml_node& config)
 {
-    LOG("Loading Map Parser");
-    bool ret = true;
+	LOG("Loading Map Parser");
+	bool ret = true;
 
-    folder.Create(config.child("folder").child_value());
+	folder.Create(config.child("folder").child_value());
 
-    return ret;
+	return ret;
 }
 
 // Draw the map (all requried layers)
 void Map::Draw()
 {
 	if (mapLoaded == false) return;
-
+	ListItem<TileSet*>* dat;
+	dat = data.tilesets.start;
 	// L04: DONE 5: Prepare the loop to draw all tilesets + DrawTexture()
 	ListItem<MapLayer*>* layer = data.layers.start;
+	SDL_Texture* text = dat->data->texture;
 	// L06: TODO 4: Make sure we draw all the layers and not just the first one
-	while (layer!=NULL)
+	while (layer != NULL)
 	{
 		for (int y = 0; y < data.height; ++y)
 		{
 			for (int x = 0; x < data.width; ++x)
 			{
 				int tileId = layer->data->Get(x, y);
-				if (tileId == 0)
+				if (tileId > 0)
 				{
-					data.tilesets.start->data = GetTilesetFromTileId(tileId);
-					SDL_Rect rect = data.tilesets.start->data->GetTileRect(tileId);
+					dat->data = GetTilesetFromTileId(tileId);
+					SDL_Rect rect = dat->data->GetTileRect(tileId);
 					iPoint point = MapToWorld(x, y);
-					app->render->DrawTexture(data.tilesets.start->data->texture, point.x, point.y, &rect);
+					app->render->DrawTexture(text, point.x, point.y, &rect);
 					// L04: DONE 9: Complete the draw function
 				}
 			}
 		}
 		layer = layer->next;
 	}
-	
+
 }
 
 iPoint Map::MapToWorld(int x, int y) const
 {
-	iPoint ret(0,0);
+	iPoint ret(0, 0);
 
 	// L05: DONE 1: Add isometric map to world coordinates
 	if (data.type == MAPTYPE_ORTHOGONAL)
@@ -144,10 +146,10 @@ TileSet* Map::GetTilesetFromTileId(int id) const
 // Called before quitting
 bool Map::CleanUp()
 {
-    LOG("Unloading map");
+	LOG("Unloading map");
 
-    // L03: DONE 2: Make sure you clean up any memory allocated from tilesets/map
-    // Remove all tilesets
+	// L03: DONE 2: Make sure you clean up any memory allocated from tilesets/map
+	// Remove all tilesets
 	ListItem<TileSet*>* item;
 	item = data.tilesets.start;
 
@@ -161,7 +163,7 @@ bool Map::CleanUp()
 	// Clean up the pugui tree
 	mapFile.reset();
 
-    return true;
+	return true;
 }
 
 SDL_Rect TileSet::GetTileRect(int id) const
@@ -185,11 +187,12 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	rect.y = res * rect.h;*/
 
 	//ORTHOGONAL
-	int tam=texWidth/tileWidth
-	int res = id / tam;
-	int hond = id % tam;
+
+	int num = texWidth / tileWidth;
+	int res = id / num;
+	int hond = id % num;
 	if (hond == 0) {
-		hond = tam;
+		hond = num;
 		res = res - 1;
 	}
 	hond = hond - 1;
@@ -200,22 +203,22 @@ SDL_Rect TileSet::GetTileRect(int id) const
 // Load new map
 bool Map::Load(const char* filename)
 {
-    bool ret = true;
-    SString tmp("%s%s", folder.GetString(), filename);
+	bool ret = true;
+	SString tmp("%s%s", folder.GetString(), filename);
 
-    pugi::xml_parse_result result = mapFile.load_file(tmp.GetString());
+	pugi::xml_parse_result result = mapFile.load_file(tmp.GetString());
 
-    if(result == NULL)
-    {
-        LOG("Could not load map xml file %s. pugi error: %s", filename, result.description());
-        ret = false;
-    }
+	if (result == NULL)
+	{
+		LOG("Could not load map xml file %s. pugi error: %s", filename, result.description());
+		ret = false;
+	}
 
 	// Load general info
-   
 
-    // L03: DONE 4: Create and call a private function to load a tileset
-    // remember to support more any number of tilesets!
+
+	// L03: DONE 4: Create and call a private function to load a tileset
+	// remember to support more any number of tilesets!
 	pugi::xml_node tileset;
 	for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
 	{
@@ -232,16 +235,16 @@ bool Map::Load(const char* filename)
 		// L03: DONE 3: Create and call a private function to load and fill all your map data
 		ret = LoadMap();
 	}
-    if(ret == true)
-    {
-        // L03: DONE 5: LOG all the data loaded iterate all tilesets and LOG everything
+	if (ret == true)
+	{
+		// L03: DONE 5: LOG all the data loaded iterate all tilesets and LOG everything
 		ListItem<TileSet*>* list1;
 		list1 = data.tilesets.start;
 
-		LOG("Succesfully parsed map XML file: snow_tileset.tmx",);
+		LOG("Succesfully parsed map XML file: snow_tileset.tmx", );
 		LOG("width: %d tile_height: %d", data.width, data.height);
 		LOG("tile_width: %d tile_heigh: %d", data.tileWidth, data.tileHeight);
-    }
+	}
 	pugi::xml_node layer;
 	for (layer = mapFile.child("map").child("layer"); layer && ret; layer = layer.next_sibling("layer"))
 	{
@@ -252,9 +255,9 @@ bool Map::Load(const char* filename)
 		if (ret == true)
 			data.layers.add(lay);
 	}
-    mapLoaded = ret;
+	mapLoaded = ret;
 
-    return ret;
+	return ret;
 }
 bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 {
@@ -298,11 +301,11 @@ bool Map::LoadMap()
 		data.height = map.attribute("height").as_int();
 		data.width = map.attribute("width").as_int();
 		SString tmp("%s", map.attribute("orientation").value());
-		if (tmp=="orthogonal")
+		if (tmp == "orthogonal")
 		{
 			data.type = MapTypes::MAPTYPE_ORTHOGONAL;
 		}
-		else if (tmp=="isometric")
+		else if (tmp == "isometric")
 		{
 			data.type = MapTypes::MAPTYPE_ISOMETRIC;
 		}
