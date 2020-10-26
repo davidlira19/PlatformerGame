@@ -51,7 +51,7 @@ void Map::Draw()
 			for (int x = 0; x < data.width; ++x)
 			{
 				int tileId = layer->data->Get(x, y);
-				if (tileId > 0)
+				if (tileId == 0)
 				{
 					data.tilesets.start->data = GetTilesetFromTileId(tileId);
 					SDL_Rect rect = data.tilesets.start->data->GetTileRect(tileId);
@@ -237,7 +237,7 @@ bool Map::Load(const char* filename)
 		ListItem<TileSet*>* list1;
 		list1 = data.tilesets.start;
 
-		LOG("Succesfully parsed map XML file: hello2.tmx",);
+		LOG("Succesfully parsed map XML file: snow_tileset.tmx",);
 		LOG("width: %d tile_height: %d", data.width, data.height);
 		LOG("tile_width: %d tile_heigh: %d", data.tileWidth, data.tileHeight);
     }
@@ -329,14 +329,14 @@ bool Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 	}
 	else
 	{
-		set->firstgid = tileset_node.attribute("firstgid").as_int(1);
-		set->margin = tileset_node.attribute("margin").as_int(1);
-		set->name = tileset_node.attribute("name").as_string("Desert");
-		set->tile_width = tileset_node.attribute("tilewidth").as_int(32);
-		set->tile_height = tileset_node.attribute("tileheight").as_int(32);
-		set->tileHeight = tileset_node.attribute("tileheight").as_int(32);
-		set->tileWidth = tileset_node.attribute("tilewidth").as_int(32);
-		set->spacing = tileset_node.attribute("spacing").as_int(1);
+		set->firstgid = tileset_node.attribute("firstgid").as_int();
+		set->margin = tileset_node.attribute("margin").as_int();
+		set->name = tileset_node.attribute("name").as_string();
+		set->tile_width = tileset_node.attribute("tilewidth").as_int();
+		set->tile_height = tileset_node.attribute("tileheight").as_int();
+		set->tileHeight = tileset_node.attribute("tileheight").as_int();
+		set->tileWidth = tileset_node.attribute("tilewidth").as_int();
+		set->spacing = tileset_node.attribute("spacing").as_int();
 	}
 
 	return ret;
