@@ -174,7 +174,7 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	rect.h = tileHeight;
 
 	//ISOMETRIC
-	int res = id / 4;
+	/*int res = id / 4;
 	int hond = id % 4;
 	if (hond == 0) {
 		hond = 4;
@@ -182,18 +182,18 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	}
 	hond = hond - 1;
 	rect.x = hond * rect.w;
-	rect.y = res * rect.h;
+	rect.y = res * rect.h;*/
 
 	//ORTHOGONAL
-	/*int res = id / 8;
-	int hond = id % 8;
+	int res = id / 10;
+	int hond = id % 10;
 	if (hond == 0) {
-		hond = 8;
+		hond = 10;
 		res = res - 1;
 	}
 	hond = hond - 1;
-	rect.x = margin * hond + hond * rect.w + margin;
-	rect.y = margin * res + res * rect.h + margin;*/
+	rect.x = hond * rect.w;
+	rect.y = res * rect.h;
 	return rect;
 }
 // Load new map
