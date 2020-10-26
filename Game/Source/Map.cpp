@@ -42,24 +42,30 @@ void Map::Draw()
 	if (mapLoaded == false) return;
 
 	// L04: DONE 5: Prepare the loop to draw all tilesets + DrawTexture()
-	MapLayer* layer = data.layers.start->data;
-	ListItem<TileSet*>* node;
-	node = data.tilesets.start;
+	ListItem<MapLayer*>* layer = data.layers.start;
 	// L06: TODO 4: Make sure we draw all the layers and not just the first one
-	for (int y = 0; y < data.height; ++y)
+	while (layer!=NULL)
 	{
-		for (int x = 0; x < data.width; ++x)
+		for (int y = 0; y < data.height; ++y)
 		{
-			int tileId = layer->Get(x, y);
-			if (tileId > 0)
+			for (int x = 0; x < data.width; ++x)
 			{
-				iPoint point = MapToWorld(x, y);
-				app->render->DrawTexture(node->data->texture, point.x, point.y, &node->data->GetTileRect(tileId));
-				// L04: DONE 9: Complete the draw function
+				int tileId = layer->data->Get(x, y);
+				if (tileId > 0)
+				{
+					data.tilesets.start->data = GetTilesetFromTileId(tileId);
+					SDL_Rect rect = data.tilesets.start->data->GetTileRect(tileId);
+					iPoint point = MapToWorld(x, y);
+					app->render->DrawTexture(data.tilesets.start->data->texture, point.x, point.y, &rect);
+					// L04: DONE 9: Complete the draw function
+				}
 			}
 		}
+		layer = layer->next;
 	}
+	
 }
+
 iPoint Map::MapToWorld(int x, int y) const
 {
 	iPoint ret(0,0);
@@ -119,7 +125,7 @@ TileSet* Map::GetTilesetFromTileId(int id) const
 	TileSet* set = item->data;
 	bool correct = false;
 
-	while (correct == false)
+	while (correct == false && item->next != nullptr)
 	{
 		if (id >= item->data->firstgid && id < item->next->data->firstgid)
 		{
@@ -157,6 +163,7 @@ bool Map::CleanUp()
 
     return true;
 }
+
 SDL_Rect TileSet::GetTileRect(int id) const
 {
 	SDL_Rect rect = { 0 };
@@ -167,10 +174,10 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	rect.h = tileHeight;
 
 	//ISOMETRIC
-	int res = id / 4;
-	int hond = id % 4;
+	int res = id / 2;
+	int hond = id % 2;
 	if (hond == 0) {
-		hond = 4;
+		hond = 2;
 		res = res - 1;
 	}
 	hond = hond - 1;
@@ -348,18 +355,14 @@ bool Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	}
 	else
 	{
-		SString tmp("%s%s", folder.GetString(), image.attribute("source").as_string("tmw_desert_spacing.png"));
+		SString tmp("%s%s", folder.GetString(), image.attribute("source").as_string());
 		set->texture = app->tex->Load(tmp.GetString());
-		set->texHeight = image.attribute("height").as_int(199);
-		set->texWidth = image.attribute("width").as_int(265);
-		/*SString tmp("%s%s", folder.GetString(), image.attribute("source").as_string("tmw_desert_spacing.png"));
-		set->texture = app->tex->Load(tmp.GetString());
-		set->texWidth = tileset_node.attribute("texWidth").as_int();
-		set->texHeight = tileset_node.attribute("texHeight").as_int();
+		set->texHeight = image.attribute("height").as_int();
+		set->texWidth = image.attribute("width").as_int();
 		set->numTilesWidth = tileset_node.attribute("numTilesWidth").as_int();
 		set->numTilesHeight = tileset_node.attribute("numTilesHeight").as_int();
 		set->offsetX = tileset_node.attribute("offsetX").as_int();
-		set->offsetY = tileset_node.attribute("offsetY").as_int();*/
+		set->offsetY = tileset_node.attribute("offsetY").as_int();
 	}
 
 	return ret;
