@@ -17,6 +17,14 @@ Map::Map() : Module(), mapLoaded(false)
 Map::~Map()
 {}
 
+// L06: TODO 7: Ask for the value of a custom property
+int Properties::GetProperty(const char* value, int defaultValue) const
+{
+	//...
+
+	return defaultValue;
+}
+
 // Called before render is available
 bool Map::Awake(pugi::xml_node& config)
 {
@@ -37,6 +45,7 @@ void Map::Draw()
 	MapLayer* layer = data.layers.start->data;
 	ListItem<TileSet*>* node;
 	node = data.tilesets.start;
+	// L06: TODO 4: Make sure we draw all the layers and not just the first one
 	for (int y = 0; y < data.height; ++y)
 	{
 		for (int x = 0; x < data.width; ++x)
@@ -103,6 +112,29 @@ iPoint Map::WorldToMap(int x, int y) const
 	return ret;
 }
 
+// L06: TODO 3: Pick the right Tileset based on a tile id
+TileSet* Map::GetTilesetFromTileId(int id) const
+{
+	ListItem<TileSet*>* item = data.tilesets.start;
+	TileSet* set = item->data;
+	bool correct = false;
+
+	while (correct == false)
+	{
+		if (id >= item->data->firstgid && id < item->next->data->firstgid)
+		{
+			set = item->data;
+			correct = true;
+		}
+		else
+		{
+			item = item->next;
+		}
+	}
+
+	return set;
+}
+
 // Called before quitting
 bool Map::CleanUp()
 {
@@ -135,7 +167,7 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	rect.h = tileHeight;
 
 	//ISOMETRIC
-	/*int res = id / 4;
+	int res = id / 4;
 	int hond = id % 4;
 	if (hond == 0) {
 		hond = 4;
@@ -143,10 +175,10 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	}
 	hond = hond - 1;
 	rect.x = hond * rect.w;
-	rect.y = res * rect.h;*/
+	rect.y = res * rect.h;
 
 	//ORTHOGONAL
-	int res = id / 8;
+	/*int res = id / 8;
 	int hond = id % 8;
 	if (hond == 0) {
 		hond = 8;
@@ -154,7 +186,7 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	}
 	hond = hond - 1;
 	rect.x = margin * hond + hond * rect.w + margin;
-	rect.y = margin * res + res * rect.h + margin;
+	rect.y = margin * res + res * rect.h + margin;*/
 	return rect;
 }
 // Load new map
@@ -330,5 +362,14 @@ bool Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 		set->offsetY = tileset_node.attribute("offsetY").as_int();*/
 	}
 
+	return ret;
+}
+
+// L06: TODO 6: Load a group of properties from a node and fill a list with it
+bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
+{
+	bool ret = false;
+
+	//...
 	return ret;
 }
