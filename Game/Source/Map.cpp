@@ -46,7 +46,7 @@ void Map::Draw()
 			{
 				iPoint point = MapToWorld(x, y);
 				app->render->DrawTexture(node->data->texture, point.x, point.y, &node->data->GetTileRect(tileId));
-				// L04: TODO 9: Complete the draw function
+				// L04: DONE 9: Complete the draw function
 			}
 		}
 	}
@@ -55,14 +55,50 @@ iPoint Map::MapToWorld(int x, int y) const
 {
 	iPoint ret;
 
-	ret.x = x * data.tileWidth;
-	ret.y = y * data.tileHeight;
-
-	// L05: TODO 1: Add isometric map to world coordinates
+	if (data.type == MAPTYPE_ORTHOGONAL)
+	{
+		ret.x = x * data.tileWidth;
+		ret.y = y * data.tileHeight;
+	}
+	else if (data.type == MAPTYPE_ISOMETRIC)
+	{
+		ret.x = (x - y) * (data.tileWidth / 2);
+		ret.y = (x + y) * (data.tileHeight / 2);
+	}
+	else
+	{
+		LOG("Unknown map type");
+		ret.x = x; ret.y = y;
+	}
 
 	return ret;
 }
+iPoint Map::WorldToMap(int x, int y) const
+{
+	iPoint ret(0, 0);
 
+	// L05: DONE 3: Add the case for isometric maps to WorldToMap
+	if (data.type == MAPTYPE_ORTHOGONAL)
+	{
+		ret.x = x / data.tileWidth;
+		ret.y = y / data.tileHeight;
+	}
+	else if (data.type == MAPTYPE_ISOMETRIC)
+	{
+
+		float half_width = data.tileWidth * 0.5f;
+		float half_height = data.tileHeight * 0.5f;
+		ret.x = int((x / half_width + y / half_height) / 2);
+		ret.y = int((y / half_height - (x / half_width)) / 2);
+	}
+	else
+	{
+		LOG("Unknown map type");
+		ret.x = x; ret.y = y;
+	}
+
+	return ret;
+}
 // Called before quitting
 bool Map::CleanUp()
 {
@@ -179,7 +215,7 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 		layer->data[i] = node1.attribute("gid").as_int();
 		node1 = node1.next_sibling("tile");
 	}
-	// L04: TODO 3: Load a single layer
+	// L04: DONE 3: Load a single layer
 
 	return ret;
 }
