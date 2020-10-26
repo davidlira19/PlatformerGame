@@ -46,19 +46,59 @@ void Map::Draw()
 			{
 				iPoint point = MapToWorld(x, y);
 				app->render->DrawTexture(node->data->texture, point.x, point.y, &node->data->GetTileRect(tileId));
-				// L04: TODO 9: Complete the draw function
+				// L04: DONE 9: Complete the draw function
 			}
 		}
 	}
 }
 iPoint Map::MapToWorld(int x, int y) const
 {
-	iPoint ret;
+	iPoint ret(0,0);
 
-	ret.x = x * data.tileWidth;
-	ret.y = y * data.tileHeight;
+	// L05: DONE 1: Add isometric map to world coordinates
+	if (data.type == MAPTYPE_ORTHOGONAL)
+	{
+		ret.x = x * data.tileWidth;
+		ret.y = y * data.tileHeight;
+	}
+	else if (data.type == MAPTYPE_ISOMETRIC)
+	{
+		ret.x = (x - y) * (data.tileWidth / 2);
+		ret.y = (x + y) * (data.tileHeight / 2);
+	}
+	else
+	{
+		LOG("Unknown map type");
+		ret.x = x; ret.y = y;
+	}
 
-	// L05: TODO 1: Add isometric map to world coordinates
+	return ret;
+}
+
+// L05: DONE 2: Add orthographic world to map coordinates
+iPoint Map::WorldToMap(int x, int y) const
+{
+	iPoint ret(0, 0);
+
+	// L05: DONE 3: Add the case for isometric maps to WorldToMap
+	if (data.type == MAPTYPE_ORTHOGONAL)
+	{
+		ret.x = x / data.tileWidth;
+		ret.y = y / data.tileHeight;
+	}
+	else if (data.type == MAPTYPE_ISOMETRIC)
+	{
+
+		float half_width = data.tileWidth * 0.5f;
+		float half_height = data.tileHeight * 0.5f;
+		ret.x = int((x / half_width + y / half_height) / 2);
+		ret.y = int((y / half_height - (x / half_width)) / 2);
+	}
+	else
+	{
+		LOG("Unknown map type");
+		ret.x = x; ret.y = y;
+	}
 
 	return ret;
 }
@@ -205,6 +245,23 @@ bool Map::LoadMap()
 		node->data->numTilesWidth = map.attribute("width").as_int();
 		data.height = map.attribute("height").as_int();
 		data.width = map.attribute("width").as_int();
+		SString tmp("%s", map.attribute("orientation").value());
+		if (tmp=="orthogonal")
+		{
+			data.type = MapTypes::MAPTYPE_ORTHOGONAL;
+		}
+		else if (tmp=="isometric")
+		{
+			data.type = MapTypes::MAPTYPE_ISOMETRIC;
+		}
+		else if (tmp == "staggered")
+		{
+			data.type = MapTypes::MAPTYPE_STAGGERED;
+		}
+		else
+		{
+			data.type = MapTypes::MAPTYPE_UNKNOWN;
+		}
 	}
 
 	return ret;

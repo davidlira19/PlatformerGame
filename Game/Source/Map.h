@@ -95,7 +95,7 @@ public:
     // Load new map
     bool Load(const char* path);
 	iPoint MapToWorld(int x, int y) const;
-
+	iPoint WorldToMap(int x, int y) const;
 private:
 
 	// L03: DONE Methods to load all required map data
