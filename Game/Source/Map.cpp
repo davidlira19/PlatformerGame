@@ -31,9 +31,37 @@ bool Map::Awake(pugi::xml_node& config)
 // Draw the map (all requried layers)
 void Map::Draw()
 {
+	if (mapLoaded == false) return;
 
+	// L04: DONE 5: Prepare the loop to draw all tilesets + DrawTexture()
+	MapLayer* layer = data.layers.start->data;
+	ListItem<TileSet*>* node;
+	node = data.tilesets.start;
+	for (int y = 0; y < data.height; ++y)
+	{
+		for (int x = 0; x < data.width; ++x)
+		{
+			int tileId = layer->Get(x, y);
+			if (tileId > 0)
+			{
+				iPoint point = MapToWorld(x, y);
+				app->render->DrawTexture(node->data->texture, point.x, point.y, &node->data->GetTileRect(tileId));
+				// L04: TODO 9: Complete the draw function
+			}
+		}
+	}
 }
+iPoint Map::MapToWorld(int x, int y) const
+{
+	iPoint ret;
 
+	ret.x = x * data.tileWidth;
+	ret.y = y * data.tileHeight;
+
+	// L05: TODO 1: Add isometric map to world coordinates
+
+	return ret;
+}
 
 // Called before quitting
 bool Map::CleanUp()
@@ -57,7 +85,27 @@ bool Map::CleanUp()
 
     return true;
 }
+SDL_Rect TileSet::GetTileRect(int id) const
+{
+	SDL_Rect rect = { 0 };
 
+	// L04: DONE 7: Get relative Tile rectangle
+	int relativeId = id - firstgid;
+	rect.w = tileWidth;
+	rect.h = tileHeight;
+	/*rect.x = margin + ((rect.w + spacing) * (relativeId % numTilesWidth));
+	rect.y = margin + ((rect.h + spacing) * (relativeId / numTilesWidth));*/
+	int res = id / 8;
+	int hond = id % 8;
+	if (hond == 0) {
+		hond = 8;
+		res = res - 1;
+	}
+	hond = hond - 1;
+	rect.x = margin * hond + hond * rect.w + margin;
+	rect.y = margin * res + res * rect.h + margin;
+	return rect;
+}
 // Load new map
 bool Map::Load(const char* filename)
 {
@@ -73,11 +121,7 @@ bool Map::Load(const char* filename)
     }
 
 	// Load general info
-    if(ret == true)
-    {
-        // L03: DONE 3: Create and call a private function to load and fill all your map data
-		ret = LoadMap();
-	}
+   
 
     // L03: DONE 4: Create and call a private function to load a tileset
     // remember to support more any number of tilesets!
@@ -92,7 +136,11 @@ bool Map::Load(const char* filename)
 
 		data.tilesets.add(set);
 	}
-    
+	if (ret == true)
+	{
+		// L03: DONE 3: Create and call a private function to load and fill all your map data
+		ret = LoadMap();
+	}
     if(ret == true)
     {
         // L03: DONE 5: LOG all the data loaded iterate all tilesets and LOG everything
@@ -103,12 +151,38 @@ bool Map::Load(const char* filename)
 		LOG("width: %d tile_height: %d", data.width, data.height);
 		LOG("tile_width: %d tile_heigh: %d", data.tileWidth, data.tileHeight);
     }
+	pugi::xml_node layer;
+	for (layer = mapFile.child("map").child("layer"); layer && ret; layer = layer.next_sibling("layer"))
+	{
+		MapLayer* lay = new MapLayer();
 
+		ret = LoadLayer(layer, lay);
+
+		if (ret == true)
+			data.layers.add(lay);
+	}
     mapLoaded = ret;
 
     return ret;
 }
+bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
+{
+	bool ret = true;
 
+	layer->height = node.attribute("height").as_int();
+	layer->name = node.attribute("name").as_string();
+	layer->width = node.attribute("width").as_int();
+	layer->data = new uint[750];
+	memset(layer->data, 0, 750);
+	pugi::xml_node node1 = node.child("data").child("tile");
+	for (int i = 0; i < 750; i++) {
+		layer->data[i] = node1.attribute("gid").as_int();
+		node1 = node1.next_sibling("tile");
+	}
+	// L04: TODO 3: Load a single layer
+
+	return ret;
+}
 // L03: DONE: Load map general properties
 bool Map::LoadMap()
 {
@@ -122,10 +196,15 @@ bool Map::LoadMap()
 	}
 	else
 	{
-		data.width = map.attribute("width").as_int();
+		ListItem<TileSet*>* node;
+		node = data.tilesets.start;
+		// L03: TODO: Load map general properties
+		data.tileHeight = map.attribute("tileheight").as_int(32);
+		data.tileWidth = map.attribute("tilewidth").as_int(32);
+		node->data->numTilesHeight = map.attribute("height").as_int();
+		node->data->numTilesWidth = map.attribute("width").as_int();
 		data.height = map.attribute("height").as_int();
-		data.tileWidth = map.attribute("tilewidth").as_int();
-		data.tileHeight = map.attribute("tileheight").as_int();
+		data.width = map.attribute("width").as_int();
 	}
 
 	return ret;
@@ -143,12 +222,14 @@ bool Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 	}
 	else
 	{
-		set->firstgid = tileset_node.attribute("firstgrid").as_int();
-		set->name = tileset_node.attribute("name").as_string();
-		set->tileWidth = tileset_node.attribute("tileWidth").as_int();
-		set->tileHeight = tileset_node.attribute("tileHeight").as_int();
-		set->margin = tileset_node.attribute("margin").as_int();
-		set->spacing = tileset_node.attribute("spacing").as_int();
+		set->firstgid = tileset_node.attribute("firstgid").as_int(1);
+		set->margin = tileset_node.attribute("margin").as_int(1);
+		set->name = tileset_node.attribute("name").as_string("Desert");
+		set->tile_width = tileset_node.attribute("tilewidth").as_int(32);
+		set->tile_height = tileset_node.attribute("tileheight").as_int(32);
+		set->tileHeight = tileset_node.attribute("tileheight").as_int(32);
+		set->tileWidth = tileset_node.attribute("tilewidth").as_int(32);
+		set->spacing = tileset_node.attribute("spacing").as_int(1);
 	}
 
 	return ret;
@@ -169,12 +250,16 @@ bool Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	{
 		SString tmp("%s%s", folder.GetString(), image.attribute("source").as_string("tmw_desert_spacing.png"));
 		set->texture = app->tex->Load(tmp.GetString());
+		set->texHeight = image.attribute("height").as_int(199);
+		set->texWidth = image.attribute("width").as_int(265);
+		/*SString tmp("%s%s", folder.GetString(), image.attribute("source").as_string("tmw_desert_spacing.png"));
+		set->texture = app->tex->Load(tmp.GetString());
 		set->texWidth = tileset_node.attribute("texWidth").as_int();
 		set->texHeight = tileset_node.attribute("texHeight").as_int();
 		set->numTilesWidth = tileset_node.attribute("numTilesWidth").as_int();
 		set->numTilesHeight = tileset_node.attribute("numTilesHeight").as_int();
 		set->offsetX = tileset_node.attribute("offsetX").as_int();
-		set->offsetY = tileset_node.attribute("offsetY").as_int();
+		set->offsetY = tileset_node.attribute("offsetY").as_int();*/
 	}
 
 	return ret;

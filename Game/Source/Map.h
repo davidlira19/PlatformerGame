@@ -17,7 +17,8 @@ struct TileSet
 	int	spacing;
 	int	tileWidth;
 	int	tileHeight;
-
+	int tile_width;
+	int tile_height;
 	SDL_Texture* texture;
 	int	texWidth;
 	int	texHeight;
@@ -25,7 +26,7 @@ struct TileSet
 	int	numTilesHeight;
 	int	offsetX;
 	int	offsetY;
-
+	SDL_Rect GetTileRect(int id) const;
 };
 
 // L03: DONE 1: We create an enum for map type, just for convenience,
@@ -70,7 +71,7 @@ struct MapData
 	SDL_Color backgroundColor;
 	MapTypes type;
 	List<TileSet*> tilesets;
-
+	List<MapLayer*> layers;
 };
 
 class Map : public Module
@@ -93,7 +94,7 @@ public:
 
     // Load new map
     bool Load(const char* path);
-
+	iPoint MapToWorld(int x, int y) const;
 
 private:
 
@@ -101,9 +102,10 @@ private:
 	bool LoadMap();
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
-	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
+	
 
 public:
+	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 
     // L03: DONE 1: Add your struct for map info
 	MapData data;
