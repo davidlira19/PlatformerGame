@@ -12,6 +12,7 @@ class Input;
 class Render;
 class Textures;
 class Audio;
+class Player;
 class Scene;
 class Map;
 
@@ -79,8 +80,10 @@ public:
 	Render* render;
 	Textures* tex;
 	Audio* audio;
+	Player* player;
 	Scene* scene;
 	Map* map;
+	
 
 private:
 

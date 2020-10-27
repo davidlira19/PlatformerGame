@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
+#include "Player.h"
 #include "Scene.h"
 #include "Map.h"
 
@@ -23,6 +24,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render();
 	tex = new Textures();
 	audio = new Audio();
+	player = new Player();
 	scene = new Scene();
 	map = new Map();
 
@@ -32,6 +34,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
+	AddModule(player);
 	AddModule(scene);
 	AddModule(map);
 	// Render last to swap buffer
