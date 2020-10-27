@@ -38,7 +38,8 @@ bool Scene::Start()
 
 	// Load music
 	app->audio->PlayMusic("Assets/audio/music/Christmas_music2004.ogg");
-
+	app->render->camera.x = 0;
+	app->render->camera.y = -700;
 	return true;
 }
 
@@ -59,16 +60,16 @@ bool Scene::Update(float dt)
 		app->SaveGameRequest();
 
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		app->render->camera.y -= 1;
+		app->render->camera.y -= 2;
 
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		app->render->camera.y += 1;
+		app->render->camera.y += 2;
 
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		app->render->camera.x -= 1;
+		app->render->camera.x -= 2;
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		app->render->camera.x += 1;
+		app->render->camera.x += 2;
 
 	//app->render->DrawTexture(img, 380, 100);
 	app->map->Draw();
