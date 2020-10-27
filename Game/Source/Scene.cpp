@@ -37,7 +37,7 @@ bool Scene::Start()
 	app->map->Load("snow_tileset.tmx");
 
 	// Load music
-	app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
+	app->audio->PlayMusic("Assets/audio/music/Christmas_music2004.ogg");
 
 	return true;
 }
