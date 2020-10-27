@@ -60,16 +60,16 @@ bool Scene::Update(float dt)
 		app->SaveGameRequest();
 
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		app->render->camera.y -= 5;
-
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		app->render->camera.y += 5;
 
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		app->render->camera.y -= 5;
+
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		app->render->camera.x -= 5;
+		app->render->camera.x += 5;
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		app->render->camera.x += 5;
+		app->render->camera.x -= 5;
 
 	//CAMERA.X LIMITS
 	if (app->render->camera.x > 0)
@@ -92,7 +92,7 @@ bool Scene::Update(float dt)
 	//DRAW BACKGROUND
 	app->render->DrawTexture(bg_snow, 0, 0);
 	app->render->DrawTexture(bg_snow, 3600, 0);
-	app->render->DrawTexture(bg_snow, 7202, 0);
+	app->render->DrawTexture(bg_snow, 7200, 0);
 	app->map->Draw();
 	// L03: DONE 7: Set the window title with map/tileset info
 	
