@@ -17,12 +17,11 @@ class Player : public Module
 {
 public:
 	Player();
-	virtual ~Player();
 	bool Start();
 	bool Update();
 	bool PostUpdate();
 	bool CleanUp();
-
+	posicion Posicion;
 private:
 	SDL_Texture* santa = nullptr;
 
