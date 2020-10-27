@@ -28,22 +28,26 @@ Player::Player() : Module()
 }
 bool Player::Start()
 {
+
 	santa = app->tex->Load("Assets/textures/santaanimation.png");
 	//SET POSITION
 	Position.x = 870; Position.y = 1135;
 	currentAnimation = &Stop;
+
 	return true;
 }
-bool Player::Update()
+bool Player::Update(float dt)
 {
 	//INPUT TO MOVE THE PLAYER
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-		Position.x -= 2;
+		//currentAnimation = &Run_Right;
+		Position.x += 2;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-		Position.x += 2;
+		//currentAnimation = &Run_Left;
+		Position.x -= 2;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
@@ -53,16 +57,29 @@ bool Player::Update()
 	{
 		Position.y += 2;
 	}
+	else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		currentAnimation = &Jump;
+		JumpFunction();
+	}
+
 	return true;
 }
 bool Player::PostUpdate() {
+
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(santa, Position.x, Position.y, &rect);
 	currentAnimation->Update();
+
 	return true;
 }
 bool Player::CleanUp() {
 
-
 	return true;
+}
+
+//PLAYER FUNCTIONS
+void Player::JumpFunction()
+{
+	
 }

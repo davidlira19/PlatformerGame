@@ -18,9 +18,14 @@ class Player : public Module
 public:
 	Player();
 	bool Start();
-	bool Update();
+	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
+
+	//PLAYER VARIABLES
+
+	//PLAYER FUNCTIONS
+	void JumpFunction();
 	//PLAYER POSITION
 	position Position;
 	//PLAYER ANIMATIONS
