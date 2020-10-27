@@ -8,7 +8,7 @@
 struct SDL_Rect;
 struct SDL_Texture;
 struct SDL_Renderer;
-class posicion
+class position
 {
 public:
 	int x, y;
@@ -21,8 +21,18 @@ public:
 	bool Update();
 	bool PostUpdate();
 	bool CleanUp();
-	posicion Posicion;
+	//PLAYER POSITION
+	position Position;
+	//PLAYER ANIMATIONS
+	Animation* lastanimation = nullptr;
+	Animation* currentAnimation = nullptr;
+
+	Animation Stop;
+	Animation Jump;
+	Animation Run;
+	Animation Dead;
 private:
+	//PLAYER TEXTURE
 	SDL_Texture* santa = nullptr;
 
 };
