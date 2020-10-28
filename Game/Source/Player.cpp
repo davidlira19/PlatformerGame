@@ -51,12 +51,11 @@ Player::Player() : Module()
 	DeadRight.loop = false;
 
 	//ANIMATION WHEN SANTA IS RUNNING RIGHT
-	RunRight.PushBack({ 80,1409,260,156 });
-	RunRight.PushBack({ 349,1409,260,156 });
-	RunRight.PushBack({ 621,1409,260,156 });
-	RunRight.PushBack({ 887,1409,260,156 });
-	RunRight.PushBack({ 1159,1409,260,156 });
-	//RunRight.PushBack({ 1,1678,270,156 });
+	RunRight.PushBack({ 1,1407,260,156 });
+	RunRight.PushBack({ 271,1407,260,156 });
+	RunRight.PushBack({ 541,1407,260,156 });
+	RunRight.PushBack({ 811,1407,260,156 });
+	RunRight.PushBack({ 1082,1407,260,156 });
 
 	RunRight.speed = 0.075f;
 	RunRight.loop = true;
@@ -100,13 +99,13 @@ Player::Player() : Module()
 
 	DeadLeft.speed = 0.075f;
 	DeadLeft.loop = false;
+
 	//ANIMATION WHEN SANTA IS RUNNING LEFT
-	RunLeft.PushBack({ 2515,1407,260,156 });
-	RunLeft.PushBack({ 2245,1407,260,156 });
-	RunLeft.PushBack({ 1975,1407,260,156 });
-	RunLeft.PushBack({ 1705,1407,260,156 });
-	RunLeft.PushBack({ 1442,1407,260,156 });
-	//RunLeft.PushBack({ 2529,1409,270,156 });
+	RunLeft.PushBack({ 2431,1407,260,156 });
+	RunLeft.PushBack({ 2162,1407,260,156 });
+	RunLeft.PushBack({ 1891,1407,260,156 });
+	RunLeft.PushBack({ 1621,1407,260,156 });
+	RunLeft.PushBack({ 1351,1407,260,156 });
 
 	RunLeft.speed = 0.075f;
 	RunLeft.loop = true;
@@ -117,7 +116,7 @@ bool Player::Start()
 
 	santa = app->tex->Load("Assets/textures/santaanimation.png");
 	//SET POSITION
-	Position.x = 870; Position.y = 1135;
+	Position.x = 870; Position.y = 1125;
 	currentAnimation = &StopRight;
 	//INITIALIZE VARIABLES
 	isJumping = false;
