@@ -61,6 +61,10 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		app->SaveGameRequest();
 
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		app->map->ChangeCollisionsDraw();
+	}
 	//CAMERA.X LIMITS
 	if (app->render->camera.x > 0)
 	{

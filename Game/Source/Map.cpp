@@ -40,7 +40,7 @@ bool Map::Awake(pugi::xml_node& config)
 void Map::Draw()
 {
 	if (mapLoaded == false) return;
-	
+	bool exit = false;
 	// L04: DONE 5: Prepare the loop to draw all tilesets + DrawTexture()
 	TileSet* tileset;
 	ListItem<MapLayer*>* layer = data.layers.start;
@@ -52,22 +52,66 @@ void Map::Draw()
 			for (int x = 0; x < data.width; ++x)
 			{
 				int tileId = layer->data->Get(x, y);
+
 				if (tileId > 0)
 				{
 					tileset = GetTilesetFromTileId(tileId);
-					SDL_Rect rect = tileset->GetTileRect(tileId);
-				
-					iPoint point = MapToWorld(x, y);
-					app->render->DrawTexture(tileset->texture, point.x, point.y, &rect);
+
+					if (tileset->name == "colisiones")
+					{
+
+						ListItem<MapLayer*>* list1;
+						list1 = data.layers.start;
+
+						if (list1->data->properties.propety.propetyValue == 1)
+						{
+							exit = true;
+						}
+
+					}
+
+					if (exit == false)
+					{
+
+						SDL_Rect rect = tileset->GetTileRect(tileId);
+						iPoint point = MapToWorld(x, y);
+						app->render->DrawTexture(tileset->texture, point.x, point.y, &rect);
+
+					}
+					else
+					{
+						break;
+					}
+
 					// L04: DONE 9: Complete the draw function
 				}
+
+			}
+			if (exit == true)
+			{
+				exit = false;
+				break;
 			}
 		}
+
 		layer = layer->next;
+
 	}
 
 }
-
+void Map::ChangeCollisionsDraw()
+{
+	ListItem<MapLayer*>* list1;
+	list1 = data.layers.start;
+	if (list1->data->properties.propety.propetyValue == 1)
+	{
+		list1->data->properties.propety.propetyValue = 0;
+	}
+	else
+	{
+		list1->data->properties.propety.propetyValue = 1;
+	}
+}
 iPoint Map::MapToWorld(int x, int y) const
 {
 	iPoint ret(0, 0);
@@ -256,6 +300,8 @@ bool Map::Load(const char* filename)
 		LOG("tile_width: %d tile_heigh: %d", data.tileWidth, data.tileHeight);
 	}
 	pugi::xml_node layer;
+	pugi::xml_node node2;
+	ListItem<MapLayer*>* list2;
 	for (layer = mapFile.child("map").child("layer"); layer && ret; layer = layer.next_sibling("layer"))
 	{
 		MapLayer* lay = new MapLayer();
@@ -264,6 +310,13 @@ bool Map::Load(const char* filename)
 
 		if (ret == true)
 			data.layers.add(lay);
+
+		node2 = layer.child("properties");
+		list2 = data.layers.start;
+		for (node2 = node2.child("property"); node2; node2 = node2.next_sibling("property"))
+		{
+			LoadProperties(node2, list2->data->properties);
+		}
 	}
 	mapLoaded = ret;
 
@@ -386,8 +439,12 @@ bool Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 // L06: TODO 6: Load a group of properties from a node and fill a list with it
 bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 {
-	bool ret = false;
+	bool ret = true;
 
-	//...
+	properties.propety.propetyName = node.attribute("name").as_string();
+	properties.propety.propetyValue = node.attribute("value").as_int();
+
+
 	return ret;
+	//...
 }

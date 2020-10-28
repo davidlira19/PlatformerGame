@@ -41,13 +41,16 @@ enum MapTypes
 
 
 // L06: TODO 5: Create a generic structure to hold properties
+struct Property
+{
+	SString propetyName;
+	int propetyValue;
+};
+// L06: TODO 5: Create a generic structure to hold properties
 struct Properties
 {
-	struct Property
-	{
-		//...
-	};
 
+	Property propety;
 	~Properties()
 	{
 		//...
@@ -134,7 +137,7 @@ private:
 	TileSet* GetTilesetFromTileId(int id) const;
 
 public:
-
+	void ChangeCollisionsDraw();
     // L03: DONE 1: Add your struct for map info
 	MapData data;
 
