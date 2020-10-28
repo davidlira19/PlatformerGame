@@ -40,11 +40,10 @@ bool Map::Awake(pugi::xml_node& config)
 void Map::Draw()
 {
 	if (mapLoaded == false) return;
-	ListItem<TileSet*>* dat;
-	dat = data.tilesets.start;
+	
 	// L04: DONE 5: Prepare the loop to draw all tilesets + DrawTexture()
+	TileSet* tileset;
 	ListItem<MapLayer*>* layer = data.layers.start;
-	SDL_Texture* text = dat->data->texture;
 	// L06: TODO 4: Make sure we draw all the layers and not just the first one
 	while (layer != NULL)
 	{
@@ -55,10 +54,11 @@ void Map::Draw()
 				int tileId = layer->data->Get(x, y);
 				if (tileId > 0)
 				{
-					dat->data = GetTilesetFromTileId(tileId);
-					SDL_Rect rect = dat->data->GetTileRect(tileId);
+					tileset = GetTilesetFromTileId(tileId);
+					SDL_Rect rect = tileset->GetTileRect(tileId);
+				
 					iPoint point = MapToWorld(x, y);
-					app->render->DrawTexture(text, point.x, point.y, &rect);
+					app->render->DrawTexture(tileset->texture, point.x, point.y, &rect);
 					// L04: DONE 9: Complete the draw function
 				}
 			}
@@ -123,23 +123,26 @@ iPoint Map::WorldToMap(int x, int y) const
 // L06: TODO 3: Pick the right Tileset based on a tile id
 TileSet* Map::GetTilesetFromTileId(int id) const
 {
-	ListItem<TileSet*>* item = data.tilesets.start;
-	TileSet* set = item->data;
-	bool correct = false;
-
-	while (correct == false && item->next != nullptr)
+	ListItem<TileSet*>* lista = data.tilesets.start;
+	TileSet* set = lista->data;
+	while (lista->data != nullptr) 
 	{
-		if (id >= item->data->firstgid && id < item->next->data->firstgid)
+		if (lista->next == nullptr) 
 		{
-			set = item->data;
-			correct = true;
+			set = lista->data;
+			break;
 		}
-		else
+		if ((lista->data->firstgid <= id) && (lista->next->data->firstgid > id)) 
 		{
-			item = item->next;
+			set = lista->data;
+			break;
 		}
+		
+		
+		lista = lista->next;
+		
 	}
-
+	
 	return set;
 }
 
@@ -171,9 +174,20 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	SDL_Rect rect = { 0 };
 
 	// L04: DONE 7: Get relative Tile rectangle
-	int relativeId = id - firstgid;
+	//ORTHOGONAL
 	rect.w = tileWidth;
 	rect.h = tileHeight;
+	int num = texWidth / tileWidth;
+	int usa=id-firstgid+1;
+	int res = usa / num;
+	int hond = usa % num;
+	if (hond == 0) {
+		hond = num;
+		res = res - 1;
+	}
+	hond = hond - 1;
+	rect.x = hond * rect.w;
+	rect.y = res * rect.h;
 
 	//ISOMETRIC
 	/*int res = id / 4;
@@ -186,18 +200,14 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	rect.x = hond * rect.w;
 	rect.y = res * rect.h;*/
 
-	//ORTHOGONAL
+	
 
-	int num = texWidth / tileWidth;
-	int res = id / num;
-	int hond = id % num;
-	if (hond == 0) {
-		hond = num;
-		res = res - 1;
-	}
-	hond = hond - 1;
-	rect.x = hond * rect.w;
-	rect.y = res * rect.h;
+	
+	/*int relativeId = id - firstgid;
+	rect.w = tileWidth;
+	rect.h = tileHeight;
+	rect.x = margin + ((rect.w + spacing) * (relativeId % 96));
+	rect.y = margin + ((rect.h + spacing) * (relativeId / 96));*/
 	return rect;
 }
 // Load new map
