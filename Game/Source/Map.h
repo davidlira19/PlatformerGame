@@ -39,7 +39,6 @@ enum MapTypes
 	MAPTYPE_STAGGERED
 };
 
-
 // L06: TODO 5: Create a generic structure to hold properties
 struct Property
 {

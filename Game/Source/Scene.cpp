@@ -146,6 +146,9 @@ bool Scene::Update(float dt)
 	app->render->DrawTexture(bg_snow, 0, 0);
 	app->render->DrawTexture(bg_snow, 3600, 0);
 	app->render->DrawTexture(bg_snow, 7200, 0);
+
+
+
 	app->map->Draw();
 	// L03: DONE 7: Set the window title with map/tileset info
 	
