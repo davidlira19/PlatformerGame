@@ -10,21 +10,86 @@
 
 Player::Player() : Module()
 {
-	//ANIMATION WHEN SANTA IS NOT MOVING
-	Stop.PushBack({1153,331,97,152});
-	Stop.PushBack({ 73,601,97,152 });
-	Stop.PushBack({ 344,601,97,152 });
-	Stop.PushBack({ 615,601,97,152 });
-	Stop.PushBack({ 887,601,97,152 });
-	Stop.PushBack({ 1156,601,97,152 });
-	Stop.PushBack({ 75,871,97,152 });
-	Stop.PushBack({ 343,871,97,152 });
-	Stop.speed = 0.075f;
-	Stop.loop = true;
+	//ANIMATION WHEN SANTA IS NOT MOVING RIGHT
+	Stop.PushBack({ 1082,327,270,156});
+	Stop.PushBack({ 1,597,270,156 });
+	Stop.PushBack({ 271,597,270,156 });
+	Stop.PushBack({ 541,597,270,156 });
+	Stop.PushBack({ 811,597,270,156 });
+	Stop.PushBack({ 1082,597,270,156 });
+	Stop.PushBack({ 1,867,270,156 });
+	Stop.PushBack({ 271,867,270,156 });
 
-	//ANIMATION WHEN SANTA IS JUMPING
-	//ANIMATION WHEN SANTA IS DEAD
-	//ANIMATION WHEN SANTA IS RUNNUNG
+	//ANIMATION WHEN SANTA IS JUMPING RIGHT
+	Stop.PushBack({ 541,867,270,156 });
+	Stop.PushBack({ 811,867,270,156 });
+	Stop.PushBack({ 1082,867,270,156 });
+	Stop.PushBack({ 1,1138,270,156 });
+	Stop.PushBack({ 271,1138,270,156 });
+	Stop.PushBack({ 541,1138,270,156 });
+	Stop.PushBack({ 811,1138,270,156 });
+	Stop.PushBack({ 1082,1138,270,156 });
+
+	//ANIMATION WHEN SANTA IS DEAD RIGHT
+	Stop.PushBack({ 1,57,270,156 });
+	Stop.PushBack({ 271,57,270,156 });
+	Stop.PushBack({ 541,57,270,156 });
+	Stop.PushBack({ 811,57,270,156 });
+	Stop.PushBack({ 1082,57,270,156 });
+	Stop.PushBack({ 1,327,270,156 });
+	Stop.PushBack({ 271,327,270,156 });
+	Stop.PushBack({ 541,327,270,156 });
+	Stop.PushBack({ 811,327,270,156 });
+
+	//ANIMATION WHEN SANTA IS RUNNING RIGHT
+	Stop.PushBack({ 1,1047,270,156 });
+	Stop.PushBack({ 271,1047,270,156 });
+	Stop.PushBack({ 541,1047,270,156 });
+	Stop.PushBack({ 811,1047,270,156 });
+	Stop.PushBack({ 1082,1047,270,156 });
+	Stop.PushBack({ 1,1678,270,156 });
+
+	//ANIMATION WHEN SANTA IS NOT MOVING LEFT
+	Stop.PushBack({ 1351,327,270,156 });
+	Stop.PushBack({ 2431,597,270,156 });
+	Stop.PushBack({ 2162,597,270,156 });
+	Stop.PushBack({ 1891,597,270,156 });
+	Stop.PushBack({ 1621,597,270,156 });
+	Stop.PushBack({ 1351,597,270,156 });
+	Stop.PushBack({ 2432,867,270,156 });
+	Stop.PushBack({ 2162,867,270,156 });
+
+	//ANIMATION WHEN SANTA IS JUMPING LEFT
+	Stop.PushBack({ 1891,867,270,156 });
+	Stop.PushBack({ 1621,867,270,156 });
+	Stop.PushBack({ 1351,867,270,156 });
+	Stop.PushBack({ 2432,1138,270,156 });
+	Stop.PushBack({ 2162,1138,270,156 });
+	Stop.PushBack({ 1891,1138,270,156 });
+	Stop.PushBack({ 1621,1138,270,156 });
+	Stop.PushBack({ 1351,1138,270,156 });
+
+	//ANIMATION WHEN SANTA IS DEAD LEFT
+	Stop.PushBack({ 2431,57,270,156 });
+	Stop.PushBack({ 2162,57,270,156 });
+	Stop.PushBack({ 1891,57,270,156 });
+	Stop.PushBack({ 1621,57,270,156 });
+	Stop.PushBack({ 1351,57,270,156 });
+	Stop.PushBack({ 2431,327,270,156 });
+	Stop.PushBack({ 2162,327,270,156 });
+	Stop.PushBack({ 1891,327,270,156 });
+	Stop.PushBack({ 1621,327,270,156 });
+
+	//ANIMATION WHEN SANTA IS RUNNING LEFT
+	Stop.PushBack({ 2431,1047,270,156 });
+	Stop.PushBack({ 2162,1047,270,156 });
+	Stop.PushBack({ 1891,1047,270,156 });
+	Stop.PushBack({ 1621,1047,270,156 });
+	Stop.PushBack({ 1351,1047,270,156 });
+	Stop.PushBack({ 2431,1678,270,156 });
+
+	Stop.speed = 0.020f;
+	Stop.loop = true;
 }
 bool Player::Start()
 {
