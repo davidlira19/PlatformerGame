@@ -6,7 +6,7 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
-
+#include"Player.h"
 #include "Defs.h"
 #include "Log.h"
 
@@ -50,7 +50,104 @@ bool Scene::PreUpdate()
 {
 	return true;
 }
+collisionPosition collisions::getCollision(position positionChek,SDL_Rect rect,int id)
+{
+	bool chekResult;
+	collisionPosition positionCollision = collisionPosition::null;
+	position relativePosition;
+	for (int a = 1; a < 4; a++) 
+	{
+		switch (a)
+		{
+		case 1:
+			relativePosition.x = positionChek.x + (rect.w);
+			relativePosition.y = positionChek.y + (rect.h / 2);
+			chekResult = checkIfCollision(id, relativePosition);
+			if (chekResult == true)
+			{
+				positionCollision = collisionPosition::right;
+			}
+			break;
+		case 2:
+			relativePosition.x = positionChek.x + (rect.w / 2);
+			relativePosition.y = positionChek.y + rect.h;
+			chekResult = checkIfCollision(id, relativePosition);
+			if (chekResult == true&& positionCollision == collisionPosition::right)
+			{
+				positionCollision = collisionPosition::downAndRight;
+			}
+			else if(chekResult == true) 
+			{
+				positionCollision = collisionPosition::down;
+			}
+			else if (positionCollision == collisionPosition::right)
+			{
+				positionCollision = collisionPosition::right;
+			}
+			else 
+			{
+				positionCollision = collisionPosition::null;
+			}
+			break;
+		case 3:
+			relativePosition.x = positionChek.x;
+			relativePosition.y = positionChek.y + (rect.h / 2);
+			chekResult = checkIfCollision(id, relativePosition);
+			if (chekResult == true && positionCollision == collisionPosition::down)
+			{
+				positionCollision = collisionPosition::downAndLeft;
+			}
+			else if(chekResult == true)
+			{
+				positionCollision = collisionPosition::left;
+			}
+			else if(positionCollision == collisionPosition::down)
+			{
+				positionCollision = collisionPosition::down;
+			}
+			else if(positionCollision == collisionPosition::right)
+			{
+				positionCollision = collisionPosition::right;
+			}
+			else 
+			{
+				positionCollision = collisionPosition::null;
+			}
+			break;
+		}
+	}
+	
+	return positionCollision;
+}
+bool collisions::checkIfCollision(int id, position positionToChek)
+{
+	bool result = false;
+	int idChek;
+	position numTilesMap;
+	position tilePosition;
+	/*numTilesMap.x = app->map->data.tilesets.start->data->numTilesWidth * app->map->data.tilesets.start->data->tileWidth;
+	numTilesMap.y = app->map->data.tilesets.start->data->numTilesHeight * app->map->data.tilesets.start->data->tileHeight;*/
+	numTilesMap.x = app->map->data.tilesets.start->data->tileWidth;
+	numTilesMap.y = app->map->data.tilesets.start->data->tileHeight;
+	tilePosition.x = positionToChek.x /numTilesMap.x ;
+	tilePosition.y = positionToChek.y /numTilesMap.y ;
+	ListItem<MapLayer*>* list1;
+	
+	for (list1 = app->map->data.layers.start; list1 != nullptr; list1=list1->next) 
+	{
+		if (list1->data->name == "colisions") 
+		{
+			idChek=list1->data->Get(tilePosition.x, tilePosition.y);
 
+			if (idChek == id) 
+			{
+				result = true;
+				return result;
+			}
+		}
+	}
+	return result;
+}
 // Called each loop iteration
 bool Scene::Update(float dt)
 {

@@ -4,7 +4,15 @@
 #include "Module.h"
 
 struct SDL_Texture;
-
+class position;
+enum class collisionPosition{
+	down, right, left, downAndRight, downAndLeft,null
+};
+class collisions {
+public:
+	collisionPosition getCollision(position positionChek,SDL_Rect rect,int id);
+	bool checkIfCollision(int id, position positionToChek);
+};
 class Scene : public Module
 {
 public:

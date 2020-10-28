@@ -5,6 +5,7 @@
 #include"Textures.h"
 #include"Animation.h"
 #include"Module.h"
+#include "Scene.h"
 struct SDL_Rect;
 struct SDL_Texture;
 struct SDL_Renderer;
@@ -21,7 +22,7 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
-
+	void updatePosition();
 	//PLAYER VARIABLES
 	bool isJumping;
 	//PLAYER FUNCTIONS
@@ -36,11 +37,12 @@ public:
 	Animation JumpRight;
 	Animation RunRight;
 	Animation DeadRight;
-
+	SDL_Rect collider;
 	Animation StopLeft;
 	Animation JumpLeft;
 	Animation RunLeft;
 	Animation DeadLeft;
+	collisions playerCollisions;
 private:
 	//PLAYER TEXTURE
 	SDL_Texture* santa = nullptr;

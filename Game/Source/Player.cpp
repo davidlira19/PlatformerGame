@@ -106,7 +106,7 @@ Player::Player() : Module()
 	RunLeft.PushBack({ 1891,1407,260,156 });
 	RunLeft.PushBack({ 1621,1407,260,156 });
 	RunLeft.PushBack({ 1351,1407,260,156 });
-
+	
 	RunLeft.speed = 0.075f;
 	RunLeft.loop = true;
 
@@ -120,11 +120,20 @@ bool Player::Start()
 	currentAnimation = &StopRight;
 	//INITIALIZE VARIABLES
 	isJumping = false;
-
+	collider = { Position.x,Position.y,160,156 };
 	return true;
+}
+void Player::updatePosition()
+{
+	collider.x = Position.x;
+	collider.y = Position.y;
 }
 bool Player::Update(float dt)
 {
+	//270, 156
+	collisionPosition result;
+
+	
 	//INPUT TO MOVE THE PLAYER
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
@@ -179,7 +188,19 @@ bool Player::Update(float dt)
 			currentAnimation = &DeadLeft;
 		}
 	}
-	
+	updatePosition();
+	result = playerCollisions.getCollision(Position, collider, 61);
+	if (result == collisionPosition::down)
+	{
+		Position.y -= 2;
+	}
+	else if (result == collisionPosition::right)
+	{
+		Position.x -= 2;
+	}
+	else if (result == collisionPosition::left) {
+		Position.x += 2;
+	}
 	return true;
 }
 bool Player::PostUpdate() {
