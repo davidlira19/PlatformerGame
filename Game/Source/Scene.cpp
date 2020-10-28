@@ -89,6 +89,35 @@ bool Scene::Update(float dt)
 	{
 		app->render->camera.y = -1100;
 	}
+	//CAMERA AUTOMATIC MOVEMENT
+	if ((app->render->camera.x <= 0) && (app->render->camera.x >= -2920))
+	{
+		app->render->camera.x--;
+	}
+	if (((app->render->camera.y <= -700) && (app->render->camera.y >= -1055)) && (app->render->camera.x == -2921))
+	{
+		app->render->camera.y--;
+	}
+	if (((app->render->camera.y == -1056) && (app->render->camera.x <= -2921)) && (app->render->camera.x >= -5121))
+	{
+		app->render->camera.x--;
+	}
+	if ((app->render->camera.x <= -5122 && app->render->camera.x >= -5857) && (app->render->camera.y >=-1057 && app->render->camera.y <= -781))
+	{
+		app->render->camera.x--;
+	}
+	if ((app->render->camera.x <= -5622 && app->render->camera.x >= -5857) && (app->render->camera.y >= -1057 && app->render->camera.y <= -781))
+	{
+		app->render->camera.y++;
+	}
+	if (app->render->camera.x <= -5858 && app->render->camera.x >= -9000)
+	{
+		app->render->camera.x--;
+	}
+	if (app->render->camera.y >= -820 && app->render->camera.y <= -420 && app->render->camera.x <= -8000 && app->render->camera.x >= -9000)
+	{
+		app->render->camera.y++;
+	}
 	//DRAW BACKGROUND
 	app->render->DrawTexture(bg_snow, 0, 0);
 	app->render->DrawTexture(bg_snow, 3600, 0);

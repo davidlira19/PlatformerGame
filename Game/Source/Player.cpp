@@ -49,7 +49,8 @@ bool Player::Update(float dt)
 		//currentAnimation = &Run_Left;
 		Position.x -= 2;
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		Position.y -= 2;
 	}
@@ -57,7 +58,8 @@ bool Player::Update(float dt)
 	{
 		Position.y += 2;
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		currentAnimation = &Jump;
 		JumpFunction();
