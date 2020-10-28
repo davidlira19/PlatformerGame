@@ -23,7 +23,7 @@ public:
 	bool CleanUp();
 
 	//PLAYER VARIABLES
-
+	bool isJumping;
 	//PLAYER FUNCTIONS
 	void JumpFunction();
 	//PLAYER POSITION
@@ -32,10 +32,15 @@ public:
 	Animation* lastanimation = nullptr;
 	Animation* currentAnimation = nullptr;
 
-	Animation Stop;
-	Animation Jump;
-	Animation Run;
-	Animation Dead;
+	Animation StopRight;
+	Animation JumpRight;
+	Animation RunRight;
+	Animation DeadRight;
+
+	Animation StopLeft;
+	Animation JumpLeft;
+	Animation RunLeft;
+	Animation DeadLeft;
 private:
 	//PLAYER TEXTURE
 	SDL_Texture* santa = nullptr;
