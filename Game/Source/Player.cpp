@@ -169,15 +169,18 @@ bool Player::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
-		lastanimation = currentAnimation;
-		currentAnimation = &DeadRight;
+		if (currentAnimation == &RunRight || currentAnimation == &StopRight || currentAnimation == &JumpRight)
+		{
+			lastanimation = currentAnimation;
+			currentAnimation = &DeadRight;
+		}
+		if (currentAnimation == &RunLeft || currentAnimation == &StopLeft || currentAnimation == &JumpLeft)
+		{
+			lastanimation = currentAnimation;
+			currentAnimation = &DeadLeft;
+		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
-	{
-		lastanimation = currentAnimation;
-		currentAnimation = &DeadLeft;
-	}
-
+	
 	return true;
 }
 bool Player::PostUpdate() {
