@@ -153,23 +153,9 @@ bool collisions::checkIfCollision(int id, position positionToChek)
 bool Scene::Update(float dt)
 {
 	// L02: DONE 3: Request Load / Save when pressing L/S
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		app->LoadGameRequest();
-
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		app->SaveGameRequest();
-
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		app->map->ChangeCollisionsDraw();
-	}
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-	{
-		freeCamera = true;
-	}
-	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
-	{
-		
 	}
 	//CAMERA.X LIMITS
 	if (app->render->camera.x > 0)

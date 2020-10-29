@@ -189,22 +189,12 @@ bool Player::Update(float dt)
 	{
 		app->LoadGameRequest();
 	}
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN|| app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
 		app->player->CleanUp();
 		app->scene->CleanUp();
 		app->player->Start();
 		app->scene->Start();
-	}
-	{
-		if (godMode == false)
-		{
-			godMode = true;
-		}
-		else
-		{
-			godMode = false;
-		}
 	}
 	//JUST UPDATE THE ANIMATION
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
