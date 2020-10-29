@@ -1,6 +1,6 @@
 #include "App.h"
-#include "Window.h"
 #include "Input.h"
+#include "Window.h"
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -21,16 +21,16 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 {
 	frames = 0;
 
-	input = new Input();
-	win = new Window();
-	render = new Render();
-	tex = new Textures();
-	audio = new Audio();
-	player = new Player();
-	sceneIntro = new SceneIntro();
-	fade = new FadeToBlack();
-	scene = new Scene();
-	map = new Map();
+	input = new Input(true);
+	win = new Window(true);
+	render = new Render(true);
+	tex = new Textures(true);
+	audio = new Audio(true);
+	player = new Player(false);
+	sceneIntro = new SceneIntro(true);
+	fade = new FadeToBlack(true);
+	scene = new Scene(false);
+	map = new Map(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp

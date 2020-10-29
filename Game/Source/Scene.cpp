@@ -2,15 +2,16 @@
 #include "Input.h"
 #include "Textures.h"
 #include "Audio.h"
+#include "FadeToBlack.h"
 #include "Render.h"
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
-#include"Player.h"
+#include "Player.h"
 #include "Defs.h"
 #include "Log.h"
 
-Scene::Scene() : Module()
+Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");
 }
@@ -255,7 +256,7 @@ bool Scene::Update(float dt)
 		app->map->data.tilesets.count());
 
 	app->win->SetTitle(title.GetString());
-	LOG("Position x: %d ------ Position y: %d", app->render->camera.x, app->render->camera.y);
+	//LOG("Position x: %d ------ Position y: %d", app->render->camera.x, app->render->camera.y);
 
 	return true;
 }
@@ -267,7 +268,6 @@ bool Scene::PostUpdate()
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
-
 	return ret;
 }
 

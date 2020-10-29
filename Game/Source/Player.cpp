@@ -8,7 +8,7 @@
 #include"Audio.h"
 #include"SDL/include/SDL_scancode.h"
 
-Player::Player() : Module()
+Player::Player(bool startEnabled) : Module(startEnabled)
 {
 	//ANIMATION WHEN SANTA IS NOT MOVING RIGHT
 	StopRight.PushBack({ 1082,327,270,156});
