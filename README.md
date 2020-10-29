@@ -2,7 +2,7 @@
 
 ## Description
 
-Santa's Run is a christmas platformer developed by 2C1V, run and skip the obstacles to get into the iglu!
+Santa's Run is a christmas platformer developed by 2C1V, run and skip the obstacles to get into the igloo!
 
 ## Key Features
 
