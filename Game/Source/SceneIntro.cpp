@@ -48,8 +48,8 @@ bool SceneIntro::Update()
 bool SceneIntro::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	app->render->DrawTexture(IntroTexture, 0, 0, NULL);
-	app->fade->Fade(app->sceneIntro, app->scene, 90.0f);
+	//app->render->DrawTexture(IntroTexture, 0, 0, NULL);
+	//app->fade->Fade(app->sceneIntro, app->scene, 90.0f);
 	return true;
 }
 bool SceneIntro::CleanUp()

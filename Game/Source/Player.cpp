@@ -120,6 +120,8 @@ bool Player::Start()
 	currentAnimation = &StopRight;
 	//INITIALIZE VARIABLES
 	isJumping = false;
+	aceleration = 9.8f;
+	velocity = 0;
 	collider = { Position.x,Position.y,160,156 };
 	return true;
 }
@@ -161,7 +163,8 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		JumpFunction();
+		state = playerState::jumping;
+		//JumpFunction();
 	}
 
 	//JUST UPDATE THE ANIMATION
@@ -192,9 +195,25 @@ bool Player::Update(float dt)
 	result = playerCollisions.getCollision(Position, collider, 61);
 	if (result == collisionPosition::down)
 	{
-		Position.y -= 2;
+		if (state == playerState::jumping) {
+			JumpFunction();
+
+		}
+		velocity = 0;
 	}
-	else if (result == collisionPosition::right)
+	else {
+
+		if (state != playerState::jumping)
+		{
+			Gravity();
+		}
+
+
+	}
+	if (state == playerState::jumping) {
+		JumpFunction();
+	}
+	if (result == collisionPosition::right)
 	{
 		Position.x -= 2;
 	}
@@ -215,24 +234,27 @@ bool Player::CleanUp() {
 
 	return true;
 }
+void Player::Gravity()
+{
+	velocity += aceleration * 0.05;
+	Position.y += velocity * 0.05;
 
+}
 //PLAYER FUNCTIONS
 void Player::JumpFunction()
 {
-	isJumping = true;
-
-	for (int i = 0; i < 100; i++)
+	if (jumpingCount < 90)
 	{
-		if ((lastanimation == &RunLeft || lastanimation == &StopLeft) && isJumping == true)
+		if ((lastanimation == &RunLeft || lastanimation == &StopLeft))
 		{
 			lastanimation = currentAnimation;
 			currentAnimation = &JumpLeft;
 		}
-		if ((lastanimation == &RunRight || lastanimation == &StopRight) && isJumping == true)
-		{
-			lastanimation = currentAnimation;
-			currentAnimation = &JumpRight;
-		}
+		Position.y -= 2;
+		jumpingCount++;
 	}
-	isJumping = false;
+	else {
+		state = playerState::null;
+		jumpingCount = 0;
+	}
 }

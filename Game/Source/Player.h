@@ -9,6 +9,10 @@
 struct SDL_Rect;
 struct SDL_Texture;
 struct SDL_Renderer;
+enum class  playerState
+{
+	null, jumping
+};
 class position
 {
 public:
@@ -17,6 +21,8 @@ public:
 class Player : public Module
 {
 public:
+	playerState state;
+	void Gravity();
 	Player(bool startEnabled);
 	bool Start();
 	bool Update(float dt);
@@ -32,7 +38,7 @@ public:
 	//PLAYER ANIMATIONS
 	Animation* lastanimation = nullptr;
 	Animation* currentAnimation = nullptr;
-
+	float aceleration, velocity;
 	Animation StopRight;
 	Animation JumpRight;
 	Animation RunRight;
@@ -43,6 +49,7 @@ public:
 	Animation RunLeft;
 	Animation DeadLeft;
 	collisions playerCollisions;
+	int jumpingCount;
 private:
 	//PLAYER TEXTURE
 	SDL_Texture* santa = nullptr;
