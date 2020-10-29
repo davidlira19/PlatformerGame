@@ -57,7 +57,7 @@ void Map::Draw()
 				{
 					tileset = GetTilesetFromTileId(tileId);
 
-					if (tileset->name == "colisions")
+					if (tileset->name == "colisiones")
 					{
 
 						ListItem<MapLayer*>* list1;
@@ -66,7 +66,9 @@ void Map::Draw()
 						if (list1->data->properties.propety.propetyValue == 1)
 						{
 							exit = true;
+							break;
 						}
+						
 
 					}
 
@@ -78,10 +80,7 @@ void Map::Draw()
 						app->render->DrawTexture(tileset->texture, point.x, point.y, &rect);
 
 					}
-					else
-					{
-						break;
-					}
+					
 
 					// L04: DONE 9: Complete the draw function
 				}

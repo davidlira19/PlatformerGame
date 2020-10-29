@@ -7,7 +7,7 @@
   <image source="snow_tileset.png" width="1280" height="768"/>
  </tileset>
  <tileset firstgid="61" name="colisiones" tilewidth="128" tileheight="128" tilecount="2" columns="2">
-  <image source="colisiones.png" width="256" height="128"/>
+  <image source="colisions.png" width="256" height="128"/>
  </tileset>
  <layer id="3" name="Agua" width="96" height="19">
   <data>
