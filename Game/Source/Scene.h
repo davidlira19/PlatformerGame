@@ -41,6 +41,7 @@ public:
 	bool CleanUp();
 
 private:
+	
 	bool freeCamera;
 	SDL_Texture* img;
 	SDL_Texture* bg_snow;

@@ -109,11 +109,11 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	
 	RunLeft.speed = 0.075f;
 	RunLeft.loop = true;
-
+	
 }
 bool Player::Start()
 {
-
+	godMode = false;
 	santa = app->tex->Load("Assets/textures/santa_animation.png");
 	//SET POSITION
 	Position.x = 870; Position.y = 1125;
@@ -154,11 +154,15 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
-		Position.y -= 2;
+		if(godMode == true){
+			Position.y -= 2;
+		}
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		Position.y += 2;
+		if (godMode == true) {
+			Position.y += 2;
+		}
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
@@ -166,7 +170,42 @@ bool Player::Update(float dt)
 		state = playerState::jumping;
 		//JumpFunction();
 	}
-
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		if (godMode == false) 
+		{
+			godMode = true;
+		}
+		else 
+		{
+			godMode = false;
+		}
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) 
+	{
+		app->SaveGameRequest();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	{
+		app->LoadGameRequest();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		app->player->CleanUp();
+		app->scene->CleanUp();
+		app->player->Start();
+		app->scene->Start();
+	}
+	{
+		if (godMode == false)
+		{
+			godMode = true;
+		}
+		else
+		{
+			godMode = false;
+		}
+	}
 	//JUST UPDATE THE ANIMATION
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
 	{
@@ -192,33 +231,35 @@ bool Player::Update(float dt)
 		}
 	}
 	updatePosition();
-	result = playerCollisions.getCollision(Position, collider, 61);
-	if (result == collisionPosition::down)
-	{
+	if (godMode == false) {
+		result = playerCollisions.getCollision(Position, collider, 61);
+		if (result == collisionPosition::down)
+		{
+			if (state == playerState::jumping) {
+				JumpFunction();
+
+			}
+			velocity = 0;
+		}
+		else {
+
+			if (state != playerState::jumping)
+			{
+				Gravity();
+			}
+
+
+		}
 		if (state == playerState::jumping) {
 			JumpFunction();
-
 		}
-		velocity = 0;
-	}
-	else {
-
-		if (state != playerState::jumping)
+		if (result == collisionPosition::right)
 		{
-			Gravity();
+			Position.x -= 2;
 		}
-
-
-	}
-	if (state == playerState::jumping) {
-		JumpFunction();
-	}
-	if (result == collisionPosition::right)
-	{
-		Position.x -= 2;
-	}
-	else if (result == collisionPosition::left) {
-		Position.x += 2;
+		else if (result == collisionPosition::left) {
+			Position.x += 2;
+		}
 	}
 	return true;
 }

@@ -50,6 +50,7 @@ public:
 	Animation DeadLeft;
 	collisions playerCollisions;
 	int jumpingCount;
+	bool godMode;
 private:
 	//PLAYER TEXTURE
 	SDL_Texture* santa = nullptr;
