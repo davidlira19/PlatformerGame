@@ -167,9 +167,9 @@ bool Scene::Update(float dt)
 	{
 		app->render->camera.x = 0;
 	}
-	else if (app->render->camera.x <= -9000)
+	else if (app->render->camera.x <= -8200)
 	{
-		app->render->camera.x = -9000;
+		app->render->camera.x = -8200;
 	}
 	//CAMERA.Y LIMITS
 	if (app->render->camera.y >= -5)

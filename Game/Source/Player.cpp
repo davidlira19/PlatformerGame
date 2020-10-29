@@ -132,7 +132,7 @@ bool Player::Update(float dt)
 {
 	//270, 156
 	collisionPosition result;
-
+	
 	
 	//INPUT TO MOVE THE PLAYER
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
