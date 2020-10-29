@@ -177,13 +177,15 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && canMove == true)
 	{
-		if(godMode == true){
+		if(godMode == true)
+		{
 			Position.y -= 2;
 		}
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && canMove == true)
 	{
-		if (godMode == true) {
+		if (godMode == true) 
+		{
 			Position.y += 2;
 		}
 	}
@@ -235,53 +237,52 @@ bool Player::Update(float dt)
 		DeadAction();
 	}
 	updatePosition();
-	if (godMode == false) {
+	if (godMode == false) 
+	{
 		result = playerCollisions.getCollision(Position, collider, 61);
 		if (result == collisionPosition::down)
 		{
-			if (state == playerState::jumping) {
+			if (state == playerState::jumping) 
+			{
 				JumpFunction();
-
 			}
 			velocity = 0;
 		}
-		else {
-
+		else 
+		{
 			if (state != playerState::jumping)
 			{
 				Gravity();
 			}
-
-
 		}
-		if (state == playerState::jumping) {
+		if (state == playerState::jumping) 
+		{
 			JumpFunction();
 		}
 		if (result == collisionPosition::right)
 		{
 			Position.x -= 2;
 		}
-		else if (result == collisionPosition::left) {
+		else if (result == collisionPosition::left) 
+		{
 			Position.x += 2;
 		}
 	}
 	return true;
 }
-bool Player::PostUpdate() {
-
+bool Player::PostUpdate() 
+{
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(santa, Position.x, Position.y, &rect);
 
 	if (Dead == true)
 	{
-		//JUST A LITTLE TIME UNTIL RESET PLAYER AND SCENE
 		DeadAction();
 		canMove = false;
 		app->scene->freeCamera = false;
 		godMode = true;
 		app->render->DrawTexture(DeadTex, app->render->camera.x + 635, app->render->camera.y + 1400);
 	}
-
 	if (Win == true)
 	{
 		canMove = false;
@@ -289,9 +290,9 @@ bool Player::PostUpdate() {
 		app->render->DrawTexture(WinTex, app->render->camera.x + 635, app->render->camera.y + 1400);
 	}
 	currentAnimation->Update();
-
 	return true;
 }
+
 bool Player::CleanUp() 
 {
 	app->tex->UnLoad(WinTex);
@@ -299,6 +300,7 @@ bool Player::CleanUp()
 	app->tex->UnLoad(santa);
 	return true;
 }
+
 void Player::Gravity()
 {
 	velocity += aceleration * 0.05;
@@ -318,7 +320,8 @@ void Player::JumpFunction()
 		Position.y -= 2;
 		jumpingCount++;
 	}
-	else {
+	else 
+	{
 		state = playerState::null;
 		jumpingCount = 0;
 	}

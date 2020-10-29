@@ -224,7 +224,8 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	int usa=id-firstgid+1;
 	int res = usa / num;
 	int hond = usa % num;
-	if (hond == 0) {
+	if (hond == 0) 
+	{
 		hond = num;
 		res = res - 1;
 	}
@@ -332,7 +333,8 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->data = new uint[cant];
 	memset(layer->data, 0, cant);
 	pugi::xml_node node1 = node.child("data").child("tile");
-	for (int i = 0; i < cant; i++) {
+	for (int i = 0; i < cant; i++) 
+	{
 		layer->data[i] = node1.attribute("gid").as_int();
 		node1 = node1.next_sibling("tile");
 	}

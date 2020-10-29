@@ -5,10 +5,12 @@
 
 struct SDL_Texture;
 class position;
-enum class collisionPosition{
+enum class collisionPosition
+{
 	down, right, left, downAndRight, downAndLeft,null
 };
-class collisions {
+class collisions 
+{
 public:
 	collisionPosition getCollision(position positionChek,SDL_Rect rect,int id);
 	bool checkIfCollision(int id, position positionToChek);
