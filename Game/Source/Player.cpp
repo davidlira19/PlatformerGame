@@ -115,7 +115,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 bool Player::Start()
 {
 
-	santa = app->tex->Load("Assets/textures/santaanimation.png");
+	santa = app->tex->Load("Assets/textures/santa_animation.png");
 	//SET POSITION
 	Position.x = 870; Position.y = 1125;
 	currentAnimation = &StopRight;

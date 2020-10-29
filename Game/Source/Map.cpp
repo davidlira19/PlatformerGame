@@ -57,7 +57,7 @@ void Map::Draw()
 				{
 					tileset = GetTilesetFromTileId(tileId);
 
-					if (tileset->name == "colisiones")
+					if (tileset->name == "colisions")
 					{
 
 						ListItem<MapLayer*>* list1;

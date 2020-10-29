@@ -35,7 +35,7 @@ bool Scene::Start()
 	// L03: DONE: Load map
 	app->map->Load("snow_tileset.tmx");
 	// Load music
-	app->audio->PlayMusic("Assets/audio/music/Christmas_music2004.ogg");
+	app->audio->PlayMusic("Assets/audio/music/christmas_music.ogg");
 	//Load Position
 	app->render->camera.x = 0;
 	app->render->camera.y = -700;
