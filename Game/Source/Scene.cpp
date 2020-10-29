@@ -5,12 +5,13 @@
 #include "Render.h"
 #include "Window.h"
 #include "Scene.h"
+#include "FadeToBlack.h"
 #include "Map.h"
 #include"Player.h"
 #include "Defs.h"
 #include "Log.h"
 
-Scene::Scene() : Module()
+Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");
 }
@@ -41,7 +42,7 @@ bool Scene::Start()
 	//Load Texture
 	bg_snow = app->tex->Load("Assets/textures/snow_background.png");
 
-	freeCamera = true;
+	freeCamera = false;
 	return true;
 }
 
@@ -192,7 +193,11 @@ bool Scene::Update(float dt)
 			freeCamera = true;
 		}
 	}
-		
+	
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+	{
+		freeCamera = true;
+	}
 
 	if (freeCamera==true)
 	{

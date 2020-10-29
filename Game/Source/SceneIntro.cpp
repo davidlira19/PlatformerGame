@@ -8,7 +8,7 @@
 #include "Input.h"
 #include "FadeToBlack.h"
 
-SceneIntro::SceneIntro() : Module()
+SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 {
 
 }
@@ -25,22 +25,21 @@ bool SceneIntro::Start()
 	bool ret = true;
 
 	//app->player->vidas = 3;
-	//IntroTexture = App->textures->Load("Assets/sceneIntro.png");
-	//app->audio->PlayMusic("Assets/5. How High Can You Get.ogg", 1.0f);
+	IntroTexture = app->tex->Load("Assets/textures/sceneIntro.png");
+	//app->audio->PlayMusic("Assets/audio/music/Christmas_music2004.ogg", 1.0f);
 	return ret;
 }
 
 bool SceneIntro::Update()
 {
-	/*GamePad& pad = App->input->pads[0];
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || pad.a == true)
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->howhigh, 90);
+		app->fade->fFadeToBlack(this, (Module*)app->scene, 90);
 	}
-	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
 		exit(0);
-	}*/
+	}
 	return true;
 }
 
@@ -48,14 +47,15 @@ bool SceneIntro::Update()
 bool SceneIntro::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	//app->render->Blit(IntroTexture, 0, 0, NULL);
+	SDL_Rect rect = { 0,0,1920,1080 };
+	app->render->DrawTexture(IntroTexture, 0, 700, &rect);
 
 	return true;
 }
 bool SceneIntro::CleanUp()
 {
 
-	//app->textures->Unload(IntroTexture);
-	//App->audio->CleanUp();
+	//app->tex->Unload(IntroTexture);
+	app->audio->CleanUp();
 	return true;
 }
