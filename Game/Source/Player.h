@@ -17,7 +17,7 @@ public:
 class Player : public Module
 {
 public:
-	Player(bool startEnabled);
+	Player();
 	bool Start();
 	bool Update(float dt);
 	bool PostUpdate();

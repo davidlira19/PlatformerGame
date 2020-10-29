@@ -10,7 +10,7 @@ class SceneIntro : public Module
 {
 public:
 	//Constructor
-	SceneIntro(bool startEnabled);
+	SceneIntro();
 
 	//Destructor
 	~SceneIntro();

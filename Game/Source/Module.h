@@ -11,7 +11,8 @@ class Module
 {
 public:
 
-	Module(bool startEnabled);
+	Module() : active(false)
+	{}
 
 	void Init()
 	{
@@ -20,27 +21,40 @@ public:
 
 	// Called before render is available
 	// TODO 5: Sending config file to all modules
-	virtual bool Awake(pugi::xml_node&);
-	
+	virtual bool Awake(pugi::xml_node&)
+	{
+		return true;
+	}
 
 	// Called before the first frame
-	virtual bool Start();
-	
+	virtual bool Start()
+	{
+		return true;
+	}
 
 	// Called each loop iteration
-	virtual bool PreUpdate();
-	
+	virtual bool PreUpdate()
+	{
+		return true;
+	}
 
 	// Called each loop iteration
-	virtual bool Update(float dt);
-	
+	virtual bool Update(float dt)
+	{
+		return true;
+	}
 
 	// Called each loop iteration
-	virtual bool PostUpdate();
-
+	virtual bool PostUpdate()
+	{
+		return true;
+	}
 
 	// Called before quitting
-	virtual bool CleanUp();
+	virtual bool CleanUp()
+	{
+		return true;
+	}
 
 	// L02: DONE 2: Create new virtual methods to Load / Save state
 	virtual bool LoadState(pugi::xml_node* nodo)
@@ -53,12 +67,8 @@ public:
 		return true;
 	}
 
-	void Enable();
-	void Disable();
-	inline bool IsEnabled() const { return isEnabled; }
-
 public:
-	bool isEnabled = true;
+
 	SString name;
 	bool active;
 

@@ -5,11 +5,10 @@
 #include"Module.h"
 #include"Input.h"
 #include"Animation.h"
-#include "FadeToBlack.h"
 #include"Audio.h"
 #include"SDL/include/SDL_scancode.h"
 
-Player::Player(bool startEnabled) : Module(startEnabled)
+Player::Player() : Module()
 {
 	//ANIMATION WHEN SANTA IS NOT MOVING RIGHT
 	StopRight.PushBack({ 1082,327,270,156});
@@ -188,7 +187,6 @@ bool Player::Update(float dt)
 			lastanimation = currentAnimation;
 			currentAnimation = &DeadLeft;
 		}
-		app->fade->fFadeToBlack(this, (Module*)app->sceneIntro, 90);
 	}
 	updatePosition();
 	result = playerCollisions.getCollision(Position, collider, 61);
