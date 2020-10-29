@@ -42,7 +42,7 @@ bool Scene::Start()
 	//Load Texture
 	bg_snow = app->tex->Load("Assets/textures/snow_background.png");
 
-	freeCamera = true;
+	freeCamera = false;
 	return true;
 }
 
@@ -152,7 +152,7 @@ bool collisions::checkIfCollision(int id, position positionToChek)
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-	// L02: DONE 3: Request Load / Save when pressing L/S
+
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		app->map->ChangeCollisionsDraw();

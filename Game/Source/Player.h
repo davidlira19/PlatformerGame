@@ -33,6 +33,7 @@ public:
 	bool isJumping;
 	//PLAYER FUNCTIONS
 	void JumpFunction();
+	void DeadAction();
 	//PLAYER POSITION
 	position Position;
 	//PLAYER ANIMATIONS
@@ -51,6 +52,13 @@ public:
 	collisions playerCollisions;
 	int jumpingCount;
 	bool godMode;
+	bool canMove;
+	// WIN-LOSE TEXTURES
+	SDL_Texture* WinTex = nullptr;
+	SDL_Texture* DeadTex = nullptr;
+	// WIN-LOSE BOOLS
+	bool Win;
+	bool Dead;
 private:
 	//PLAYER TEXTURE
 	SDL_Texture* santa = nullptr;

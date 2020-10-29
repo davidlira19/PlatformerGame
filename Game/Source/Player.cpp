@@ -6,6 +6,7 @@
 #include"Input.h"
 #include"Animation.h"
 #include"Audio.h"
+#include "Log.h"
 #include"SDL/include/SDL_scancode.h"
 
 Player::Player(bool startEnabled) : Module(startEnabled)
@@ -114,15 +115,26 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 bool Player::Start()
 {
 	godMode = false;
+	//LOAD TEXTURES
 	santa = app->tex->Load("Assets/textures/santa_animation.png");
+	WinTex = app->tex->Load("Assets/textures/win_screen.png");
+	DeadTex = app->tex->Load("Assets/textures/dead_screen.png");
 	//SET POSITION
 	Position.x = 870; Position.y = 1125;
 	currentAnimation = &StopRight;
 	//INITIALIZE VARIABLES
 	isJumping = false;
+
+	canMove = true;
+
+	Win = false;
+	Dead = false;
+
 	aceleration = 9.8f;
 	velocity = 0;
+
 	collider = { Position.x,Position.y,160,156 };
+
 	return true;
 }
 void Player::updatePosition()
@@ -135,16 +147,27 @@ bool Player::Update(float dt)
 	//270, 156
 	collisionPosition result;
 	
-	
-	//INPUT TO MOVE THE PLAYER
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	//CONDITIONS TO WIN - LOSE
+	if (Position.y  >= 1602 && Position.y <= 1608)
 	{
+		Dead = true;
+	}
+	if (Position.x >= 9550 && Position.x <= 9560)
+	{
+		Win = true;
+	}
+	LOG("POSITION X: %d --- POSITION Y: %d", Position.x, Position.y);
+
+	//INPUT TO MOVE THE PLAYER
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && canMove == true)
+	{
+		app->scene->freeCamera = true;
 		lastanimation = currentAnimation;
 		currentAnimation = &RunRight;
 
 		Position.x += 2;
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && canMove == true)
 	{
 		lastanimation = currentAnimation;
 		currentAnimation = &RunLeft;
@@ -152,13 +175,13 @@ bool Player::Update(float dt)
 		Position.x -= 2;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && canMove == true)
 	{
 		if(godMode == true){
 			Position.y -= 2;
 		}
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && canMove == true)
 	{
 		if (godMode == true) {
 			Position.y += 2;
@@ -209,16 +232,7 @@ bool Player::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
-		if (currentAnimation == &RunRight || currentAnimation == &StopRight || currentAnimation == &JumpRight)
-		{
-			lastanimation = currentAnimation;
-			currentAnimation = &DeadRight;
-		}
-		if (currentAnimation == &RunLeft || currentAnimation == &StopLeft || currentAnimation == &JumpLeft)
-		{
-			lastanimation = currentAnimation;
-			currentAnimation = &DeadLeft;
-		}
+		DeadAction();
 	}
 	updatePosition();
 	if (godMode == false) {
@@ -257,12 +271,32 @@ bool Player::PostUpdate() {
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(santa, Position.x, Position.y, &rect);
+
+	if (Dead == true)
+	{
+		//JUST A LITTLE TIME UNTIL RESET PLAYER AND SCENE
+		DeadAction();
+		canMove = false;
+		app->scene->freeCamera = false;
+		godMode = true;
+		app->render->DrawTexture(DeadTex, app->render->camera.x + 635, app->render->camera.y + 1400);
+	}
+
+	if (Win == true)
+	{
+		canMove = false;
+		app->scene->freeCamera = false;
+		app->render->DrawTexture(WinTex, app->render->camera.x + 635, app->render->camera.y + 1400);
+	}
 	currentAnimation->Update();
 
 	return true;
 }
-bool Player::CleanUp() {
-
+bool Player::CleanUp() 
+{
+	app->tex->UnLoad(WinTex);
+	app->tex->UnLoad(DeadTex);
+	app->tex->UnLoad(santa);
 	return true;
 }
 void Player::Gravity()
@@ -287,5 +321,19 @@ void Player::JumpFunction()
 	else {
 		state = playerState::null;
 		jumpingCount = 0;
+	}
+}
+
+void Player::DeadAction()
+{
+	if (currentAnimation == &RunRight || currentAnimation == &StopRight || currentAnimation == &JumpRight)
+	{
+		lastanimation = currentAnimation;
+		currentAnimation = &DeadRight;
+	}
+	if (currentAnimation == &RunLeft || currentAnimation == &StopLeft || currentAnimation == &JumpLeft)
+	{
+		lastanimation = currentAnimation;
+		currentAnimation = &DeadLeft;
 	}
 }

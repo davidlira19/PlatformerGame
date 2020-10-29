@@ -40,9 +40,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool freeCamera;
 private:
 	
-	bool freeCamera;
 	SDL_Texture* img;
 	SDL_Texture* bg_snow;
 };
