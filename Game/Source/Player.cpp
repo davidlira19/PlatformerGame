@@ -422,10 +422,12 @@ void Player::DeadAction()
 	{
 		lastanimation = currentAnimation;
 		currentAnimation = &DeadRight;
+		currentAnimation->Update();
 	}
 	else if (currentAnimation == &RunLeft || currentAnimation == &StopLeft || currentAnimation == &JumpLeft)
 	{
 		lastanimation = currentAnimation;
 		currentAnimation = &DeadLeft;
+		currentAnimation->Update();
 	}
 }
