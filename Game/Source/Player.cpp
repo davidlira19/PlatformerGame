@@ -114,6 +114,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 }
 bool Player::Start()
 {
+	result = collisionPosition::null;
 	Intro = true;
 	godMode = false;
 	//LOAD TEXTURES
@@ -147,7 +148,6 @@ void Player::updatePosition()
 bool Player::Update(float dt)
 {
 	//270, 156
-	collisionPosition result;
 	updatePosition();
 
 	if (godMode == false)
@@ -188,11 +188,23 @@ bool Player::Update(float dt)
 		}
 		if (result == collisionPosition::right)
 		{
+			Position.x -= 10;
+			Position.y -= 2;
+		}
+		if (result == collisionPosition::downAndRight)
+		{
 			Position.x -= 2;
+			Position.y -= 2;
+		}
+		if (result == collisionPosition::downAndLeft)
+		{
+			Position.x += 2;
+			Position.y -= 2;
 		}
 		else if (result == collisionPosition::left)
 		{
-			Position.x += 2;
+			Position.x += 10;
+			Position.y -= 2;
 		}
 	}
 	//CONDITIONS TO WIN - LOSE

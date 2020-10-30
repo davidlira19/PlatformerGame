@@ -36,6 +36,7 @@ public:
 	void DeadAction();
 	//PLAYER POSITION
 	position Position;
+	collisionPosition result;
 	//PLAYER ANIMATIONS
 	Animation* lastanimation = nullptr;
 	Animation* currentAnimation = nullptr;
