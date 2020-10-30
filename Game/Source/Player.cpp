@@ -302,11 +302,11 @@ bool Player::Update(float dt)
 			godMode = false;
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) 
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) 
 	{
 		app->SaveGameRequest("save_game.xml");
 	}
-	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
 		app->LoadGameRequest("save_game.xml");
 	}
