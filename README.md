@@ -2,35 +2,50 @@
 
 ## Description
 
-Santa's Run is a christmas platformer developed by 2C1V, run and skip the obstacles to get into the igloo!
+Santa's Run is an amazing christmas platformer game developed by 2C1V for the Videogames Development subject in CITM (UPC), run and jump over the platforms to get into the igloo!
 
 ## Key Features
 
  - Player Movement
+ - Player Physycs
+ - Camera Movement
  - Map with Collisions
  - Debug Keys
  - Intro/Death/Win screens
+ - Music/FX
  
 ## Controls
 
- - SANTA'S MOVEMENT
+ SANTA'S MOVEMENT
  - [A] Run Left
  - [D] Run Right
  - [SPACE] Jump
 
- - SANTA'S MOVEMENT (GOD MODE)
+ SANTA'S MOVEMENT (GOD MODE)
  - [A] Move Left
  - [D] Move Right
  - [W] Move Up
  - [S] Move Down
+ 
+ CAMERA MOVEMENT (FREE CAMERA MODE)
+ - [LEFT] Move Left
+ - [RIGHT] Move Right
+ - [UP] Move Up
+ - [DOWN] Move Down
 
- - DEBUG KEYS
- - F1/F2 Start from the first/second level
- - F3 Start from the beginning of the current level
- - F5 Save the current game state
- - F6 Load the previous state
- - F9 View colliders / logic
- - F10 God Mode
+ DEBUG KEYS
+ - [F1/F2] Start from the first level
+ - [F3] Start from the beginning of the current level
+ - [F5] Save the current game state
+ - [F6] Load the previous state
+ - [F9] View colliders
+ - [F10] God Mode
+ 
+ EXTRA KEYS
+ - [3/4] Music volume up/down
+ - [M] Dead animation
+ - [F] Enable/disable free camera mode
+ - [ESC] Exit Game
 
 ## Developers
 
@@ -48,3 +63,11 @@ https://creativecommons.org/publicdomain/zero/1.0/
 Background Texture License:
 https://creativecommons.org/publicdomain/zero/1.0/
 
+Background Music License:
+https://creativecommons.org/licenses/by/4.0/
+
+Jump Sound Effect:
+https://creativecommons.org/licenses/by/3.0/
+
+Jump Landing Effect:
+https://creativecommons.org/publicdomain/zero/1.0/
