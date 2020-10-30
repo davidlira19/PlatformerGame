@@ -49,7 +49,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	DeadRight.PushBack({ 811,327,270,156 });
 
 	DeadRight.speed = 0.075f;
-	DeadRight.loop = false;
+	DeadRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS RUNNING RIGHT
 	RunRight.PushBack({ 1,1407,260,156 });
@@ -99,7 +99,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	DeadLeft.PushBack({ 1621,327,270,156 });
 
 	DeadLeft.speed = 0.075f;
-	DeadLeft.loop = false;
+	DeadLeft.loop = true;
 
 	//ANIMATION WHEN SANTA IS RUNNING LEFT
 	RunLeft.PushBack({ 2431,1407,260,156 });
@@ -114,18 +114,20 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 }
 bool Player::Start()
 {
+	Intro = true;
 	godMode = false;
 	//LOAD TEXTURES
 	santa = app->tex->Load("Assets/textures/santa_animation.png");
 	WinTex = app->tex->Load("Assets/textures/win_screen.png");
 	DeadTex = app->tex->Load("Assets/textures/dead_screen.png");
+	IntroTex = app->tex->Load("Assets/textures/title_screen.png");
 	//SET POSITION
 	Position.x = 870; Position.y = 1125;
 	currentAnimation = &StopRight;
 	//INITIALIZE VARIABLES
 	isJumping = false;
 
-	canMove = true;
+	canMove = false;
 
 	Win = false;
 	Dead = false;
@@ -147,6 +149,7 @@ bool Player::Update(float dt)
 	//270, 156
 	collisionPosition result;
 	updatePosition();
+
 	if (godMode == false)
 	{
 		result = playerCollisions.getCollision(Position, collider, 61);
@@ -212,7 +215,8 @@ bool Player::Update(float dt)
 			currentAnimation = &RunRight;
 			currentAnimation->Update();
 		}
-		if (state == playerState::jumping) {
+		if (state == playerState::jumping) 
+		{
 			currentAnimation = &JumpRight;
 		}
 		app->scene->freeCamera = true;
@@ -247,7 +251,7 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && canMove == true)
 	{
 		if (result == collisionPosition::down) 
 		{
@@ -336,6 +340,15 @@ bool Player::PostUpdate()
 		app->scene->Start();
 		app->player->Start();
 	}
+
+	app->render->DrawTexture(IntroTex, app->render->camera.x * -1, app->render->camera.y * -1);
+	if (Intro == true && app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+	{
+		Intro = false;
+		app->tex->UnLoad(IntroTex);
+		canMove = true;
+	}
+	
 	return true;
 }
 
@@ -344,6 +357,7 @@ bool Player::CleanUp()
 	app->tex->UnLoad(WinTex);
 	app->tex->UnLoad(DeadTex);
 	app->tex->UnLoad(santa);
+
 	return true;
 }
 
@@ -388,7 +402,8 @@ void Player::DeadAction()
 	{
 		lastanimation = currentAnimation;
 		currentAnimation = &DeadRight;
-	}else if (currentAnimation == &RunLeft || currentAnimation == &StopLeft || currentAnimation == &JumpLeft)
+	}
+	else if (currentAnimation == &RunLeft || currentAnimation == &StopLeft || currentAnimation == &JumpLeft)
 	{
 		lastanimation = currentAnimation;
 		currentAnimation = &DeadLeft;

@@ -53,9 +53,11 @@ public:
 	int jumpingCount;
 	bool godMode;
 	bool canMove;
+	bool Intro;
 	// WIN-LOSE TEXTURES
 	SDL_Texture* WinTex = nullptr;
 	SDL_Texture* DeadTex = nullptr;
+	SDL_Texture* IntroTex = nullptr;
 	// WIN-LOSE BOOLS
 	bool Win;
 	bool Dead;

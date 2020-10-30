@@ -32,7 +32,6 @@ bool SceneIntro::Start()
 
 bool SceneIntro::Update()
 {
-
 	if (app->input->GetKey(SDLK_KP_ENTER) == KEY_DOWN)
 	{
 		app->fade->Fade(this, (Module*)app->scene, 90);
