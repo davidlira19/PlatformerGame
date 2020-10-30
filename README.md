@@ -57,17 +57,17 @@ Santa's Run is an amazing christmas platformer game developed by 2C1V for the Vi
 
 This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
 
-Santa's Animation License:
+Santa's Animation License: https://opengameart.org/content/santa-claus-free-sprites
 https://creativecommons.org/publicdomain/zero/1.0/
 
-Background Texture License:
+Background Texture License: https://opengameart.org/content/winter-platformer-game-tileset
 https://creativecommons.org/publicdomain/zero/1.0/
 
-Background Music License:
+Background Music License: https://opengameart.org/content/winter-wonderland
 https://creativecommons.org/licenses/by/4.0/
 
-Jump Sound Effect:
+Jump Sound Effect: https://opengameart.org/content/cartoony-jump-and-bounce
 https://creativecommons.org/licenses/by/3.0/
 
-Jump Landing Effect:
+Jump Landing Effect: https://opengameart.org/content/jump-landing-sound
 https://creativecommons.org/publicdomain/zero/1.0/
