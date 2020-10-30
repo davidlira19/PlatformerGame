@@ -323,15 +323,19 @@ bool Player::PostUpdate()
 		canMove = false;
 		app->scene->freeCamera = false;
 		godMode = true;
-		app->render->DrawTexture(DeadTex, app->render->camera.x + 635, app->render->camera.y + 1400);
+		app->render->DrawTexture(DeadTex, app->render->camera.x * -1, app->render->camera.y * -1);
 	}
 	if (Win == true)
 	{
 		canMove = false;
 		app->scene->freeCamera = false;
-		app->render->DrawTexture(WinTex, app->render->camera.x + 635, app->render->camera.y + 1400);
+		app->render->DrawTexture(WinTex, app->render->camera.x * -1, app->render->camera.y * -1);
 	}
-	
+	if ((Dead == true || Win == true) && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN))
+	{
+		app->scene->Start();
+		app->player->Start();
+	}
 	return true;
 }
 
