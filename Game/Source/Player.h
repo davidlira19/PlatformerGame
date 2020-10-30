@@ -59,6 +59,9 @@ public:
 	SDL_Texture* WinTex = nullptr;
 	SDL_Texture* DeadTex = nullptr;
 	SDL_Texture* IntroTex = nullptr;
+	//FX AUDIO
+	unsigned int jumpFx;
+	unsigned int landFx;
 	// WIN-LOSE BOOLS
 	bool Win;
 	bool Dead;

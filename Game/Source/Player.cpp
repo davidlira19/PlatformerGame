@@ -46,7 +46,6 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	DeadRight.PushBack({ 1,327,270,156 });
 	DeadRight.PushBack({ 271,327,270,156 });
 	DeadRight.PushBack({ 541,327,270,156 });
-	DeadRight.PushBack({ 811,327,270,156 });
 
 	DeadRight.speed = 0.075f;
 	DeadRight.loop = true;
@@ -122,6 +121,8 @@ bool Player::Start()
 	WinTex = app->tex->Load("Assets/textures/win_screen.png");
 	DeadTex = app->tex->Load("Assets/textures/dead_screen.png");
 	IntroTex = app->tex->Load("Assets/textures/title_screen.png");
+	jumpFx = app->audio->LoadFx("Assets/audio/fx/santa_jump.ogg");
+	landFx = app->audio->LoadFx("Assets/audio/fx/santa_land.wav");
 	//SET POSITION
 	Position.x = 870; Position.y = 1125;
 	currentAnimation = &StopRight;
@@ -155,6 +156,9 @@ bool Player::Update(float dt)
 		result = playerCollisions.getCollision(Position, collider, 61);
 		if (result == collisionPosition::down)
 		{
+			if (currentAnimation == &JumpLeft && velocity > 0 || currentAnimation == &JumpRight && velocity > 0) {
+				app->audio->PlayFx(landFx);
+			}
 			if (state == playerState::jumping)
 			{
 				JumpFunction();
@@ -233,6 +237,7 @@ bool Player::Update(float dt)
 		}
 		app->scene->freeCamera = true;
 		Position.x += 2;
+		app->render->camera.x -= 2;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && canMove == true)
 	{
@@ -246,6 +251,7 @@ bool Player::Update(float dt)
 			currentAnimation = &JumpLeft;
 		}
 		Position.x -= 2;
+		app->render->camera.x += 2;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && canMove == true)
@@ -265,6 +271,7 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && canMove == true)
 	{
+		app->audio->PlayFx(jumpFx);
 		if (result == collisionPosition::down) 
 		{
 			if (currentAnimation == &RunRight || currentAnimation == &StopRight )
@@ -377,7 +384,7 @@ void Player::Gravity()
 {
 	velocity += aceleration * 0.05;
 	Position.y += velocity * 0.05;
-
+	app->render->camera.y -= velocity * 0.05;
 }
 //PLAYER FUNCTIONS
 void Player::JumpFunction()
@@ -396,6 +403,7 @@ void Player::JumpFunction()
 			currentAnimation = &JumpRight;
 		}
 		Position.y -= 2;
+		app->render->camera.y += 2;
 		jumpingCount++;
 	}
 	else 

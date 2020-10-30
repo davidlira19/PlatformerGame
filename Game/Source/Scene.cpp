@@ -190,11 +190,6 @@ bool Scene::Update(float dt)
 
 	if (freeCamera==true)
 	{
-		if (app->render->camera.x <= -0 && app->render->camera.x >= -9000)
-		{
-			app->render->camera.x -= 2;
-		}
-
 		if (app->render->camera.y >= -820 && app->render->camera.y <= -420 && app->render->camera.x <= -8000 && app->render->camera.x >= -9000)
 		{
 			app->render->camera.y += 2;
