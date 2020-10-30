@@ -55,6 +55,8 @@ public:
 	bool godMode;
 	bool canMove;
 	bool Intro;
+	bool LoadState(pugi::xml_node* nodo);
+	bool SaveState(pugi::xml_node* nodo);
 	// WIN-LOSE TEXTURES
 	SDL_Texture* WinTex = nullptr;
 	SDL_Texture* DeadTex = nullptr;

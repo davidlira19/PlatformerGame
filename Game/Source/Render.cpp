@@ -144,7 +144,7 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 
 	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
 	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		//LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
 	}
 
@@ -206,8 +206,8 @@ bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b,
 // for now load camera's x and y
 bool Render::LoadState(pugi::xml_node* nodo) 
 {
-	camera.x = nodo->child("camera").attribute("x").as_int(0);
-	camera.y = nodo->child("camera").attribute("y").as_int(0);
+	camera.x = nodo->child("camera").attribute("x").as_int();
+	camera.y = nodo->child("camera").attribute("y").as_int();
 	
 	return true;
 }

@@ -109,7 +109,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	
 	RunLeft.speed = 0.075f;
 	RunLeft.loop = true;
-	
+	name.Create("player");
 }
 bool Player::Start()
 {
@@ -220,7 +220,7 @@ bool Player::Update(float dt)
 	{
 		Win = true;
 	}
-	LOG("POSITION X: %d --- POSITION Y: %d", Position.x, Position.y);
+	//LOG("POSITION X: %d --- POSITION Y: %d", Position.x, Position.y);
 
 	//INPUT TO MOVE THE PLAYER
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && canMove == true)
@@ -302,13 +302,13 @@ bool Player::Update(float dt)
 			godMode = false;
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) 
+	if (app->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) 
 	{
-		app->SaveGameRequest();
+		app->SaveGameRequest("save_game.xml");
 	}
-	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
-		app->LoadGameRequest();
+		app->LoadGameRequest("save_game.xml");
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN|| app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
@@ -415,7 +415,6 @@ void Player::JumpFunction()
 		velocity = 1.0f;
 	}
 }
-
 void Player::DeadAction()
 {
 	if (currentAnimation == &RunRight || currentAnimation == &StopRight || currentAnimation == &JumpRight)
@@ -428,4 +427,20 @@ void Player::DeadAction()
 		lastanimation = currentAnimation;
 		currentAnimation = &DeadLeft;
 	}
+}
+bool Player::SaveState(pugi::xml_node* nodo)
+{
+	pugi::xml_node node=nodo->append_child("data");
+	node.append_attribute("x").set_value(Position.x);
+	node.append_attribute("y").set_value(Position.y);
+	node.append_attribute("aceleration") = aceleration;
+	
+	return true;
+}
+bool Player::LoadState(pugi::xml_node* nodo)
+{
+	Position.x = nodo->child("data").attribute("x").as_int();
+	Position.y = nodo->child("data").attribute("y").as_int();
+	aceleration = nodo->child("data").attribute("aceleration").as_int();
+	return true;
 }

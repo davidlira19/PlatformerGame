@@ -73,6 +73,7 @@ void App::AddModule(Module* module)
 // Called before render is available
 bool App::Awake()
 {
+	
 	// TODO 3: Load config from XML
 	bool ret = LoadConfig();
 
@@ -286,17 +287,25 @@ const char* App::GetOrganization() const
 
 // Load / Save
 // L02: TODO 7: Implement the xml save method for current state
-void App::LoadGameRequest()
+void App::LoadGameRequest(const char* name)
 {
 	// NOTE: We should check if SAVE_STATE_FILENAME actually exist
 	loadGameRequested = true;
+	loadedGame.Create("save_game.xml");
+	
 }
 
 // ---------------------------------------
-void App::SaveGameRequest() const
+void App::SaveGameRequest(const char* name) const
 {
 	// NOTE: We should check if SAVE_STATE_FILENAME actually exist and... should we overwriten
 	saveGameRequested = true;
+	/*if (savedGame != loadedGame)
+	{
+		
+	}*/
+	
+	
 }
 // L02: TODO 5: Create a method to actually load an xml file
 // then call all the modules to load themselves
@@ -306,7 +315,7 @@ void App::LoadGame()
 	pugi::xml_document LoadFile;
 	pugi::xml_node load;
 	LoadFile.load_file(loadedGame.GetString());
-	load = LoadFile.child("save_state");
+	load = LoadFile.child("game_state");
 
 	for (item = modules.start; item != nullptr; item = item->next) 
 	{
@@ -316,15 +325,17 @@ void App::LoadGame()
 }
 void App::SaveGame() 
 {
-	ListItem<Module*>* item = nullptr;
+	
 	pugi::xml_document SaveFile;
-	pugi::xml_node Save;
-	SaveFile.load_file(savedGame.GetString());
-	Save = SaveFile.append_child("save_state");
+	//pugi::xml_node Save;
+	auto Save = SaveFile.append_child("game_state");
+	ListItem<Module*>* item = nullptr;
 
 	for (item = modules.start; item != nullptr; item = item->next) 
 	{
+		Save.append_child(item->data->name.GetString());
 		item->data->SaveState(&Save.child(item->data->name.GetString()));
 	}
+	SaveFile.save_file("save_game.xml");
 	saveGameRequested = false;
 }

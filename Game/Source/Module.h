@@ -62,7 +62,7 @@ public:
 		return true;
 	}
 
-	virtual bool SaveState(pugi::xml_node* nodo) const
+	virtual bool SaveState(pugi::xml_node* nodo)
 	{
 		return true;
 	}
