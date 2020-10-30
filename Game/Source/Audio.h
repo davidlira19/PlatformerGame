@@ -20,6 +20,7 @@ public:
 	// Called before render is available
 	bool Awake(pugi::xml_node&);
 
+	bool Update(float dt);
 	// Called before quitting
 	bool CleanUp();
 
@@ -33,7 +34,7 @@ public:
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
 private:
-
+	int Volume;
 	_Mix_Music* music;
 	List<Mix_Chunk *>	fx;
 };

@@ -188,14 +188,7 @@ bool Scene::Update(float dt)
 	}
 		
 
-	if (freeCamera==true)
-	{
-		if (app->render->camera.y >= -820 && app->render->camera.y <= -420 && app->render->camera.x <= -8000 && app->render->camera.x >= -9000)
-		{
-			app->render->camera.y += 2;
-		}
-	}
-	else
+	if (freeCamera == false)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 			app->render->camera.y += 5;

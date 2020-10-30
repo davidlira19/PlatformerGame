@@ -1,6 +1,6 @@
 #include "App.h"
 #include "Audio.h"
-
+#include "Input.h"
 #include "Defs.h"
 #include "Log.h"
 
@@ -16,6 +16,7 @@ Audio::Audio(bool startEnabled) : Module(startEnabled)
 {
 	music = NULL;
 	name.Create("audio");
+	Volume = 10;
 }
 
 // Destructor
@@ -60,6 +61,29 @@ bool Audio::Awake(pugi::xml_node& config)
 	return ret;
 }
 
+bool Audio::Update(float dt)
+{
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	{
+		Volume += 5;
+		if (Volume >= 100)
+		{
+			Volume = 100;
+		}
+		Mix_VolumeMusic(Volume);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+	{
+		Volume -= 5;
+		if (Volume <= 0)
+		{
+			Volume = 0;
+		}
+		Mix_VolumeMusic(Volume);
+	}
+
+	return true;
+}
 // Called before quitting
 bool Audio::CleanUp()
 {

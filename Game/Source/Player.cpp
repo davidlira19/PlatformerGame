@@ -156,7 +156,7 @@ bool Player::Update(float dt)
 		result = playerCollisions.getCollision(Position, collider, 61);
 		if (result == collisionPosition::down)
 		{
-			if (currentAnimation == &JumpLeft && velocity > 0 || currentAnimation == &JumpRight && velocity > 0) {
+			if ((currentAnimation == &JumpLeft || currentAnimation == &StopLeft || currentAnimation == &StopRight || currentAnimation == &JumpRight) && (velocity > 0)) {
 				app->audio->PlayFx(landFx);
 			}
 			if (state == playerState::jumping)
