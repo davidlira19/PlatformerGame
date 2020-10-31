@@ -7,7 +7,7 @@ Santa's Run is an amazing christmas platformer game developed by 2C1V for the Vi
 ## Key Features
 
  - Player Movement
- - Player Physycs
+ - Player Physics
  - Camera Movement
  - Map with Collisions
  - Debug Keys
