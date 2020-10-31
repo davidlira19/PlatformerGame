@@ -5,13 +5,13 @@
 	<textures />
 	<audio />
 	<player>
-		<data x="3872" y="1512" aceleration="10" />
+		<data x="200" y="1125" aceleration="10" />
 	</player>
 	<:anonymous />
 	<:anonymous />
 	<scene />
 	<map />
 	<renderer>
-		<camera x="-3002" y="-1079" />
+		<camera x="-78" y="-700" />
 	</renderer>
 </game_state>
