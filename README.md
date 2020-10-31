@@ -1,4 +1,4 @@
-# Santa's Run
+# PlatformerGame
 
 ## Description
 
@@ -49,9 +49,9 @@ Santa's Run is an amazing christmas platformer game developed by 2C1V for the Vi
 
 ## Developers
 
- - Adrián Aroca (adrianam4)
- - David Lira (davidlira19)
- - Unai Díaz (unaidiaz)
+ - Adrián Aroca (adrianam4) -> Dev and QA
+ - David Lira (davidlira19) -> Dev and QA
+ - Unai Díaz (unaidiaz) -> Dev and QA
 
 ## License
 
