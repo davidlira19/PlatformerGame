@@ -156,7 +156,7 @@ bool Player::Update(float dt)
 		result = playerCollisions.getCollision(Position, collider, 61);
 		if (result == collisionPosition::down)
 		{
-			if ((currentAnimation == &JumpLeft || currentAnimation == &StopLeft || currentAnimation == &StopRight || currentAnimation == &JumpRight) && (velocity > 0)) 
+			if (((currentAnimation == &JumpLeft) || (currentAnimation == &StopLeft) || (currentAnimation == &StopRight) || (currentAnimation == &JumpRight)) && (velocity > 0)) 
 			{
 				app->audio->PlayFx(landFx);
 			}
@@ -213,7 +213,7 @@ bool Player::Update(float dt)
 		}
 	}
 	//CONDITIONS TO WIN - LOSE
-	if (Position.y  >= 1602 && Position.y <= 1608)
+	if ((Position.y  >= 1602) && (Position.y <= 1608))
 	{
 		Dead = true;
 	}
@@ -224,15 +224,15 @@ bool Player::Update(float dt)
 	//LOG("POSITION X: %d --- POSITION Y: %d", Position.x, Position.y);
 
 	//INPUT TO MOVE THE PLAYER
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && canMove == true)
+	if ((app->input->GetKey(SDL_SCANCODE_D)) == (KEY_REPEAT && canMove == true))
 	{
-		if (result == collisionPosition::down)
+		if ((result) == (collisionPosition::down))
 		{
 			lastanimation = currentAnimation;
 			currentAnimation = &RunRight;
 			currentAnimation->Update();
 		}
-		if (state == playerState::jumping) 
+		if ((state) == (playerState::jumping)) 
 		{
 			currentAnimation = &JumpRight;
 		}
@@ -240,15 +240,15 @@ bool Player::Update(float dt)
 		Position.x += 2;
 		app->render->camera.x -= 2;
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && canMove == true)
+	else if ((app->input->GetKey(SDL_SCANCODE_A)) == (KEY_REPEAT) && (canMove == true))
 	{
-		if (result == collisionPosition::down)	
+		if ((result) == (collisionPosition::down))
 		{
 			lastanimation = currentAnimation;
 			currentAnimation = &RunLeft;
 			currentAnimation->Update();
 		}
-		if (state == playerState::jumping) 
+		if ((state) == (playerState::jumping)) 
 		{
 			currentAnimation = &JumpLeft;
 		}
@@ -256,14 +256,14 @@ bool Player::Update(float dt)
 		app->render->camera.x += 2;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && canMove == true)
+	if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) && (canMove == true))
 	{
 		if(godMode == true)
 		{
 			Position.y -= 2;
 		}
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && canMove == true)
+	else if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) && (canMove == true))
 	{
 		if (godMode == true) 
 		{
@@ -394,12 +394,12 @@ void Player::JumpFunction()
 	collisionPosition result;
 	if (jumpingCount < 90)
 	{
-		if ((lastanimation == &RunLeft || lastanimation == &StopLeft))
+		if (((lastanimation == &RunLeft) || (lastanimation == &StopLeft)))
 		{
 			lastanimation = currentAnimation;
 			currentAnimation = &JumpLeft;
 		}
-		if ((lastanimation == &RunRight || lastanimation == &StopRight))
+		if (((lastanimation == &RunRight) || (lastanimation == &StopRight)))
 		{
 			lastanimation = currentAnimation;
 			currentAnimation = &JumpRight;
@@ -419,13 +419,13 @@ void Player::JumpFunction()
 }
 void Player::DeadAction()
 {
-	if (currentAnimation == &RunRight || currentAnimation == &StopRight || currentAnimation == &JumpRight)
+	if ((currentAnimation == &RunRight) || (currentAnimation == &StopRight) || (currentAnimation == &JumpRight))
 	{
 		lastanimation = currentAnimation;
 		currentAnimation = &DeadRight;
 		currentAnimation->Update();
 	}
-	else if (currentAnimation == &RunLeft || currentAnimation == &StopLeft || currentAnimation == &JumpLeft)
+	else if ((currentAnimation == &RunLeft) || (currentAnimation == &StopLeft) || (currentAnimation == &JumpLeft))
 	{
 		lastanimation = currentAnimation;
 		currentAnimation = &DeadLeft;

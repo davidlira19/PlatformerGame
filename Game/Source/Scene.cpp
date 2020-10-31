@@ -73,7 +73,7 @@ collisionPosition collisions::getCollision(position positionChek,SDL_Rect rect,i
 			relativePosition.x = positionChek.x + (rect.w / 2);
 			relativePosition.y = positionChek.y + rect.h;
 			chekResult = checkIfCollision(id, relativePosition);
-			if (chekResult == true&& positionCollision == collisionPosition::right)
+			if ((chekResult == true)&& (positionCollision == collisionPosition::right))
 			{
 				positionCollision = collisionPosition::downAndRight;
 			}
