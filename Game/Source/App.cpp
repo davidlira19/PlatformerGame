@@ -5,8 +5,6 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Player.h"
-#include "SceneIntro.h"
-#include "FadeToBlack.h"
 #include "Scene.h"
 #include "Map.h"
 
@@ -27,8 +25,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	audio = new Audio(true);
 	player = new Player(false);
-	sceneIntro = new SceneIntro(true);
-	fade = new FadeToBlack(true);
 	scene = new Scene(false);
 	map = new Map(false);
 
@@ -39,8 +35,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(player);
-	AddModule(sceneIntro);
-	AddModule(fade);
 	AddModule(scene);
 	AddModule(map);
 	// Render last to swap buffer
