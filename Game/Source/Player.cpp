@@ -224,7 +224,7 @@ bool Player::Update(float dt)
 	//LOG("POSITION X: %d --- POSITION Y: %d", Position.x, Position.y);
 
 	//INPUT TO MOVE THE PLAYER
-	if ((app->input->GetKey(SDL_SCANCODE_D)) == (KEY_REPEAT && canMove == true))
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && canMove == true)
 	{
 		if ((result) == (collisionPosition::down))
 		{
@@ -232,7 +232,7 @@ bool Player::Update(float dt)
 			currentAnimation = &RunRight;
 			currentAnimation->Update();
 		}
-		if ((state) == (playerState::jumping)) 
+		if (state == playerState::jumping) 
 		{
 			currentAnimation = &JumpRight;
 		}
