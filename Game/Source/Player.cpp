@@ -213,11 +213,11 @@ bool Player::Update(float dt)
 		}
 	}
 	//CONDITIONS TO WIN - LOSE
-	if ((Position.y  >= 1602) && (Position.y <= 1608))
+	if (Position.y  >= 1602)
 	{
 		Dead = true;
 	}
-	if (Position.x >= 9550 && Position.x <= 9560)
+	if (Position.x >= 9550)
 	{
 		Win = true;
 	}
