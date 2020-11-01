@@ -194,22 +194,22 @@ bool Player::Update(float dt)
 		if (result == collisionPosition::right)
 		{
 			Position.x -= 10;
-			Position.y -= 2;
+			Position.y -= 4;
 		}
 		if (result == collisionPosition::downAndRight)
 		{
-			Position.x -= 2;
-			Position.y -= 2;
+			Position.x -= 4;
+			Position.y -= 4;
 		}
 		if (result == collisionPosition::downAndLeft)
 		{
-			Position.x += 2;
-			Position.y -= 2;
+			Position.x += 4;
+			Position.y -= 4;
 		}
 		else if (result == collisionPosition::left)
 		{
 			Position.x += 10;
-			Position.y -= 2;
+			Position.y -= 4;
 		}
 	}
 	//CONDITIONS TO WIN - LOSE
@@ -237,8 +237,8 @@ bool Player::Update(float dt)
 			currentAnimation = &JumpRight;
 		}
 		app->scene->freeCamera = true;
-		Position.x += 2;
-		app->render->camera.x -= 2;
+		Position.x += 4;
+		app->render->camera.x -= 4;
 	}
 	else if ((app->input->GetKey(SDL_SCANCODE_A)) == (KEY_REPEAT) && (canMove == true))
 	{
@@ -252,22 +252,22 @@ bool Player::Update(float dt)
 		{
 			currentAnimation = &JumpLeft;
 		}
-		Position.x -= 2;
-		app->render->camera.x += 2;
+		Position.x -= 4;
+		app->render->camera.x += 4;
 	}
 
 	if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) && (canMove == true))
 	{
 		if(godMode == true)
 		{
-			Position.y -= 2;
+			Position.y -= 4;
 		}
 	}
 	else if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) && (canMove == true))
 	{
 		if (godMode == true) 
 		{
-			Position.y += 2;
+			Position.y += 4;
 		}
 	}
 
@@ -384,15 +384,15 @@ bool Player::CleanUp()
 
 void Player::Gravity()
 {
-	velocity += aceleration * 0.05;
-	Position.y += velocity * 0.05;
-	app->render->camera.y -= velocity * 0.05;
+	velocity += aceleration * 0.05 * 2;
+	Position.y += velocity * 0.05 * 2;
+	app->render->camera.y -= velocity * 0.05 * 2;
 }
 //PLAYER FUNCTIONS
 void Player::JumpFunction()
 {
 	collisionPosition result;
-	if (jumpingCount < 90)
+	if (jumpingCount < 45)
 	{
 		if (((lastanimation == &RunLeft) || (lastanimation == &StopLeft)))
 		{
@@ -404,8 +404,8 @@ void Player::JumpFunction()
 			lastanimation = currentAnimation;
 			currentAnimation = &JumpRight;
 		}
-		Position.y -= 2;
-		app->render->camera.y += 2;
+		Position.y -= 4;
+		app->render->camera.y += 4;
 		jumpingCount++;
 	}
 	else 
@@ -413,8 +413,8 @@ void Player::JumpFunction()
 		result = collisionPosition::null;
 		state = playerState::null;
 		jumpingCount = 0;
-		Position.y += 2;
-		velocity = 1.0f;
+		Position.y += 4;
+		velocity = 3.0f;
 	}
 }
 void Player::DeadAction()
