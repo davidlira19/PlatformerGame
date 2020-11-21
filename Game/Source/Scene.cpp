@@ -24,7 +24,7 @@ bool Scene::Awake()
 {
 	LOG("Loading Scene");
 	bool ret = true;
-
+	
 	return ret;
 }
 
@@ -151,10 +151,7 @@ bool collisions::checkIfCollision(int id, position positionToChek)
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-		app->map->ResetPath();
-		app->map->PropagateBFS();
-	}
+	
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		app->map->ChangeCollisionsDraw();
@@ -209,10 +206,17 @@ bool Scene::Update(float dt)
 	app->render->DrawTexture(bg_snow, 0, 0);
 	app->render->DrawTexture(bg_snow, 3600, 0);
 	app->render->DrawTexture(bg_snow, 7200, 0);
-
-
-
 	app->map->Draw();
+
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {
+		//
+		app->map->PropagateBFS();
+		app->map->DrawPath();
+
+	}
+	else {
+		app->map->ResetPath();
+	}
 	// L03: DONE 7: Set the window title with map/tileset info
 	
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",

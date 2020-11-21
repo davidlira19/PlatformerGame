@@ -31,7 +31,7 @@ bool Map::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	folder.Create(config.child("folder").child_value());
-
+	ResetPath();
 
 	return ret;
 }
@@ -41,29 +41,32 @@ void Map::PropagateBFS()
 	// pop the last one and calculate its 4 neighbors
 	iPoint curr;
 	iPoint neighbors[4];
-	for (int i = 0; i < app->map->data.tilesets.start->data->numTilesHeight * app->map->data.tilesets.start->data->numTilesWidth; i++) {
-		if (frontier.Pop(curr) == true)
-		{
-			neighbors[0].Create(curr.x, curr.y - 1);
-			neighbors[1].Create(curr.x + 1, curr.y);
-			neighbors[2].Create(curr.x, curr.y + 1);
-			neighbors[3].Create(curr.x - 1, curr.y);
-		}
+	/*for (int i = 0; i < app->map->data.tilesets.start->data->numTilesHeight * app->map->data.tilesets.start->data->numTilesWidth; i++) {
+	}*/
+	if (frontier.Pop(curr) == true)
+	{
+		neighbors[0].Create(curr.x, curr.y - 1);
+		neighbors[1].Create(curr.x + 1, curr.y);
+		neighbors[2].Create(curr.x, curr.y + 1);
+		neighbors[3].Create(curr.x - 1, curr.y);
 
-		// L10: TODO 2: For each neighbor, if not visited, add it
-		// to the frontier queue and visited list
 		for (int i = 0; i < 4; i++)
 		{
 			if (visited.Find(neighbors[i]) == -1)
 			{
 				frontier.Push(neighbors[i]);
 				visited.Add(neighbors[i]);
-				DrawPath();
+
 			}
-			
+
 		}
-		
 	}
+
+	// L10: TODO 2: For each neighbor, if not visited, add it
+	// to the frontier queue and visited list
+	
+		
+	
 	
 }
 void Map::DrawPath()
@@ -104,13 +107,14 @@ void Map::ResetPath()
 	frontier.Clear();
 	visited.Clear();
 	
-	frontier.Push(iPoint(0,0));
-	visited.Add(iPoint(0,0));
+	frontier.Push(iPoint(10,4));
+	visited.Add(iPoint(10,4));
 }
 bool Map::IsWalkable(int x, int y) const
 {
 	// L10: TODO 3: return true only if x and y are within map limits
 	// and the tile is walkable (tile id 0 in the navigation layer)
+
 	bool ret = false;
 	if (x <= data.tilesets.start->data->numTilesWidth && y <= data.tilesets.start->data->numTilesHeight && data.tilesets.start->data->firstgid == 0)
 	{
@@ -174,6 +178,7 @@ void Map::Draw()
 				exit = false;
 				break;
 			}
+
 		}
 
 		layer = layer->next;
