@@ -101,7 +101,7 @@ bool Audio::CleanUp()
 	for(item = fx.start; item != NULL; item = item->next)
 		Mix_FreeChunk(item->data);
 
-	fx.clear();
+	fx.Clear();
 
 	Mix_CloseAudio();
 	Mix_Quit();
@@ -180,7 +180,7 @@ unsigned int Audio::LoadFx(const char* path)
 	}
 	else
 	{
-		fx.add(chunk);
+		fx.Add(chunk);
 		ret = fx.count();
 	}
 

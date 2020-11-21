@@ -2,10 +2,9 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Map.h"
-
 #include "Defs.h"
 #include "Log.h"
-
+#include"Player.h"
 #include <math.h>
 
 Map::Map(bool startEnabled) : Module(startEnabled), mapLoaded(false)
@@ -33,9 +32,93 @@ bool Map::Awake(pugi::xml_node& config)
 
 	folder.Create(config.child("folder").child_value());
 
+
 	return ret;
 }
+void Map::PropagateBFS()
+{
+	// L10: TODO 1: If frontier queue contains elements
+	// pop the last one and calculate its 4 neighbors
+	iPoint curr;
+	iPoint neighbors[4];
+	for (int i = 0; i < app->map->data.tilesets.start->data->numTilesHeight * app->map->data.tilesets.start->data->numTilesWidth; i++) {
+		if (frontier.Pop(curr) == true)
+		{
+			neighbors[0].Create(curr.x, curr.y - 1);
+			neighbors[1].Create(curr.x + 1, curr.y);
+			neighbors[2].Create(curr.x, curr.y + 1);
+			neighbors[3].Create(curr.x - 1, curr.y);
+		}
 
+		// L10: TODO 2: For each neighbor, if not visited, add it
+		// to the frontier queue and visited list
+		for (int i = 0; i < 4; i++)
+		{
+			if (visited.Find(neighbors[i]) == -1)
+			{
+				frontier.Push(neighbors[i]);
+				visited.Add(neighbors[i]);
+				DrawPath();
+			}
+			
+		}
+		
+	}
+	
+}
+void Map::DrawPath()
+{
+	iPoint point;
+
+	// Draw visited
+	ListItem<iPoint>* item = visited.start;
+
+	while (item)
+	{
+		point = item->data;
+		TileSet* tileset = GetTilesetFromTileId(61);
+
+		SDL_Rect rec = tileset->GetTileRect(61);
+		iPoint pos = MapToWorld(point.x, point.y);
+
+		app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+
+		item = item->next;
+	}
+
+	// Draw frontier
+	for (uint i = 0; i < frontier.Count(); ++i)
+	{
+		point = *(frontier.Peek(i));
+		TileSet* tileset = GetTilesetFromTileId(62);
+
+		SDL_Rect rec = tileset->GetTileRect(62);
+		iPoint pos = MapToWorld(point.x, point.y);
+
+		app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+	}
+
+}
+void Map::ResetPath()
+{
+	frontier.Clear();
+	visited.Clear();
+	
+	frontier.Push(iPoint(0,0));
+	visited.Add(iPoint(0,0));
+}
+bool Map::IsWalkable(int x, int y) const
+{
+	// L10: TODO 3: return true only if x and y are within map limits
+	// and the tile is walkable (tile id 0 in the navigation layer)
+	bool ret = false;
+	if (x <= data.tilesets.start->data->numTilesWidth && y <= data.tilesets.start->data->numTilesHeight && data.tilesets.start->data->firstgid == 0)
+	{
+		ret = true;
+	}
+
+	return ret;
+}
 // Draw the map (all requried layers)
 void Map::Draw()
 {
@@ -204,7 +287,7 @@ bool Map::CleanUp()
 		RELEASE(item->data);
 		item = item->next;
 	}
-	data.tilesets.clear();
+	data.tilesets.Clear();
 
 	// Clean up the pugui tree
 	mapFile.reset();
@@ -282,7 +365,7 @@ bool Map::Load(const char* filename)
 
 		if (ret == true) ret = LoadTilesetImage(tileset, set);
 
-		data.tilesets.add(set);
+		data.tilesets.Add(set);
 	}
 	if (ret == true)
 	{
@@ -309,7 +392,7 @@ bool Map::Load(const char* filename)
 		ret = LoadLayer(layer, lay);
 
 		if (ret == true)
-			data.layers.add(lay);
+			data.layers.Add(lay);
 
 		node2 = layer.child("properties");
 		list2 = data.layers.start;

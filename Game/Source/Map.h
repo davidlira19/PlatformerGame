@@ -4,13 +4,14 @@
 #include "Module.h"
 #include "List.h"
 #include "Point.h"
-
+#include "Queue.h"
 #include "PugiXml\src\pugixml.hpp"
 
 // L03: DONE 2: Create a struct to hold information for a TileSet
 // Ignore Terrain Types and Tile Types for now, but we want the image!
 struct TileSet
 {
+	
 	SString	name;
 	int	firstgid;
 	int margin;
@@ -116,7 +117,13 @@ public:
 
     // Called before quitting
     bool CleanUp();
+	// L10: BFS Pathfinding methods
+	void ResetPath();
+	void DrawPath();
+	bool IsWalkable(int x, int y) const;
 
+	// Propagate methods
+	void PropagateBFS();
     // Load new map
     bool Load(const char* path);
 	iPoint MapToWorld(int x, int y) const;
@@ -141,6 +148,8 @@ public:
 	MapData data;
 
 private:
+	Queue<iPoint> frontier;
+	List<iPoint> visited;
 
     pugi::xml_document mapFile;
     SString folder;

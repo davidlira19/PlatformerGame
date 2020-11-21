@@ -151,6 +151,10 @@ bool collisions::checkIfCollision(int id, position positionToChek)
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+		app->map->ResetPath();
+		app->map->PropagateBFS();
+	}
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		app->map->ChangeCollisionsDraw();
