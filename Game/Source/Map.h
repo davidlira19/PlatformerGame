@@ -128,8 +128,9 @@ public:
     bool Load(const char* path);
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
+	
 private:
-
+	int GetTileIdFromPosition(int x, int y, const char* layername);
 	// L03: DONE Methods to load all required map data
 	bool LoadMap();
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);

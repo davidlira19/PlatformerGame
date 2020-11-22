@@ -52,12 +52,12 @@ void Map::PropagateBFS()
 
 		for (int i = 0; i < 4; i++)
 		{
-			if (visited.Find(neighbors[i]) == -1)
+			if (visited.Find(neighbors[i]) == -1 && IsWalkable(neighbors[i].x, neighbors[i].y) == true)
 			{
 				frontier.Push(neighbors[i]);
 				visited.Add(neighbors[i]);
-
 			}
+			
 
 		}
 	}
@@ -114,13 +114,17 @@ bool Map::IsWalkable(int x, int y) const
 {
 	// L10: TODO 3: return true only if x and y are within map limits
 	// and the tile is walkable (tile id 0 in the navigation layer)
+	
 
 	bool ret = false;
-	if (x <= data.tilesets.start->data->numTilesWidth && y <= data.tilesets.start->data->numTilesHeight && data.tilesets.start->data->firstgid == 0)
+
+	if ((x < data.tilesets.start->data->numTilesWidth && x > 0) && (y < data.tilesets.start->data->numTilesHeight && y > 0) && (app->map->GetTileIdFromPosition(x, y, "colisions") != 61))
 	{
+		//&& data.tilesets.start->data->firstgid == 0
 		ret = true;
 	}
-
+	
+	
 	return ret;
 }
 // Draw the map (all requried layers)
@@ -251,6 +255,17 @@ iPoint Map::WorldToMap(int x, int y) const
 	return ret;
 }
 
+int Map::GetTileIdFromPosition(int x, int y,const char* layername) {
+	ListItem<MapLayer*>* layer = data.layers.start;
+	while (layer != nullptr) {
+		if (layer->data->name == layername) {
+			break;
+		}
+		layer=layer->next;
+	}
+	
+	return layer->data->Get(x, y);
+}
 // L06: TODO 3: Pick the right Tileset based on a tile id
 TileSet* Map::GetTilesetFromTileId(int id) const
 {
