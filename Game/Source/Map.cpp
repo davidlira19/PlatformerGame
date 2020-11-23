@@ -32,41 +32,95 @@ bool Map::Awake(pugi::xml_node& config)
 
 	folder.Create(config.child("folder").child_value());
 	ResetPath();
-
+	app->map->goal.x = -1;
+	app->map->goal.y = -1;
 	return ret;
+}
+void Map::FindFinalPath() 
+{
+	bool pathFound = false;
+	ListItem<iPoint>* selector1;
+	ListItem<iPoint>* selector;
+	ListItem<iPoint>* oldSelector = visited.end;
+	while (pathFound == false)
+	{
+		finalPath.Add(oldSelector->data);
+		if (oldSelector->data == visited.start->data)
+		{
+			pathFound = true;
+			break;
+		}
+		selector = visited.start;
+		selector1 = breadcrumps.start;
+		while (selector != nullptr)
+		{
+			if (selector->data == oldSelector->data)
+			{
+				oldSelector->data = selector1->data;
+				break;
+			}
+			else
+			{
+				selector = selector->next;
+				selector1 = selector1->next;
+			}
+		}
+	}
+	List<iPoint> auxiliarList;
+	ListItem<iPoint>*auxiliarListItem;
+	auxiliarListItem= finalPath.end;
+	for (int a = 0; a < finalPath.count(); a++) {
+		auxiliarList.Add(auxiliarListItem->data);
+		auxiliarListItem=auxiliarListItem->prev;
+	}
+	finalPath = auxiliarList;
 }
 void Map::PropagateBFS()
 {
+	bool found = false;
+	
 	// L10: TODO 1: If frontier queue contains elements
 	// pop the last one and calculate its 4 neighbors
 	iPoint curr;
 	iPoint neighbors[4];
-	/*for (int i = 0; i < app->map->data.tilesets.start->data->numTilesHeight * app->map->data.tilesets.start->data->numTilesWidth; i++) {
-	}*/
-	if (frontier.Pop(curr) == true)
-	{
-		neighbors[0].Create(curr.x, curr.y - 1);
-		neighbors[1].Create(curr.x + 1, curr.y);
-		neighbors[2].Create(curr.x, curr.y + 1);
-		neighbors[3].Create(curr.x - 1, curr.y);
+	breadcrumps.Add(visited.start->data);
+	for (int i = 0; i < app->map->data.tilesets.start->data->numTilesHeight * app->map->data.tilesets.start->data->numTilesWidth; i++) {
 
-		for (int i = 0; i < 4; i++)
+		if (frontier.Pop(curr) == true)
 		{
-			if (visited.Find(neighbors[i]) == -1 && IsWalkable(neighbors[i].x, neighbors[i].y) == true)
-			{
-				frontier.Push(neighbors[i]);
-				visited.Add(neighbors[i]);
-			}
-			
+			neighbors[0].Create(curr.x, curr.y - 1);
+			neighbors[1].Create(curr.x + 1, curr.y);
+			neighbors[2].Create(curr.x, curr.y + 1);
+			neighbors[3].Create(curr.x - 1, curr.y);
 
+			for (int i = 0; i < 4; i++)
+			{
+				if (visited.Find(neighbors[i]) == -1 && IsWalkable(neighbors[i].x, neighbors[i].y) == true)
+				{
+					frontier.Push(neighbors[i]);
+					visited.Add(neighbors[i]);
+					breadcrumps.Add(curr);
+				}
+				if (neighbors[i] == goal)
+				{
+					found = true;
+					break;
+				}
+
+			}
+		}
+		if (found == true) 
+		{ 
+			break; 
 		}
 	}
 
+	if (found == true)
+	{
+		FindFinalPath();
+	}
 	// L10: TODO 2: For each neighbor, if not visited, add it
 	// to the frontier queue and visited list
-	
-		
-	
 	
 }
 void Map::DrawPath()
@@ -101,14 +155,32 @@ void Map::DrawPath()
 		app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
 	}
 
+	//draw final path
+	ListItem<iPoint>* auxiliarItem = finalPath.start;
+
+	while (auxiliarItem)
+	{
+		point = auxiliarItem->data;
+		TileSet* tileset = GetTilesetFromTileId(25);
+
+		SDL_Rect rec = tileset->GetTileRect(25);
+		iPoint pos = MapToWorld(point.x, point.y);
+
+		app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+
+		auxiliarItem = auxiliarItem->next;
+	}
+
 }
 void Map::ResetPath()
 {
 	frontier.Clear();
 	visited.Clear();
+	breadcrumps.Clear();
 	
 	frontier.Push(iPoint(10,4));
 	visited.Add(iPoint(10,4));
+	/*finalPath.Clear();*/
 }
 bool Map::IsWalkable(int x, int y) const
 {

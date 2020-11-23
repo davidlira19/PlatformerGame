@@ -208,17 +208,40 @@ bool Scene::Update(float dt)
 	app->render->DrawTexture(bg_snow, 7200/2, 0);
 	app->map->Draw();
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {
-		//
-		app->map->PropagateBFS();
-		app->map->DrawPath();
-
+	if (app->input->GetMouseButtonDown(1) == KEY_DOWN)
+	{
+		app->input->GetMousePosition(app->map->goal.x, app->map->goal.y);
+		app->map->goal.x -= app->render->camera.x;
+		app->map->goal.y -= app->render->camera.y;
+		app->map->goal = app->map->WorldToMap(app->map->goal.x, app->map->goal.y);
 	}
-	else {
-		app->map->ResetPath();
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
+		{
+			app->map->PropagateBFS();
+			//app->map->DrawPath();
+		}
 	}
 	// L03: DONE 7: Set the window title with map/tileset info
-	
+	if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
+	{
+		TileSet* tileset = app->map->GetTilesetFromTileId(62);
+
+		SDL_Rect rec = tileset->GetTileRect(62);
+		iPoint pos = app->map->MapToWorld(app->map->goal.x, app->map->goal.y);
+
+		app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+		app->map->DrawPath();
+	}
+	// L03: DONE 7: Set the window title with map/tileset info
+	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	{
+		app->map->goal.x = -1;
+		app->map->goal.y = -1;
+		app->map->ResetPath();
+		//app->map->finalPath.Clear();
+	}
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 		app->map->data.width, app->map->data.height,
 		app->map->data.tileWidth, app->map->data.tileHeight,

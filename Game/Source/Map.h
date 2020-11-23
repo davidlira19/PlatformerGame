@@ -136,22 +136,26 @@ private:
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
-
+	void FindFinalPath();
 	// L06: TODO 6: Load a group of properties 
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
 	// L06: TODO 3: Pick the right Tileset based on a tile id
-	TileSet* GetTilesetFromTileId(int id) const;
+	
 
 public:
+	TileSet* GetTilesetFromTileId(int id) const;
 	void ChangeCollisionsDraw();
     // L03: DONE 1: Add your struct for map info
 	MapData data;
-
+	iPoint goal;
+	List<iPoint> finalPath;
 private:
+	
 	Queue<iPoint> frontier;
 	List<iPoint> visited;
-
+	List<iPoint> breadcrumps;
+	
     pugi::xml_document mapFile;
     SString folder;
     bool mapLoaded;
