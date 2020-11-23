@@ -37,7 +37,7 @@ bool Scene::Start()
 	app->audio->PlayMusic("Assets/audio/music/christmas_music.ogg");
 	//Load Position
 	app->render->camera.x = 0;
-	app->render->camera.y = -700;
+	app->render->camera.y = -200;
 	//Load Texture
 	bg_snow = app->tex->Load("Assets/textures/snow_background.png");
 
@@ -204,8 +204,8 @@ bool Scene::Update(float dt)
 	}
 	//DRAW BACKGROUND
 	app->render->DrawTexture(bg_snow, 0, 0);
-	app->render->DrawTexture(bg_snow, 3600, 0);
-	app->render->DrawTexture(bg_snow, 7200, 0);
+	app->render->DrawTexture(bg_snow, 3600/2, 0);
+	app->render->DrawTexture(bg_snow, 7200/2, 0);
 	app->map->Draw();
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {

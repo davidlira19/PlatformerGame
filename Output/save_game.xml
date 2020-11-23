@@ -5,11 +5,11 @@
 	<textures />
 	<audio />
 	<player>
-		<data x="2234" y="708" aceleration="10" />
+		<data x="1355" y="436" aceleration="10" />
 	</player>
 	<scene />
 	<map />
 	<renderer>
-		<camera x="-1364" y="-277" />
+		<camera x="-920" y="-212" />
 	</renderer>
 </game_state>

@@ -12,100 +12,100 @@
 Player::Player(bool startEnabled) : Module(startEnabled)
 {
 	//ANIMATION WHEN SANTA IS NOT MOVING RIGHT
-	StopRight.PushBack({ 1082,327,270,156});
-	StopRight.PushBack({ 1,597,270,156 });
-	StopRight.PushBack({ 271,597,270,156 });
-	StopRight.PushBack({ 541,597,270,156 });
-	StopRight.PushBack({ 811,597,270,156 });
-	StopRight.PushBack({ 1082,597,270,156 });
-	StopRight.PushBack({ 1,867,270,156 });
-	StopRight.PushBack({ 271,867,270,156 });
+	StopRight.PushBack({ 1082 / 2,327 / 2,270 / 2,156 / 2 });
+	StopRight.PushBack({ 1 / 2,597 / 2,270 / 2,156 / 2 });
+	StopRight.PushBack({ 271 / 2,597 / 2,270 / 2,156 / 2 });
+	StopRight.PushBack({ 541 / 2,597 / 2,270 / 2,156 / 2 });
+	StopRight.PushBack({ 811 / 2,597 / 2,270 / 2,156 / 2 });
+	StopRight.PushBack({ 1082 / 2,597 / 2,270 / 2,156 / 2 });
+	StopRight.PushBack({ 1 / 2,867 / 2,270 / 2,156 / 2 });
+	StopRight.PushBack({ 271 / 2,867 / 2,270 / 2,156 / 2 });
 
 	StopRight.speed = 0.075f;
 	StopRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS JUMPING RIGHT
-	JumpRight.PushBack({ 541,867,270,156 });
-	JumpRight.PushBack({ 811,867,270,156 });
-	JumpRight.PushBack({ 1082,867,270,156 });
-	JumpRight.PushBack({ 1,1138,270,156 });
-	JumpRight.PushBack({ 271,1138,270,156 });
-	JumpRight.PushBack({ 541,1138,270,156 });
-	JumpRight.PushBack({ 811,1138,270,156 });
-	JumpRight.PushBack({ 1082,1138,270,156 });
+	JumpRight.PushBack({ 541 / 2,867 / 2,270 / 2,156 / 2 });
+	JumpRight.PushBack({ 811 / 2,867 / 2,270 / 2,156 / 2 });
+	JumpRight.PushBack({ 1082 / 2,867 / 2,270 / 2,156 / 2 });
+	JumpRight.PushBack({ 1 / 2,1138 / 2,270 / 2,156 / 2 });
+	JumpRight.PushBack({ 271 / 2,1138 / 2,270 / 2,156 / 2 });
+	JumpRight.PushBack({ 541 / 2,1138 / 2,270 / 2,156 / 2 });
+	JumpRight.PushBack({ 811 / 2,1138 / 2,270 / 2,156 / 2 });
+	JumpRight.PushBack({ 1082 / 2,1138 / 2,270 / 2,156 / 2 });
 
 	JumpRight.speed = 0.075f;
 	JumpRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS DEAD RIGHT
-	DeadRight.PushBack({ 1,57,270,156 });
-	DeadRight.PushBack({ 271,57,270,156 });
-	DeadRight.PushBack({ 541,57,270,156 });
-	DeadRight.PushBack({ 811,57,270,156 });
-	DeadRight.PushBack({ 1082,57,270,156 });
-	DeadRight.PushBack({ 1,327,270,156 });
-	DeadRight.PushBack({ 271,327,270,156 });
-	DeadRight.PushBack({ 541,327,270,156 });
+	DeadRight.PushBack({ 1 / 2,57 / 2,270 / 2,156 / 2 });
+	DeadRight.PushBack({ 271 / 2,57 / 2,270 / 2,156 / 2 });
+	DeadRight.PushBack({ 541 / 2,57 / 2,270 / 2,156 / 2 });
+	DeadRight.PushBack({ 811 / 2,57 / 2,270 / 2,156 / 2 });
+	DeadRight.PushBack({ 1082 / 2,57 / 2,270 / 2,156 / 2 });
+	DeadRight.PushBack({ 1 / 2,327 / 2,270 / 2,156 / 2 });
+	DeadRight.PushBack({ 271 / 2,327 / 2,270 / 2,156 / 2 });
+	DeadRight.PushBack({ 541 / 2,327 / 2,270 / 2,156 / 2 });
 
 	DeadRight.speed = 0.075f;
 	DeadRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS RUNNING RIGHT
-	RunRight.PushBack({ 1,1407,260,156 });
-	RunRight.PushBack({ 271,1407,260,156 });
-	RunRight.PushBack({ 541,1407,260,156 });
-	RunRight.PushBack({ 811,1407,260,156 });
-	RunRight.PushBack({ 1082,1407,260,156 });
+	RunRight.PushBack({ 1 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 271 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 541 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 811 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 1082 / 2,1407 / 2,260 / 2,156 / 2 });
 
 	RunRight.speed = 0.075f;
 	RunRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS NOT MOVING LEFT
-	StopLeft.PushBack({ 1351,327,270,156 });
-	StopLeft.PushBack({ 2431,597,270,156 });
-	StopLeft.PushBack({ 2162,597,270,156 });
-	StopLeft.PushBack({ 1891,597,270,156 });
-	StopLeft.PushBack({ 1621,597,270,156 });
-	StopLeft.PushBack({ 1351,597,270,156 });
-	StopLeft.PushBack({ 2432,867,270,156 });
-	StopLeft.PushBack({ 2162,867,270,156 });
+	StopLeft.PushBack({ 1351 / 2,327 / 2,270 / 2,156 / 2 });
+	StopLeft.PushBack({ 2431 / 2,597 / 2,270 / 2,156 / 2 });
+	StopLeft.PushBack({ 2162 / 2,597 / 2,270 / 2,156 / 2 });
+	StopLeft.PushBack({ 1891 / 2,597 / 2,270 / 2,156 / 2 });
+	StopLeft.PushBack({ 1621 / 2,597 / 2,270 / 2,156 / 2 });
+	StopLeft.PushBack({ 1351 / 2,597 / 2,270 / 2,156 / 2 });
+	StopLeft.PushBack({ 2432 / 2,867 / 2,270 / 2,156 / 2 });
+	StopLeft.PushBack({ 2162 / 2,867 / 2,270 / 2,156 / 2 });
 
 	StopLeft.speed = 0.075f;
 	StopLeft.loop = true;
 
 	//ANIMATION WHEN SANTA IS JUMPING LEFT
-	JumpLeft.PushBack({ 1891,867,270,156 });
-	JumpLeft.PushBack({ 1621,867,270,156 });
-	JumpLeft.PushBack({ 1351,867,270,156 });
-	JumpLeft.PushBack({ 2432,1138,270,156 });
-	JumpLeft.PushBack({ 2162,1138,270,156 });
-	JumpLeft.PushBack({ 1891,1138,270,156 });
-	JumpLeft.PushBack({ 1621,1138,270,156 });
-	JumpLeft.PushBack({ 1351,1138,270,156 });
+	JumpLeft.PushBack({ 1891 / 2,867 / 2,270 / 2,156 / 2 });
+	JumpLeft.PushBack({ 1621 / 2,867 / 2,270 / 2,156 / 2 });
+	JumpLeft.PushBack({ 1351 / 2,867 / 2,270 / 2,156 / 2 });
+	JumpLeft.PushBack({ 2432 / 2,1138 / 2,270 / 2,156 / 2 });
+	JumpLeft.PushBack({ 2162 / 2,1138 / 2,270 / 2,156 / 2 });
+	JumpLeft.PushBack({ 1891 / 2,1138 / 2,270 / 2,156 / 2 });
+	JumpLeft.PushBack({ 1621 / 2,1138 / 2,270 / 2,156 / 2 });
+	JumpLeft.PushBack({ 1351 / 2,1138 / 2,270 / 2,156 / 2 });
 
 	JumpLeft.speed = 0.075f;
 	JumpLeft.loop = true;
 
 	//ANIMATION WHEN SANTA IS DEAD LEFT
-	DeadLeft.PushBack({ 2431,57,270,156 });
-	DeadLeft.PushBack({ 2162,57,270,156 });
-	DeadLeft.PushBack({ 1891,57,270,156 });
-	DeadLeft.PushBack({ 1621,57,270,156 });
-	DeadLeft.PushBack({ 1351,57,270,156 });
-	DeadLeft.PushBack({ 2431,327,270,156 });
-	DeadLeft.PushBack({ 2162,327,270,156 });
-	DeadLeft.PushBack({ 1891,327,270,156 });
-	DeadLeft.PushBack({ 1621,327,270,156 });
+	DeadLeft.PushBack({ 2431 / 2,57 / 2,270 / 2,156 / 2 });
+	DeadLeft.PushBack({ 2162 / 2,57 / 2,270 / 2,156 / 2 });
+	DeadLeft.PushBack({ 1891 / 2,57 / 2,270 / 2,156 / 2 });
+	DeadLeft.PushBack({ 1621 / 2,57 / 2,270 / 2,156 / 2 });
+	DeadLeft.PushBack({ 1351 / 2,57 / 2,270 / 2,156 / 2 });
+	DeadLeft.PushBack({ 2431 / 2,327 / 2,270 / 2,156 / 2 });
+	DeadLeft.PushBack({ 2162 / 2,327 / 2,270 / 2,156 / 2 });
+	DeadLeft.PushBack({ 1891 / 2,327 / 2,270 / 2,156 / 2 });
+	DeadLeft.PushBack({ 1621 / 2,327 / 2,270 / 2,156 / 2 });
 
 	DeadLeft.speed = 0.075f;
 	DeadLeft.loop = true;
 
 	//ANIMATION WHEN SANTA IS RUNNING LEFT
-	RunLeft.PushBack({ 2431,1407,260,156 });
-	RunLeft.PushBack({ 2162,1407,260,156 });
-	RunLeft.PushBack({ 1891,1407,260,156 });
-	RunLeft.PushBack({ 1621,1407,260,156 });
-	RunLeft.PushBack({ 1351,1407,260,156 });
+	RunLeft.PushBack({ 2431 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunLeft.PushBack({ 2162 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunLeft.PushBack({ 1891 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunLeft.PushBack({ 1621 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunLeft.PushBack({ 1351 / 2,1407 / 2,260 / 2,156 / 2 });
 	
 	RunLeft.speed = 0.075f;
 	RunLeft.loop = true;
@@ -124,7 +124,7 @@ bool Player::Start()
 	jumpFx = app->audio->LoadFx("Assets/audio/fx/santa_jump.ogg");
 	landFx = app->audio->LoadFx("Assets/audio/fx/santa_land.wav");
 	//SET POSITION
-	Position.x = 870; Position.y = 1125;
+	Position.x = 870 / 2; Position.y = 1125 / 2;
 	currentAnimation = &StopRight;
 	//INITIALIZE VARIABLES
 	isJumping = false;
@@ -137,7 +137,7 @@ bool Player::Start()
 	aceleration = 10.0f;
 	velocity = 0;
 
-	collider = { Position.x,Position.y,160,156 };
+	collider = { Position.x,Position.y,160 / 2,156 / 2 };
 
 	return true;
 }
@@ -213,11 +213,11 @@ bool Player::Update(float dt)
 		}
 	}
 	//CONDITIONS TO WIN - LOSE
-	if (Position.y  >= 1602)
+	if (Position.y  >= 1602 / 2)
 	{
 		Dead = true;
 	}
-	if (Position.x >= 9550)
+	if (Position.x >= 9550 / 2)
 	{
 		Win = true;
 	}
@@ -260,14 +260,14 @@ bool Player::Update(float dt)
 	{
 		if(godMode == true)
 		{
-			Position.y -= 4;
+			Position.y -= 2;
 		}
 	}
 	else if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) && (canMove == true))
 	{
 		if (godMode == true) 
 		{
-			Position.y += 4;
+			Position.y += 2;
 		}
 	}
 
@@ -404,8 +404,8 @@ void Player::JumpFunction()
 			lastanimation = currentAnimation;
 			currentAnimation = &JumpRight;
 		}
-		Position.y -= 4;
-		app->render->camera.y += 4;
+		Position.y -= 2;
+		app->render->camera.y += 2;
 		jumpingCount++;
 	}
 	else 
