@@ -69,10 +69,11 @@ void Map::FindFinalPath()
 	List<iPoint> auxiliarList;
 	ListItem<iPoint>*auxiliarListItem;
 	auxiliarListItem= finalPath.end;
-	for (int a = 0; a < finalPath.count(); a++) {
+	for (int a = 0; a < finalPath.count() || auxiliarListItem!=nullptr; a++) {
 		auxiliarList.Add(auxiliarListItem->data);
 		auxiliarListItem=auxiliarListItem->prev;
 	}
+	finalPath.Clear();
 	finalPath = auxiliarList;
 }
 void Map::PropagateBFS()

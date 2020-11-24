@@ -235,13 +235,13 @@ bool Scene::Update(float dt)
 		app->map->DrawPath();
 	}
 	// L03: DONE 7: Set the window title with map/tileset info
-	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
-	{
-		app->map->goal.x = -1;
-		app->map->goal.y = -1;
-		app->map->ResetPath();
-		//app->map->finalPath.Clear();
-	}
+	//if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	//{
+	//	app->map->goal.x = -1;
+	//	app->map->goal.y = -1;
+	//	app->map->ResetPath();
+	//	//app->map->finalPath.Clear();
+	//}
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 		app->map->data.width, app->map->data.height,
 		app->map->data.tileWidth, app->map->data.tileHeight,
