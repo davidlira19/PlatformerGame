@@ -124,7 +124,7 @@ bool Player::Start()
 	jumpFx = app->audio->LoadFx("Assets/audio/fx/santa_jump.ogg");
 	landFx = app->audio->LoadFx("Assets/audio/fx/santa_land.wav");
 	//SET POSITION
-	Position.x = 870 / 2; Position.y = 1125 / 2;
+	Position.x = 2300 / 2; Position.y = 1125 / 2;
 	currentAnimation = &StopRight;
 	//INITIALIZE VARIABLES
 	isJumping = false;
@@ -137,7 +137,7 @@ bool Player::Start()
 	aceleration = 13.0f;
 	velocity = 3;
 
-	collider = { Position.x + 30, Position.y, 48, 76 };
+	collider = { Position.x, Position.y, 48, 76 };
 
 	return true;
 }
@@ -217,7 +217,7 @@ bool Player::Update(float dt)
 	{
 		Dead = true;
 	}
-	if (Position.x >= 9550 / 2)
+	if (Position.x >= 11350 / 2)
 	{
 		Win = true;
 	}
@@ -405,7 +405,7 @@ void Player::JumpFunction()
 			currentAnimation = &JumpRight;
 		}
 		Position.y -= 3;
-		app->render->camera.y += 2;
+		app->render->camera.y += 3;
 		jumpingCount++;
 	}
 	else 
@@ -414,6 +414,7 @@ void Player::JumpFunction()
 		state = playerState::null;
 		jumpingCount = 0;
 		Position.y += 3;
+		app->render->camera.y -= 3;
 		velocity = 5.0f;
 	}
 }

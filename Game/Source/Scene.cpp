@@ -36,8 +36,8 @@ bool Scene::Start()
 	// Load music
 	app->audio->PlayMusic("Assets/audio/music/christmas_music.ogg");
 	//Load Position
-	app->render->camera.x = 0;
-	app->render->camera.y = -200;
+	app->render->camera.x = -580;
+	app->render->camera.y = -210;
 	//Load Texture
 	bg_snow = app->tex->Load("Assets/textures/snow_background.png");
 
@@ -76,7 +76,7 @@ collisionPosition collisions::getCollision(position positionChek,SDL_Rect rect,i
 			{
 				positionCollision = collisionPosition::downAndRight;
 			}
-			else if(chekResult == true) 
+			else if(chekResult == true)
 			{
 				positionCollision = collisionPosition::down;
 			}
@@ -156,6 +156,7 @@ bool Scene::Update(float dt)
 	{
 		app->map->ChangeCollisionsDraw();
 	}
+	/*
 	//CAMERA.X LIMITS
 	if (app->render->camera.x > 0)
 	{
@@ -174,6 +175,7 @@ bool Scene::Update(float dt)
 	{
 		app->render->camera.y = -1100;
 	}
+	*/
 	//CAMERA AUTOMATIC MOVEMENT
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
@@ -186,7 +188,7 @@ bool Scene::Update(float dt)
 			freeCamera = true;
 		}
 	}
-		
+	
 
 	if (freeCamera == false)
 	{
@@ -203,6 +205,7 @@ bool Scene::Update(float dt)
 			app->render->camera.x -= 5;
 	}
 	//DRAW BACKGROUND
+	app->render->DrawTexture(bg_snow, -3600/2, 0);
 	app->render->DrawTexture(bg_snow, 0, 0);
 	app->render->DrawTexture(bg_snow, 3600/2, 0);
 	app->render->DrawTexture(bg_snow, 7200/2, 0);
