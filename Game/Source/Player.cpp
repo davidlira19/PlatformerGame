@@ -135,7 +135,7 @@ bool Player::Start()
 	Dead = false;
 
 	aceleration = 13.0f;
-	velocity = 3;
+	velocity = 0;
 
 	collider = { Position.x, Position.y, 48, 76 };
 
@@ -177,7 +177,7 @@ bool Player::Update(float dt)
 					currentAnimation = &StopRight;
 				}
 			}
-			velocity = 3;
+			velocity = 0;
 		}
 		else
 		{
