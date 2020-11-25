@@ -21,7 +21,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	StopRight.PushBack({ 1 / 2,867 / 2,270 / 2,156 / 2 });
 	StopRight.PushBack({ 271 / 2,867 / 2,270 / 2,156 / 2 });
 
-	StopRight.speed = 0.075f;
+	StopRight.speed = 0.2f;
 	StopRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS JUMPING RIGHT
@@ -34,7 +34,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	JumpRight.PushBack({ 811 / 2,1138 / 2,270 / 2,156 / 2 });
 	JumpRight.PushBack({ 1082 / 2,1138 / 2,270 / 2,156 / 2 });
 
-	JumpRight.speed = 0.075f;
+	JumpRight.speed = 0.2f;
 	JumpRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS DEAD RIGHT
@@ -47,7 +47,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	DeadRight.PushBack({ 271 / 2,327 / 2,270 / 2,156 / 2 });
 	DeadRight.PushBack({ 541 / 2,327 / 2,270 / 2,156 / 2 });
 
-	DeadRight.speed = 0.075f;
+	DeadRight.speed = 0.2f;
 	DeadRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS RUNNING RIGHT
@@ -57,7 +57,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	RunRight.PushBack({ 811 / 2,1407 / 2,260 / 2,156 / 2 });
 	RunRight.PushBack({ 1082 / 2,1407 / 2,260 / 2,156 / 2 });
 
-	RunRight.speed = 0.075f;
+	RunRight.speed = 0.2f;
 	RunRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS NOT MOVING LEFT
@@ -70,7 +70,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	StopLeft.PushBack({ 2432 / 2,867 / 2,270 / 2,156 / 2 });
 	StopLeft.PushBack({ 2162 / 2,867 / 2,270 / 2,156 / 2 });
 
-	StopLeft.speed = 0.075f;
+	StopLeft.speed = 0.2f;
 	StopLeft.loop = true;
 
 	//ANIMATION WHEN SANTA IS JUMPING LEFT
@@ -83,7 +83,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	JumpLeft.PushBack({ 1621 / 2,1138 / 2,270 / 2,156 / 2 });
 	JumpLeft.PushBack({ 1351 / 2,1138 / 2,270 / 2,156 / 2 });
 
-	JumpLeft.speed = 0.075f;
+	JumpLeft.speed = 0.2f;
 	JumpLeft.loop = true;
 
 	//ANIMATION WHEN SANTA IS DEAD LEFT
@@ -97,7 +97,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	DeadLeft.PushBack({ 1891 / 2,327 / 2,270 / 2,156 / 2 });
 	DeadLeft.PushBack({ 1621 / 2,327 / 2,270 / 2,156 / 2 });
 
-	DeadLeft.speed = 0.075f;
+	DeadLeft.speed = 0.2f;
 	DeadLeft.loop = true;
 
 	//ANIMATION WHEN SANTA IS RUNNING LEFT
@@ -107,7 +107,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	RunLeft.PushBack({ 1621 / 2,1407 / 2,260 / 2,156 / 2 });
 	RunLeft.PushBack({ 1351 / 2,1407 / 2,260 / 2,156 / 2 });
 	
-	RunLeft.speed = 0.075f;
+	RunLeft.speed = 0.2f;
 	RunLeft.loop = true;
 	name.Create("player");
 }
@@ -134,10 +134,10 @@ bool Player::Start()
 	Win = false;
 	Dead = false;
 
-	aceleration = 10.0f;
-	velocity = 0;
+	aceleration = 13.0f;
+	velocity = 3;
 
-	collider = { Position.x,Position.y,160 / 2,156 / 2 };
+	collider = { Position.x + 30, Position.y, 48, 76 };
 
 	return true;
 }
@@ -177,7 +177,7 @@ bool Player::Update(float dt)
 					currentAnimation = &StopRight;
 				}
 			}
-			velocity = 0;
+			velocity = 3;
 		}
 		else
 		{
@@ -226,7 +226,7 @@ bool Player::Update(float dt)
 	//INPUT TO MOVE THE PLAYER
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && canMove == true)
 	{
-		if ((result) == (collisionPosition::down))
+		if ((result) == (collisionPosition::down) && godMode == false)
 		{
 			lastanimation = currentAnimation;
 			currentAnimation = &RunRight;
@@ -260,14 +260,14 @@ bool Player::Update(float dt)
 	{
 		if(godMode == true)
 		{
-			Position.y -= 2;
+			Position.y -= 4;
 		}
 	}
 	else if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) && (canMove == true))
 	{
 		if (godMode == true) 
 		{
-			Position.y += 2;
+			Position.y += 4;
 		}
 	}
 
@@ -392,7 +392,7 @@ void Player::Gravity()
 void Player::JumpFunction()
 {
 	collisionPosition result;
-	if (jumpingCount < 45)
+	if (jumpingCount < 30)
 	{
 		if (((lastanimation == &RunLeft) || (lastanimation == &StopLeft)))
 		{
@@ -404,7 +404,7 @@ void Player::JumpFunction()
 			lastanimation = currentAnimation;
 			currentAnimation = &JumpRight;
 		}
-		Position.y -= 2;
+		Position.y -= 3;
 		app->render->camera.y += 2;
 		jumpingCount++;
 	}
@@ -413,8 +413,8 @@ void Player::JumpFunction()
 		result = collisionPosition::null;
 		state = playerState::null;
 		jumpingCount = 0;
-		Position.y += 4;
-		velocity = 3.0f;
+		Position.y += 3;
+		velocity = 5.0f;
 	}
 }
 void Player::DeadAction()

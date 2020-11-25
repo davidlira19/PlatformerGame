@@ -206,6 +206,7 @@ bool Scene::Update(float dt)
 	app->render->DrawTexture(bg_snow, 0, 0);
 	app->render->DrawTexture(bg_snow, 3600/2, 0);
 	app->render->DrawTexture(bg_snow, 7200/2, 0);
+	app->render->DrawTexture(bg_snow, 10800/2, 0);
 	app->map->Draw();
 
 	if (app->input->GetMouseButtonDown(1) == KEY_DOWN)
