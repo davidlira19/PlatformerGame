@@ -18,6 +18,7 @@
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {
 	frames = 0;
+	PERF_START(ptimer);
 
 	input = new Input(true);
 	win = new Window(true);
@@ -39,6 +40,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	// Render last to swap buffer
 	AddModule(render);
+
+	PERF_PEEK(ptimer);
 }
 
 // Destructor
@@ -67,6 +70,7 @@ void App::AddModule(Module* module)
 // Called before render is available
 bool App::Awake()
 {
+	PERF_START(ptimer);
 	
 	// TODO 3: Load config from XML
 	bool ret = LoadConfig();
@@ -91,12 +95,16 @@ bool App::Awake()
 		}
 	}
 
+	PERF_PEEK(ptimer);
+
 	return ret;
 }
 
 // Called before the first frame
 bool App::Start()
 {
+	PERF_START(ptimer);
+
 	bool ret = true;
 	ListItem<Module*>* item;
 	item = modules.start;
@@ -106,6 +114,8 @@ bool App::Start()
 		ret = item->data->Start();
 		item = item->next;
 	}
+
+	PERF_PEEK(ptimer);
 
 	return ret;
 }
@@ -166,6 +176,30 @@ void App::FinishUpdate()
 	// L02: DONE 1: This is a good place to call Load / Save methods
 	if (loadGameRequested == true) LoadGame();
 	if (saveGameRequested == true) SaveGame();
+
+	// L07: DONE 4: Now calculate:
+	// Amount of frames since startup
+	// Amount of time since game start (use a low resolution timer)
+	// Average FPS for the whole game life
+	// Amount of ms took the last update
+	// Amount of frames during the last second
+	if (lastSecFrameTime.Read() > 1000)
+	{
+		lastSecFrameTime.Start();
+		prevLastSecFrameCount = lastSecFrameCount;
+		lastSecFrameCount = 0;
+	}
+
+	float averageFps = float(frameCount) / startupTime.ReadSec();
+	float secondsSinceStartup = startupTime.ReadSec();
+	uint lastFrameMs = frameTime.Read();
+	uint framesOnLastUpdate = prevLastSecFrameCount;
+
+	static char title[256];
+	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u ",
+		averageFps, lastFrameMs, framesOnLastUpdate, dt, secondsSinceStartup, frameCount);
+
+	app->win->SetTitle(title);
 }
 
 // Call modules before each loop iteration
