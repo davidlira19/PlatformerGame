@@ -227,6 +227,14 @@ bool Scene::Update(float dt)
 			//app->map->DrawPath();
 		}
 	}
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+	{
+		if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
+		{
+			app->map->PropagateAStar();
+			//app->map->DrawPath();
+		}
+	}
 	// L03: DONE 7: Set the window title with map/tileset info
 	if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
 	{

@@ -124,6 +124,7 @@ public:
 
 	// Propagate methods
 	void PropagateBFS();
+	void PropagateAStar();
     // Load new map
     bool Load(const char* path);
 	iPoint MapToWorld(int x, int y) const;
@@ -154,8 +155,9 @@ private:
 	
 	Queue<iPoint> frontier;
 	List<iPoint> visited;
+	List<iPoint> frontierr;
 	List<iPoint> breadcrumps;
-	
+	List<iPoint> tileValue;
     pugi::xml_document mapFile;
     SString folder;
     bool mapLoaded;

@@ -76,6 +76,124 @@ void Map::FindFinalPath()
 	finalPath.Clear();
 	finalPath = auxiliarList;*/
 }
+void Map::PropagateAStar() 
+{
+	bool found = false;
+	int counter = 0;
+	iPoint start = { 16,4 };
+	iPoint result;
+	iPoint curr;
+	iPoint neighbors[4];
+	breadcrumps.Add(visited.start->data);
+	curr = start;
+	frontier.Clear();
+	int h, g, minimum;
+	ListItem<iPoint>* auxiliar = nullptr;
+	ListItem<iPoint>* selected = nullptr;
+	ListItem<iPoint>* secondAuxiliar = nullptr;
+
+	//bucle
+	for (int i = 0; i < app->map->data.tilesets.start->data->numTilesHeight * app->map->data.tilesets.start->data->numTilesWidth; i++)
+	{
+		neighbors[0].Create(curr.x, curr.y - 1);
+		neighbors[1].Create(curr.x - 1, curr.y);
+		neighbors[2].Create(curr.x, curr.y + 1);
+		neighbors[3].Create(curr.x + 1, curr.y);
+
+		for (int i = 0; i < 4; i++)
+		{
+			if (visited.Find(neighbors[i]) == -1 && IsWalkable(neighbors[i].x, neighbors[i].y) == true)
+			{
+				frontierr.Add(neighbors[i]);
+				visited.Add(neighbors[i]);
+				breadcrumps.Add(curr);
+
+				h = neighbors[i].DistanceManhattan(goal);
+				g = neighbors[i].DistanceManhattan(start);
+				result.x = g;
+				result.y = h;
+				tileValue.Add(result);
+
+			}
+			if (neighbors[i] == goal)
+			{
+				found = true;
+				counter = 0;
+				break;
+			}
+		}
+		if (found == true)
+		{
+			break;
+		}
+
+
+		minimum = tileValue.start->data.x + tileValue.start->data.y;
+		secondAuxiliar = frontierr.start;
+		selected = nullptr;
+		auxiliar = tileValue.start;
+		counter = 0;
+
+		while (auxiliar != nullptr)
+		{
+			if ((auxiliar->data.x + auxiliar->data.y) <= minimum)
+			{
+				minimum = auxiliar->data.x + auxiliar->data.y;
+				selected = auxiliar;
+				counter++;
+
+			}
+			auxiliar = auxiliar->next;
+		}
+
+		if (counter - 1 > 1)
+		{
+			counter = 0;
+			auxiliar = tileValue.start;
+			while (auxiliar != nullptr)
+			{
+				if (auxiliar->data.y <= minimum)
+				{
+					minimum = auxiliar->data.y;
+					selected = auxiliar;
+					counter++;
+				}
+				auxiliar = auxiliar->next;
+			}
+		}
+
+		auxiliar = tileValue.start;
+		while (auxiliar != nullptr)
+		{
+			if (auxiliar == selected)
+			{
+				curr = secondAuxiliar->data;
+				tileValue.Del(selected);
+				frontierr.Del(secondAuxiliar);
+				break;
+			}
+			else
+			{
+				auxiliar = auxiliar->next;
+				secondAuxiliar = secondAuxiliar->next;
+			}
+
+		}
+
+		counter = 0;
+
+
+
+
+
+	}
+
+	if (found == true)
+	{
+
+		FindFinalPath();
+	}
+}
 void Map::PropagateBFS()
 {
 	bool found = false;
@@ -179,8 +297,8 @@ void Map::ResetPath()
 	visited.Clear();
 	breadcrumps.Clear();
 	
-	frontier.Push(iPoint(10,4));
-	visited.Add(iPoint(10,4));
+	frontier.Push(iPoint(16,4));
+	visited.Add(iPoint(16,4));
 	/*finalPath.Clear();*/
 }
 bool Map::IsWalkable(int x, int y) const
