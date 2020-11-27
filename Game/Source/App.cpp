@@ -6,11 +6,14 @@
 #include "Audio.h"
 #include "Player.h"
 #include "Scene.h"
+#include"Intro.h"
 #include "Map.h"
-
+#include"FadeToBlack.h"
 #include "Defs.h"
 #include "Log.h"
-
+#include"Wellcome.h"
+#include"Dead.h"
+#include"Win.h"
 #include <iostream>
 #include <sstream>
 
@@ -28,13 +31,22 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	player = new Player(false);
 	scene = new Scene(false);
 	map = new Map(false);
-
+	fade = new ModuleFadeToBlack(true);
+	intro = new Intro(true);
+	wellcome= new Wellcome(false);
+	dead = new Dead(false);
+	winp = new Win(false);
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
+	AddModule(intro);
+	AddModule(wellcome);
+	AddModule(dead);
+	AddModule(winp);
+	AddModule(fade);	
 	AddModule(player);
 	AddModule(scene);
 	AddModule(map);
@@ -111,8 +123,13 @@ bool App::Start()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Start();
+		if (item->data->isEnabled == true) 
+		{
+			ret = item->data->Start();
+		}
 		item = item->next;
+		
+		
 	}
 
 	PERF_PEEK(ptimer);
@@ -214,7 +231,7 @@ bool App::PreUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->active == false) 
+		if(pModule->isEnabled == false)
 		{
 			continue;
 		}
@@ -237,7 +254,7 @@ bool App::DoUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->active == false) 
+		if(pModule->isEnabled == false)
 		{
 			continue;
 		}
@@ -257,9 +274,10 @@ bool App::PostUpdate()
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
+		
 		pModule = item->data;
 
-		if(pModule->active == false) 
+		if(pModule->isEnabled == false) 
 		{
 			continue;
 		}

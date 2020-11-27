@@ -89,6 +89,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -102,6 +103,9 @@
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Dead.h" />
+    <ClInclude Include="Source\FadeToBlack.h" />
+    <ClInclude Include="Source\Intro.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Player.h" />
@@ -114,6 +118,8 @@
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\Wellcome.h" />
+    <ClInclude Include="Source\Win.h" />
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />
     <ClInclude Include="Source\List.h" />

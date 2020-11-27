@@ -22,7 +22,11 @@ class Audio;
 class Player;
 class Scene;
 class Map;
-
+class ModuleFadeToBlack;
+class Intro;
+class Wellcome;
+class Dead;
+class Win;
 class App
 {
 public:
@@ -90,8 +94,11 @@ public:
 	Player* player;
 	Scene* scene;
 	Map* map;
-	
-
+	ModuleFadeToBlack* fade;
+	Intro* intro;
+	Wellcome* wellcome;
+	Dead* dead;
+	Win* winp;
 private:
 
 	int argc;

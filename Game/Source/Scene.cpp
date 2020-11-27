@@ -40,8 +40,9 @@ bool Scene::Start()
 	app->render->camera.y = -210;
 	//Load Texture
 	bg_snow = app->tex->Load("Assets/textures/snow_background.png");
-
+	//app->player->Enable();
 	freeCamera = false;
+	app->player->Enable();
 	return true;
 }
 
@@ -279,6 +280,10 @@ bool Scene::PostUpdate()
 bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
-
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
+	app->tex->UnLoad(bg_snow);
+	app->map->Disable();
+	app->audio->Unload();
 	return true;
 }

@@ -8,7 +8,8 @@
 #include"Audio.h"
 #include "Log.h"
 #include"SDL/include/SDL_scancode.h"
-
+#include"FadeToBlack.h"
+#include"Dead.h"
 Player::Player(bool startEnabled) : Module(startEnabled)
 {
 	//ANIMATION WHEN SANTA IS NOT MOVING RIGHT
@@ -129,7 +130,7 @@ bool Player::Start()
 	//INITIALIZE VARIABLES
 	isJumping = false;
 
-	canMove = false;
+	canMove = true;
 
 	Win = false;
 	Dead = false;
@@ -138,7 +139,7 @@ bool Player::Start()
 	velocity = 0;
 
 	collider = { Position.x, Position.y, 48, 76 };
-
+	
 	return true;
 }
 void Player::updatePosition()
@@ -344,31 +345,32 @@ bool Player::PostUpdate()
 
 	if (Dead == true)
 	{
-		DeadAction();
+		/*DeadAction();
 		canMove = false;
 		app->scene->freeCamera = false;
-		godMode = true;
-		app->render->DrawTexture(DeadTex, app->render->camera.x * -1, app->render->camera.y * -1);
+		godMode = true;*/
+		//app->render->DrawTexture(DeadTex, app->render->camera.x * -1, app->render->camera.y * -1);
+		app->fade->FadeToBlack(this,(Module*)app->dead,50);
+		Dead = false;
+		canMove = false;
 	}
 	if (Win == true)
 	{
-		canMove = false;
+		/*canMove = false;
 		app->scene->freeCamera = false;
-		app->render->DrawTexture(WinTex, app->render->camera.x * -1, app->render->camera.y * -1);
+		app->render->DrawTexture(WinTex, app->render->camera.x * -1, app->render->camera.y * -1);*/
+		app->fade->FadeToBlack(this, (Module*)app->winp, 50);
+		Win = false;
+		canMove = false;
 	}
-	if ((Dead == true || Win == true) && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN))
+	/*if ((Dead == true || Win == true) && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN))
 	{
 		app->scene->Start();
 		app->player->Start();
-	}
+	}*/
 
-	app->render->DrawTexture(IntroTex, app->render->camera.x * -1, app->render->camera.y * -1);
-	if (Intro == true && app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-	{
-		Intro = false;
-		app->tex->UnLoad(IntroTex);
-		canMove = true;
-	}
+	//app->render->DrawTexture(IntroTex, app->render->camera.x * -1, app->render->camera.y * -1);
+	
 	
 	return true;
 }
@@ -378,7 +380,8 @@ bool Player::CleanUp()
 	app->tex->UnLoad(WinTex);
 	app->tex->UnLoad(DeadTex);
 	app->tex->UnLoad(santa);
-
+	app->tex->UnLoad(IntroTex);
+	app->scene->Disable();
 	return true;
 }
 

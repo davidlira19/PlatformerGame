@@ -11,12 +11,14 @@ class Module
 {
 public:
 
-	Module(bool startEnabled) : active(false)
-	{}
+	Module(bool startEnabled)
+	{
+		isEnabled = startEnabled;
+	
+	}
 
 	void Init()
 	{
-		active = true;
 	}
 
 	// Called before render is available
@@ -66,11 +68,27 @@ public:
 	{
 		return true;
 	}
+	void Module::Enable()
+	{
+		if (!isEnabled)
+		{
+			isEnabled = true;
+			Start();
+		}
+	}
 
+	// Switches isEnabled and calls CleanUp() method
+	void Module::Disable()
+	{
+		if (isEnabled)
+		{
+			isEnabled = false;
+			CleanUp();
+		}
+	}
 public:
-
+	bool isEnabled = true;
 	SString name;
-	bool active;
 
 };
 
