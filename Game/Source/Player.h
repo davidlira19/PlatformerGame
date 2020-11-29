@@ -64,13 +64,14 @@ public:
 	//FX AUDIO
 	unsigned int jumpFx;
 	unsigned int landFx;
-	bool laterals;
+	bool lateralsR;
+	bool lateralsL;
 	// WIN-LOSE BOOLS
 	bool Win;
 	bool Dead;
 	Collider* playerCollider;
 	Collider* playerRight;
-	void OnCollision(Collider* c1, Collider* c2,collisionPosition position);
+	void OnCollision(Collider* c1, Collider* c2);
 private:
 	//PLAYER TEXTURE
 	SDL_Texture* santa = nullptr;

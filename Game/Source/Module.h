@@ -86,7 +86,7 @@ public:
 			CleanUp();
 		}
 	}
-	virtual void OnCollision(Collider* c1, Collider* c2,collisionPosition position)
+	virtual void OnCollision(Collider* c1, Collider* c2)
 	{
 
 	}

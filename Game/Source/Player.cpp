@@ -53,11 +53,11 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	DeadRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS RUNNING RIGHT
-	RunRight.PushBack({ 39,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 174,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 310,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 444,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 580,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 1 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 271 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 541 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 811 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 1082 / 2,1407 / 2,260 / 2,156 / 2 });
 
 	RunRight.speed = 0.2f;
 	RunRight.loop = true;
@@ -145,7 +145,8 @@ bool Player::Start()
 	playerCollider = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
 	rect = { Position.x, Position.y, 1, 74 };
 	playerRight = app->collisions->AddCollider(rect, Collider::PLAYERRIHGT , (Module*)this);
-	laterals = false;
+	lateralsR = false;
+	lateralsL = false;
 	return true;
 }
 void Player::updatePosition()
@@ -157,8 +158,8 @@ bool Player::Update(float dt)
 {
 	//270, 156
 	//updatePosition();
-	playerCollider->SetPos(Position.x+app->render->camera.x+42, Position.y+app->render->camera.y+76);
-	playerRight->SetPos(Position.x + app->render->camera.x + 88, Position.y + app->render->camera.y-1);
+	playerCollider->SetPos(Position.x+app->render->camera.x+38, Position.y+app->render->camera.y+76);
+	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y-2);
 	if (godMode == false)
 	{
 		/*result = playerCollisions.getCollision(Position, collider, 61);
@@ -240,10 +241,9 @@ bool Player::Update(float dt)
 	//INPUT TO MOVE THE PLAYER
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && canMove == true)
 	{
-		if (laterals == false) {
-
-		
-			if ((result) == (collisionPosition::down) && godMode == false)
+		if (lateralsR == false) {
+	
+			if ((state == playerState::null) && (godMode == false))
 			{
 				lastanimation = currentAnimation;
 				currentAnimation = &RunRight;
@@ -260,8 +260,8 @@ bool Player::Update(float dt)
 	}
 	else if ((app->input->GetKey(SDL_SCANCODE_A)) == (KEY_REPEAT) && (canMove == true))
 	{
-		if (laterals == false) {
-			if ((result) == (collisionPosition::down))
+		if (lateralsL == false) {
+			if (state==playerState::null)
 			{
 				lastanimation = currentAnimation;
 				currentAnimation = &RunLeft;
@@ -408,7 +408,8 @@ bool Player::PostUpdate()
 	{
 		state = playerState::free;
 	}
-	laterals = false;
+	lateralsR = false;
+	lateralsL = false;
 	return true;
 }
 
@@ -489,54 +490,45 @@ bool Player::LoadState(pugi::xml_node* nodo)
 	aceleration = nodo->child("data").attribute("aceleration").as_int();
 	return true;
 }
-void Player::OnCollision(Collider* c1, Collider* c2,collisionPosition position) 
+void Player::OnCollision(Collider* c1, Collider* c2) 
 {
 	if (c1->type == Collider::PLAYER) 
 	{
 		if (c2->type == Collider::FLOOR) 
 		{
-			//Position.y = lastPosition.y;
-			if (position == collisionPosition::down)
+			state = playerState::null;
+			if (velocity > 80)
 			{
-				state = playerState::null;
-				if (velocity > 80)
-				{
-					Position.y -= velocity * 0.05 * 2;
-					velocity = 0;
-				}
-
+				Position.y -= velocity * 0.05 * 2;
+				
 			}
-		
+			velocity = 0;
 		}
-		if (c2->type == Collider::WALL) {
-			//Position.y = lastPosition.y;
-			if (position == collisionPosition::right)
-			{
-				state = playerState::free;
-				laterals = true;
-			}
-
-		}
+	
 	}
 	else if (c1->type == Collider::PLAYERRIHGT) 
 	{
 		if (c2->type == Collider::FLOOR)
 		{
-			if (position == collisionPosition::right|| position == collisionPosition::down)
+			if (state == playerState::null) 
 			{
-				state = playerState::free;
-				laterals = true;
+				//state = playerState::free;
+				lateralsR = true;
 			}
+			else 
+			{
+			
+				lateralsR = true;
+			}
+			
 
 		}
 		if (c2->type == Collider::WALL)
 		{
-			if (position == collisionPosition::right)
-			{
-				state = playerState::free;
-				laterals = true;
-			}
-
+			
+			state = playerState::free;
+			lateralsR = true;
+			
 		}
 		
 		

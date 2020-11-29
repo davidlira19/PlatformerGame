@@ -71,16 +71,16 @@ bool ModuleCollisions::PreUpdate()
 				continue;
 
 			c2 = colliders[k];
-			collisionPosition position = collisionPosition::null;
-			position = c1->Intersects(c2->rect);
-			if (position!= collisionPosition::null)
+			/*collisionPosition position = collisionPosition::null;
+			position = */
+			if (c1->Intersects(c2->rect))
 			{
 				
 				if (matrix[c1->type][c2->type] == true && c1->listener != nullptr)
-					c1->listener->OnCollision(c1, c2,position);
+					c1->listener->OnCollision(c1, c2);
 
 				if (matrix[c2->type][c1->type] == true && c2->listener != nullptr)
-					c2->listener->OnCollision(c2, c1,position);
+					c2->listener->OnCollision(c2, c1);
 			}
 		}
 	}

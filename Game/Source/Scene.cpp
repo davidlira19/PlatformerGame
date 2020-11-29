@@ -37,18 +37,19 @@ bool Scene::Start()
 	app->audio->PlayMusic("Assets/audio/music/christmas_music.ogg");
 	//Load Position
 	app->render->camera.x = -580;
-	app->render->camera.y = -210;
+	app->render->camera.y = -100;
 	//Load Texture
 	bg_snow = app->tex->Load("Assets/textures/snow_background.png");
 	//app->player->Enable();
 	freeCamera = false;
+	app->collisions->Enable();
 	app->player->Enable();
 	SDL_Rect rect;
 	for (int y = 0; y < app->map->data.tilesets.start->data->numTilesHeight; y++)
 	{
 		for (int x =0 ; x < app->map->data.tilesets.start->data->numTilesWidth; x++)
 		{
-			if (app->map->GetTileIdFromPosition(x, y, "colisions") ==61)
+			if (app->map->GetTileIdFromPosition(x, y, "colisions") == 61)
 			{
 				
 				rect = { x* app->map->data.tilesets.start->data->tileWidth ,y* app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
@@ -62,12 +63,7 @@ bool Scene::Start()
 
 				colliders.Add(app->collisions->AddCollider(rect, Collider::WALL));
 			}
-			/*if (app->map->GetTileIdFromPosition(x, y, "colisions") == 63)
-			{
-				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
-
-				colliders.Add(app->collisions->AddCollider(rect, Collider::BLOCK));
-			}*/
+			
 
 		}
 	}
@@ -347,5 +343,8 @@ bool Scene::CleanUp()
 	app->map->Disable();
 	app->audio->Unload();
 	colliders.Clear();
+	app->collisions->Disable();
+	
+	
 	return true;
 }
