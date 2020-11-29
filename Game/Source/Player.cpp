@@ -115,6 +115,8 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 }
 bool Player::Start()
 {
+	noise = true;
+	cont = 0;
 	app->SaveGameRequest("save_game.xml");
 	result = collisionPosition::null;
 	Intro = true;
@@ -127,6 +129,7 @@ bool Player::Start()
 	IntroTex = app->tex->Load("Assets/textures/title_screen.png");
 	jumpFx = app->audio->LoadFx("Assets/audio/fx/santa_jump.ogg");
 	landFx = app->audio->LoadFx("Assets/audio/fx/santa_land.wav");
+	checkpointFx = app->audio->LoadFx("Assets/audio/fx/checkpoint.wav");
 	LifesTex = app->tex->Load("Assets/textures/lifes.png");
 	//SET POSITION
 	Position.x = 2300 / 2; Position.y = 500 / 2;
@@ -163,6 +166,11 @@ bool Player::Update(float dt)
 {
 	//270, 156
 	//updatePosition();
+	if (Position.x>=2610 && Position.x <= 2620)
+	{
+		noise = true;
+	}
+
 	playerCollider->SetPos(Position.x+app->render->camera.x+43, Position.y+app->render->camera.y+76);
 	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y-2);
 	playerLeft->SetPos(Position.x + app->render->camera.x + 40, Position.y + app->render->camera.y - 2);
@@ -372,6 +380,7 @@ bool Player::Update(float dt)
 }
 bool Player::PostUpdate() 
 {
+	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(santa, Position.x, Position.y, &rect);
 
@@ -568,6 +577,11 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		if (c2->type == Collider::CHECKPOINT)
 		{
 			app->SaveGameRequest("save_game.xml");
+			if (noise == true)
+			{
+				app->audio->PlayFx(app->player->checkpointFx);
+				noise = false;
+			}
 		}
 		if (c2->type == Collider::WALL)
 		{

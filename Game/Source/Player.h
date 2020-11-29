@@ -65,6 +65,7 @@ public:
 	//FX AUDIO
 	unsigned int jumpFx;
 	unsigned int landFx;
+	unsigned int checkpointFx;
 	bool lateralsR;
 	bool lateralsL;
 	// WIN-LOSE BOOLS
@@ -76,6 +77,8 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 private:
 	//PLAYER TEXTURE
+	int cont;
+	bool noise;
 	SDL_Texture* santa = nullptr;
 	SDL_Texture* LifesTex = nullptr;
 };
