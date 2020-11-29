@@ -5,10 +5,7 @@
 
 struct SDL_Texture;
 class position;
-enum class collisionPosition
-{
-	down, right, left, downAndRight, downAndLeft,null
-};
+
 class collisions 
 {
 public:
@@ -44,7 +41,7 @@ public:
 
 	bool freeCamera;
 private:
-	
+	List<Collider*>colliders;
 	SDL_Texture* img;
 	SDL_Texture* bg_snow;
 };

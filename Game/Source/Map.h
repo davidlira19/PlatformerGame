@@ -131,7 +131,7 @@ public:
 	iPoint WorldToMap(int x, int y) const;
 	
 private:
-	int GetTileIdFromPosition(int x, int y, const char* layername);
+	
 	// L03: DONE Methods to load all required map data
 	bool LoadMap();
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
@@ -145,6 +145,7 @@ private:
 	
 
 public:
+	int GetTileIdFromPosition(int x, int y, const char* layername);
 	TileSet* GetTilesetFromTileId(int id) const;
 	void ChangeCollisionsDraw();
     // L03: DONE 1: Add your struct for map info

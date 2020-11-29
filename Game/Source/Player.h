@@ -11,7 +11,7 @@ struct SDL_Texture;
 struct SDL_Renderer;
 enum class  playerState
 {
-	null, jumping
+	null, jumping,free
 };
 class position
 {
@@ -35,7 +35,7 @@ public:
 	void JumpFunction();
 	void DeadAction();
 	//PLAYER POSITION
-	position Position;
+	position Position,lastPosition;
 	collisionPosition result;
 	//PLAYER ANIMATIONS
 	Animation* lastanimation = nullptr;
@@ -64,9 +64,13 @@ public:
 	//FX AUDIO
 	unsigned int jumpFx;
 	unsigned int landFx;
+	bool laterals;
 	// WIN-LOSE BOOLS
 	bool Win;
 	bool Dead;
+	Collider* playerCollider;
+	Collider* playerRight;
+	void OnCollision(Collider* c1, Collider* c2,collisionPosition position);
 private:
 	//PLAYER TEXTURE
 	SDL_Texture* santa = nullptr;

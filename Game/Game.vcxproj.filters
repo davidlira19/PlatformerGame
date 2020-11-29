@@ -20,6 +20,8 @@
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
+    <ClCompile Include="Source\Collisions.cpp" />
+    <ClCompile Include="Source\Collider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -77,6 +79,8 @@
     <ClInclude Include="Source\Win.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Collisions.h" />
+    <ClInclude Include="Source\Collider.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

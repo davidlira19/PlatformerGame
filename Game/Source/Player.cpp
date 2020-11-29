@@ -10,6 +10,7 @@
 #include"SDL/include/SDL_scancode.h"
 #include"FadeToBlack.h"
 #include"Dead.h"
+#include"Collisions.h"
 Player::Player(bool startEnabled) : Module(startEnabled)
 {
 	//ANIMATION WHEN SANTA IS NOT MOVING RIGHT
@@ -52,11 +53,11 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	DeadRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS RUNNING RIGHT
-	RunRight.PushBack({ 1 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 271 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 541 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 811 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 1082 / 2,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 39,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 174,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 310,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 444,1407 / 2,260 / 2,156 / 2 });
+	RunRight.PushBack({ 580,1407 / 2,260 / 2,156 / 2 });
 
 	RunRight.speed = 0.2f;
 	RunRight.loop = true;
@@ -125,7 +126,8 @@ bool Player::Start()
 	jumpFx = app->audio->LoadFx("Assets/audio/fx/santa_jump.ogg");
 	landFx = app->audio->LoadFx("Assets/audio/fx/santa_land.wav");
 	//SET POSITION
-	Position.x = 2300 / 2; Position.y = 1125 / 2;
+	Position.x = 2300 / 2; Position.y = 500 / 2;
+	
 	currentAnimation = &StopRight;
 	//INITIALIZE VARIABLES
 	isJumping = false;
@@ -138,8 +140,12 @@ bool Player::Start()
 	aceleration = 13.0f;
 	velocity = 0;
 
-	collider = { Position.x, Position.y, 48, 76 };
-	
+	collider = { Position.x, Position.y, 42, 76 };
+	SDL_Rect rect = { Position.x, Position.y, 48, 1 };
+	playerCollider = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
+	rect = { Position.x, Position.y, 1, 74 };
+	playerRight = app->collisions->AddCollider(rect, Collider::PLAYERRIHGT , (Module*)this);
+	laterals = false;
 	return true;
 }
 void Player::updatePosition()
@@ -150,11 +156,12 @@ void Player::updatePosition()
 bool Player::Update(float dt)
 {
 	//270, 156
-	updatePosition();
-
+	//updatePosition();
+	playerCollider->SetPos(Position.x+app->render->camera.x+42, Position.y+app->render->camera.y+76);
+	playerRight->SetPos(Position.x + app->render->camera.x + 88, Position.y + app->render->camera.y-1);
 	if (godMode == false)
 	{
-		result = playerCollisions.getCollision(Position, collider, 61);
+		/*result = playerCollisions.getCollision(Position, collider, 61);
 		if (result == collisionPosition::down)
 		{
 			if (((currentAnimation == &JumpLeft) || (currentAnimation == &StopLeft) || (currentAnimation == &StopRight) || (currentAnimation == &JumpRight)) && (velocity > 0)) 
@@ -211,7 +218,7 @@ bool Player::Update(float dt)
 		{
 			Position.x += 10;
 			Position.y -= 4;
-		}
+		}*/
 	}
 	//CONDITIONS TO WIN - LOSE
 	if (Position.y  >= 1602 / 2)
@@ -222,39 +229,51 @@ bool Player::Update(float dt)
 	{
 		Win = true;
 	}
+
+	///////////
+	
+ 
+	
+	//////////
 	//LOG("POSITION X: %d --- POSITION Y: %d", Position.x, Position.y);
 
 	//INPUT TO MOVE THE PLAYER
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && canMove == true)
 	{
-		if ((result) == (collisionPosition::down) && godMode == false)
-		{
-			lastanimation = currentAnimation;
-			currentAnimation = &RunRight;
-			currentAnimation->Update();
+		if (laterals == false) {
+
+		
+			if ((result) == (collisionPosition::down) && godMode == false)
+			{
+				lastanimation = currentAnimation;
+				currentAnimation = &RunRight;
+				currentAnimation->Update();
+			}
+			if (state == playerState::jumping) 
+			{
+				currentAnimation = &JumpRight;
+			}
+			app->scene->freeCamera = true;
+			Position.x += 4;
+			app->render->camera.x -= 4;
 		}
-		if (state == playerState::jumping) 
-		{
-			currentAnimation = &JumpRight;
-		}
-		app->scene->freeCamera = true;
-		Position.x += 4;
-		app->render->camera.x -= 4;
 	}
 	else if ((app->input->GetKey(SDL_SCANCODE_A)) == (KEY_REPEAT) && (canMove == true))
 	{
-		if ((result) == (collisionPosition::down))
-		{
-			lastanimation = currentAnimation;
-			currentAnimation = &RunLeft;
-			currentAnimation->Update();
+		if (laterals == false) {
+			if ((result) == (collisionPosition::down))
+			{
+				lastanimation = currentAnimation;
+				currentAnimation = &RunLeft;
+				currentAnimation->Update();
+			}
+			if ((state) == (playerState::jumping))
+			{
+				currentAnimation = &JumpLeft;
+			}
+			Position.x -= 4;
+			app->render->camera.x += 4;
 		}
-		if ((state) == (playerState::jumping)) 
-		{
-			currentAnimation = &JumpLeft;
-		}
-		Position.x -= 4;
-		app->render->camera.x += 4;
 	}
 
 	if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) && (canMove == true))
@@ -275,7 +294,7 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && canMove == true)
 	{
 		app->audio->PlayFx(jumpFx);
-		if (result == collisionPosition::down) 
+		if (state==playerState::null) 
 		{
 			if (currentAnimation == &RunRight || currentAnimation == &StopRight )
 			{
@@ -335,7 +354,14 @@ bool Player::Update(float dt)
 	{
 		DeadAction();
 	}
-	
+	if (state == playerState::jumping)
+	{
+		JumpFunction();
+	}
+	else if (state != playerState::null && state != playerState::jumping)
+	{
+		Gravity();
+	}
 	return true;
 }
 bool Player::PostUpdate() 
@@ -370,8 +396,19 @@ bool Player::PostUpdate()
 	}*/
 
 	//app->render->DrawTexture(IntroTex, app->render->camera.x * -1, app->render->camera.y * -1);
-	
-	
+	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+	SDL_RenderFillRect(app->render->renderer, &playerCollider->rect);
+
+
+	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+	SDL_RenderFillRect(app->render->renderer, &playerRight->rect);
+	if (state != playerState::jumping) 
+	{
+		state = playerState::free;
+	}
+	laterals = false;
 	return true;
 }
 
@@ -413,8 +450,8 @@ void Player::JumpFunction()
 	}
 	else 
 	{
-		result = collisionPosition::null;
-		state = playerState::null;
+		//result = collisionPosition::null;
+		state = playerState::free;
 		jumpingCount = 0;
 		Position.y += 3;
 		app->render->camera.y -= 3;
@@ -451,4 +488,59 @@ bool Player::LoadState(pugi::xml_node* nodo)
 	Position.y = nodo->child("data").attribute("y").as_int();
 	aceleration = nodo->child("data").attribute("aceleration").as_int();
 	return true;
+}
+void Player::OnCollision(Collider* c1, Collider* c2,collisionPosition position) 
+{
+	if (c1->type == Collider::PLAYER) 
+	{
+		if (c2->type == Collider::FLOOR) 
+		{
+			//Position.y = lastPosition.y;
+			if (position == collisionPosition::down)
+			{
+				state = playerState::null;
+				if (velocity > 80)
+				{
+					Position.y -= velocity * 0.05 * 2;
+					velocity = 0;
+				}
+
+			}
+		
+		}
+		if (c2->type == Collider::WALL) {
+			//Position.y = lastPosition.y;
+			if (position == collisionPosition::right)
+			{
+				state = playerState::free;
+				laterals = true;
+			}
+
+		}
+	}
+	else if (c1->type == Collider::PLAYERRIHGT) 
+	{
+		if (c2->type == Collider::FLOOR)
+		{
+			if (position == collisionPosition::right|| position == collisionPosition::down)
+			{
+				state = playerState::free;
+				laterals = true;
+			}
+
+		}
+		if (c2->type == Collider::WALL)
+		{
+			if (position == collisionPosition::right)
+			{
+				state = playerState::free;
+				laterals = true;
+			}
+
+		}
+		
+		
+	}
+	
+
 }

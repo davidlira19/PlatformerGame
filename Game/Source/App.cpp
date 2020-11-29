@@ -14,6 +14,7 @@
 #include"Wellcome.h"
 #include"Dead.h"
 #include"Win.h"
+#include"Collisions.h"
 #include <iostream>
 #include <sstream>
 
@@ -36,12 +37,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	wellcome= new Wellcome(false);
 	dead = new Dead(false);
 	winp = new Win(false);
+	collisions = new ModuleCollisions(true);
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
+	
 	AddModule(intro);
 	AddModule(wellcome);
 	AddModule(dead);
@@ -50,6 +53,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	AddModule(scene);
 	AddModule(map);
+	AddModule(collisions);
 	// Render last to swap buffer
 	AddModule(render);
 

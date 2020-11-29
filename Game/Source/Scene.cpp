@@ -9,7 +9,7 @@
 #include "Player.h"
 #include "Defs.h"
 #include "Log.h"
-
+#include"Collisions.h"
 Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");
@@ -43,83 +43,130 @@ bool Scene::Start()
 	//app->player->Enable();
 	freeCamera = false;
 	app->player->Enable();
+	SDL_Rect rect;
+	for (int y = 0; y < app->map->data.tilesets.start->data->numTilesHeight; y++)
+	{
+		for (int x =0 ; x < app->map->data.tilesets.start->data->numTilesWidth; x++)
+		{
+			if (app->map->GetTileIdFromPosition(x, y, "colisions") ==61)
+			{
+				
+				rect = { x* app->map->data.tilesets.start->data->tileWidth ,y* app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
+			
+				colliders.Add(app->collisions->AddCollider(rect, Collider::FLOOR));
+				
+			}
+			if (app->map->GetTileIdFromPosition(x, y, "colisions") == 62) 
+			{
+				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
+
+				colliders.Add(app->collisions->AddCollider(rect, Collider::WALL));
+			}
+			/*if (app->map->GetTileIdFromPosition(x, y, "colisions") == 63)
+			{
+				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
+
+				colliders.Add(app->collisions->AddCollider(rect, Collider::BLOCK));
+			}*/
+
+		}
+	}
+	
 	return true;
 }
 
 // Called each loop iteration
 bool Scene::PreUpdate()
 {
-	return true;
-}
-collisionPosition collisions::getCollision(position positionChek,SDL_Rect rect,int id)
-{
-	bool chekResult;
-	collisionPosition positionCollision = collisionPosition::null;
-	position relativePosition;
-	for (int a = 1; a < 4; a++) 
+	ListItem<Collider*>* auxiliar;
+	auxiliar = colliders.start;
+	for (int y = 0; y < app->map->data.tilesets.start->data->numTilesHeight; y++)
 	{
-		switch (a)
+		for (int x = 0; x < app->map->data.tilesets.start->data->numTilesWidth; x++)
 		{
-		case 1:
-			relativePosition.x = positionChek.x + (rect.w);
-			relativePosition.y = positionChek.y + (rect.h / 2);
-			chekResult = checkIfCollision(id, relativePosition);
-			if (chekResult == true)
-			{
-				positionCollision = collisionPosition::right;
+			
+			if ((app->map->GetTileIdFromPosition(x, y, "colisions") == 61 || app->map->GetTileIdFromPosition(x, y, "colisions") == 62) && auxiliar!=NULL)
+			{		
+				auxiliar->data->SetPos(x * app->map->data.tilesets.start->data->tileWidth+app->render->camera.x, y * app->map->data.tilesets.start->data->tileHeight + app->render->camera.y);
+					
+				auxiliar = auxiliar->next;
 			}
-			break;
-		case 2:
-			relativePosition.x = positionChek.x + (rect.w / 2);
-			relativePosition.y = positionChek.y + rect.h;
-			chekResult = checkIfCollision(id, relativePosition);
-			if ((chekResult == true)&& (positionCollision == collisionPosition::right))
-			{
-				positionCollision = collisionPosition::downAndRight;
-			}
-			else if(chekResult == true)
-			{
-				positionCollision = collisionPosition::down;
-			}
-			else if (positionCollision == collisionPosition::right)
-			{
-				positionCollision = collisionPosition::right;
-			}
-			else 
-			{
-				positionCollision = collisionPosition::null;
-			}
-			break;
-		case 3:
-			relativePosition.x = positionChek.x;
-			relativePosition.y = positionChek.y + (rect.h / 2);
-			chekResult = checkIfCollision(id, relativePosition);
-			if (chekResult == true && positionCollision == collisionPosition::down)
-			{
-				positionCollision = collisionPosition::downAndLeft;
-			}
-			else if(chekResult == true)
-			{
-				positionCollision = collisionPosition::left;
-			}
-			else if(positionCollision == collisionPosition::down)
-			{
-				positionCollision = collisionPosition::down;
-			}
-			else if(positionCollision == collisionPosition::right)
-			{
-				positionCollision = collisionPosition::right;
-			}
-			else 
-			{
-				positionCollision = collisionPosition::null;
-			}
-			break;
 		}
+
 	}
 	
-	return positionCollision;
+	
+	return true;
 }
+//collisionPosition collisions::getCollision(position positionChek,SDL_Rect rect,int id)
+//{
+//	/*bool chekResult;
+//	collisionPosition positionCollision = collisionPosition::null;
+//	position relativePosition;
+//	for (int a = 1; a < 4; a++) 
+//	{
+//		switch (a)
+//		{
+//		case 1:
+//			relativePosition.x = positionChek.x + (rect.w);
+//			relativePosition.y = positionChek.y + (rect.h / 2);
+//			chekResult = checkIfCollision(id, relativePosition);
+//			if (chekResult == true)
+//			{
+//				positionCollision = collisionPosition::right;
+//			}
+//			break;
+//		case 2:
+//			relativePosition.x = positionChek.x + (rect.w / 2);
+//			relativePosition.y = positionChek.y + rect.h;
+//			chekResult = checkIfCollision(id, relativePosition);
+//			if ((chekResult == true)&& (positionCollision == collisionPosition::right))
+//			{
+//				positionCollision = collisionPosition::downAndRight;
+//			}
+//			else if(chekResult == true)
+//			{
+//				positionCollision = collisionPosition::down;
+//			}
+//			else if (positionCollision == collisionPosition::right)
+//			{
+//				positionCollision = collisionPosition::right;
+//			}
+//			else 
+//			{
+//				positionCollision = collisionPosition::null;
+//			}
+//			break;
+//		case 3:
+//			relativePosition.x = positionChek.x;
+//			relativePosition.y = positionChek.y + (rect.h / 2);
+//			chekResult = checkIfCollision(id, relativePosition);
+//			if (chekResult == true && positionCollision == collisionPosition::down)
+//			{
+//				positionCollision = collisionPosition::downAndLeft;
+//			}
+//			else if(chekResult == true)
+//			{
+//				positionCollision = collisionPosition::left;
+//			}
+//			else if(positionCollision == collisionPosition::down)
+//			{
+//				positionCollision = collisionPosition::down;
+//			}
+//			else if(positionCollision == collisionPosition::right)
+//			{
+//				positionCollision = collisionPosition::right;
+//			}
+//			else 
+//			{
+//				positionCollision = collisionPosition::null;
+//			}
+//			break;
+//		}
+//	}
+//	
+//	return positionCollision;*/
+//}
 bool collisions::checkIfCollision(int id, position positionToChek)
 {
 	bool result = false;
@@ -273,6 +320,20 @@ bool Scene::PostUpdate()
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
+	
+	
+	ListItem<Collider*>* auxiliar;
+	auxiliar = colliders.start;
+	while (auxiliar != nullptr) {
+		SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+		SDL_RenderFillRect(app->render->renderer, &auxiliar->data->rect);
+		auxiliar = auxiliar->next;
+	}
+	
+		
+	
+	
 	return ret;
 }
 
@@ -285,5 +346,6 @@ bool Scene::CleanUp()
 	app->tex->UnLoad(bg_snow);
 	app->map->Disable();
 	app->audio->Unload();
+	colliders.Clear();
 	return true;
 }

@@ -27,6 +27,7 @@ class Intro;
 class Wellcome;
 class Dead;
 class Win;
+class ModuleCollisions;
 class App
 {
 public:
@@ -99,6 +100,7 @@ public:
 	Wellcome* wellcome;
 	Dead* dead;
 	Win* winp;
+	ModuleCollisions* collisions;
 private:
 
 	int argc;

@@ -1,6 +1,6 @@
 #ifndef __MODULE_H__
 #define __MODULE_H__
-
+#include"Collider.h"
 #include "SString.h"
 
 #include "PugiXml/src/pugixml.hpp"
@@ -85,6 +85,10 @@ public:
 			isEnabled = false;
 			CleanUp();
 		}
+	}
+	virtual void OnCollision(Collider* c1, Collider* c2,collisionPosition position)
+	{
+
 	}
 public:
 	bool isEnabled = true;
