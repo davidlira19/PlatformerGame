@@ -20,6 +20,7 @@ class Render;
 class Textures;
 class Audio;
 class Player;
+class Enemy;
 class Scene;
 class Map;
 class ModuleFadeToBlack;
@@ -93,6 +94,7 @@ public:
 	Textures* tex;
 	Audio* audio;
 	Player* player;
+	Enemy* enemy;
 	Scene* scene;
 	Map* map;
 	ModuleFadeToBlack* fade;
