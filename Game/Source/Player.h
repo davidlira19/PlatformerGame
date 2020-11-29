@@ -30,6 +30,7 @@ public:
 	bool CleanUp();
 	void updatePosition();
 	//PLAYER VARIABLES
+	int lifes;
 	bool isJumping;
 	//PLAYER FUNCTIONS
 	void JumpFunction();
@@ -76,7 +77,7 @@ public:
 private:
 	//PLAYER TEXTURE
 	SDL_Texture* santa = nullptr;
-
+	SDL_Texture* LifesTex = nullptr;
 };
 #endif
 

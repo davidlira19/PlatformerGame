@@ -115,9 +115,11 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 }
 bool Player::Start()
 {
+	app->SaveGameRequest("save_game.xml");
 	result = collisionPosition::null;
 	Intro = true;
 	godMode = false;
+	lifes = 3;
 	//LOAD TEXTURES
 	santa = app->tex->Load("Assets/textures/santa_animation.png");
 	WinTex = app->tex->Load("Assets/textures/win_screen.png");
@@ -125,6 +127,7 @@ bool Player::Start()
 	IntroTex = app->tex->Load("Assets/textures/title_screen.png");
 	jumpFx = app->audio->LoadFx("Assets/audio/fx/santa_jump.ogg");
 	landFx = app->audio->LoadFx("Assets/audio/fx/santa_land.wav");
+	LifesTex = app->tex->Load("Assets/textures/lifes.png");
 	//SET POSITION
 	Position.x = 2300 / 2; Position.y = 500 / 2;
 	
@@ -372,6 +375,24 @@ bool Player::PostUpdate()
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(santa, Position.x, Position.y, &rect);
 
+	switch (lifes)
+	{
+	case 3:
+		rect = { 0,0,99,49 };
+		app->render->DrawTexture(LifesTex,app->render->camera.x*-1, app->render->camera.y*-1, &rect);
+		break;
+	case 2:
+		rect = { 0,0,65,49 };
+		app->render->DrawTexture(LifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
+		break;
+	case 1:
+		rect = { 0,0,32,49 };
+		app->render->DrawTexture(LifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
+		break;
+	default:
+		break;
+	}
+
 	if (Dead == true)
 	{
 		/*DeadAction();
@@ -379,9 +400,18 @@ bool Player::PostUpdate()
 		app->scene->freeCamera = false;
 		godMode = true;*/
 		//app->render->DrawTexture(DeadTex, app->render->camera.x * -1, app->render->camera.y * -1);
-		app->fade->FadeToBlack(this,(Module*)app->dead,50);
-		Dead = false;
-		canMove = false;
+		if (lifes != 0)
+		{
+			Dead = false;
+			lifes--;
+			app->LoadGameRequest("save_game.xml");
+		}
+		if (lifes == 0)
+		{
+			app->fade->FadeToBlack(this, (Module*)app->dead, 50);
+			Dead = false;
+			canMove = false;
+		}
 	}
 	if (Win == true)
 	{
