@@ -360,10 +360,24 @@ void Map::Draw()
 						SDL_Rect rect = tileset->GetTileRect(tileId);
 						iPoint point = MapToWorld(x, y);
 						app->render->DrawTexture(tileset->texture, point.x, point.y, &rect);
+						if (tileset->name == "colisiones")
+						{
+							SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+							SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+							SDL_RenderFillRect(app->render->renderer, &app->player->playerCollider->rect);
 
+
+							SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+							SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+							SDL_RenderFillRect(app->render->renderer, &app->player->playerRight->rect);
+
+
+
+							SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+							SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+							SDL_RenderFillRect(app->render->renderer, &app->player->playerLeft->rect);
+						}
 					}
-					
-
 					// L04: DONE 9: Complete the draw function
 				}
 

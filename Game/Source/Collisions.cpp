@@ -16,22 +16,44 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::FLOOR][Collider::Type::FLOOR] = false;
 	matrix[Collider::Type::FLOOR][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::FLOOR][Collider::Type::WALL] = false;
-	matrix[Collider::Type::FLOOR][Collider::Type::PLAYERRIHGT] = true;
+	matrix[Collider::Type::FLOOR][Collider::Type::PLAYERRIGHT] = true;
+	matrix[Collider::Type::FLOOR][Collider::Type::CHECKPOINT] = false;
+	matrix[Collider::Type::FLOOR][Collider::Type::PLAYERLEFT] = true;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::FLOOR] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
-	matrix[Collider::Type::PLAYER][Collider::Type::PLAYERRIHGT] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::PLAYERRIGHT] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::CHECKPOINT] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::PLAYERLEFT] = false;
 
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::WALL][Collider::Type::FLOOR] = false;
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
-	matrix[Collider::Type::WALL][Collider::Type::PLAYERRIHGT] = true;
+	matrix[Collider::Type::WALL][Collider::Type::PLAYERRIGHT] = true;
+	matrix[Collider::Type::WALL][Collider::Type::CHECKPOINT] = false;
+	matrix[Collider::Type::WALL][Collider::Type::PLAYERLEFT] = true;
 
-	matrix[Collider::Type::PLAYERRIHGT][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::PLAYERRIHGT][Collider::Type::FLOOR] = true;
-	matrix[Collider::Type::PLAYERRIHGT][Collider::Type::WALL] = true;
-	matrix[Collider::Type::PLAYERRIHGT][Collider::Type::PLAYERRIHGT] = false;
+	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::FLOOR] = true;
+	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::WALL] = true;
+	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::PLAYERRIGHT] = false;
+	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::CHECKPOINT] = true;
+	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::PLAYERLEFT] = false;
+
+	matrix[Collider::Type::CHECKPOINT][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::CHECKPOINT][Collider::Type::FLOOR] = false;
+	matrix[Collider::Type::CHECKPOINT][Collider::Type::WALL] = false;
+	matrix[Collider::Type::CHECKPOINT][Collider::Type::PLAYERRIGHT] = true;
+	matrix[Collider::Type::CHECKPOINT][Collider::Type::CHECKPOINT] = false;
+	matrix[Collider::Type::CHECKPOINT][Collider::Type::PLAYERLEFT] = false;
+
+	matrix[Collider::Type::PLAYERLEFT][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::PLAYERLEFT][Collider::Type::FLOOR] = true;
+	matrix[Collider::Type::PLAYERLEFT][Collider::Type::WALL] = true;
+	matrix[Collider::Type::PLAYERLEFT][Collider::Type::PLAYERRIGHT] = false;
+	matrix[Collider::Type::PLAYERLEFT][Collider::Type::CHECKPOINT] = false;
+	matrix[Collider::Type::PLAYERLEFT][Collider::Type::PLAYERLEFT] = false;
 }
 
 // Destructor

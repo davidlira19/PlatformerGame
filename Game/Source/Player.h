@@ -71,6 +71,7 @@ public:
 	bool Dead;
 	Collider* playerCollider;
 	Collider* playerRight;
+	Collider* playerLeft;
 	void OnCollision(Collider* c1, Collider* c2);
 private:
 	//PLAYER TEXTURE

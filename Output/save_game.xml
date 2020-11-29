@@ -4,12 +4,19 @@
 	<window />
 	<textures />
 	<audio />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
 	<player>
-		<data x="1455" y="435" aceleration="18" />
+		<data x="5682" y="371" aceleration="13" />
 	</player>
+	<:anonymous />
 	<scene />
 	<map />
+	<:anonymous />
 	<renderer>
-		<camera x="-1020" y="-87" />
+		<camera x="0" y="0" />
 	</renderer>
 </game_state>

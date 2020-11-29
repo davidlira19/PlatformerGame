@@ -141,10 +141,12 @@ bool Player::Start()
 	velocity = 0;
 
 	collider = { Position.x, Position.y, 42, 76 };
-	SDL_Rect rect = { Position.x, Position.y, 48, 1 };
+	SDL_Rect rect = { Position.x, Position.y, 43, 1 };
 	playerCollider = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
 	rect = { Position.x, Position.y, 1, 74 };
-	playerRight = app->collisions->AddCollider(rect, Collider::PLAYERRIHGT , (Module*)this);
+	playerRight = app->collisions->AddCollider(rect, Collider::PLAYERRIGHT , (Module*)this);
+	rect = { Position.x, Position.y, 1, 74 };
+	playerLeft = app->collisions->AddCollider(rect, Collider::PLAYERLEFT, (Module*)this);
 	lateralsR = false;
 	lateralsL = false;
 	return true;
@@ -158,8 +160,9 @@ bool Player::Update(float dt)
 {
 	//270, 156
 	//updatePosition();
-	playerCollider->SetPos(Position.x+app->render->camera.x+38, Position.y+app->render->camera.y+76);
+	playerCollider->SetPos(Position.x+app->render->camera.x+43, Position.y+app->render->camera.y+76);
 	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y-2);
+	playerLeft->SetPos(Position.x + app->render->camera.x + 40, Position.y + app->render->camera.y - 2);
 	if (godMode == false)
 	{
 		/*result = playerCollisions.getCollision(Position, collider, 61);
@@ -396,7 +399,8 @@ bool Player::PostUpdate()
 	}*/
 
 	//app->render->DrawTexture(IntroTex, app->render->camera.x * -1, app->render->camera.y * -1);
-	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+	
+	/*SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
 	SDL_RenderFillRect(app->render->renderer, &playerCollider->rect);
 
@@ -404,6 +408,13 @@ bool Player::PostUpdate()
 	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
 	SDL_RenderFillRect(app->render->renderer, &playerRight->rect);
+
+
+
+	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+	SDL_RenderFillRect(app->render->renderer, &playerLeft->rect);*/
+
 	if (state != playerState::jumping) 
 	{
 		state = playerState::free;
@@ -504,9 +515,10 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			}
 			velocity = 0;
 		}
+		
 	
 	}
-	else if (c1->type == Collider::PLAYERRIHGT) 
+	else if (c1->type == Collider::PLAYERRIGHT) 
 	{
 		if (c2->type == Collider::FLOOR)
 		{
@@ -523,6 +535,10 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			
 
 		}
+		if (c2->type == Collider::CHECKPOINT)
+		{
+			app->SaveGameRequest("save_game.xml");
+		}
 		if (c2->type == Collider::WALL)
 		{
 			
@@ -532,6 +548,33 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		}
 		
 		
+	}
+	else if (c1->type == Collider::PLAYERLEFT)
+	{
+		if (c2->type == Collider::FLOOR)
+		{
+			if (state == playerState::null)
+			{
+				//state = playerState::free;
+				lateralsL = true;
+			}
+			else
+			{
+
+				lateralsL = true;
+			}
+
+
+		}
+		if (c2->type == Collider::WALL)
+		{
+
+			state = playerState::free;
+			lateralsL = true;
+
+		}
+
+
 	}
 	
 

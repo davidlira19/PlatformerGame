@@ -63,11 +63,13 @@ bool Scene::Start()
 
 				colliders.Add(app->collisions->AddCollider(rect, Collider::WALL));
 			}
-			
-
+			if (app->map->GetTileIdFromPosition(x, y, "colisions") == 63)
+			{
+				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
+				colliders.Add(app->collisions->AddCollider(rect, Collider::CHECKPOINT,(Module*)app->player));
+			}
 		}
 	}
-	
 	return true;
 }
 
@@ -81,7 +83,7 @@ bool Scene::PreUpdate()
 		for (int x = 0; x < app->map->data.tilesets.start->data->numTilesWidth; x++)
 		{
 			
-			if ((app->map->GetTileIdFromPosition(x, y, "colisions") == 61 || app->map->GetTileIdFromPosition(x, y, "colisions") == 62) && auxiliar!=NULL)
+			if ((app->map->GetTileIdFromPosition(x, y, "colisions") == 61 || app->map->GetTileIdFromPosition(x, y, "colisions") == 62) || app->map->GetTileIdFromPosition(x, y, "colisions") == 63 && auxiliar!=NULL)
 			{		
 				auxiliar->data->SetPos(x * app->map->data.tilesets.start->data->tileWidth+app->render->camera.x, y * app->map->data.tilesets.start->data->tileHeight + app->render->camera.y);
 					
@@ -199,6 +201,7 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		app->map->ChangeCollisionsDraw();
+
 	}
 	/*
 	//CAMERA.X LIMITS
@@ -318,14 +321,14 @@ bool Scene::PostUpdate()
 		ret = false;
 	
 	
-	ListItem<Collider*>* auxiliar;
+	/*ListItem<Collider*>* auxiliar;
 	auxiliar = colliders.start;
 	while (auxiliar != nullptr) {
 		SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 		SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
 		SDL_RenderFillRect(app->render->renderer, &auxiliar->data->rect);
 		auxiliar = auxiliar->next;
-	}
+	}*/
 	
 		
 	
