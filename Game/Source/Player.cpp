@@ -268,8 +268,8 @@ bool Player::Update(float dt)
 				currentAnimation = &JumpRight;
 			}
 			app->scene->freeCamera = true;
-			Position.x += 4;
-			app->render->camera.x -= 4;
+		    Position.x += 300* (dt / 1000);
+			app->render->camera.x -= 300* (dt / 1000);
 		}
 	}
 	else if ((app->input->GetKey(SDL_SCANCODE_A)) == (KEY_REPEAT) && (canMove == true))
@@ -285,8 +285,8 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &JumpLeft;
 			}
-			Position.x -= 4;
-			app->render->camera.x += 4;
+			Position.x -= 300 * (dt / 1000);
+			app->render->camera.x += 300 * (dt / 1000);
 		}
 	}
 
@@ -294,14 +294,14 @@ bool Player::Update(float dt)
 	{
 		if(godMode == true)
 		{
-			Position.y -= 4;
+			Position.y -= 300 * (dt / 1000);
 		}
 	}
 	else if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) && (canMove == true))
 	{
 		if (godMode == true) 
 		{
-			Position.y += 4;
+			Position.y += 300 * (dt/1000);
 		}
 	}
 
@@ -370,11 +370,11 @@ bool Player::Update(float dt)
 	}
 	if (state == playerState::jumping)
 	{
-		JumpFunction();
+		JumpFunction(dt);
 	}
 	else if (state != playerState::null && state != playerState::jumping)
 	{
-		Gravity();
+		Gravity(dt);
 	}
 	return true;
 }
@@ -473,14 +473,14 @@ bool Player::CleanUp()
 	return true;
 }
 
-void Player::Gravity()
+void Player::Gravity(float dt)
 {
-	velocity += aceleration * 0.05 * 2;
-	Position.y += velocity * 0.05 * 2;
-	app->render->camera.y -= velocity * 0.05 * 2;
+	velocity += aceleration * 0.05 * 100 * (dt / 1000);
+	Position.y += velocity * 0.05 * 100 * (dt / 1000);
+	app->render->camera.y -= velocity * 0.05 * 100 * (dt/1000);
 }
 //PLAYER FUNCTIONS
-void Player::JumpFunction()
+void Player::JumpFunction(float dt)
 {
 	collisionPosition result;
 	if (jumpingCount < 30)
@@ -495,9 +495,10 @@ void Player::JumpFunction()
 			lastanimation = currentAnimation;
 			currentAnimation = &JumpRight;
 		}
-		Position.y -= 3;
-		app->render->camera.y += 3;
-		jumpingCount++;
+		Position.y -= 150*(dt/1000);
+		app->render->camera.y += 150*(dt/1000);
+		jumpingCount+= (dt/15);
+		
 	}
 	else 
 	{

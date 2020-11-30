@@ -68,7 +68,7 @@ public:
 private:
 
 	// Load config file
-	bool LoadConfig();
+	pugi::xml_node LoadConfig(pugi::xml_document&) const;
 
 	// Call modules before each loop iteration
 	void PrepareUpdate();
@@ -130,6 +130,8 @@ private:
 	// L07: DONE 4: Calculate some timing measures
 	// required variables are provided:
 	PerfTimer ptimer;
+	PerfTimer dif;
+
 	uint frameCount = 0;
 
 	Timer startupTime;
@@ -138,6 +140,10 @@ private:
 	uint lastSecFrameCount = 0;
 	uint prevLastSecFrameCount = 0;
 	float dt = 0.0f;
+
+	int	cappedMs = -1;
+
+	int maxFPS;
 };
 
 extern App* app;

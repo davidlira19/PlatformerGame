@@ -90,22 +90,38 @@ void App::AddModule(Module* module)
 bool App::Awake()
 {
 	PERF_START(ptimer);
-	
-	// TODO 3: Load config from XML
-	bool ret = LoadConfig();
 
-	// TODO 4: Read the title from the config file
-	title.Create(configApp.child("title").child_value());
-	win->SetTitle(title.GetString());
+	pugi::xml_document configFile;
+	pugi::xml_node config;
+	pugi::xml_node configApp;
 
-	if(ret == true)
+	bool ret = false;
+
+	// L01: DONE 3: Load config from XML
+	config = LoadConfig(configFile);
+
+	if (config.empty() == false)
+	{
+		ret = true;
+		configApp = config.child("app");
+
+		// L01: DONE 4: Read the title from the config file
+		title.Create(configApp.child("title").child_value());
+		organization.Create(configApp.child("organization").child_value());
+
+		// L08: TODO 1: Read from config file your framerate cap
+
+		maxFPS = configApp.attribute("framerate_cap").as_int();
+	}
+
+	if (ret == true)
 	{
 		ListItem<Module*>* item;
 		item = modules.start;
 
-		while(item != NULL && ret == true)
+		while ((item != NULL) && (ret == true))
 		{
-			// TODO 5: Add a new argument to the Awake method to receive a pointer to an xml node.
+			// L01: DONE 5: Add a new argument to the Awake method to receive a pointer to an xml node.
 			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
 			// that can be used to read all variables for that module.
 			// Send nullptr if the node does not exist in config.xml
@@ -167,24 +183,14 @@ bool App::Update()
 }
 
 // Load config from XML file
-bool App::LoadConfig()
+pugi::xml_node App::LoadConfig(pugi::xml_document& configFile) const
 {
-	bool ret = true;
+	pugi::xml_node ret;
 
-	// TODO 3: Load config.xml file using load_file() method from the xml_document class
-	pugi::xml_parse_result result = configFile.load_file("config.xml");
+	pugi::xml_parse_result result = configFile.load_file(CONFIG_FILENAME);
 
-	// TODO 3: Check result for loading errors
-	if(result == NULL)
-	{
-		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
-		ret = false;
-	}
-	else
-	{
-		config = configFile.child("config");
-		configApp = config.child("app");
-	}
+	if (result == NULL) LOG("Could not load xml file: %s. pugi error: %s", CONFIG_FILENAME, result.description());
+	else ret = configFile.child("config");
 
 	return ret;
 }
@@ -192,6 +198,24 @@ bool App::LoadConfig()
 // ---------------------------------------------
 void App::PrepareUpdate()
 {
+	frameCount++;
+	lastSecFrameCount++;
+
+	// L08: TODO 4: Calculate the dt: differential time since last frame
+	dt = frameTime.Read();
+	frameTime.Start();
+
+	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		if (maxFPS == 13)
+		{
+			maxFPS = 30;
+		}
+		else if (maxFPS == 30)
+		{
+			maxFPS = 13;
+		}
+	}
 }
 
 // ---------------------------------------------
@@ -224,6 +248,17 @@ void App::FinishUpdate()
 		averageFps, lastFrameMs, framesOnLastUpdate, dt, secondsSinceStartup, frameCount);
 
 	app->win->SetTitle(title);
+
+	// L08: TODO 2: Use SDL_Delay to make sure you get your capped framerate
+	if (maxFPS > 0 && lastFrameMs < maxFPS)
+	{
+		PERF_START(ptimer);
+		SDL_Delay(maxFPS);
+		PERF_PEEK(ptimer);
+
+		//LOG("We waited for %d milliseconds and got back in %.6f", maxFPS, perfTimerWait);
+	}
+	// L08: TODO 3: Measure accurately the amount of time SDL_Delay() actually waits compared to what was expected
 }
 
 // Call modules before each loop iteration

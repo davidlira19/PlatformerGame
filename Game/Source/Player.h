@@ -22,7 +22,7 @@ class Player : public Module
 {
 public:
 	playerState state;
-	void Gravity();
+	void Gravity(float dt);
 	Player(bool startEnabled);
 	bool Start();
 	bool Update(float dt);
@@ -33,7 +33,7 @@ public:
 	int lifes;
 	bool isJumping;
 	//PLAYER FUNCTIONS
-	void JumpFunction();
+	void JumpFunction(float dt);
 	void DeadAction();
 	//PLAYER POSITION
 	position Position,lastPosition;
