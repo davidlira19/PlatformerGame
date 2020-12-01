@@ -20,7 +20,7 @@ class Render;
 class Textures;
 class Audio;
 class Player;
-class Enemy;
+class EntityManager;
 class Scene;
 class Map;
 class ModuleFadeToBlack;
@@ -94,7 +94,7 @@ public:
 	Textures* tex;
 	Audio* audio;
 	Player* player;
-	Enemy* enemy;
+	EntityManager* enemy;
 	Scene* scene;
 	Map* map;
 	ModuleFadeToBlack* fade;

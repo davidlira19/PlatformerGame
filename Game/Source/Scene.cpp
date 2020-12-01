@@ -10,6 +10,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include"Collisions.h"
+#include"Enemies.h"
 Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");
@@ -44,6 +45,7 @@ bool Scene::Start()
 	freeCamera = false;
 	app->collisions->Enable();
 	app->player->Enable();
+	app->enemy->Enable();
 	SDL_Rect rect;
 	for (int y = 0; y < app->map->data.tilesets.start->data->numTilesHeight; y++)
 	{
@@ -70,6 +72,7 @@ bool Scene::Start()
 			}
 		}
 	}
+	app->enemy->AddEntity(EntityTipe::EnemyAir, 0, 0);
 	return true;
 }
 

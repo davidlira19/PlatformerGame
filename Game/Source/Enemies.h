@@ -1,34 +1,28 @@
-#ifndef __ENEMIES_H__
-#define __ENEMIES_H__
+#ifndef _ENEMIES_H_
+#define _ENEMIES_H_
+#include "Enemy.h"
 
 #include "Module.h"
-
+#include "Enemy_Air.h"
+#include"Enemy_Ground.h"
+#include"List.h"
+#include"Textures.h"
 #define MAX_ENEMIES 100
 
-enum class Enemy_Type
-{
-	NO_TYPE,
-	Air,
-	Ground
-};
 
 struct EnemySpawnpoint
 {
-	Enemy_Type type = Enemy_Type::NO_TYPE;
-	int x, y,direccion;
+	EntityTipe type = EntityTipe::NO_TYPE;
+	int x, y, direccion;
 };
-
-class Enemy;
-struct SDL_Texture;
-
-class Enemy : public Module
+class EntityManager : public Module
 {
 public:
 	// Constructor
-	Enemy(bool startEnabled);
+	EntityManager(bool startEnabled);
 	bool PreUpdate();
 	// Destructor
-	~Enemy();
+	~EntityManager();
 
 	// Called when the module is activated
 	// Loads the necessary textures for the enemies
@@ -56,30 +50,24 @@ public:
 	//void OnCollision(Collider* c1, Collider* c2) override;
 
 	// Add an enemy into the queue to be spawned later
-	bool AddEnemy(Enemy_Type type, int x, int y,int direccion);
+	bool AddEntity(EntityTipe type, int x, int y);
 
 	// Iterates the queue and checks for camera position
 	void HandleEnemiesSpawn();
 
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
-	bool compene();
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
-
+	SDL_Texture* textures;
+	int destroyedFx = 0;
+	/*List <Entity*> entityList;*/
 private:
+	List<Entity*>entityList;
 	// A queue with all spawn points information
 	EnemySpawnpoint spawnQueue[MAX_ENEMIES];
-
-	// All spawned enemies in the scene
-	Enemy* enemies[MAX_ENEMIES] = { nullptr };
-
-	// The enemies sprite sheet
-	SDL_Texture* enemigos = nullptr;
-	SDL_Texture* kongs = nullptr;
 	// The audio fx for destroying an enemy
-	int enemyDestroyedFx = 0;
 };
 
 #endif // __ENEMIES_H__

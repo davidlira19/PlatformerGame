@@ -1,28 +1,24 @@
-#pragma once
 #ifndef __ENEMY_H__
 #define __ENEMY_H__
-
 #include "Point.h"
 #include "Animation.h"
-#include <time.h>
-struct SDL_Texture;
-struct Collider;
-enum class tipo {
-	Ground,Air
+#include"Textures.h"
+enum class EntityTipe
+{
+	NO_TYPE,
+	EnemyAir,
+	EnemyGround,
+	item
 };
-enum class state {
-	recto, bajando,libre,subiendo, saliendo
-};
-class Enem
+class Entity
 {
 public:
 	// Constructor
 	// Saves the spawn position for later movement calculations
-	Enem(int x, int y);
-	tipo typo;
-	// Destructor
-	virtual ~Enem();
+	Entity(int x, int y);
 
+	// Destructor
+	virtual ~Entity();
 	// Returns the enemy's collider
 	//const Collider* GetCollider() const;
 
@@ -38,24 +34,14 @@ public:
 	virtual void OnCollision(Collider* collideri, Collider* collidere);
 
 public:
-	int numerorand;
-	state random(state Estado, Collider* colider, tipo tip);
-	bool pendingToDelete = false;
 	void destr();
 	// Current Position in the world
 	iPoint position;
 	bool pendientedeelim = false;
 	// The enemy's texture
-	bool top1;
-	bool top2;
-	int prior1;
-	int contsub;
-	int frames1;
-	int frames2;
-	SDL_Texture* enemigo = nullptr;
-	state estado;
+	EntityTipe type;
 	// Sound fx when destroyed
-	int destroyedFx = 0;
+	SDL_Texture* airEnemiesTexture;
 	Collider* collider1 = nullptr;
 protected:
 	// A ptr to the current animation
@@ -63,8 +49,6 @@ protected:
 
 	// The enemy's collider
 	Collider* collider = nullptr;
-
-	int dire;
 	// Original spawn position
 	iPoint spawnPos;
 };

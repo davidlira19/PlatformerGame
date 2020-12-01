@@ -1,200 +1,182 @@
 #include "Enemies.h"
-
 #include "App.h"
 #include"Player.h"
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
 #include "Log.h"
-
 #include "SDL/include/SDL.h"
 #include "SDL_image/include/SDL_image.h"
-#include<time.h>
+
 
 #define SPAWN_MARGIN 50
 
 
-Enemy::Enemy(bool startEnabled) : Module(startEnabled)
+EntityManager::EntityManager(bool startEnabled) : Module(startEnabled)
 {
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-		enemies[i] = nullptr;
+	/*for (uint i = 0; i < MAX_ENEMIES; ++i)
+		enemies[i] = nullptr;*/
 }
 
-Enemy::~Enemy()
+EntityManager::~EntityManager()
 {
 
 }
 
-bool Enemy::Start()
+bool EntityManager::Start()
 {
-	
-	/*enemigos = app->tex->Load("Assets/objetosanimados.png");
-	kongs = app->tex->Load("Assets/sprites.png");
-	enemyDestroyedFx = app->audio->LoadFx("Assets/8. SFX (Kill).wav");*/
+
+	textures = app->tex->Load("Assets/textures/bird_animation.png");
 
 	return true;
 }
 
-bool Enemy::PreUpdate()
+bool EntityManager::PreUpdate()
 {
 	// Remove all enemies scheduled for deletion
-	/*for (int i = 0; i < MAX_ENEMIES; i++)
-	{
-		if (enemies[i] != nullptr && enemies[i]->pendientedeelim == true)
-		{
-			delete enemies[i];
-			enemies[i] = nullptr;
-		}
-	}*/
 
+	ListItem<Entity*>* listItem;
+	listItem = entityList.start;
+	while (listItem != nullptr) {
+		if (listItem->data->pendientedeelim == true)
+		{
+			entityList.Del(listItem);
+		}
+		listItem = listItem->next;
+	}
 	return true;
 }
 
-bool Enemy::Update(float dt)
+bool EntityManager::Update(float dt)
 {
-	/*HandleEnemiesSpawn();
+	HandleEnemiesSpawn();
 
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (enemies[i] != nullptr)
-			enemies[i]->Update(dt);
+	ListItem<Entity*>* listItem;
+	listItem = entityList.start;
+	while (listItem != nullptr) {
+		listItem->data->Update();
+		listItem = listItem->next;
 	}
 
-	HandleEnemiesDespawn();*/
+	HandleEnemiesDespawn();
 
 	return true;
 }
 
-bool Enemy::PostUpdate()
+bool EntityManager::PostUpdate()
 {
 	/*for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr)
 			enemies[i]->Draw();
 	}*/
+	ListItem<Entity*>* listItem;
+	listItem = entityList.start;
+	while (listItem != nullptr) {
+		listItem->data->Draw();
+		listItem = listItem->next;
+	}
 
 	return true;
 }
 
 // Called before quitting
-bool Enemy::CleanUp()
+bool EntityManager::CleanUp()
 {
-	/*LOG("Freeing all enemies");
-	app->tex->Unload(kongs);
-	app->tex->Unload(enemigos);
-	for (int i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (enemies[i] != nullptr)
-		{
-			
-			delete enemies[i];
-			enemies[i] = nullptr;
-		}
-	}*/
-
+	LOG("Freeing all enemies");
+	app->tex->UnLoad(textures);
+	ListItem<Entity*>* listItem;
+	listItem = entityList.start;
+	while (listItem != nullptr) {
+		delete listItem->data;	
+		listItem = listItem->next;
+	}
+	entityList.Clear();
 	return true;
 }
 
-bool Enemy::AddEnemy(Enemy_Type type, int x, int y,int direccion)
+bool EntityManager::AddEntity(EntityTipe type, int x, int y)
 {
 	bool ret = false;
 
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	for(int i=0;i< MAX_ENEMIES;i++)
 	{
-		if (spawnQueue[i].type == Enemy_Type::NO_TYPE)
+		if (spawnQueue[i].type == EntityTipe::NO_TYPE)
 		{
 			spawnQueue[i].type = type;
 			spawnQueue[i].x = x;
 			spawnQueue[i].y = y;
-			spawnQueue[i].direccion = direccion;
 			ret = true;
 			break;
 		}
 	}
-
 	return ret;
 }
 
-/*void Enemy::HandleEnemiesSpawn()
+void EntityManager::HandleEnemiesSpawn()
 {
-	// Iterate all the enemies queue
-	for (int i = 0; i < MAX_ENEMIES; i++)
+	for(int i=0;i<MAX_ENEMIES;i++)
 	{
-		if (spawnQueue[i].type != Enemy_Type::NO_TYPE)
+		if (spawnQueue[i].type != EntityTipe::NO_TYPE)
 		{
 			SpawnEnemy(spawnQueue[i]);
-			spawnQueue[i].type = Enemy_Type::NO_TYPE; // Removing the newly spawned enemy from the queue
+			spawnQueue[i].type = EntityTipe::NO_TYPE; // Removing the newly spawned enemy from the queue
 		}
-	}
-}*/
 
-/*void Enemy::HandleEnemiesDespawn()
+	}
+}
+
+void EntityManager::HandleEnemiesDespawn()
 {
 	// Iterate existing enemies
-	for (int i = 0; i < MAX_ENEMIES; i++)
-	{
-		if (enemies[i] != nullptr&&enemies[i]->pendientedeelim==true)
+	//for (int i = 0; i < MAX_ENEMIES; i++)
+	//{
+	//	if (enemies[i] != nullptr&&enemies[i]->pendientedeelim==true)
+	//	{
+	//		delete enemies[i];
+	//		enemies[i] = nullptr;
+	//	}
+	//}
+	ListItem<Entity*>* listItem;
+	listItem = entityList.start;
+	while (listItem != nullptr) {
+		if (listItem->data->pendientedeelim == true)
 		{
-			delete enemies[i];
-			enemies[i] = nullptr;
+			delete listItem->data;
+			entityList.Del(listItem);
 		}
+		listItem = listItem->next;
 	}
-}*/
+}
 
-/*void Enemy::SpawnEnemy(const EnemySpawnpoint& info)
+void EntityManager::SpawnEnemy(const EnemySpawnpoint& info)
 {
-	// Find an empty slot in the enemies array
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	Entity* entity = nullptr;
+	switch (info.type)
 	{
-		if (enemies[i] == nullptr)
-		{
-
-			switch (info.type)
-			{
-			case Enemy_Type::Ground:
-				enemies[i] = new Enemy_Ground(info.x, info.y, info.direccion);
-				enemies[i]->ground = grounds;
-				enemies[i]->destroyedFx = enemyDestroyedFx;
-				break;
-
-			case Enemy_Type::Air:
-				enemies[i] = new Enemy_Air(info.x, info.y, info.direccion);
-				enemies[i]->air = airs;
-				enemies[i]->destroyedFx = enemyDestroyedFx;
-				break;
-			}
-			break;
-		}
+	case EntityTipe::EnemyAir:
+		entity = new EnemyAir(info.x, info.y);
+		entity->airEnemiesTexture = textures;
+		break;
+	case EntityTipe::EnemyGround:
+		entity = new EnemyGround(info.x, info.y);
+		entity->airEnemiesTexture = textures;
+		break;
 	}
-}*/
+	entity->type = info.type;
+	entityList.Add(entity);
+}
 
 /*void Enemies::OnCollision(Collider* c1, Collider* c2)
 {
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (enemies[i] != nullptr)
-		{
-			if (c1->type == c1->Enemigo && c2->type == c2->martillo) {
-				if (c1 == enemies[i]->GetCollider()) {
-					App->audio->PlayFx(App->enemies->enemyDestroyedFx);//Notify the enemy of a collision
-					enemies[i]->destr();
-					break;
-				}	
-			}
-			else {
-				enemies[i]->OnCollision(c1, c2);
-			}
 
-		}
-
-	}
-}*/
+}
 
 /*bool Enemy::compene()
 {
-	for (int i = 0; i < MAX_ENEMIES; i++) 
+	for (int i = 0; i < MAX_ENEMIES; i++)
 	{
-		if (enemies[i] != nullptr) 
+		if (enemies[i] != nullptr)
 		{
 			return false;
 		}

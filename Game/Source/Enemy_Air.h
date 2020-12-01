@@ -1,14 +1,15 @@
 #ifndef __ENEMY_AIR_H__
 #define __ENEMY_AIR_H__
-
+#include"Animation.h"
 #include "Enemy.h"
-class EnemyAir : public Enem
+class EnemyAir : public Entity
 {
 public:
 
 	// Constructor (x y coordinates in the world)
 	// Creates animation data and the collider
-	EnemyAir(int x, int y, int direccion);
+	EnemyAir(int x, int y);
+	~EnemyAir();
 	// The enemy is going to perform a sinusoidal movement
 	void Update();
 

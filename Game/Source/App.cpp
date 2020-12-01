@@ -31,7 +31,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	audio = new Audio(true);
 	player = new Player(false);
-	enemy = new Enemy(false);
+	enemy = new EntityManager(false);
 	scene = new Scene(false);
 	map = new Map(false);
 	fade = new ModuleFadeToBlack(true);
