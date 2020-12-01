@@ -210,13 +210,18 @@ bool collisions::checkIfCollision(int id, position positionToChek)
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+	if (freeCamera == true)
+	{
+		app->render->camera.x = (app->player->Position.x - 500) * -1;
+		app->render->camera.y = (app->player->Position.y - 250) * -1;
+	}
 	LOG("%d %d", app->player->Position.x, app->player->Position.y);
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		app->map->ChangeCollisionsDraw();
 
 	}
-	/*
+	
 	//CAMERA.X LIMITS
 	if (app->render->camera.x > 0)
 	{
@@ -235,7 +240,7 @@ bool Scene::Update(float dt)
 	{
 		app->render->camera.y = -1100;
 	}
-	*/
+	
 	//CAMERA AUTOMATIC MOVEMENT
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{

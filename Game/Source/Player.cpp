@@ -170,7 +170,17 @@ bool Player::Update(float dt)
 	{
 		noise = true;
 	}
-
+	LOG("%d %d", Position.x, Position.y);
+	if ((Position.x >= 1000 && Position.x <= 2140 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) || (Position.x >= 4900 && Position.x <= 5700 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN))
+	{
+		Position.x = 2141;
+		Position.y = 435;
+	}
+	else if (Position.x >= 2141 && Position.x <= 4903 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+	{
+		Position.x = 4900;
+		Position.y = 563;
+	}
 	playerCollider->SetPos(Position.x+app->render->camera.x+43, Position.y+app->render->camera.y+76);
 	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y-2);
 	playerLeft->SetPos(Position.x + app->render->camera.x + 40, Position.y + app->render->camera.y - 2);
@@ -269,7 +279,7 @@ bool Player::Update(float dt)
 			}
 			app->scene->freeCamera = true;
 		    Position.x += 300* (dt / 1000);
-			app->render->camera.x -= 300* (dt / 1000);
+			//////app->render->camera.x -= 300* (dt / 1000);
 		}
 	}
 	else if ((app->input->GetKey(SDL_SCANCODE_A)) == (KEY_REPEAT) && (canMove == true))
@@ -286,7 +296,7 @@ bool Player::Update(float dt)
 				currentAnimation = &JumpLeft;
 			}
 			Position.x -= 300 * (dt / 1000);
-			app->render->camera.x += 300 * (dt / 1000);
+			//////app->render->camera.x += 300 * (dt / 1000);
 		}
 	}
 
@@ -506,7 +516,7 @@ void Player::JumpFunction(float dt)
 		state = playerState::free;
 		jumpingCount = 0;
 		Position.y += 3;
-		app->render->camera.y -= 3;
+		//////app->render->camera.y -= 3;
 		velocity = 5.0f;
 	}
 }
