@@ -1,6 +1,6 @@
 #include "EntityManager.h"
 #include "App.h"
-#include"Player.h"
+#include "Player.h"
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -28,6 +28,7 @@ bool EntityManager::Start()
 
 	birdTexture = app->tex->Load("Assets/textures/bird_animation.png");
 	zombieTexture = app->tex->Load("Assets/textures/zombie_animation.png");
+	coinTexture = app->tex->Load("Assets/textures/coin_animation.png");
 	return true;
 }
 
@@ -163,10 +164,15 @@ void EntityManager::SpawnEnemy(const EnemySpawnpoint& info)
 		entity = new EnemyGround(info.x, info.y);
 		entity->groundEnemiesTexture = zombieTexture;
 		break;
+	case EntityTipe::item:
+		entity = new Coin(info.x, info.y);
+		entity->itemTexture = coinTexture;
+		break;
 	}
 	entity->type = info.type;
 	entityList.Add(entity);
 }
+
 
 /*void Enemies::OnCollision(Collider* c1, Collider* c2)
 {

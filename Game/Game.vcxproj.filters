@@ -26,6 +26,7 @@
     <ClCompile Include="Source\Enemy_Ground.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
+    <ClCompile Include="Source\Coin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -89,6 +90,7 @@
     <ClInclude Include="Source\Enemy_Ground.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Entity.h" />
+    <ClInclude Include="Source\Coin.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

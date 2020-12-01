@@ -45,6 +45,7 @@ public:
 	// Sound fx when destroyed
 	SDL_Texture* airEnemiesTexture;
 	SDL_Texture* groundEnemiesTexture;
+	SDL_Texture* itemTexture;
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;

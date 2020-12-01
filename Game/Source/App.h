@@ -94,7 +94,7 @@ public:
 	Textures* tex;
 	Audio* audio;
 	Player* player;
-	EntityManager* enemy;
+	EntityManager* entity;
 	Scene* scene;
 	Map* map;
 	ModuleFadeToBlack* fade;

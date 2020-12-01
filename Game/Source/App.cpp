@@ -31,7 +31,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	audio = new Audio(true);
 	player = new Player(false);
-	enemy = new EntityManager(false);
+	entity = new EntityManager(false);
 	scene = new Scene(false);
 	map = new Map(false);
 	fade = new ModuleFadeToBlack(true);
@@ -53,7 +53,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(winp);
 	AddModule(fade);	
 	AddModule(player);
-	AddModule(enemy);
+	AddModule(entity);
 	AddModule(scene);
 	AddModule(map);
 	AddModule(collisions);

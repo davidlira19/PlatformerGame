@@ -20,8 +20,8 @@ EnemyGround::EnemyGround(int x, int y) : Entity(x, y)
 	zombieMoveLeft.speed = 0.15f;
 	//////
 	currentAnim = &zombieMoveLeft;
-	playerWin = app->collisions->AddCollider({ 0, 0, 48, 4 }, Collider::ENEMY1, (Module*)app->enemy);
-	collider = app->collisions->AddCollider({ 0, 6, 48, 77 }, Collider::ENEMY2, (Module*)app->enemy);
+	playerWin = app->collisions->AddCollider({ 0, 0, 48, 4 }, Collider::ENEMY1, (Module*)app->entity);
+	collider = app->collisions->AddCollider({ 0, 6, 48, 77 }, Collider::ENEMY2, (Module*)app->entity);
 	
 
 }

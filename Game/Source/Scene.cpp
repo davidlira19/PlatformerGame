@@ -45,7 +45,7 @@ bool Scene::Start()
 	freeCamera = false;
 	app->collisions->Enable();
 	app->player->Enable();
-	app->enemy->Enable();
+	app->entity->Enable();
 	SDL_Rect rect;
 	for (int y = 0; y < app->map->data.tilesets.start->data->numTilesHeight; y++)
 	{
@@ -73,16 +73,20 @@ bool Scene::Start()
 		}
 	}
 	//BIRDS
-	app->enemy->AddEntity(EntityTipe::EnemyAir, 1633, 500);
-	app->enemy->AddEntity(EntityTipe::EnemyAir, 3343, 670);
-	app->enemy->AddEntity(EntityTipe::EnemyAir, 4300, 550);
-	app->enemy->AddEntity(EntityTipe::EnemyAir, 5005, 560);
+	app->entity->AddEntity(EntityTipe::EnemyAir, 1633, 500);
+	app->entity->AddEntity(EntityTipe::EnemyAir, 3343, 670);
+	app->entity->AddEntity(EntityTipe::EnemyAir, 4300, 550);
+	app->entity->AddEntity(EntityTipe::EnemyAir, 5005, 560);
 	//ZOMBIES
-	app->enemy->AddEntity(EntityTipe::EnemyGround, 1899, 435);
-	app->enemy->AddEntity(EntityTipe::EnemyGround, 3034, 755);
-	app->enemy->AddEntity(EntityTipe::EnemyGround, 3832, 628);
-	app->enemy->AddEntity(EntityTipe::EnemyGround, 4631, 500);
-	app->enemy->AddEntity(EntityTipe::EnemyGround, 5404, 499);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 1899, 435);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 3034, 755);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 3832, 628);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 4631, 500);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 5404, 499);
+	//COIN
+	app->entity->AddEntity(EntityTipe::item, 1860, 435);
+	app->entity->AddEntity(EntityTipe::item, 3000, 755);
+	app->entity->AddEntity(EntityTipe::item, 100, 100);
 	return true;
 }
 

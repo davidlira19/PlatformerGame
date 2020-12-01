@@ -5,6 +5,7 @@
 #include "Module.h"
 #include "Enemy_Air.h"
 #include "Enemy_Ground.h"
+#include "Coin.h"
 #include "List.h"
 #include "Textures.h"
 #define MAX_ENEMIES 100
@@ -62,6 +63,7 @@ private:
 	void SpawnEnemy(const EnemySpawnpoint& info);
 	SDL_Texture* birdTexture;
 	SDL_Texture* zombieTexture;
+	SDL_Texture* coinTexture;
 	int destroyedFx = 0;
 	/*List <Entity*> entityList;*/
 private:
