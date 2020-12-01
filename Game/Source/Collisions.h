@@ -1,7 +1,7 @@
 #ifndef _COLLISIONS_H_
 #define _COLLISIONS_H_
 
-#define MAX_COLLIDERS 250
+#define MAX_COLLIDERS 350
 
 #include "Module.h"
 #include "Collider.h"

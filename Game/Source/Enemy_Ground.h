@@ -11,11 +11,12 @@ public:
 	EnemyGround(int x, int y);
 	// The enemy is going to perform a sinusoidal movement
 	void Update();
+	void Draw();
 
 private:
 	// The position (as ratio) in the wave at a specific moment
 
-
+	Collider* playerWin = nullptr;
 	// The enemy animation
 	Animation zombieMoveLeft;
 

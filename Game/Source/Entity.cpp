@@ -35,9 +35,9 @@ void Entity::Update()
 void Entity::Draw()
 {
 
-	SDL_Rect rect = currentAnim->GetCurrentFrame();
+	/*SDL_Rect rect = currentAnim->GetCurrentFrame();
 	app->render->DrawTexture(airEnemiesTexture, position.x, position.y,&rect);
-	app->render->DrawTexture(groundEnemiesTexture, position.x, position.y, &rect);
+	app->render->DrawTexture(groundEnemiesTexture, position.x, position.y, &rect);*/
 }
 
 void Entity::OnCollision(Collider* collideri, Collider* collidere)

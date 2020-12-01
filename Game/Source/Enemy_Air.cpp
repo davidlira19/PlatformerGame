@@ -2,7 +2,7 @@
 
 #include"EntityManager.h"
 #include "App.h"
-//#include "Collisions.h"
+#include "Collisions.h"
 
 
 EnemyAir::EnemyAir(int x, int y) : Entity(x, y)
@@ -14,8 +14,8 @@ EnemyAir::EnemyAir(int x, int y) : Entity(x, y)
 	birdAnim.loop = true;
 	birdAnim.speed = 0.1f;
 	currentAnim = &birdAnim;
-	//collider = app->collisions->AddCollider({ 0, 0, 25, 11 }, Collider::Type::Enemigo, (Module*)App->enemies);
-	//collider1 = app->collisions->AddCollider({ 0, 0, 5, 5 }, Collider::Type::top, (Module*)App->enemies);
+	playerWin = app->collisions->AddCollider({ 0, 0, 88, 4 }, Collider::ENEMY1, (Module*)app->enemy);
+	collider = app->collisions->AddCollider({ 0, 6, 88, 56 }, Collider::ENEMY2, (Module*)app->enemy);
 
 }
 EnemyAir::~EnemyAir() {
@@ -23,7 +23,23 @@ EnemyAir::~EnemyAir() {
 }
 void EnemyAir::Update()
 {
+	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y);
+	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y+6);
+	
 	currentAnim->Update();
 
 	Entity::Update();
+}
+void EnemyAir::Draw()
+{
+
+	SDL_Rect rect = currentAnim->GetCurrentFrame();
+	app->render->DrawTexture(airEnemiesTexture, position.x, position.y, &rect);
+
+
+	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+	SDL_RenderFillRect(app->render->renderer, &playerWin->rect);
+	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+	SDL_RenderFillRect(app->render->renderer, &collider->rect);
 }

@@ -3,6 +3,8 @@
 #include "Point.h"
 #include "Animation.h"
 #include"Textures.h"
+#include"Collider.h"
+#include"Render.h"
 enum class EntityTipe
 {
 	NO_TYPE,
@@ -43,7 +45,6 @@ public:
 	// Sound fx when destroyed
 	SDL_Texture* airEnemiesTexture;
 	SDL_Texture* groundEnemiesTexture;
-	Collider* collider1 = nullptr;
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
