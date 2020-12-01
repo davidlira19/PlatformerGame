@@ -85,6 +85,7 @@ bool EntityManager::CleanUp()
 {
 	LOG("Freeing all enemies");
 	app->tex->UnLoad(birdTexture);
+	app->tex->UnLoad(zombieTexture);
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
 	while (listItem != nullptr) {

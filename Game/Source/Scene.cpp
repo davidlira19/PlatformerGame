@@ -72,8 +72,17 @@ bool Scene::Start()
 			}
 		}
 	}
-	app->enemy->AddEntity(EntityTipe::EnemyAir, 1000, 500);
-	app->enemy->AddEntity(EntityTipe::EnemyGround, 1000, 500);
+	//BIRDS
+	app->enemy->AddEntity(EntityTipe::EnemyAir, 1633, 500);
+	app->enemy->AddEntity(EntityTipe::EnemyAir, 3343, 670);
+	app->enemy->AddEntity(EntityTipe::EnemyAir, 4300, 550);
+	app->enemy->AddEntity(EntityTipe::EnemyAir, 5005, 560);
+	//ZOMBIES
+	app->enemy->AddEntity(EntityTipe::EnemyGround, 1899, 435);
+	app->enemy->AddEntity(EntityTipe::EnemyGround, 3034, 755);
+	app->enemy->AddEntity(EntityTipe::EnemyGround, 3832, 628);
+	app->enemy->AddEntity(EntityTipe::EnemyGround, 4631, 500);
+	app->enemy->AddEntity(EntityTipe::EnemyGround, 5404, 499);
 	return true;
 }
 
@@ -201,7 +210,7 @@ bool collisions::checkIfCollision(int id, position positionToChek)
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-	
+	LOG("%d %d", app->player->Position.x, app->player->Position.y);
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		app->map->ChangeCollisionsDraw();
