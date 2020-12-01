@@ -10,7 +10,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include"Collisions.h"
-#include"Enemies.h"
+#include"EntityManager.h"
 Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");
@@ -72,7 +72,8 @@ bool Scene::Start()
 			}
 		}
 	}
-	app->enemy->AddEntity(EntityTipe::EnemyAir, 0, 0);
+	app->enemy->AddEntity(EntityTipe::EnemyAir, 1000, 500);
+	app->enemy->AddEntity(EntityTipe::EnemyGround, 1000, 500);
 	return true;
 }
 

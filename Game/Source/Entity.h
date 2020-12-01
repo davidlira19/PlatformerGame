@@ -1,5 +1,5 @@
-#ifndef __ENEMY_H__
-#define __ENEMY_H__
+#ifndef __ENTITY_H__
+#define __ENTITY_H__
 #include "Point.h"
 #include "Animation.h"
 #include"Textures.h"
@@ -42,6 +42,7 @@ public:
 	EntityTipe type;
 	// Sound fx when destroyed
 	SDL_Texture* airEnemiesTexture;
+	SDL_Texture* groundEnemiesTexture;
 	Collider* collider1 = nullptr;
 protected:
 	// A ptr to the current animation
@@ -53,4 +54,4 @@ protected:
 	iPoint spawnPos;
 };
 
-#endif // __ENEMY_H__*/
+#endif // __ENTITY_H__*/

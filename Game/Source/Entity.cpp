@@ -1,4 +1,4 @@
-#include "Enemy.h"
+#include "Entity.h"
 #include"Textures.h"
 #include "App.h"
 //#include "Collisions.h"

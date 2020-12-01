@@ -1,7 +1,7 @@
 #ifndef __ENEMY_GROUND_H__
 #define __ENEMY_GROUND_H__
 #include"Animation.h"
-#include "Enemy.h"
+#include "Entity.h"
 class EnemyGround : public Entity
 {
 public:
@@ -17,7 +17,7 @@ private:
 
 
 	// The enemy animation
-	Animation GroundEnemAnim;
+	Animation zombieMoveLeft;
 
 };
 

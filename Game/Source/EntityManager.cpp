@@ -1,4 +1,4 @@
-#include "Enemies.h"
+#include "EntityManager.h"
 #include "App.h"
 #include"Player.h"
 #include "Render.h"
@@ -26,8 +26,8 @@ EntityManager::~EntityManager()
 bool EntityManager::Start()
 {
 
-	textures = app->tex->Load("Assets/textures/bird_animation.png");
-
+	birdTexture = app->tex->Load("Assets/textures/bird_animation.png");
+	zombieTexture = app->tex->Load("Assets/textures/zombie_animation.png");
 	return true;
 }
 
@@ -84,7 +84,7 @@ bool EntityManager::PostUpdate()
 bool EntityManager::CleanUp()
 {
 	LOG("Freeing all enemies");
-	app->tex->UnLoad(textures);
+	app->tex->UnLoad(birdTexture);
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
 	while (listItem != nullptr) {
@@ -156,11 +156,11 @@ void EntityManager::SpawnEnemy(const EnemySpawnpoint& info)
 	{
 	case EntityTipe::EnemyAir:
 		entity = new EnemyAir(info.x, info.y);
-		entity->airEnemiesTexture = textures;
+		entity->airEnemiesTexture = birdTexture;
 		break;
 	case EntityTipe::EnemyGround:
 		entity = new EnemyGround(info.x, info.y);
-		entity->airEnemiesTexture = textures;
+		entity->groundEnemiesTexture = zombieTexture;
 		break;
 	}
 	entity->type = info.type;

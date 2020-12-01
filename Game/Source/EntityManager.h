@@ -1,6 +1,6 @@
-#ifndef _ENEMIES_H_
-#define _ENEMIES_H_
-#include "Enemy.h"
+#ifndef _ENTITYMANAGER_H_
+#define _ENTITYMANAGER_H_
+#include "Entity.h"
 
 #include "Module.h"
 #include "Enemy_Air.h"
@@ -60,7 +60,8 @@ public:
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
-	SDL_Texture* textures;
+	SDL_Texture* birdTexture;
+	SDL_Texture* zombieTexture;
 	int destroyedFx = 0;
 	/*List <Entity*> entityList;*/
 private:
@@ -70,4 +71,4 @@ private:
 	// The audio fx for destroying an enemy
 };
 
-#endif // __ENEMIES_H__
+#endif // __ENTITYMANAGER_H__

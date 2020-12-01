@@ -5,7 +5,7 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Player.h"
-#include "Enemies.h"
+#include "EntityManager.h"
 #include "Scene.h"
 #include"Intro.h"
 #include "Map.h"
