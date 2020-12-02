@@ -1,6 +1,7 @@
 #include "Coin.h"
 
 #include "App.h"
+#include "EntityManager.h"
 #include "Collisions.h"
 
 
@@ -20,7 +21,10 @@ Coin::Coin(int x, int y) : Entity(x, y)
 	
 
 }
-
+Coin::~Coin()
+{
+	collider->pendingToDelete = true;
+}
 void Coin::Update()
 {
 	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y+6);
@@ -33,10 +37,13 @@ void Coin::Draw()
 {
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
-	app->render->DrawTexture(itemTexture, position.x, position.y, &rect);
+	app->render->DrawTexture(moneyTexture, position.x, position.y, &rect);
 
+	if (app->entity->drawItems == true)
+	{
+		SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+		SDL_RenderFillRect(app->render->renderer, &collider->rect);
+	}
 
-	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-	SDL_RenderFillRect(app->render->renderer, &collider->rect);
 }

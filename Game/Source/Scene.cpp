@@ -84,9 +84,11 @@ bool Scene::Start()
 	app->entity->AddEntity(EntityTipe::EnemyGround, 4631, 500);
 	app->entity->AddEntity(EntityTipe::EnemyGround, 5404, 499);
 	//COIN
-	app->entity->AddEntity(EntityTipe::item, 1860, 435);
-	app->entity->AddEntity(EntityTipe::item, 3000, 755);
-	app->entity->AddEntity(EntityTipe::item, 100, 100);
+	app->entity->AddEntity(EntityTipe::Coin, 1860, 435);
+	app->entity->AddEntity(EntityTipe::Coin, 3000, 755);
+	app->entity->AddEntity(EntityTipe::Coin, 100, 100);
+	//HEARTH
+	app->entity->AddEntity(EntityTipe::Hearth, 1000, 435);
 	return true;
 }
 
@@ -219,11 +221,18 @@ bool Scene::Update(float dt)
 		app->render->camera.x = (app->player->Position.x - 500) * -1;
 		app->render->camera.y = (app->player->Position.y - 250) * -1;
 	}
-	LOG("%d %d", app->player->Position.x, app->player->Position.y);
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		app->map->ChangeCollisionsDraw();
 
+		if (app->entity->drawItems == true)
+		{
+			app->entity->drawItems = false;
+		}
+		else if (app->entity->drawItems == false)
+		{
+			app->entity->drawItems = true;
+		}
 	}
 	
 	//CAMERA.X LIMITS

@@ -32,6 +32,8 @@ public:
 	//PLAYER VARIABLES
 	int lifes;
 	bool isJumping;
+	int points;
+	int maxPoints;
 	//PLAYER FUNCTIONS
 	void JumpFunction(float dt);
 	void DeadAction();
@@ -65,6 +67,8 @@ public:
 	//FX AUDIO
 	unsigned int jumpFx;
 	unsigned int landFx;
+	unsigned int coinFx;
+	unsigned int lifeFx;
 	unsigned int checkpointFx;
 	bool lateralsR;
 	bool lateralsL;

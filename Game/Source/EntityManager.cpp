@@ -29,6 +29,10 @@ bool EntityManager::Start()
 	birdTexture = app->tex->Load("Assets/textures/bird_animation.png");
 	zombieTexture = app->tex->Load("Assets/textures/zombie_animation.png");
 	coinTexture = app->tex->Load("Assets/textures/coin_animation.png");
+	hearthTexture = app->tex->Load("Assets/textures/hearth_animation.png");
+
+	drawItems = false;
+
 	return true;
 }
 
@@ -88,6 +92,7 @@ bool EntityManager::CleanUp()
 	app->tex->UnLoad(birdTexture);
 	app->tex->UnLoad(zombieTexture);
 	app->tex->UnLoad(coinTexture);
+	app->tex->UnLoad(hearthTexture);
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
 	while (listItem != nullptr) {
@@ -165,9 +170,13 @@ void EntityManager::SpawnEnemy(const EnemySpawnpoint& info)
 		entity = new EnemyGround(info.x, info.y);
 		entity->groundEnemiesTexture = zombieTexture;
 		break;
-	case EntityTipe::item:
+	case EntityTipe::Coin:
 		entity = new Coin(info.x, info.y);
-		entity->itemTexture = coinTexture;
+		entity->moneyTexture = coinTexture;
+		break;
+	case EntityTipe::Hearth:
+		entity = new Hearth(info.x, info.y);
+		entity->lifeTexture = hearthTexture;
 		break;
 	}
 	entity->type = info.type;
@@ -204,7 +213,17 @@ void EntityManager::OnCollision(Collider* c1, Collider* c2)
 				
 			}
 		}
-		
+		else if (c1->type == c1->COIN || c1->type == c1->HEARTH)
+		{
+			if (c2->type == c2->PLAYER || c2->type == c2->PLAYERLEFT || c2->type == c2->PLAYERRIGHT)
+			{
+				if (c1 == listItem->data->collider)
+				{
+					listItem->data->OnCollision(c1, c2);
+				}
+
+			}
+		}
 		listItem = listItem->next;
 	}
 

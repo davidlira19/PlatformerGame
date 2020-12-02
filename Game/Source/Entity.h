@@ -10,7 +10,8 @@ enum class EntityTipe
 	NO_TYPE,
 	EnemyAir,
 	EnemyGround,
-	item
+	Coin,
+	Hearth
 };
 class Entity
 {
@@ -45,7 +46,8 @@ public:
 	// Sound fx when destroyed
 	SDL_Texture* airEnemiesTexture;
 	SDL_Texture* groundEnemiesTexture;
-	SDL_Texture* itemTexture;
+	SDL_Texture* moneyTexture;
+	SDL_Texture* lifeTexture;
 	Collider* playerWin = nullptr;
 	// The enemy's collider
 	Collider* collider = nullptr;

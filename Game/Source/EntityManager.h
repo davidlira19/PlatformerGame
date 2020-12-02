@@ -6,6 +6,7 @@
 #include "Enemy_Air.h"
 #include "Enemy_Ground.h"
 #include "Coin.h"
+#include "Hearth.h"
 #include "List.h"
 #include "Textures.h"
 #define MAX_ENEMIES 100
@@ -59,6 +60,7 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
 	
+	bool drawItems;
 private:
 	List<Entity*>entityList;
 	// Spawns a new enemy using the data from the queue
@@ -66,6 +68,7 @@ private:
 	SDL_Texture* birdTexture;
 	SDL_Texture* zombieTexture;
 	SDL_Texture* coinTexture;
+	SDL_Texture* hearthTexture;
 	int destroyedFx = 0;
 	/*List <Entity*> entityList;*/
 	

@@ -1,6 +1,7 @@
 #include "Enemy_Ground.h"
 
 #include "App.h"
+#include "EntityManager.h"
 #include "Collisions.h"
 
 
@@ -45,10 +46,12 @@ void EnemyGround::Draw()
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 	app->render->DrawTexture(groundEnemiesTexture, position.x, position.y, &rect);
 
-
-	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-	SDL_RenderFillRect(app->render->renderer, &playerWin->rect);
-	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-	SDL_RenderFillRect(app->render->renderer, &collider->rect);
+	if (app->entity->drawItems == true)
+	{
+		SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+		SDL_RenderFillRect(app->render->renderer, &playerWin->rect);
+		SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+		SDL_RenderFillRect(app->render->renderer, &collider->rect);
+	}
 }

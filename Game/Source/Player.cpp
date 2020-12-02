@@ -122,6 +122,7 @@ bool Player::Start()
 	Intro = true;
 	godMode = false;
 	lifes = 3;
+	points = 0;
 	//LOAD TEXTURES
 	santa = app->tex->Load("Assets/textures/santa_animation.png");
 	WinTex = app->tex->Load("Assets/textures/win_screen.png");
@@ -129,6 +130,8 @@ bool Player::Start()
 	IntroTex = app->tex->Load("Assets/textures/title_screen.png");
 	jumpFx = app->audio->LoadFx("Assets/audio/fx/santa_jump.ogg");
 	landFx = app->audio->LoadFx("Assets/audio/fx/santa_land.wav");
+	coinFx = app->audio->LoadFx("Assets/audio/fx/coin_drop.wav");
+	lifeFx = app->audio->LoadFx("Assets/audio/fx/life.wav");
 	checkpointFx = app->audio->LoadFx("Assets/audio/fx/checkpoint.wav");
 	LifesTex = app->tex->Load("Assets/textures/lifes.png");
 	//SET POSITION
@@ -170,7 +173,7 @@ bool Player::Update(float dt)
 	{
 		noise = true;
 	}
-	LOG("%d %d", Position.x, Position.y);
+	LOG("%d %d", points, lifes);
 	if ((Position.x >= 1000 && Position.x <= 2140 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) || (Position.x >= 4900 && Position.x <= 5700 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN))
 	{
 		Position.x = 2141;
@@ -544,7 +547,19 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			}
 			velocity = 0;
 		}
-		
+		else if (c2->type == Collider::COIN)
+		{
+			points += 100;
+			app->audio->PlayFx(coinFx);
+			c2->pendingToDelete = true;
+		}
+		else if (c2->type == Collider::HEARTH)
+		{
+			points += 50;
+			app->audio->PlayFx(lifeFx);
+			lifes++;
+			c2->pendingToDelete = true;
+		}
 	
 	}
 	else if (c1->type == Collider::PLAYERRIGHT) 
@@ -581,8 +596,19 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			Dead = true;
 			
 		}
-		
-		
+		else if (c2->type == Collider::COIN)
+		{
+			points += 100;
+			app->audio->PlayFx(coinFx);
+			c2->pendingToDelete = true;
+		}
+		else if (c2->type == Collider::HEARTH)
+		{
+			points += 50;
+			app->audio->PlayFx(lifeFx);
+			lifes++;
+			c2->pendingToDelete = true;
+		}
 	}
 	else if (c1->type == Collider::PLAYERLEFT)
 	{
@@ -610,6 +636,19 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		{
 			Dead = true;
 			
+		}
+		else if (c2->type == Collider::COIN)
+		{
+			points += 100;
+			app->audio->PlayFx(coinFx);
+			c2->pendingToDelete = true;
+		}
+		else if (c2->type == Collider::HEARTH)
+		{
+			points += 50;
+			app->audio->PlayFx(lifeFx);
+			lifes++;
+			c2->pendingToDelete = true;
 		}
 	}
 }

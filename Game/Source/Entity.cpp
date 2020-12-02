@@ -3,6 +3,7 @@
 #include "App.h"
 //#include "Collisions.h"
 //#include "ModuleParticles.h"
+#include "Player.h"
 #include "EntityManager.h"
 #include "Audio.h"
 #include "Render.h"
@@ -47,9 +48,25 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 	{
 		if (collidere->type == Collider::PLAYER) 
 		{
+			if (type == EntityTipe::EnemyAir)
+			{
+				app->player->points += 300;
+			}
+			if (type == EntityTipe::EnemyGround)
+			{
+				app->player->points += 200;
+			}
 			pendientedeelim = true;
 		}
 		
+	}
+	if (collidere->type == Collider::PLAYER || collidere->type == Collider::PLAYERLEFT || collidere->type == Collider::PLAYERRIGHT)
+	{
+		if (collideri->type == Collider::COIN ||collideri->type == Collider::HEARTH)
+		{
+			pendientedeelim = true;
+		}
+
 	}
 }
 
