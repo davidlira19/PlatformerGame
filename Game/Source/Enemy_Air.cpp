@@ -18,8 +18,10 @@ EnemyAir::EnemyAir(int x, int y) : Entity(x, y)
 	collider = app->collisions->AddCollider({ 0, 6, 88, 56 }, Collider::ENEMY2, (Module*)app->entity);
 
 }
-EnemyAir::~EnemyAir() {
-
+EnemyAir::~EnemyAir() 
+{
+	collider->pendingToDelete = true;
+	playerWin->pendingToDelete = true;
 }
 void EnemyAir::Update()
 {

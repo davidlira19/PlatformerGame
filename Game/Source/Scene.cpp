@@ -366,10 +366,10 @@ bool Scene::CleanUp()
 	app->render->camera.y = 0;
 	app->tex->UnLoad(bg_snow);
 	app->map->Disable();
+	app->entity->Disable();
 	app->audio->Unload();
-	colliders.Clear();
 	app->collisions->Disable();
-	
+	colliders.Clear();
 	
 	return true;
 }

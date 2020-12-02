@@ -441,28 +441,7 @@ bool Player::PostUpdate()
 		Win = false;
 		canMove = false;
 	}
-	/*if ((Dead == true || Win == true) && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN))
-	{
-		app->scene->Start();
-		app->player->Start();
-	}*/
-
-	//app->render->DrawTexture(IntroTex, app->render->camera.x * -1, app->render->camera.y * -1);
 	
-	/*SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-	SDL_RenderFillRect(app->render->renderer, &playerCollider->rect);
-
-
-	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-	SDL_RenderFillRect(app->render->renderer, &playerRight->rect);
-
-
-
-	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-	SDL_RenderFillRect(app->render->renderer, &playerLeft->rect);*/
 
 	if (state != playerState::jumping) 
 	{
@@ -584,8 +563,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			}
 			
 
-		}
-		if (c2->type == Collider::CHECKPOINT)
+		}else if (c2->type == Collider::CHECKPOINT)	
 		{
 			app->SaveGameRequest("save_game.xml");
 			if (noise == true)
@@ -593,12 +571,14 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				app->audio->PlayFx(app->player->checkpointFx);
 				noise = false;
 			}
-		}
-		if (c2->type == Collider::WALL)
-		{
-			
+		}else if (c2->type == Collider::WALL)		
+		{		
 			state = playerState::free;
-			lateralsR = true;
+			lateralsR = true;		
+		}
+		else if (c2->type == Collider::ENEMY2) 
+		{
+			Dead = true;
 			
 		}
 		
@@ -620,17 +600,16 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			}
 
 
-		}
-		if (c2->type == Collider::WALL)
+		}else if (c2->type == Collider::WALL)		
 		{
 
 			state = playerState::free;
 			lateralsL = true;
 
+		}else if (c2->type == Collider::ENEMY2)	
+		{
+			Dead = true;
+			
 		}
-
-
 	}
-	
-
 }

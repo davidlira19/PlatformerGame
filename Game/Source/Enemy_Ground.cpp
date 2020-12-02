@@ -25,7 +25,11 @@ EnemyGround::EnemyGround(int x, int y) : Entity(x, y)
 	
 
 }
-
+EnemyGround::~EnemyGround() 
+{
+	collider->pendingToDelete = true;
+	playerWin->pendingToDelete = true;
+}
 void EnemyGround::Update()
 {
 	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y);

@@ -87,6 +87,7 @@ bool EntityManager::CleanUp()
 	LOG("Freeing all enemies");
 	app->tex->UnLoad(birdTexture);
 	app->tex->UnLoad(zombieTexture);
+	app->tex->UnLoad(coinTexture);
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
 	while (listItem != nullptr) {
@@ -174,8 +175,38 @@ void EntityManager::SpawnEnemy(const EnemySpawnpoint& info)
 }
 
 
-/*void Enemies::OnCollision(Collider* c1, Collider* c2)
+void EntityManager::OnCollision(Collider* c1, Collider* c2)
 {
+	ListItem<Entity*>* listItem;
+	listItem = entityList.start;
+	while (listItem != nullptr) {
+		if (c1->type == c1->ENEMY2)
+		{
+			if (c2->type == c2->PLAYERLEFT || c2->type == c2->PLAYERRIGHT)
+			{
+				break;
+				/*if (c1 == listItem->data->collider)
+				{
+					delete listItem->data;
+					entityList.Del(listItem);
+
+				}*/
+			}
+		}
+		else if (c1->type == c1->ENEMY1)
+		{
+			if (c2->type == c2->PLAYER)
+			{
+				if (c1 == listItem->data->playerWin)
+				{
+					listItem->data->OnCollision(c1,c2);
+				}
+				
+			}
+		}
+		
+		listItem = listItem->next;
+	}
 
 }
 

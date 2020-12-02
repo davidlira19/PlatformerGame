@@ -3,6 +3,7 @@
 #include "App.h"
 //#include "Collisions.h"
 //#include "ModuleParticles.h"
+#include "EntityManager.h"
 #include "Audio.h"
 #include "Render.h"
 
@@ -42,7 +43,14 @@ void Entity::Draw()
 
 void Entity::OnCollision(Collider* collideri, Collider* collidere)
 {
-
+	if (collideri->type == Collider::ENEMY1) 
+	{
+		if (collidere->type == Collider::PLAYER) 
+		{
+			pendientedeelim = true;
+		}
+		
+	}
 }
 
 void Entity::destr()

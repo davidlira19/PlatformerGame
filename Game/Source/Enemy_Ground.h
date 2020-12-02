@@ -9,6 +9,7 @@ public:
 	// Constructor (x y coordinates in the world)
 	// Creates animation data and the collider
 	EnemyGround(int x, int y);
+	~EnemyGround();
 	// The enemy is going to perform a sinusoidal movement
 	void Update();
 	void Draw();
@@ -16,7 +17,6 @@ public:
 private:
 	// The position (as ratio) in the wave at a specific moment
 
-	Collider* playerWin = nullptr;
 	// The enemy animation
 	Animation zombieMoveLeft;
 

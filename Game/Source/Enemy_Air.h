@@ -16,7 +16,7 @@ public:
 private:
 	// The position (as ratio) in the wave at a specific moment
 
-	Collider* playerWin = nullptr;
+	
 	// The enemy animation
 	Animation birdAnim;
 };

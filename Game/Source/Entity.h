@@ -46,12 +46,13 @@ public:
 	SDL_Texture* airEnemiesTexture;
 	SDL_Texture* groundEnemiesTexture;
 	SDL_Texture* itemTexture;
+	Collider* playerWin = nullptr;
+	// The enemy's collider
+	Collider* collider = nullptr;
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
-
-	// The enemy's collider
-	Collider* collider = nullptr;
+	
 	// Original spawn position
 	iPoint spawnPos;
 };

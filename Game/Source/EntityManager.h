@@ -55,10 +55,12 @@ public:
 
 	// Iterates the queue and checks for camera position
 	void HandleEnemiesSpawn();
-
+	void OnCollision(Collider* c1, Collider* c2);
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
+	
 private:
+	List<Entity*>entityList;
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
 	SDL_Texture* birdTexture;
@@ -66,8 +68,7 @@ private:
 	SDL_Texture* coinTexture;
 	int destroyedFx = 0;
 	/*List <Entity*> entityList;*/
-private:
-	List<Entity*>entityList;
+	
 	// A queue with all spawn points information
 	EnemySpawnpoint spawnQueue[MAX_ENEMIES];
 	// The audio fx for destroying an enemy
