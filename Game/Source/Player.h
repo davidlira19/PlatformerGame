@@ -21,6 +21,7 @@ public:
 class Player : public Module
 {
 public:
+	bool HasThePlayerMove();
 	playerState state;
 	void Gravity(float dt);
 	Player(bool startEnabled);
@@ -79,8 +80,10 @@ public:
 	Collider* playerRight;
 	Collider* playerLeft;
 	void OnCollision(Collider* c1, Collider* c2);
+	iPoint GetPosition();
 private:
 	//PLAYER TEXTURE
+
 	int cont;
 	bool noise;
 	SDL_Texture* santa = nullptr;

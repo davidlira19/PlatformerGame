@@ -4,6 +4,7 @@
 #include "Animation.h"
 #include"Textures.h"
 #include"Collider.h"
+#include"PathFinding.h"
 #include"Render.h"
 enum class EntityTipe
 {
@@ -51,7 +52,11 @@ public:
 	Collider* playerWin = nullptr;
 	// The enemy's collider
 	Collider* collider = nullptr;
+	PathFinding path;
+	bool counter;
+	int numCounter;
 protected:
+
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 	

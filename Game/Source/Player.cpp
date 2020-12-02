@@ -7,6 +7,7 @@
 #include"Animation.h"
 #include"Audio.h"
 #include "Log.h"
+#include"Map.h"
 #include"SDL/include/SDL_scancode.h"
 #include"FadeToBlack.h"
 #include"Dead.h"
@@ -136,7 +137,7 @@ bool Player::Start()
 	LifesTex = app->tex->Load("Assets/textures/lifes.png");
 	//SET POSITION
 	Position.x = 2300 / 2; Position.y = 500 / 2;
-	
+	//2300
 	currentAnimation = &StopRight;
 	//INITIALIZE VARIABLES
 	isJumping = false;
@@ -158,13 +159,14 @@ bool Player::Start()
 	playerLeft = app->collisions->AddCollider(rect, Collider::PLAYERLEFT, (Module*)this);
 	lateralsR = false;
 	lateralsL = false;
+	lastPosition = Position;
 	return true;
 }
-void Player::updatePosition()
-{
-	collider.x = Position.x;
-	collider.y = Position.y;
-}
+//void Player::updatePosition()
+//{
+//	collider.x = Position.x;
+//	collider.y = Position.y;
+//}
 bool Player::Update(float dt)
 {
 	//270, 156
@@ -281,6 +283,7 @@ bool Player::Update(float dt)
 				currentAnimation = &JumpRight;
 			}
 			app->scene->freeCamera = true;
+			lastPosition = Position;
 		    Position.x += 300* (dt / 1000);
 			//////app->render->camera.x -= 300* (dt / 1000);
 		}
@@ -298,6 +301,7 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &JumpLeft;
 			}
+			lastPosition = Position;
 			Position.x -= 300 * (dt / 1000);
 			//////app->render->camera.x += 300 * (dt / 1000);
 		}
@@ -467,6 +471,7 @@ bool Player::CleanUp()
 
 void Player::Gravity(float dt)
 {
+	lastPosition = Position;
 	velocity += aceleration * 0.05 * 100 * (dt / 1000);
 	Position.y += velocity * 0.05 * 100 * (dt / 1000);
 	app->render->camera.y -= velocity * 0.05 * 100 * (dt/1000);
@@ -487,6 +492,7 @@ void Player::JumpFunction(float dt)
 			lastanimation = currentAnimation;
 			currentAnimation = &JumpRight;
 		}
+		lastPosition = Position;
 		Position.y -= 150*(dt/1000);
 		app->render->camera.y += 150*(dt/1000);
 		jumpingCount+= (dt/15);
@@ -495,6 +501,7 @@ void Player::JumpFunction(float dt)
 	else 
 	{
 		//result = collisionPosition::null;
+		lastPosition = Position;
 		state = playerState::free;
 		jumpingCount = 0;
 		Position.y += 3;
@@ -651,4 +658,25 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			c2->pendingToDelete = true;
 		}
 	}
+}
+bool Player::HasThePlayerMove() 
+{
+	iPoint actual, previous;
+	actual=app->map->WorldToMap(Position.x, Position.y);
+	previous = app->map->WorldToMap(lastPosition.x, lastPosition.y);
+	if (actual != previous) 
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
+
+}
+iPoint Player:: GetPosition()
+{
+	iPoint point;
+	point.x = Position.x;
+	point.y = Position.y;
+	return point;
 }

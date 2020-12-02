@@ -6,23 +6,18 @@
 #include "Player.h"
 #include "EntityManager.h"
 #include "Audio.h"
+#include"Map.h"
 #include "Render.h"
 
 Entity::Entity(int x, int y) : position(x, y)
 {
-
+	counter = false;
+	numCounter = 0;
 }
 
 Entity::~Entity()
 {
-	/*
-	if (collider != nullptr) {
-		collider->pendingToDelete = true;
-	}
-	if (collider1 != nullptr) {
-		collider1->pendingToDelete = true;
-	}
-	*/
+	
 }
 
 /*const Collider* Enem::GetCollider() const
@@ -31,15 +26,71 @@ Entity::~Entity()
 }*/
 void Entity::Update()
 {
+	
+	if (type == EntityTipe::EnemyAir || type == EntityTipe::EnemyGround) {
+		numCounter++;
+		//app->player->HasThePlayerMove()==true
+		if (numCounter %5==0)
+		{	
+			path.ResetPath();
+			//hacer reset path
+			path.start = app->map->WorldToMap(position.x, position.y);
 
+			path.goal = app->map->WorldToMap(app->player->Position.x+40, app->player->Position.y);
+			path.frontier.Push(path.start);
+			path.visited.Add(path.start);
+			if (path.PropagateAStar() == true) 
+			{
+				counter = true;
+			}
+			else 
+			{
+				counter = false;
+			}
+			
+		}
+		if (counter == true) {
+			iPoint nextTile;
+			ListItem<iPoint>* auxiliar;
+			iPoint positionn = app->map->WorldToMap(position.x, position.y);
+			auxiliar = path.finalPath.end;
+			while (auxiliar != nullptr)
+			{
+				if (auxiliar->data == positionn)
+				{
+					nextTile = auxiliar->prev->data;
+					break;
+				}
+				else
+				{
+					auxiliar = auxiliar->prev;
+				}
+
+			}
+			if (app->map->numberToMap(position.x) < nextTile.x)
+			{
+
+				position.x += 5;
+			}
+			else if (app->map->numberToMap(position.x) > nextTile.x)
+			{
+				position.x -= 5;
+			}
+			if (app->map->numberToMap(position.y) < nextTile.y)
+			{
+				position.y += 5;
+			}
+			else if (app->map->numberToMap(position.y) > nextTile.y)
+			{
+				position.y -= 5;
+			}
+			counter = false;
+		}
+	}
 }
 
 void Entity::Draw()
 {
-
-	/*SDL_Rect rect = currentAnim->GetCurrentFrame();
-	app->render->DrawTexture(airEnemiesTexture, position.x, position.y,&rect);
-	app->render->DrawTexture(groundEnemiesTexture, position.x, position.y, &rect);*/
 }
 
 void Entity::OnCollision(Collider* collideri, Collider* collidere)
@@ -72,14 +123,4 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 
 void Entity::destr()
 {
-	/*
-	if (collider != nullptr) {
-		collider->pendingToDelete = true;
-	}
-	if (collider1 != nullptr) {
-		collider1->pendingToDelete = true;
-
-	}
-	pendientedeelim = true;
-	*/
 }

@@ -115,104 +115,36 @@ bool Scene::PreUpdate()
 	
 	return true;
 }
-//collisionPosition collisions::getCollision(position positionChek,SDL_Rect rect,int id)
+
+//bool collisions::checkIfCollision(int id, position positionToChek)
 //{
-//	/*bool chekResult;
-//	collisionPosition positionCollision = collisionPosition::null;
-//	position relativePosition;
-//	for (int a = 1; a < 4; a++) 
+//	bool result = false;
+//	int idChek;
+//	position numTilesMap;
+//	position tilePosition;
+//	/*numTilesMap.x = app->map->data.tilesets.start->data->numTilesWidth * app->map->data.tilesets.start->data->tileWidth;
+//	numTilesMap.y = app->map->data.tilesets.start->data->numTilesHeight * app->map->data.tilesets.start->data->tileHeight;*/
+//	numTilesMap.x = app->map->data.tilesets.start->data->tileWidth;
+//	numTilesMap.y = app->map->data.tilesets.start->data->tileHeight;
+//	tilePosition.x = positionToChek.x /numTilesMap.x ;
+//	tilePosition.y = positionToChek.y /numTilesMap.y ;
+//	ListItem<MapLayer*>* list1;
+//	
+//	for (list1 = app->map->data.layers.start; list1 != nullptr; list1=list1->next) 
 //	{
-//		switch (a)
+//		if (list1->data->name == "colisions") 
 //		{
-//		case 1:
-//			relativePosition.x = positionChek.x + (rect.w);
-//			relativePosition.y = positionChek.y + (rect.h / 2);
-//			chekResult = checkIfCollision(id, relativePosition);
-//			if (chekResult == true)
+//			idChek=list1->data->Get(tilePosition.x, tilePosition.y);
+//
+//			if (idChek == id) 
 //			{
-//				positionCollision = collisionPosition::right;
+//				result = true;
+//				return result;
 //			}
-//			break;
-//		case 2:
-//			relativePosition.x = positionChek.x + (rect.w / 2);
-//			relativePosition.y = positionChek.y + rect.h;
-//			chekResult = checkIfCollision(id, relativePosition);
-//			if ((chekResult == true)&& (positionCollision == collisionPosition::right))
-//			{
-//				positionCollision = collisionPosition::downAndRight;
-//			}
-//			else if(chekResult == true)
-//			{
-//				positionCollision = collisionPosition::down;
-//			}
-//			else if (positionCollision == collisionPosition::right)
-//			{
-//				positionCollision = collisionPosition::right;
-//			}
-//			else 
-//			{
-//				positionCollision = collisionPosition::null;
-//			}
-//			break;
-//		case 3:
-//			relativePosition.x = positionChek.x;
-//			relativePosition.y = positionChek.y + (rect.h / 2);
-//			chekResult = checkIfCollision(id, relativePosition);
-//			if (chekResult == true && positionCollision == collisionPosition::down)
-//			{
-//				positionCollision = collisionPosition::downAndLeft;
-//			}
-//			else if(chekResult == true)
-//			{
-//				positionCollision = collisionPosition::left;
-//			}
-//			else if(positionCollision == collisionPosition::down)
-//			{
-//				positionCollision = collisionPosition::down;
-//			}
-//			else if(positionCollision == collisionPosition::right)
-//			{
-//				positionCollision = collisionPosition::right;
-//			}
-//			else 
-//			{
-//				positionCollision = collisionPosition::null;
-//			}
-//			break;
 //		}
 //	}
-//	
-//	return positionCollision;*/
+//	return result;
 //}
-bool collisions::checkIfCollision(int id, position positionToChek)
-{
-	bool result = false;
-	int idChek;
-	position numTilesMap;
-	position tilePosition;
-	/*numTilesMap.x = app->map->data.tilesets.start->data->numTilesWidth * app->map->data.tilesets.start->data->tileWidth;
-	numTilesMap.y = app->map->data.tilesets.start->data->numTilesHeight * app->map->data.tilesets.start->data->tileHeight;*/
-	numTilesMap.x = app->map->data.tilesets.start->data->tileWidth;
-	numTilesMap.y = app->map->data.tilesets.start->data->tileHeight;
-	tilePosition.x = positionToChek.x /numTilesMap.x ;
-	tilePosition.y = positionToChek.y /numTilesMap.y ;
-	ListItem<MapLayer*>* list1;
-	
-	for (list1 = app->map->data.layers.start; list1 != nullptr; list1=list1->next) 
-	{
-		if (list1->data->name == "colisions") 
-		{
-			idChek=list1->data->Get(tilePosition.x, tilePosition.y);
-
-			if (idChek == id) 
-			{
-				result = true;
-				return result;
-			}
-		}
-	}
-	return result;
-}
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
@@ -290,48 +222,48 @@ bool Scene::Update(float dt)
 	app->render->DrawTexture(bg_snow, 10800/2, 0);
 	app->map->Draw();
 
-	if (app->input->GetMouseButtonDown(1) == KEY_DOWN)
-	{
-		app->input->GetMousePosition(app->map->goal.x, app->map->goal.y);
-		app->map->goal.x -= app->render->camera.x;
-		app->map->goal.y -= app->render->camera.y;
-		app->map->goal = app->map->WorldToMap(app->map->goal.x, app->map->goal.y);
-	}
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
-	{
-		if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
-		{
-			app->map->PropagateBFS();
-			//app->map->DrawPath();
-		}
-	}
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-	{
-		if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
-		{
-			app->map->PropagateAStar();
-			//app->map->DrawPath();
-		}
-	}
-	// L03: DONE 7: Set the window title with map/tileset info
-	if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
-	{
-		TileSet* tileset = app->map->GetTilesetFromTileId(62);
+	//if (app->input->GetMouseButtonDown(1) == KEY_DOWN)
+	//{
+	//	app->input->GetMousePosition(app->map->goal.x, app->map->goal.y);
+	//	app->map->goal.x -= app->render->camera.x;
+	//	app->map->goal.y -= app->render->camera.y;
+	//	app->map->goal = app->map->WorldToMap(app->map->goal.x, app->map->goal.y);
+	//}
+	//if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	//{
+	//	if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
+	//	{
+	//		app->map->PropagateBFS();
+	//		//app->map->DrawPath();
+	//	}
+	//}
+	//if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+	//{
+	//	if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
+	//	{
+	//		app->map->PropagateAStar();
+	//		//app->map->DrawPath();
+	//	}
+	//}
+	//// L03: DONE 7: Set the window title with map/tileset info
+	//if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
+	//{
+	//	TileSet* tileset = app->map->GetTilesetFromTileId(62);
 
-		SDL_Rect rec = tileset->GetTileRect(62);
-		iPoint pos = app->map->MapToWorld(app->map->goal.x, app->map->goal.y);
+	//	SDL_Rect rec = tileset->GetTileRect(62);
+	//	iPoint pos = app->map->MapToWorld(app->map->goal.x, app->map->goal.y);
 
-		app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
-		app->map->DrawPath();
-	}
-	// L03: DONE 7: Set the window title with map/tileset info
-	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
-	{
-		app->map->goal.x = -1;
-		app->map->goal.y = -1;
-		app->map->ResetPath();
-		app->map->finalPath.Clear();
-	}
+	//	app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+	//	app->map->DrawPath();
+	//}
+	//// L03: DONE 7: Set the window title with map/tileset info
+	//if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	//{
+	//	app->map->goal.x = -1;
+	//	app->map->goal.y = -1;
+	//	app->map->ResetPath();
+	//	app->map->finalPath.Clear();
+	//}
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 		app->map->data.width, app->map->data.height,
 		app->map->data.tileWidth, app->map->data.tileHeight,
