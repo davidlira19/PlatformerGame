@@ -26,7 +26,7 @@ void Audio::Unload()
 {
 	if (music != NULL)
 	{
-		//Mix_FreeMusic(music);
+		Mix_FreeMusic(music);
 	}
 	ListItem<Mix_Chunk*>* item;
 	for (item = fx.start; item != NULL; item = item->next) 
@@ -34,7 +34,7 @@ void Audio::Unload()
 		Mix_FreeChunk(item->data);
 	}
 	fx.Clear();
-	//Mix_CloseAudio();
+	Mix_CloseAudio();
 }
 // Called before render is available
 bool Audio::Awake(pugi::xml_node& config)
