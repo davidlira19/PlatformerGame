@@ -56,7 +56,7 @@ public:
 	bool counter;
 	int numCounter;
 	bool deadZ;
-
+	bool left;
 	unsigned int birdFx;
 protected:
 

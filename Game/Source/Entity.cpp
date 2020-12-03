@@ -13,7 +13,7 @@ Entity::Entity(int x, int y) : position(x, y)
 {
 	counter = false;
 	numCounter = 0;
-
+	left = true;
 	birdFx = app->audio->LoadFx("Assets/audio/fx/fall.wav");
 }
 
@@ -55,6 +55,7 @@ void Entity::Update()
 
 			}
 			if (path.ExistPath() == true) {
+				path.DrawPath();
 				iPoint nextTile;
 				ListItem<iPoint>* auxiliar;
 				iPoint positionn = app->map->WorldToMap(position.x, position.y);
@@ -77,22 +78,72 @@ void Entity::Update()
 				}
 				if (deadZ == false)
 				{
-					if (app->map->numberToMap(position.x) < nextTile.x)
+					if (type == EntityTipe::EnemyGround)
 					{
+						if (((app->player->Position.y > position.y - 64) || (app->player->Position.y < position.y + 64)) &&(app->player->Position.x < position.x + 200)  && app->map->numberToMap(position.x) < nextTile.x )
+						{
+							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64) 
+							{
+								position.x += 2;
+							}
+							
+						}
+						else if (((app->player->Position.y > position.y - 64) || (app->player->Position.y < position.y + 64)) && (app->player->Position.x > position.x - 200) && app->map->numberToMap(position.x) > nextTile.x )
+						{
+							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64) 
+							{
+								position.x -= 2;
+							}
+							
+						}
+						else 
+						{
+							if (left == true)
+							{
+								if (app->map->GetTileIdFromPosition(((position.x-10)/64) , position.y/64, "collisions") == 64)
+								{
+									position.x -= 1;
+								}
+								else
+								{
+									left = false;
+								}
+							}
+							else 
+							{
+								if (app->map->GetTileIdFromPosition(((position.x +30)/64), position.y/64, "collisions") == 64)
+								{
+									position.x += 1;
+								}
+								else 
+								{
+									left = true;
+								}
+							}		
+						}
+						
+				
+					}
+					if (type == EntityTipe::EnemyAir)
+					{
+						if (app->map->numberToMap(position.x) < nextTile.x )
+						{
 
-						position.x += 2;
-					}
-					else if (app->map->numberToMap(position.x) > nextTile.x)
-					{
-						position.x -= 2;
-					}
-					if (app->map->numberToMap(position.y) < nextTile.y)
-					{
-						position.y += 2;
-					}
-					else if (app->map->numberToMap(position.y) > nextTile.y)
-					{
-						position.y -= 2;
+							position.x += 2;
+						}
+						else if (app->map->numberToMap(position.x) > nextTile.x)
+						{
+							position.x -= 2;
+						}
+
+						if (app->map->numberToMap(position.y) < nextTile.y)
+						{
+							position.y += 2;
+						}
+						else if (app->map->numberToMap(position.y) > nextTile.y)
+						{
+							position.y -= 2;
+						}
 					}
 					counter = false;
 				}

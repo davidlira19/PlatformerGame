@@ -2,9 +2,10 @@
 #include"App.h"
 #include"Map.h"
 #include"Render.h"
+#include"Input.h"
 PathFinding::PathFinding() 
 {
-
+	draw = false;
 }
 PathFinding::~PathFinding()
 {
@@ -57,7 +58,7 @@ bool PathFinding::PropagateAStar()
 		{
 			break;
 		}
-		minimum = tileValue.start->data.x + tileValue.start->data.y;
+ 		minimum = tileValue.start->data.x + tileValue.start->data.y;
 		secondAuxiliar = frontierr.start;
 		selected = nullptr;
 		auxiliar = tileValue.start;
@@ -145,9 +146,9 @@ bool PathFinding::IsWalkable(int x, int y) const
 }
 void PathFinding::DrawPath()
 {
-	//iPoint point;
+	iPoint point;
 
-	//// Draw visited
+	// Draw visited
 	//ListItem<iPoint>* item = visited.start;
 
 	//while (item)
@@ -158,7 +159,7 @@ void PathFinding::DrawPath()
 	//	SDL_Rect rec = tileset->GetTileRect(61);
 	//	iPoint pos = app->map->MapToWorld(point.x, point.y);
 	//	tileset = app->map->data.tilesets.start->data;
-	//	app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+	//	app->render->DrawTexture(tileset->textureTile, pos.x, pos.y, &rec);
 
 	//	item = item->next;
 	//}
@@ -172,24 +173,38 @@ void PathFinding::DrawPath()
 	//	SDL_Rect rec = tileset->GetTileRect(62);
 	//	iPoint pos = app->map->MapToWorld(point.x, point.y);
 
-	//	app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+	//	app->render->DrawTexture(tileset->textureTile, pos.x, pos.y, &rec);
 	//}
 
-	////draw final path
-	//ListItem<iPoint>* auxiliarItem = finalPath.start;
+	//draw final path
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) 
+	{
+		if (draw == true) 
+		{
+			draw = false;
+		}
+		else 
+		{
+			draw = true;
+		}
+	}
+	if (draw == true)
+	{
+		ListItem<iPoint>* auxiliarItem = finalPath.start;
 
-	//while (auxiliarItem)
-	//{
-	//	point = auxiliarItem->data;
-	//	TileSet* tileset = app->map->GetTilesetFromTileId(25);
+		while (auxiliarItem)
+		{
+			point = auxiliarItem->data;
+			TileSet* tileset = app->map->GetTilesetFromTileId(25);
 
-	//	SDL_Rect rec = tileset->GetTileRect(25);
-	//	iPoint pos = app->map->MapToWorld(point.x, point.y);
+			SDL_Rect rec = tileset->GetTileRect(25);
+			iPoint pos = app->map->MapToWorld(point.x, point.y);
 
-	//	app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+			app->render->DrawTexture(tileset->textureTile, pos.x, pos.y, &rec);
 
-	//	auxiliarItem = auxiliarItem->next;
-	//}
+			auxiliarItem = auxiliarItem->next;
+		}
+	}
 
 }
 void PathFinding::ResetPath()

@@ -149,7 +149,7 @@ bool Player::Start()
 	aceleration = 13.0f;
 	velocity = 0;
 
-	collider = { Position.x, Position.y, 42, 76 };
+	//collider = { Position.x, Position.y, 42, 76 };
 	SDL_Rect rect = { Position.x, Position.y, 43, 5 };
 	playerCollider = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
 	rect = { Position.x, Position.y, 5, 74 };

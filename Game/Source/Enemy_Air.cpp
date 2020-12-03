@@ -25,8 +25,8 @@ EnemyAir::~EnemyAir()
 }
 void EnemyAir::Update()
 {
-	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y);
-	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y+6);
+	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y-60);
+	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y-54);
 	
 	currentAnim->Update();
 
@@ -36,7 +36,7 @@ void EnemyAir::Draw()
 {
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
-	app->render->DrawTexture(airEnemiesTexture, position.x, position.y, &rect);
+	app->render->DrawTexture(airEnemiesTexture, position.x, position.y-60, &rect);
 
 	if (app->entity->drawItems == true)
 	{

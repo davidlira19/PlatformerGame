@@ -74,8 +74,8 @@ EnemyGround::~EnemyGround()
 }
 void EnemyGround::Update()
 {
-	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y);
-	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y + 6);
+	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y - 20);
+	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y + 6 - 20);
 
 	if (left == true)
 	{
@@ -113,7 +113,7 @@ void EnemyGround::Draw()
 {
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
-	app->render->DrawTexture(groundEnemiesTexture, position.x, position.y, &rect);
+	app->render->DrawTexture(groundEnemiesTexture, position.x, position.y-20, &rect);
 
 	if (app->entity->drawItems == true)
 	{
