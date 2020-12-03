@@ -1,6 +1,6 @@
 #include "Collider.h"
-#include"App.h"
-#include"Player.h"
+#include "App.h"
+#include "Player.h"
 Collider::Collider(SDL_Rect rectangle, Type type, Module* listener) : rect(rectangle), type(type), listener(listener)
 {
 	

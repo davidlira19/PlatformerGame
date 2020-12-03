@@ -6,6 +6,7 @@
 #include"Animation.h"
 #include"Module.h"
 #include "Scene.h"
+#include "Scene2.h"
 struct SDL_Rect;
 struct SDL_Texture;
 struct SDL_Renderer;

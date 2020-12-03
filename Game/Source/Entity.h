@@ -2,10 +2,10 @@
 #define __ENTITY_H__
 #include "Point.h"
 #include "Animation.h"
-#include"Textures.h"
-#include"Collider.h"
-#include"PathFinding.h"
-#include"Render.h"
+#include "Textures.h"
+#include "Collider.h"
+#include "PathFinding.h"
+#include "Render.h"
 enum class EntityTipe
 {
 	NO_TYPE,

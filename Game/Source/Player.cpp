@@ -135,8 +135,6 @@ bool Player::Start()
 	lifeFx = app->audio->LoadFx("Assets/audio/fx/life.wav");
 	checkpointFx = app->audio->LoadFx("Assets/audio/fx/checkpoint.wav");
 	LifesTex = app->tex->Load("Assets/textures/lifes.png");
-	//SET POSITION
-	Position.x = 2300 / 2; Position.y = 500 / 2;
 	//2300
 	currentAnimation = &StopRight;
 	//INITIALIZE VARIABLES
@@ -186,8 +184,8 @@ bool Player::Update(float dt)
 		Position.x = 4900;
 		Position.y = 563;
 	}
-	playerCollider->SetPos(Position.x+app->render->camera.x+43, Position.y+app->render->camera.y+76);
-	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y-2);
+	playerCollider->SetPos(Position.x+app->render->camera.x + 43, Position.y+app->render->camera.y + 76);
+	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y - 2);
 	playerLeft->SetPos(Position.x + app->render->camera.x + 40, Position.y + app->render->camera.y - 2);
 	if (godMode == false)
 	{
@@ -250,15 +248,7 @@ bool Player::Update(float dt)
 			Position.y -= 4;
 		}*/
 	}
-	//CONDITIONS TO WIN - LOSE
-	if (Position.y  >= 1602 / 2)
-	{
-		Dead = true;
-	}
-	if (Position.x >= 11350 / 2)
-	{
-		Win = true;
-	}
+
 
 	///////////
 	

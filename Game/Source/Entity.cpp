@@ -1,12 +1,12 @@
 #include "Entity.h"
-#include"Textures.h"
+#include "Textures.h"
 #include "App.h"
 //#include "Collisions.h"
 //#include "ModuleParticles.h"
 #include "Player.h"
 #include "EntityManager.h"
 #include "Audio.h"
-#include"Map.h"
+#include "Map.h"
 #include "Render.h"
 
 Entity::Entity(int x, int y) : position(x, y)

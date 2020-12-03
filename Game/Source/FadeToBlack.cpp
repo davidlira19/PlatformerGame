@@ -1,9 +1,9 @@
 #include "App.h"
-#include"FadeToBlack.h"
+#include "FadeToBlack.h"
 #include "Log.h"
 #include "SDL/include/SDL_render.h"
-#include"Render.h"
-#include"Window.h"
+#include "Render.h"
+#include "Window.h"
 ModuleFadeToBlack::ModuleFadeToBlack(bool startEnabled) : Module(startEnabled)
 {
 	screenRect = { 0, 0, 1280,720 };
