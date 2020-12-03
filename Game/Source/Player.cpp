@@ -52,7 +52,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	DeadRight.PushBack({ 541 / 2,327 / 2,270 / 2,156 / 2 });
 
 	DeadRight.speed = 0.2f;
-	DeadRight.loop = true;
+	DeadRight.loop = false;
 
 	//ANIMATION WHEN SANTA IS RUNNING RIGHT
 	RunRight.PushBack({ 1 / 2,1407 / 2,260 / 2,156 / 2 });
@@ -102,7 +102,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	DeadLeft.PushBack({ 1621 / 2,327 / 2,270 / 2,156 / 2 });
 
 	DeadLeft.speed = 0.2f;
-	DeadLeft.loop = true;
+	DeadLeft.loop = false;
 
 	//ANIMATION WHEN SANTA IS RUNNING LEFT
 	RunLeft.PushBack({ 2431 / 2,1407 / 2,260 / 2,156 / 2 });
@@ -168,7 +168,6 @@ bool Player::Start()
 //}
 bool Player::Update(float dt)
 {
-	//270, 156
 	//updatePosition();
 	if (Position.x>=2610 && Position.x <= 2620)
 	{
@@ -388,6 +387,12 @@ bool Player::Update(float dt)
 		}
 		
 	}
+	if ((currentAnimation == &DeadRight || currentAnimation == &DeadLeft) && currentAnimation->HasFinished() == true)
+	{
+		Dead = false;
+		app->fade->FadeToBlack(this, (Module*)app->dead, 50);
+	}
+	currentAnimation->Update();
 	return true;
 }
 bool Player::PostUpdate() 
@@ -432,11 +437,19 @@ bool Player::PostUpdate()
 		}
 		if (lifes == 0)
 		{
-			app->fade->FadeToBlack(this, (Module*)app->dead, 50);
-			Dead = false;
+			if (currentAnimation == &RunRight || currentAnimation == &StopRight || currentAnimation == &JumpRight)
+			{
+				currentAnimation = &DeadRight;
+			}
+			else if (currentAnimation == &RunLeft || currentAnimation == &StopLeft || currentAnimation == &JumpLeft)
+			{
+				currentAnimation = &DeadLeft;
+			}
 			canMove = false;
+			
 		}
 	}
+	
 	if (Win == true)
 	{
 		/*canMove = false;
