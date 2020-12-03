@@ -83,7 +83,14 @@ struct MapLayer
 	// L04: DONE 6: Short function to get the value of x,y
 	inline uint Get(int x, int y) const
 	{
-		return data[(y * width) + x];
+		if (y > 0 && x > 0) 
+		{
+			return data[(y * width) + x];
+		}
+		else 
+		{
+			return 0;
+		}	
 	}
 };
 

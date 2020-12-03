@@ -435,7 +435,7 @@ bool Player::PostUpdate()
 			lifes--;
 			app->LoadGameRequest("save_game.xml");
 		}
-		if (lifes == 0)
+		if (lifes <= 0)
 		{
 			if (currentAnimation == &RunRight || currentAnimation == &StopRight || currentAnimation == &JumpRight)
 			{
