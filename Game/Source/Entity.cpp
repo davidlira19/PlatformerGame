@@ -13,6 +13,8 @@ Entity::Entity(int x, int y) : position(x, y)
 {
 	counter = false;
 	numCounter = 0;
+
+	birdFx = app->audio->LoadFx("Assets/audio/fx/fall.wav");
 }
 
 Entity::~Entity()
@@ -73,24 +75,27 @@ void Entity::Update()
 					}
 
 				}
-				if (app->map->numberToMap(position.x) < nextTile.x)
+				if (deadZ == false)
 				{
+					if (app->map->numberToMap(position.x) < nextTile.x)
+					{
 
-					position.x += 2;
+						position.x += 2;
+					}
+					else if (app->map->numberToMap(position.x) > nextTile.x)
+					{
+						position.x -= 2;
+					}
+					if (app->map->numberToMap(position.y) < nextTile.y)
+					{
+						position.y += 2;
+					}
+					else if (app->map->numberToMap(position.y) > nextTile.y)
+					{
+						position.y -= 2;
+					}
+					counter = false;
 				}
-				else if (app->map->numberToMap(position.x) > nextTile.x)
-				{
-					position.x -= 2;
-				}
-				if (app->map->numberToMap(position.y) < nextTile.y)
-				{
-					position.y += 2;
-				}
-				else if (app->map->numberToMap(position.y) > nextTile.y)
-				{
-					position.y -= 2;
-				}
-				counter = false;
 			}
 		}
 	}
@@ -108,6 +113,7 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 		{
 			if (type == EntityTipe::EnemyAir)
 			{
+				app->audio->PlayFx(birdFx);
 				app->player->points += 300;
 			}
 			pendientedeelim = true;

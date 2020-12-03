@@ -12,6 +12,7 @@
 #include"FadeToBlack.h"
 #include"Dead.h"
 #include"Collisions.h"
+#include "EntityManager.h"
 Player::Player(bool startEnabled) : Module(startEnabled)
 {
 	//ANIMATION WHEN SANTA IS NOT MOVING RIGHT
@@ -601,7 +602,19 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			}
 			else if (c2->type == Collider::ENEMY2)
 			{
-				Dead = true;
+				ListItem<Entity*>* aux = app->entity->entityList.start;
+				while (aux != nullptr)
+				{
+					if (aux->data->collider == c2)
+					{
+						if (aux->data->deadZ == true) {}
+						else
+						{
+							Dead = true;
+						}
+					}
+					aux = aux->next;
+				}
 
 			}
 			else if (c2->type == Collider::COIN)
@@ -644,7 +657,19 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			}
 			else if (c2->type == Collider::ENEMY2)
 			{
-				Dead = true;
+				ListItem<Entity*>* aux = app->entity->entityList.start;
+				while (aux != nullptr)
+				{
+					if (aux->data->collider == c2)
+					{
+						if (aux->data->deadZ == true) {}
+						else
+						{
+							Dead = true;
+						}
+					}
+					aux = aux->next;
+				}
 			}
 			else if (c2->type == Collider::COIN)
 			{
