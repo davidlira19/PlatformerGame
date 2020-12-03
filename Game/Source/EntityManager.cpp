@@ -96,6 +96,7 @@ bool EntityManager::CleanUp()
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
 	while (listItem != nullptr) {
+		listItem->data->path.ResetPath();
 		delete listItem->data;	
 		listItem = listItem->next;
 	}

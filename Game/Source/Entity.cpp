@@ -35,7 +35,15 @@ void Entity::Update()
 			{
 				path.ResetPath();
 				//hacer reset path
-				path.start = app->map->WorldToMap(position.x, position.y);
+				if (type == EntityTipe::EnemyAir) 
+				{
+					path.start = app->map->WorldToMap(position.x, position.y);
+				}
+				else 
+				{
+					path.start = app->map->WorldToMap(position.x, position.y);
+				}
+				
 
 				path.goal = app->map->WorldToMap(app->player->Position.x + 40, app->player->Position.y);
 				path.frontier.Push(path.start);

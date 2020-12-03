@@ -43,7 +43,7 @@ bool Scene2::Start()
 	app->render->camera.y = 0;
 	//Player position
 	app->player->Position.x = 600;
-	app->player->Position.y = 0;
+	app->player->Position.y = 100;
 	//Load Texture
 	bg_snow = app->tex->Load("Assets/textures/snow_background.png");
 	//app->player->Enable();
