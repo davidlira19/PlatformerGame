@@ -61,8 +61,8 @@ public:
 	void HandleEnemiesDespawn();
 	
 	bool drawItems;
-private:
 	List<Entity*>entityList;
+private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
 	SDL_Texture* birdTexture;

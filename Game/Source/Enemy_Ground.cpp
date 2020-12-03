@@ -4,6 +4,7 @@
 #include "EntityManager.h"
 #include "Collisions.h"
 #include "Player.h"
+#include "Audio.h"
 
 
 EnemyGround::EnemyGround(int x, int y) : Entity(x, y)
@@ -64,7 +65,7 @@ EnemyGround::EnemyGround(int x, int y) : Entity(x, y)
 	playerWin = app->collisions->AddCollider({ 0, 0, 48, 4 }, Collider::ENEMY1, (Module*)app->entity);
 	collider = app->collisions->AddCollider({ 0, 6, 48, 77 }, Collider::ENEMY2, (Module*)app->entity);
 
-
+	zombieFx = app->audio->LoadFx("Assets/audio/fx/zombie_pain.wav");
 }
 EnemyGround::~EnemyGround()
 {
@@ -99,6 +100,11 @@ void EnemyGround::Update()
 		}
 	}
 
+	if ((currentAnim == &zombieDeadLeft || currentAnim == &zombieDeadRight) && currentAnim->HasFinished() == true)
+	{
+		pendientedeelim = true;
+		cont = 0;
+	}
 	currentAnim->Update();
 
 	Entity::Update();
@@ -128,10 +134,13 @@ void EnemyGround::OnCollision(Collider* collideri, Collider* collidere)
 			if (type == EntityTipe::EnemyGround)
 			{
 				deadZ = true;
-				app->player->points += 200;
+				if (cont == 0)
+				{
+					app->audio->PlayFx(zombieFx);
+					app->player->points += 200;
+				}
+				cont = 1;
 			}
-			pendientedeelim = true;
 		}
-
 	}
 }

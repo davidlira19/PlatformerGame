@@ -55,6 +55,9 @@ public:
 	PathFinding path;
 	bool counter;
 	int numCounter;
+	bool deadZ;
+
+	unsigned int birdFx;
 protected:
 
 	// A ptr to the current animation
