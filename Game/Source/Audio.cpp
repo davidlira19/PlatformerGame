@@ -107,7 +107,7 @@ bool Audio::CleanUp()
 
 	if(music != NULL)
 	{
-		//Mix_FreeMusic(music);
+		Mix_FreeMusic(music);
 	}
 
 	ListItem<Mix_Chunk*>* item;
@@ -143,7 +143,7 @@ bool Audio::PlayMusic(const char* path, float fade_time)
 		}
 
 		// this call blocks until fade out is done
-		//Mix_FreeMusic(music);
+		Mix_FreeMusic(music);
 	}
 
 	music = Mix_LoadMUS(path);
