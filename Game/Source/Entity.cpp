@@ -102,10 +102,6 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 			{
 				app->player->points += 300;
 			}
-			if (type == EntityTipe::EnemyGround)
-			{
-				app->player->points += 200;
-			}
 			pendientedeelim = true;
 		}
 		

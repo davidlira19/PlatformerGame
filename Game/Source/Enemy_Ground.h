@@ -1,6 +1,6 @@
 #ifndef __ENEMY_GROUND_H__
 #define __ENEMY_GROUND_H__
-#include "Animation.h"
+#include"Animation.h"
 #include "Entity.h"
 class EnemyGround : public Entity
 {
@@ -13,12 +13,20 @@ public:
 	// The enemy is going to perform a sinusoidal movement
 	void Update();
 	void Draw();
+	void OnCollision(Collider* collideri, Collider* collidere);
+
+	bool left;
+	bool deadZ;
 
 private:
 	// The position (as ratio) in the wave at a specific moment
 
 	// The enemy animation
 	Animation zombieMoveLeft;
+	Animation zombieMoveRight;
+	Animation zombieDeadLeft;
+	Animation zombieDeadRight;
+
 
 };
 
