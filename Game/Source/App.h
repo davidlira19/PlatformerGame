@@ -22,6 +22,7 @@ class Audio;
 class Player;
 class EntityManager;
 class Scene;
+class Scene2;
 class Map;
 class ModuleFadeToBlack;
 class Intro;
@@ -96,6 +97,7 @@ public:
 	Player* player;
 	EntityManager* entity;
 	Scene* scene;
+	Scene2* scene2;
 	Map* map;
 	ModuleFadeToBlack* fade;
 	Intro* intro;

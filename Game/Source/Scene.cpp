@@ -51,7 +51,7 @@ bool Scene::Start()
 	{
 		for (int x =0 ; x < app->map->data.tilesets.start->data->numTilesWidth; x++)
 		{
-			if (app->map->GetTileIdFromPosition(x, y, "colisions") == 61)
+			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 61)
 			{
 				
 				rect = { x* app->map->data.tilesets.start->data->tileWidth ,y* app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
@@ -59,13 +59,13 @@ bool Scene::Start()
 				colliders.Add(app->collisions->AddCollider(rect, Collider::FLOOR));
 				
 			}
-			if (app->map->GetTileIdFromPosition(x, y, "colisions") == 62) 
+			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 62) 
 			{
 				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
 
 				colliders.Add(app->collisions->AddCollider(rect, Collider::WALL));
 			}
-			if (app->map->GetTileIdFromPosition(x, y, "colisions") == 63)
+			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 63)
 			{
 				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
 				colliders.Add(app->collisions->AddCollider(rect, Collider::CHECKPOINT,(Module*)app->player));
@@ -102,7 +102,7 @@ bool Scene::PreUpdate()
 		for (int x = 0; x < app->map->data.tilesets.start->data->numTilesWidth; x++)
 		{
 			
-			if ((app->map->GetTileIdFromPosition(x, y, "colisions") == 61 || app->map->GetTileIdFromPosition(x, y, "colisions") == 62) || app->map->GetTileIdFromPosition(x, y, "colisions") == 63 && auxiliar!=NULL)
+			if ((app->map->GetTileIdFromPosition(x, y, "collisions") == 61 || app->map->GetTileIdFromPosition(x, y, "collisions") == 62) || app->map->GetTileIdFromPosition(x, y, "collisions") == 63 && auxiliar!=NULL)
 			{		
 				auxiliar->data->SetPos(x * app->map->data.tilesets.start->data->tileWidth+app->render->camera.x, y * app->map->data.tilesets.start->data->tileHeight + app->render->camera.y);
 					
@@ -132,7 +132,7 @@ bool Scene::PreUpdate()
 //	
 //	for (list1 = app->map->data.layers.start; list1 != nullptr; list1=list1->next) 
 //	{
-//		if (list1->data->name == "colisions") 
+//		if (list1->data->name == "collisions") 
 //		{
 //			idChek=list1->data->Get(tilePosition.x, tilePosition.y);
 //

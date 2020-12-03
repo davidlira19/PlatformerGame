@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="110" height="23" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="1">
  <editorsettings>
-  <export format="tmx"/>
+  <export target="." format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" name="snow_tileset" tilewidth="64" tileheight="64" tilecount="60" columns="10">
-  <image source="PlatformerGame/Output/Assets/maps/snow_tileset.png" width="640" height="384"/>
+  <image source="snow_tileset.png" width="640" height="384"/>
  </tileset>
  <tileset firstgid="61" name="colisiones" tilewidth="64" tileheight="64" tilecount="3" columns="3">
-  <image source="PlatformerGame/Output/Assets/maps/colisions.png" width="192" height="64"/>
+  <image source="collisions.png" width="192" height="64"/>
  </tileset>
  <layer id="1" name="Cueva" width="110" height="23">
   <data>
@@ -7611,7 +7611,7 @@
    <tile gid="5"/>
   </data>
  </layer>
- <layer id="5" name="colisions" width="110" height="23">
+ <layer id="5" name="collisions" width="110" height="23">
   <properties>
    <property name="draw" type="int" value="1"/>
    <property name="navegation" type="int" value="1"/>

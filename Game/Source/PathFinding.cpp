@@ -134,7 +134,7 @@ bool PathFinding::IsWalkable(int x, int y) const
 
 	bool ret = false;
 
-	if ((x < app->map->data.tilesets.start->data->numTilesWidth && x > 0) && (y < app->map->data.tilesets.start->data->numTilesHeight && y > 0) && (app->map->GetTileIdFromPosition(x, y, "colisions") != 61) && (app->map->GetTileIdFromPosition(x, y, "colisions") != 62))
+	if ((x < app->map->data.tilesets.start->data->numTilesWidth && x > 0) && (y < app->map->data.tilesets.start->data->numTilesHeight && y > 0) && (app->map->GetTileIdFromPosition(x, y, "collisions") != 61) && (app->map->GetTileIdFromPosition(x, y, "collisions") != 62))
 	{
 		//&& data.tilesets.start->data->firstgid == 0
 		ret = true;

@@ -7,15 +7,16 @@
 #include "Player.h"
 #include "EntityManager.h"
 #include "Scene.h"
-#include"Intro.h"
+#include "Scene2.h"
+#include "Intro.h"
 #include "Map.h"
-#include"FadeToBlack.h"
+#include "FadeToBlack.h"
 #include "Defs.h"
 #include "Log.h"
-#include"Wellcome.h"
-#include"Dead.h"
-#include"Win.h"
-#include"Collisions.h"
+#include "Wellcome.h"
+#include "Dead.h"
+#include "Win.h"
+#include "Collisions.h"
 #include <iostream>
 #include <sstream>
 
@@ -33,6 +34,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	player = new Player(false);
 	entity = new EntityManager(false);
 	scene = new Scene(false);
+	scene2 = new Scene2(false);
 	map = new Map(false);
 	fade = new ModuleFadeToBlack(true);
 	intro = new Intro(true);
@@ -55,6 +57,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	AddModule(entity);
 	AddModule(scene);
+	AddModule(scene2);
 	AddModule(map);
 	AddModule(collisions);
 	// Render last to swap buffer

@@ -6,7 +6,7 @@
 struct SDL_Texture;
 class position;
 
-class collisions 
+class collisions
 {
 public:
 	collisionPosition getCollision(position positionChek,SDL_Rect rect,int id);

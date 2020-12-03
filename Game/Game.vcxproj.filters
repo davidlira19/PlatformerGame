@@ -29,6 +29,7 @@
     <ClCompile Include="Source\Coin.cpp" />
     <ClCompile Include="Source\Hearth.cpp" />
     <ClCompile Include="Source\PathFinding.cpp" />
+    <ClCompile Include="Source\Scene2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -95,6 +96,7 @@
     <ClInclude Include="Source\Coin.h" />
     <ClInclude Include="Source\Hearth.h" />
     <ClInclude Include="Source\PathFinding.h" />
+    <ClInclude Include="Source\Scene2.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
