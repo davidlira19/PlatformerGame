@@ -41,6 +41,7 @@ bool Scene::Start()
 	//Load Position
 	app->render->camera.x = -580;
 	app->render->camera.y = -250;
+	app->player->currentLevel = 1;
 	//Player position
 	app->player->Position.x = 2300 / 2;
 	app->player->Position.y = 1060 / 2;
@@ -328,7 +329,7 @@ bool Scene::CleanUp()
 	app->tex->UnLoad(bg_snow);
 	app->map->Disable();
 	app->entity->Disable();
-	app->audio->Unload();
+	app->audio->CleanUp();
 	app->collisions->Disable();
 	colliders.Clear();
 	

@@ -36,6 +36,7 @@ public:
 	bool isJumping;
 	int points;
 	int maxPoints;
+	int currentLevel;
 	//PLAYER FUNCTIONS
 	void JumpFunction(float dt);
 	void DeadAction();

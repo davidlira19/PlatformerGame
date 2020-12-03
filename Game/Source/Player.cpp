@@ -352,12 +352,13 @@ bool Player::Update(float dt)
 	{
 		app->LoadGameRequest("save_game.xml");
 	}
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN|| app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN || ((app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)) && currentLevel == 1)
 	{
-		app->player->CleanUp();
-		app->scene->CleanUp();
-		app->player->Start();
-		app->scene->Start();
+		app->fade->FadeToBlack(this, (Module*)app->scene, 60);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN || ((app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)) && currentLevel == 2)
+	{
+		app->fade->FadeToBlack(this, (Module*)app->scene2, 60);
 	}
 	//JUST UPDATE THE ANIMATION
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
