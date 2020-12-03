@@ -1,31 +1,31 @@
-#include "Hearth.h"
+#include "Heart.h"
 
 #include "App.h"
 #include "EntityManager.h"
 #include "Collisions.h"
 
 
-Hearth::Hearth(int x, int y) : Entity(x, y)
+Heart::Heart(int x, int y) : Entity(x, y)
 {
-	hearthAnim.PushBack({ 1,1,62,62 });
-	hearthAnim.PushBack({ 66,1,62,62 });
-	hearthAnim.PushBack({ 131,1,62,62 });
-	hearthAnim.PushBack({ 1,66,62,62 });
-	hearthAnim.PushBack({ 66,66,62,62 });
-	hearthAnim.PushBack({ 131,66,62,62 });
-	hearthAnim.loop = true;
-	hearthAnim.speed = 0.15f;
+	heartAnim.PushBack({ 2,2,62,62 });
+	heartAnim.PushBack({ 67,2,62,62 });
+	heartAnim.PushBack({ 132,2,62,62 });
+	heartAnim.PushBack({ 2,67,62,62 });
+	heartAnim.PushBack({ 67,67,62,62 });
+	heartAnim.PushBack({ 132,67,62,62 });
+	heartAnim.loop = true;
+	heartAnim.speed = 0.15f;
 	//////
-	currentAnim = &hearthAnim;
-	collider = app->collisions->AddCollider({ 0, 0, 42, 42 }, Collider::HEARTH, (Module*)app->entity);
+	currentAnim = &heartAnim;
+	collider = app->collisions->AddCollider({ 0, 0, 42, 42 }, Collider::HEART, (Module*)app->entity);
 
 
 }
-Hearth::~Hearth()
+Heart::~Heart()
 {
 	collider->pendingToDelete = true;
 }
-void Hearth::Update()
+void Heart::Update()
 {
 	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y + 6);
 
@@ -33,7 +33,7 @@ void Hearth::Update()
 
 	Entity::Update();
 }
-void Hearth::Draw()
+void Heart::Draw()
 {
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();

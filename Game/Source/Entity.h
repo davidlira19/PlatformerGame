@@ -12,7 +12,7 @@ enum class EntityTipe
 	EnemyAir,
 	EnemyGround,
 	Coin,
-	Hearth
+	Heart
 };
 class Entity
 {

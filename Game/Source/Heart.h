@@ -1,15 +1,15 @@
-#ifndef __HEARTH_H__
-#define __HEARTH_H__
+#ifndef __HEART_H__
+#define __HEART_H__
 #include "Animation.h"
 #include "Entity.h"
-class Hearth : public Entity
+class Heart : public Entity
 {
 public:
 
 	// Constructor (x y coordinates in the world)
 	// Creates animation data and the collider
-	Hearth(int x, int y);
-	~Hearth();
+	Heart(int x, int y);
+	~Heart();
 	// The enemy is going to perform a sinusoidal movement
 	void Update();
 	void Draw();
@@ -19,7 +19,7 @@ private:
 
 	Collider* playerWin = nullptr;
 	// The enemy animation
-	Animation hearthAnim;
+	Animation heartAnim;
 
 };
 

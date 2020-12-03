@@ -27,9 +27,9 @@
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="Source\Coin.cpp" />
-    <ClCompile Include="Source\Hearth.cpp" />
     <ClCompile Include="Source\PathFinding.cpp" />
     <ClCompile Include="Source\Scene2.cpp" />
+    <ClCompile Include="Source\Heart.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -94,9 +94,9 @@
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\Coin.h" />
-    <ClInclude Include="Source\Hearth.h" />
     <ClInclude Include="Source\PathFinding.h" />
     <ClInclude Include="Source\Scene2.h" />
+    <ClInclude Include="Source\Heart.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

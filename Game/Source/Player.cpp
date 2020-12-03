@@ -397,16 +397,24 @@ bool Player::PostUpdate()
 
 	switch (lifes)
 	{
+	case 5:
+		rect = { 0,0,270,58 };
+		app->render->DrawTexture(LifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
+		break;
+	case 4:
+		rect = { 0,0,216,58 };
+		app->render->DrawTexture(LifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
+		break;
 	case 3:
-		rect = { 0,0,99,49 };
+		rect = { 0,0,162,58 };
 		app->render->DrawTexture(LifesTex,app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
 	case 2:
-		rect = { 0,0,65,49 };
+		rect = { 0,0,108,58 };
 		app->render->DrawTexture(LifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
 	case 1:
-		rect = { 0,0,32,49 };
+		rect = { 0,0,54,58 };
 		app->render->DrawTexture(LifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
 	default:
@@ -551,7 +559,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				app->audio->PlayFx(coinFx);
 				c2->pendingToDelete = true;
 			}
-			else if (c2->type == Collider::HEARTH)
+			else if (c2->type == Collider::HEART)
 			{
 				points += 50;
 				app->audio->PlayFx(lifeFx);
@@ -602,7 +610,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				app->audio->PlayFx(coinFx);
 				c2->pendingToDelete = true;
 			}
-			else if (c2->type == Collider::HEARTH)
+			else if (c2->type == Collider::HEART)
 			{
 				points += 50;
 				app->audio->PlayFx(lifeFx);
@@ -644,7 +652,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				app->audio->PlayFx(coinFx);
 				c2->pendingToDelete = true;
 			}
-			else if (c2->type == Collider::HEARTH)
+			else if (c2->type == Collider::HEART)
 			{
 				points += 50;
 				app->audio->PlayFx(lifeFx);

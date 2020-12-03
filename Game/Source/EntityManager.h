@@ -6,7 +6,7 @@
 #include "Enemy_Air.h"
 #include "Enemy_Ground.h"
 #include "Coin.h"
-#include "Hearth.h"
+#include "Heart.h"
 #include "List.h"
 #include "Textures.h"
 #define MAX_ENEMIES 100
@@ -68,7 +68,7 @@ private:
 	SDL_Texture* birdTexture;
 	SDL_Texture* zombieTexture;
 	SDL_Texture* coinTexture;
-	SDL_Texture* hearthTexture;
+	SDL_Texture* heartTexture;
 	int destroyedFx = 0;
 	/*List <Entity*> entityList;*/
 	

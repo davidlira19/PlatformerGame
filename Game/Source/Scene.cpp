@@ -92,8 +92,8 @@ bool Scene::Start()
 	app->entity->AddEntity(EntityTipe::Coin, 1860, 435);
 	app->entity->AddEntity(EntityTipe::Coin, 3000, 755);
 	app->entity->AddEntity(EntityTipe::Coin, 100, 100);
-	//HEARTH
-	app->entity->AddEntity(EntityTipe::Hearth, 1000, 435);
+	//HEART
+	app->entity->AddEntity(EntityTipe::Heart, 1000, 435);
 	return true;
 }
 

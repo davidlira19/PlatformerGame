@@ -116,7 +116,7 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 	}
 	if (collidere->type == Collider::PLAYER || collidere->type == Collider::PLAYERLEFT || collidere->type == Collider::PLAYERRIGHT)
 	{
-		if (collideri->type == Collider::COIN ||collideri->type == Collider::HEARTH)
+		if (collideri->type == Collider::COIN ||collideri->type == Collider::HEART)
 		{
 			pendientedeelim = true;
 		}

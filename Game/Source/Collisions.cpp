@@ -21,7 +21,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::FLOOR][Collider::Type::PLAYERLEFT] = true;
 	matrix[Collider::Type::FLOOR][Collider::Type::ENEMY1] = false;
 	matrix[Collider::Type::FLOOR][Collider::Type::ENEMY2] = false;
-	matrix[Collider::Type::FLOOR][Collider::Type::HEARTH] = false;
+	matrix[Collider::Type::FLOOR][Collider::Type::HEART] = false;
 	matrix[Collider::Type::FLOOR][Collider::Type::COIN] = false;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
@@ -32,7 +32,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYERLEFT] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY1] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY2] = false;
-	matrix[Collider::Type::PLAYER][Collider::Type::HEARTH] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::HEART] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::COIN] = true;
 
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
@@ -43,7 +43,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::PLAYERLEFT] = true;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY1] = false;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY2] = false;
-	matrix[Collider::Type::WALL][Collider::Type::HEARTH] = false;
+	matrix[Collider::Type::WALL][Collider::Type::HEART] = false;
 	matrix[Collider::Type::WALL][Collider::Type::COIN] = false;
 
 	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::PLAYER] = false;
@@ -54,7 +54,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::PLAYERLEFT] = false;
 	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::ENEMY1] = false;
 	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::ENEMY2] = true;
-	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::HEARTH] = true;
+	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::HEART] = true;
 	matrix[Collider::Type::PLAYERRIGHT][Collider::Type::COIN] = true;
 
 	matrix[Collider::Type::CHECKPOINT][Collider::Type::PLAYER] = false;
@@ -65,7 +65,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::CHECKPOINT][Collider::Type::PLAYERLEFT] = false;
 	matrix[Collider::Type::CHECKPOINT][Collider::Type::ENEMY1] = false;
 	matrix[Collider::Type::CHECKPOINT][Collider::Type::ENEMY2] = false;
-	matrix[Collider::Type::CHECKPOINT][Collider::Type::HEARTH] = false;
+	matrix[Collider::Type::CHECKPOINT][Collider::Type::HEART] = false;
 	matrix[Collider::Type::CHECKPOINT][Collider::Type::COIN] = false;
 
 	matrix[Collider::Type::PLAYERLEFT][Collider::Type::PLAYER] = false;
@@ -76,7 +76,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYERLEFT][Collider::Type::PLAYERLEFT] = false;
 	matrix[Collider::Type::PLAYERLEFT][Collider::Type::ENEMY1] = false;
 	matrix[Collider::Type::PLAYERLEFT][Collider::Type::ENEMY2] = true;
-	matrix[Collider::Type::PLAYERLEFT][Collider::Type::HEARTH] = true;
+	matrix[Collider::Type::PLAYERLEFT][Collider::Type::HEART] = true;
 	matrix[Collider::Type::PLAYERLEFT][Collider::Type::COIN] = true;
 
 	matrix[Collider::Type::ENEMY1][Collider::Type::PLAYER] = true;
@@ -87,7 +87,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY1][Collider::Type::PLAYERLEFT] = false;
 	matrix[Collider::Type::ENEMY1][Collider::Type::ENEMY1] = false;
 	matrix[Collider::Type::ENEMY1][Collider::Type::ENEMY2] = false;
-	matrix[Collider::Type::ENEMY1][Collider::Type::HEARTH] = false;
+	matrix[Collider::Type::ENEMY1][Collider::Type::HEART] = false;
 	matrix[Collider::Type::ENEMY1][Collider::Type::COIN] = false;
 
 	matrix[Collider::Type::ENEMY2][Collider::Type::PLAYER] = false;
@@ -98,19 +98,19 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY2][Collider::Type::PLAYERLEFT] = true;
 	matrix[Collider::Type::ENEMY2][Collider::Type::ENEMY1] = false;
 	matrix[Collider::Type::ENEMY2][Collider::Type::ENEMY2] = false;
-	matrix[Collider::Type::ENEMY2][Collider::Type::HEARTH] = false;
+	matrix[Collider::Type::ENEMY2][Collider::Type::HEART] = false;
 	matrix[Collider::Type::ENEMY2][Collider::Type::COIN] = false;
 
-	matrix[Collider::Type::HEARTH][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::HEARTH][Collider::Type::FLOOR] = false;
-	matrix[Collider::Type::HEARTH][Collider::Type::WALL] = false;
-	matrix[Collider::Type::HEARTH][Collider::Type::PLAYERRIGHT] = true;
-	matrix[Collider::Type::HEARTH][Collider::Type::CHECKPOINT] = false;
-	matrix[Collider::Type::HEARTH][Collider::Type::PLAYERLEFT] = true;
-	matrix[Collider::Type::HEARTH][Collider::Type::ENEMY1] = false;
-	matrix[Collider::Type::HEARTH][Collider::Type::ENEMY2] = false;
-	matrix[Collider::Type::HEARTH][Collider::Type::HEARTH] = false;
-	matrix[Collider::Type::HEARTH][Collider::Type::COIN] = false;
+	matrix[Collider::Type::HEART][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::HEART][Collider::Type::FLOOR] = false;
+	matrix[Collider::Type::HEART][Collider::Type::WALL] = false;
+	matrix[Collider::Type::HEART][Collider::Type::PLAYERRIGHT] = true;
+	matrix[Collider::Type::HEART][Collider::Type::CHECKPOINT] = false;
+	matrix[Collider::Type::HEART][Collider::Type::PLAYERLEFT] = true;
+	matrix[Collider::Type::HEART][Collider::Type::ENEMY1] = false;
+	matrix[Collider::Type::HEART][Collider::Type::ENEMY2] = false;
+	matrix[Collider::Type::HEART][Collider::Type::HEART] = false;
+	matrix[Collider::Type::HEART][Collider::Type::COIN] = false;
 
 	matrix[Collider::Type::COIN][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::COIN][Collider::Type::FLOOR] = false;
@@ -120,7 +120,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::COIN][Collider::Type::PLAYERLEFT] = true;
 	matrix[Collider::Type::COIN][Collider::Type::ENEMY1] = false;
 	matrix[Collider::Type::COIN][Collider::Type::ENEMY2] = false;
-	matrix[Collider::Type::COIN][Collider::Type::HEARTH] = false;
+	matrix[Collider::Type::COIN][Collider::Type::HEART] = false;
 	matrix[Collider::Type::COIN][Collider::Type::COIN] = false;
 }
 
