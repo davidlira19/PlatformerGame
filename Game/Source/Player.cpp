@@ -151,11 +151,11 @@ bool Player::Start()
 	velocity = 0;
 
 	collider = { Position.x, Position.y, 42, 76 };
-	SDL_Rect rect = { Position.x, Position.y, 43, 1 };
+	SDL_Rect rect = { Position.x, Position.y, 43, 5 };
 	playerCollider = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
-	rect = { Position.x, Position.y, 1, 74 };
+	rect = { Position.x, Position.y, 5, 74 };
 	playerRight = app->collisions->AddCollider(rect, Collider::PLAYERRIGHT , (Module*)this);
-	rect = { Position.x, Position.y, 1, 74 };
+	rect = { Position.x, Position.y, 5, 74 };
 	playerLeft = app->collisions->AddCollider(rect, Collider::PLAYERLEFT, (Module*)this);
 	lateralsR = false;
 	lateralsL = false;
@@ -391,7 +391,11 @@ bool Player::Update(float dt)
 	}
 	else if (state != playerState::null && state != playerState::jumping)
 	{
-		Gravity(dt);
+		if (godMode == false) 
+		{
+			Gravity(dt);
+		}
+		
 	}
 	return true;
 }
@@ -421,11 +425,6 @@ bool Player::PostUpdate()
 
 	if (Dead == true)
 	{
-		/*DeadAction();
-		canMove = false;
-		app->scene->freeCamera = false;
-		godMode = true;*/
-		//app->render->DrawTexture(DeadTex, app->render->camera.x * -1, app->render->camera.y * -1);
 		if (lifes != 0)
 		{
 			Dead = false;
@@ -542,120 +541,126 @@ bool Player::LoadState(pugi::xml_node* nodo)
 }
 void Player::OnCollision(Collider* c1, Collider* c2) 
 {
-	if (c1->type == Collider::PLAYER) 
+	if (godMode == false)
 	{
-		if (c2->type == Collider::FLOOR) 
+		if (c1->type == Collider::PLAYER)
 		{
-			state = playerState::null;
-			if (velocity > 80)
+			if (c2->type == Collider::FLOOR)
 			{
-				Position.y -= velocity * 0.05 * 2;
-				
+				state = playerState::null;
+				if (velocity > 80)
+				{
+					Position.y -= velocity * 0.05 * 2;
+
+				}
+				velocity = 0;
 			}
-			velocity = 0;
-		}
-		else if (c2->type == Collider::COIN)
-		{
-			points += 100;
-			app->audio->PlayFx(coinFx);
-			c2->pendingToDelete = true;
-		}
-		else if (c2->type == Collider::HEARTH)
-		{
-			points += 50;
-			app->audio->PlayFx(lifeFx);
-			lifes++;
-			c2->pendingToDelete = true;
-		}
-	
-	}
-	else if (c1->type == Collider::PLAYERRIGHT) 
-	{
-		if (c2->type == Collider::FLOOR)
-		{
-			if (state == playerState::null) 
+			else if (c2->type == Collider::COIN)
 			{
-				//state = playerState::free;
+				points += 100;
+				app->audio->PlayFx(coinFx);
+				c2->pendingToDelete = true;
+			}
+			else if (c2->type == Collider::HEARTH)
+			{
+				points += 50;
+				app->audio->PlayFx(lifeFx);
+				lifes++;
+				c2->pendingToDelete = true;
+			}
+
+		}
+		else if (c1->type == Collider::PLAYERRIGHT)
+		{
+			if (c2->type == Collider::FLOOR)
+			{
+				if (state == playerState::null)
+				{
+					//state = playerState::free;
+					lateralsR = true;
+				}
+				else
+				{
+
+					lateralsR = true;
+				}
+
+
+			}
+			else if (c2->type == Collider::CHECKPOINT)
+			{
+				app->SaveGameRequest("save_game.xml");
+				if (noise == true)
+				{
+					app->audio->PlayFx(app->player->checkpointFx);
+					noise = false;
+				}
+			}
+			else if (c2->type == Collider::WALL)
+			{
+				state = playerState::free;
 				lateralsR = true;
 			}
-			else 
+			else if (c2->type == Collider::ENEMY2)
 			{
-			
-				lateralsR = true;
-			}
-			
+				Dead = true;
 
-		}else if (c2->type == Collider::CHECKPOINT)	
-		{
-			app->SaveGameRequest("save_game.xml");
-			if (noise == true)
-			{
-				app->audio->PlayFx(app->player->checkpointFx);
-				noise = false;
 			}
-		}else if (c2->type == Collider::WALL)		
-		{		
-			state = playerState::free;
-			lateralsR = true;		
-		}
-		else if (c2->type == Collider::ENEMY2) 
-		{
-			Dead = true;
-			
-		}
-		else if (c2->type == Collider::COIN)
-		{
-			points += 100;
-			app->audio->PlayFx(coinFx);
-			c2->pendingToDelete = true;
-		}
-		else if (c2->type == Collider::HEARTH)
-		{
-			points += 50;
-			app->audio->PlayFx(lifeFx);
-			lifes++;
-			c2->pendingToDelete = true;
-		}
-	}
-	else if (c1->type == Collider::PLAYERLEFT)
-	{
-		if (c2->type == Collider::FLOOR)
-		{
-			if (state == playerState::null)
+			else if (c2->type == Collider::COIN)
 			{
-				//state = playerState::free;
+				points += 100;
+				app->audio->PlayFx(coinFx);
+				c2->pendingToDelete = true;
+			}
+			else if (c2->type == Collider::HEARTH)
+			{
+				points += 50;
+				app->audio->PlayFx(lifeFx);
+				lifes++;
+				c2->pendingToDelete = true;
+			}
+		}
+		else if (c1->type == Collider::PLAYERLEFT)
+		{
+			if (c2->type == Collider::FLOOR)
+			{
+				if (state == playerState::null)
+				{
+					//state = playerState::free;
+					lateralsL = true;
+				}
+				else
+				{
+
+					lateralsL = true;
+				}
+
+
+			}
+			else if (c2->type == Collider::WALL)
+			{
+
+				state = playerState::free;
 				lateralsL = true;
+
 			}
-			else
+			else if (c2->type == Collider::ENEMY2)
 			{
-
-				lateralsL = true;
+				Dead = true;
 			}
-
-
-		}else if (c2->type == Collider::WALL)		
-		{
-
-			state = playerState::free;
-			lateralsL = true;
-
-		}else if (c2->type == Collider::ENEMY2)	
-		{
-			Dead = true;
-			
-		}
-		else if (c2->type == Collider::COIN)
-		{
-			points += 100;
-			app->audio->PlayFx(coinFx);
-			c2->pendingToDelete = true;
-		}
-		else if (c2->type == Collider::HEARTH)
-		{
-			points += 50;
-			app->audio->PlayFx(lifeFx);
-			lifes++;
-			c2->pendingToDelete = true;
+			else if (c2->type == Collider::COIN)
+			{
+				points += 100;
+				app->audio->PlayFx(coinFx);
+				c2->pendingToDelete = true;
+			}
+			else if (c2->type == Collider::HEARTH)
+			{
+				points += 50;
+				app->audio->PlayFx(lifeFx);
+				lifes++;
+				c2->pendingToDelete = true;
+			}
 		}
 	}
 }
