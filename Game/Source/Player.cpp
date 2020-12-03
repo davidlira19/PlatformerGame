@@ -314,7 +314,6 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && canMove == true)
 	{
-		app->audio->PlayFx(jumpFx);
 		if (state==playerState::null) 
 		{
 			if (currentAnimation == &RunRight || currentAnimation == &StopRight )
@@ -559,6 +558,10 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (c2->type == Collider::FLOOR)
 			{
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+				{
+					app->audio->PlayFx(jumpFx);
+				}
 				state = playerState::null;
 				if (velocity > 80)
 				{
