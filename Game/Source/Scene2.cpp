@@ -116,9 +116,9 @@ bool Scene2::PreUpdate()
 // Called each loop iteration
 bool Scene2::Update(float dt)
 {
-	if (freeCamera == true)
+	if (freeCamera == false)
 	{
-		app->render->camera.x = (app->player->Position.x) * -1;
+		app->render->camera.x = (app->player->Position.x - 500) * -1;
 		app->render->camera.y = (app->player->Position.y - 250) * -1;
 	}
 	LOG("%d %d", app->player->Position.x, app->player->Position.y);
@@ -127,26 +127,26 @@ bool Scene2::Update(float dt)
 		app->map->ChangeCollisionsDraw();
 
 	}
-	
+	LOG("%d %d", app->render->camera.x, app->render->camera.y);
 	//CAMERA.X LIMITS
 	if (app->render->camera.x > 0)
 	{
 		app->render->camera.x = 0;
 	}
-	else if (app->render->camera.x <= -8200)
+	else if (app->render->camera.x <= -5860)
 	{
-		app->render->camera.x = -8200;
+		app->render->camera.x = -5860;
 	}
 	//CAMERA.Y LIMITS
-	if (app->render->camera.y >= -5)
+	if (app->render->camera.y <= -750)
 	{
-		app->render->camera.y = -5;
+		app->render->camera.y = -750;
 	}
-	else if (app->render->camera.y <= -1100)
+	else if (app->render->camera.y >= 0)
 	{
-		app->render->camera.y = -1100;
+		app->render->camera.y = 0;
 	}
-	
+
 	//CAMERA AUTOMATIC MOVEMENT
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
@@ -159,21 +159,21 @@ bool Scene2::Update(float dt)
 			freeCamera = true;
 		}
 	}
-	
 
-	if (freeCamera == false)
+
+	if (freeCamera == true)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-			app->render->camera.y += 5;
+			app->render->camera.y += 500 * (dt / 1000);
 
 		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-			app->render->camera.y -= 5;
+			app->render->camera.y -= 500 * (dt / 1000);
 
 		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-			app->render->camera.x += 5;
+			app->render->camera.x += 500 * (dt / 1000);
 
 		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-			app->render->camera.x -= 5;
+			app->render->camera.x -= 500 * (dt / 1000);
 	}
 	//DRAW BACKGROUND
 	app->render->DrawTexture(bg_snow, -3600/2, 0);
@@ -230,12 +230,7 @@ bool Scene2::Update(float dt)
 	//	app->map->ResetPath();
 	//	app->map->finalPath.Clear();
 	//}
-	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
-		app->map->data.width, app->map->data.height,
-		app->map->data.tileWidth, app->map->data.tileHeight,
-		app->map->data.tilesets.count());
 
-	app->win->SetTitle(title.GetString());
 
 	//LOG("Position x: %d ------ Position y: %d", app->render->camera.x, app->render->camera.y);
 

@@ -272,7 +272,7 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &JumpRight;
 			}
-			app->scene->freeCamera = true;
+			//app->scene->freeCamera = false;
 			lastPosition = Position;
 		    Position.x += 300* (dt / 1000);
 			//////app->render->camera.x -= 300* (dt / 1000);
@@ -425,6 +425,11 @@ bool Player::PostUpdate()
 		break;
 	default:
 		break;
+	}
+
+	if (canMove == false)
+	{
+		currentAnimation == &DeadRight;
 	}
 
 	if (Dead == true)
