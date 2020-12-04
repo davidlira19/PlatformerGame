@@ -204,6 +204,7 @@ void EntityManager::OnCollision(Collider* c1, Collider* c2)
 
 bool EntityManager::LoadState(pugi::xml_node* nodo)
 {
+	entityList.Clear();
 	pugi::xml_node auxiliar;
 	auxiliar = nodo->child("data");
 	int num = auxiliar.attribute("num").as_int();
@@ -226,7 +227,41 @@ bool EntityManager::LoadState(pugi::xml_node* nodo)
 	return true;
 }
 
-bool EntityManager::SaveState(pugi::xml_node* nodo) 
+bool EntityManager::SaveState(pugi::xml_node* nodo)
 {
-	return 0;
+
+	int num = 0;
+	ListItem<Entity*>* list;
+	list = entityList.start;
+	pugi::xml_node auxiliar;
+	auxiliar = nodo->append_child("data");
+	while (list != nullptr)
+	{
+		if (list->data->type == EntityTipe::EnemyAir || list->data->type == EntityTipe::EnemyGround) {
+			num++;
+		}
+		list = list->next;
+	}
+	list = entityList.start;
+	auxiliar.append_attribute("num").set_value(num);
+	while (list != nullptr)
+	{
+		if (list->data->type == EntityTipe::EnemyAir || list->data->type == EntityTipe::EnemyGround) {
+			auxiliar.append_child("Enemy").append_attribute("x").set_value(list->data->position.x);
+			auxiliar.last_child().append_attribute("y").set_value(list->data->position.y);
+			if (list->data->type == EntityTipe::EnemyAir)
+			{
+				auxiliar.last_child().append_attribute("type").set_value("EnemyAir");
+			}
+			else if (list->data->type == EntityTipe::EnemyGround)
+			{
+				auxiliar.last_child().append_attribute("type").set_value("EnemyGround");
+			}
+		}
+		list = list->next;
+
+	}
+	return true;
 }
+
+

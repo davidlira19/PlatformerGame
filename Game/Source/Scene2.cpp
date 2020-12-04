@@ -207,7 +207,7 @@ bool Scene2::Update(float dt)
 	if (app->player->Position.y >= 1310)
 	{
 		app->player->Dead = true;
-		app->player->lifes-=2;
+		app->player->lifes--;
 	}
 	if (app->player->Position.x >= 6726)
 	{

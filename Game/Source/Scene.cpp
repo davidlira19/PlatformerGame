@@ -83,7 +83,7 @@ bool Scene::Start()
 	}
 
 	//BIRDS
-	app->entity->AddEntity(EntityTipe::EnemyAir, 1633, 600);
+	app->entity->AddEntity(EntityTipe::EnemyAir, 1633, 200);
 	app->entity->AddEntity(EntityTipe::EnemyAir, 3343, 670);
 	app->entity->AddEntity(EntityTipe::EnemyAir, 4300, 550);
 	app->entity->AddEntity(EntityTipe::EnemyAir, 5005, 560);
@@ -220,7 +220,7 @@ bool Scene::Update(float dt)
 	if (app->player->Position.y >= 1602 / 2)
 	{
 		app->player->Dead = true;
-		app->player->lifes-=2;
+		app->player->lifes--;
 	}
 	if (app->player->Position.x >= 11350 / 2)
 	{

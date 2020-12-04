@@ -125,7 +125,7 @@ bool Player::Start()
 	result = collisionPosition::null;
 	Intro = true;
 	godMode = false;
-	lifes = 6;
+	lifes = 3;
 	points = 0;
 
 	//LOAD TEXTURES
@@ -332,23 +332,23 @@ bool Player::PostUpdate()
 
 	switch (lifes)
 	{
-	case 10:
+	case 5:
 		rect = { 0,0,270,58 };
 		app->render->DrawTexture(LifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
 		break;
-	case 8:
+	case 4:
 		rect = { 0,0,216,58 };
 		app->render->DrawTexture(LifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
 		break;
-	case 6:
+	case 3:
 		rect = { 0,0,162,58 };
 		app->render->DrawTexture(LifesTex,app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
-	case 4:
+	case 2:
 		rect = { 0,0,108,58 };
 		app->render->DrawTexture(LifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
-	case 2:
+	case 1:
 		rect = { 0,0,54,58 };
 		app->render->DrawTexture(LifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
@@ -520,7 +520,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				points += 50;
 				app->audio->PlayFx(lifeFx);
-				lifes+=2;
+				lifes++;
 				c2->pendingToDelete = true;
 			}
 		}
@@ -578,7 +578,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				points += 50;
 				app->audio->PlayFx(lifeFx);
-				lifes+=2;
+				lifes++;
 				c2->pendingToDelete = true;
 			}
 		}
@@ -628,7 +628,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				points += 50;
 				app->audio->PlayFx(lifeFx);
-				lifes+=2;
+				lifes++;
 				c2->pendingToDelete = true;
 			}
 		}

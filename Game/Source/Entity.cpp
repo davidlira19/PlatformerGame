@@ -52,7 +52,7 @@ void Entity::Update()
 					path.start = app->map->WorldToMap(position.x, position.y);
 				}
 
-				path.goal = app->map->WorldToMap(app->player->Position.x + 64, app->player->Position.y+128);
+				path.goal = app->map->WorldToMap(app->player->Position.x + 64, app->player->Position.y+50);
 				path.frontier.Push(path.start);
 				path.visited.Add(path.start);
 				path.PropagateAStar();
