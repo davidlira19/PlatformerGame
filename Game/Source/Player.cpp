@@ -569,6 +569,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 					Position.y -= velocity * 0.05 * 2;
 
 				}
+				
 				velocity = 0;
 			}
 			else if (c2->type == Collider::COIN)

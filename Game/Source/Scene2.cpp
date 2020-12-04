@@ -4,7 +4,7 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
-#include "Scene.h"
+//#include "Scene.h"
 #include "Scene2.h"
 #include "Map.h"
 #include "Player.h"
@@ -35,6 +35,7 @@ bool Scene2::Awake()
 bool Scene2::Start()
 {
 	// L03: DONE: Load map
+	app->map->Enable();
 	app->map->Load("snow_tileset_lvl2.tmx");
 	// Load music
 	app->audio->PlayMusic("Assets/audio/music/christmas_music.ogg");
@@ -110,75 +111,6 @@ bool Scene2::PreUpdate()
 	
 	return true;
 }
-//collisionPosition collisions::getCollision(position positionChek,SDL_Rect rect,int id)
-//{
-//	/*bool chekResult;
-//	collisionPosition positionCollision = collisionPosition::null;
-//	position relativePosition;
-//	for (int a = 1; a < 4; a++) 
-//	{
-//		switch (a)
-//		{
-//		case 1:
-//			relativePosition.x = positionChek.x + (rect.w);
-//			relativePosition.y = positionChek.y + (rect.h / 2);
-//			chekResult = checkIfCollision(id, relativePosition);
-//			if (chekResult == true)
-//			{
-//				positionCollision = collisionPosition::right;
-//			}
-//			break;
-//		case 2:
-//			relativePosition.x = positionChek.x + (rect.w / 2);
-//			relativePosition.y = positionChek.y + rect.h;
-//			chekResult = checkIfCollision(id, relativePosition);
-//			if ((chekResult == true)&& (positionCollision == collisionPosition::right))
-//			{
-//				positionCollision = collisionPosition::downAndRight;
-//			}
-//			else if(chekResult == true)
-//			{
-//				positionCollision = collisionPosition::down;
-//			}
-//			else if (positionCollision == collisionPosition::right)
-//			{
-//				positionCollision = collisionPosition::right;
-//			}
-//			else 
-//			{
-//				positionCollision = collisionPosition::null;
-//			}
-//			break;
-//		case 3:
-//			relativePosition.x = positionChek.x;
-//			relativePosition.y = positionChek.y + (rect.h / 2);
-//			chekResult = checkIfCollision(id, relativePosition);
-//			if (chekResult == true && positionCollision == collisionPosition::down)
-//			{
-//				positionCollision = collisionPosition::downAndLeft;
-//			}
-//			else if(chekResult == true)
-//			{
-//				positionCollision = collisionPosition::left;
-//			}
-//			else if(positionCollision == collisionPosition::down)
-//			{
-//				positionCollision = collisionPosition::down;
-//			}
-//			else if(positionCollision == collisionPosition::right)
-//			{
-//				positionCollision = collisionPosition::right;
-//			}
-//			else 
-//			{
-//				positionCollision = collisionPosition::null;
-//			}
-//			break;
-//		}
-//	}
-//	
-//	return positionCollision;*/
-//}
 
 // Called each loop iteration
 bool Scene2::Update(float dt)

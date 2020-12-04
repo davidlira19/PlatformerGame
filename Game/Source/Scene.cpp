@@ -36,6 +36,7 @@ bool Scene::Awake()
 bool Scene::Start()
 {
 	// L03: DONE: Load map
+	app->map->Enable();
 	app->map->Load("snow_tileset.tmx");
 	// Load music
 	app->audio->PlayMusic("Assets/audio/music/christmas_music.ogg");
@@ -295,10 +296,10 @@ bool Scene::Update(float dt)
 	app->win->SetTitle(title.GetString());
 	//LOG("Position x: %d ------ Position y: %d", app->render->camera.x, app->render->camera.y);
 
-	if (app->player->Win == true)
+	/*if (app->player->Win == true)
 	{
 		app->fade->FadeToBlack((Module*)app->scene, (Module*)app->scene2);
-	}
+	}*/
 
 	return true;
 }
@@ -335,6 +336,7 @@ bool Scene::CleanUp()
 	app->render->camera.y = 0;
 	app->tex->UnLoad(bg_snow);
 	app->map->Disable();
+
 	app->entity->Disable();
 	app->audio->CleanUp();
 	app->collisions->Disable();

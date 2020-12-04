@@ -12,6 +12,7 @@
 
 Entity::Entity(int x, int y) : position(x, y)
 {
+	dire = -1;
 	counter = false;
 	numCounter = 0;
 	left = true;
@@ -101,6 +102,7 @@ void Entity::Update()
 						{
 							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64) 
 							{
+								dire = 1;
 								position.x += 2;
 							}
 							
@@ -109,6 +111,7 @@ void Entity::Update()
 						{
 							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64) 
 							{
+								dire = -1;
 								position.x -= 2;
 							}
 							
@@ -119,6 +122,7 @@ void Entity::Update()
 							{
 								if (app->map->GetTileIdFromPosition(((position.x-10)/64) , position.y/64, "collisions") == 64)
 								{
+									dire = -1;
 									position.x -= 1;
 								}
 								else
@@ -130,6 +134,7 @@ void Entity::Update()
 							{
 								if (app->map->GetTileIdFromPosition(((position.x +30)/64), position.y/64, "collisions") == 64)
 								{
+									dire = 1;
 									position.x += 1;
 								}
 								else 
@@ -145,19 +150,23 @@ void Entity::Update()
 					{
 						if (app->map->numberToMap(position.x) < nextTile.x )
 						{
+							dire = 1;
 							position.x += 2;
 						}
 						else if (app->map->numberToMap(position.x) > nextTile.x)
 						{
+							dire = -1;
 							position.x -= 2;
 						}
 
 						if (app->map->numberToMap(position.y) < nextTile.y)
 						{
+							dire = 1;
 							position.y += 2;
 						}
 						else if (app->map->numberToMap(position.y) > nextTile.y)
 						{
+							dire = -1;
 							position.y -= 2;
 						}
 					}

@@ -38,6 +38,7 @@ public:
 	virtual void OnCollision(Collider* collideri, Collider* collidere);
 
 public:
+	int dire;
 	void destr();
 	// Current Position in the world
 	iPoint position;

@@ -18,6 +18,7 @@ public:
 	List<iPoint> visited;
 	Queue<iPoint> frontier;
 	List<iPoint> finalPath;
+	bool semiFind;
 private:
 	List<iPoint> frontierr;
 	List<iPoint> breadcrumps;

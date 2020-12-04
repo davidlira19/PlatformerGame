@@ -77,7 +77,7 @@ void EnemyGround::Update()
 	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y - 20);
 	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y + 6 - 20);
 
-	if (left == true)
+	if (dire == -1)
 	{
 		if (deadZ == false)
 		{
@@ -113,7 +113,16 @@ void EnemyGround::Draw()
 {
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
-	app->render->DrawTexture(groundEnemiesTexture, position.x, position.y-20, &rect);
+
+	if (&zombieDeadLeft == currentAnim|| &zombieDeadRight == currentAnim)
+	{
+		app->render->DrawTexture(groundEnemiesTexture, position.x, position.y + 50, &rect);
+	}
+	else 
+	{
+		app->render->DrawTexture(groundEnemiesTexture, position.x, position.y-20, &rect);
+	}
+	
 
 	if (app->entity->drawItems == true)
 	{

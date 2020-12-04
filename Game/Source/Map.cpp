@@ -219,10 +219,6 @@ TileSet* Map::GetTilesetFromTileId(int id) const
 // Called before quitting
 bool Map::CleanUp()
 {
-	LOG("Unloading map");
-
-	// L03: DONE 2: Make sure you clean up any memory allocated from tilesets/map
-	// Remove all tilesets
 	ListItem<TileSet*>* item;
 	item = data.tilesets.start;
 
@@ -232,10 +228,16 @@ bool Map::CleanUp()
 		item = item->next;
 	}
 	data.tilesets.Clear();
-
 	// Clean up the pugui tree
+	ListItem<MapLayer*>* ite;
+	ite = data.layers.start;
+	while (ite != NULL)
+	{
+		RELEASE(ite->data);
+		ite = ite->next;
+	}
+	data.layers.Clear();
 	mapFile.reset();
-
 	return true;
 }
 
