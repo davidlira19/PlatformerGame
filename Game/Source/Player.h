@@ -78,7 +78,9 @@ public:
 	// WIN-LOSE BOOLS
 	bool Win;
 	bool Dead;
-	Collider* playerCollider;
+	Collider* playerDown
+		;
+	Collider* playerUp;
 	Collider* playerRight;
 	Collider* playerLeft;
 	void OnCollision(Collider* c1, Collider* c2);

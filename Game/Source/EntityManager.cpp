@@ -206,7 +206,7 @@ void EntityManager::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (c2->type == c2->PLAYER)
 			{
-				if (c1 == listItem->data->playerWin)
+				if (c1 == listItem->data->playerWin || c1 == listItem->data->playerWin2)
 				{
 					listItem->data->OnCollision(c1,c2);
 				}
@@ -255,5 +255,5 @@ bool EntityManager::LoadState(pugi::xml_node* nodo)
 }
 bool EntityManager::SaveState(pugi::xml_node* nodo) 
 {
-
+	return 0;
 }

@@ -51,6 +51,7 @@ public:
 	SDL_Texture* moneyTexture;
 	SDL_Texture* lifeTexture;
 	Collider* playerWin = nullptr;
+	Collider* playerWin2 = nullptr;
 	// The enemy's collider
 	Collider* collider = nullptr;
 	PathFinding path;

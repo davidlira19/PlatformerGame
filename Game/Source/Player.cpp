@@ -150,10 +150,12 @@ bool Player::Start()
 	velocity = 0;
 
 	//collider = { Position.x, Position.y, 42, 76 };
-	SDL_Rect rect = { Position.x, Position.y, 43, 5 };
-	playerCollider = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
+	SDL_Rect rect = { Position.x, Position.y, 40, 5 };
+	playerDown = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
+	rect = { Position.x, Position.y, 40, 5 };
+	playerUp = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
 	rect = { Position.x, Position.y, 5, 74 };
-	playerRight = app->collisions->AddCollider(rect, Collider::PLAYERRIGHT , (Module*)this);
+	playerRight = app->collisions->AddCollider(rect, Collider::PLAYERRIGHT, (Module*)this);
 	rect = { Position.x, Position.y, 5, 74 };
 	playerLeft = app->collisions->AddCollider(rect, Collider::PLAYERLEFT, (Module*)this);
 	lateralsR = false;
@@ -184,9 +186,10 @@ bool Player::Update(float dt)
 		Position.x = 4900;
 		Position.y = 563;
 	}
-	playerCollider->SetPos(Position.x+app->render->camera.x + 43, Position.y+app->render->camera.y + 76);
-	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y - 2);
-	playerLeft->SetPos(Position.x + app->render->camera.x + 40, Position.y + app->render->camera.y - 2);
+	playerDown->SetPos(Position.x + app->render->camera.x + 47, Position.y + app->render->camera.y + 73);
+	playerUp->SetPos(Position.x + app->render->camera.x + 47, Position.y + app->render->camera.y - 5);
+	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y + 0);
+	playerLeft->SetPos(Position.x + app->render->camera.x + 40, Position.y + app->render->camera.y + 0);
 	if (godMode == false)
 	{
 		/*result = playerCollisions.getCollision(Position, collider, 61);
