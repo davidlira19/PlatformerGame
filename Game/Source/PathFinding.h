@@ -22,7 +22,6 @@ private:
 	List<iPoint> frontierr;
 	List<iPoint> breadcrumps;
 	List<iPoint> tileValue;
-	bool draw;
 };
 
 

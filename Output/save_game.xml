@@ -10,14 +10,14 @@
 	<:anonymous />
 	<:anonymous />
 	<player>
-		<data x="600" y="100" aceleration="13" />
+		<data x="2153" y="410" aceleration="13" />
 	</player>
-	<:anonymous />
 	<scene />
 	<scene2 />
+	<:anonymous />
 	<map />
 	<:anonymous />
 	<renderer>
-		<camera x="0" y="-5" />
+		<camera x="-1653" y="-160" />
 	</renderer>
 </game_state>

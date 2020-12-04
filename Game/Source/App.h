@@ -146,6 +146,7 @@ private:
 	int	cappedMs = -1;
 
 	int maxFPS;
+	bool vsync;
 };
 
 extern App* app;

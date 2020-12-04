@@ -13,6 +13,7 @@
 #include "Collisions.h"
 #include "FadeToBlack.h"
 #include "EntityManager.h"
+#include "PathFinding.h"
 Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");

@@ -8,12 +8,14 @@
 #include "Audio.h"
 #include "Map.h"
 #include "Render.h"
+#include "Input.h"
 
 Entity::Entity(int x, int y) : position(x, y)
 {
 	counter = false;
 	numCounter = 0;
 	left = true;
+	drawPath = false;
 	birdFx = app->audio->LoadFx("Assets/audio/fx/fall.wav");
 }
 
@@ -28,6 +30,17 @@ Entity::~Entity()
 }*/
 void Entity::Update()
 {
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+	{
+		if (drawPath == true)
+		{
+			drawPath = false;
+		}
+		else
+		{
+			drawPath = true;
+		}
+	}
 	if (app->player->godMode == false)
 	{
 		if (type == EntityTipe::EnemyAir || type == EntityTipe::EnemyGround) {
@@ -54,8 +67,12 @@ void Entity::Update()
 
 
 			}
-			if (path.ExistPath() == true) {
-				path.DrawPath();
+			if (path.ExistPath() == true) 
+			{
+				if (drawPath == true)
+				{
+					path.DrawPath();
+				}
 				iPoint nextTile;
 				ListItem<iPoint>* auxiliar;
 				iPoint positionn = app->map->WorldToMap(position.x, position.y);
@@ -128,7 +145,6 @@ void Entity::Update()
 					{
 						if (app->map->numberToMap(position.x) < nextTile.x )
 						{
-
 							position.x += 2;
 						}
 						else if (app->map->numberToMap(position.x) > nextTile.x)

@@ -5,7 +5,7 @@
 #include"Input.h"
 PathFinding::PathFinding() 
 {
-	draw = false;
+
 }
 PathFinding::~PathFinding()
 {
@@ -146,67 +146,55 @@ bool PathFinding::IsWalkable(int x, int y) const
 }
 void PathFinding::DrawPath()
 {
-	iPoint point;
-
-	// Draw visited
-	//ListItem<iPoint>* item = visited.start;
-
-	//while (item)
-	//{
-	//	point = item->data;
-	//	TileSet* tileset = app->map->GetTilesetFromTileId(61);
-
-	//	SDL_Rect rec = tileset->GetTileRect(61);
-	//	iPoint pos = app->map->MapToWorld(point.x, point.y);
-	//	tileset = app->map->data.tilesets.start->data;
-	//	app->render->DrawTexture(tileset->textureTile, pos.x, pos.y, &rec);
-
-	//	item = item->next;
-	//}
-
-	//// Draw frontier
-	//for (uint i = 0; i < frontier.Count(); ++i)
-	//{
-	//	point = *(frontier.Peek(i));
-	//	TileSet* tileset = app->map->GetTilesetFromTileId(62);
-
-	//	SDL_Rect rec = tileset->GetTileRect(62);
-	//	iPoint pos = app->map->MapToWorld(point.x, point.y);
-
-	//	app->render->DrawTexture(tileset->textureTile, pos.x, pos.y, &rec);
-	//}
-
 	//draw final path
-	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) 
-	{
-		if (draw == true) 
+	
+		//Draw visited
+		iPoint point;
+		/*ListItem<iPoint>* item = visited.start;
+
+		while (item)
 		{
-			draw = false;
+			point = item->data;
+			TileSet* tileset = app->map->GetTilesetFromTileId(61);
+
+			SDL_Rect rec = tileset->GetTileRect(61);
+			iPoint pos = app->map->MapToWorld(point.x, point.y);
+			tileset = app->map->data.tilesets.start->data;
+			app->render->DrawTexture(tileset->textureTile, pos.x, pos.y, &rec);
+
+			item = item->next;
 		}
-		else 
+
+		for (uint i = 0; i < frontier.Count(); ++i)
 		{
-			draw = true;
-		}
-	}
-	if (draw == true)
-	{
+			point = *(frontier.Peek(i));
+			TileSet* tileset = app->map->GetTilesetFromTileId(62);
+
+			SDL_Rect rec = tileset->GetTileRect(62);
+			iPoint pos = app->map->MapToWorld(point.x, point.y);
+
+			app->render->DrawTexture(tileset->textureTile, pos.x, pos.y, &rec);
+		}*/
+
 		ListItem<iPoint>* auxiliarItem = finalPath.start;
 
 		while (auxiliarItem)
 		{
 			point = auxiliarItem->data;
-			TileSet* tileset = app->map->GetTilesetFromTileId(25);
+			TileSet* tileset = app->map->GetTilesetFromTileId(33);
 
-			SDL_Rect rec = tileset->GetTileRect(25);
+			SDL_Rect rec = tileset->GetTileRect(33);
 			iPoint pos = app->map->MapToWorld(point.x, point.y);
 
 			app->render->DrawTexture(tileset->textureTile, pos.x, pos.y, &rec);
 
 			auxiliarItem = auxiliarItem->next;
 		}
-	}
-
+	
 }
+
+	// Draw frontier
+
 void PathFinding::ResetPath()
 {
 	frontier.Clear();

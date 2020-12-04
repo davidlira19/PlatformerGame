@@ -57,6 +57,7 @@ public:
 	int numCounter;
 	bool deadZ;
 	bool left;
+	bool drawPath;
 	unsigned int birdFx;
 protected:
 

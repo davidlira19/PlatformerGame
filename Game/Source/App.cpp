@@ -32,9 +32,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	audio = new Audio(true);
 	player = new Player(false);
-	entity = new EntityManager(false);
 	scene = new Scene(false);
 	scene2 = new Scene2(false);
+	entity = new EntityManager(false);
 	map = new Map(false);
 	fade = new ModuleFadeToBlack(true);
 	intro = new Intro(true);
@@ -55,9 +55,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(winp);
 	AddModule(fade);	
 	AddModule(player);
-	AddModule(entity);
 	AddModule(scene);
 	AddModule(scene2);
+	AddModule(entity);
 	AddModule(map);
 	AddModule(collisions);
 	// Render last to swap buffer
@@ -97,6 +97,7 @@ bool App::Awake()
 	pugi::xml_document configFile;
 	pugi::xml_node config;
 	pugi::xml_node configApp;
+	pugi::xml_node configRenderer;
 
 	bool ret = false;
 
@@ -107,6 +108,7 @@ bool App::Awake()
 	{
 		ret = true;
 		configApp = config.child("app");
+		configRenderer = config.child("renderer");
 
 		// L01: DONE 4: Read the title from the config file
 		title.Create(configApp.child("title").child_value());
@@ -115,6 +117,7 @@ bool App::Awake()
 		// L08: TODO 1: Read from config file your framerate cap
 
 		maxFPS = configApp.attribute("framerate_cap").as_int();
+		vsync = configRenderer.child("vsync").attribute("value").as_bool();
 	}
 
 	if (ret == true)
@@ -210,6 +213,15 @@ void App::PrepareUpdate()
 
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{
+		if (vsync == false)
+		{
+			vsync = true;
+		}
+		else
+		{
+			vsync = false;
+		}
+
 		if (maxFPS == 13)
 		{
 			maxFPS = 30;
@@ -246,9 +258,17 @@ void App::FinishUpdate()
 	uint lastFrameMs = frameTime.Read();
 	uint framesOnLastUpdate = prevLastSecFrameCount;
 
+	SString vsyncCharacter;
+	if (vsync == true)
+	{
+		vsyncCharacter.Create("on");
+	}
+	else
+	{
+		vsyncCharacter.Create("off");
+	}
 	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u ",
-		averageFps, lastFrameMs, framesOnLastUpdate, dt, secondsSinceStartup, frameCount);
+	sprintf_s(title, 256, "FPS: %i / Avg.FPS: %.2f / Last-Frame MS: %.3f / Vsync: %s", framesOnLastUpdate, averageFps, dt, vsyncCharacter.GetString());
 
 	app->win->SetTitle(title);
 
