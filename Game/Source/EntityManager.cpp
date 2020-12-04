@@ -14,8 +14,7 @@
 
 EntityManager::EntityManager(bool startEnabled) : Module(startEnabled)
 {
-	/*for (uint i = 0; i < MAX_ENEMIES; ++i)
-		enemies[i] = nullptr;*/
+	name.Create("EntityManager");
 }
 
 EntityManager::~EntityManager()
@@ -230,14 +229,31 @@ void EntityManager::OnCollision(Collider* c1, Collider* c2)
 
 }
 
-/*bool Enemy::compene()
+bool EntityManager::LoadState(pugi::xml_node* nodo)
 {
-	for (int i = 0; i < MAX_ENEMIES; i++)
+	pugi::xml_node auxiliar;
+	auxiliar = nodo->child("data");
+	int num = auxiliar.attribute("num").as_int();
+	auxiliar = auxiliar.child("Enemy");
+	EntityTipe auxiliarTipe = EntityTipe::EnemyAir;
+	for (int i = 0; i < num; i++)
 	{
-		if (enemies[i] != nullptr)
+		SString string = auxiliar.attribute("type").as_string();
+		if (string == "EnemyAir")
 		{
-			return false;
+			auxiliarTipe = EntityTipe::EnemyAir;
 		}
+		else if (string == "EnemyGround")
+		{
+			auxiliarTipe = EntityTipe::EnemyGround;
+		}
+		AddEntity(auxiliarTipe, auxiliar.attribute("x").as_int(), auxiliar.attribute("y").as_int());
+		auxiliar = auxiliar.next_sibling();
 	}
 	return true;
-}*/
+
+}
+bool EntityManager::SaveState(pugi::xml_node* nodo) 
+{
+
+}

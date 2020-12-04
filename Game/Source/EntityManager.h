@@ -59,7 +59,8 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
-	
+	bool LoadState(pugi::xml_node* nodo);
+	bool SaveState(pugi::xml_node* nodo);
 	bool drawItems;
 	List<Entity*>entityList;
 private:

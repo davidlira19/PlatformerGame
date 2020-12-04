@@ -36,6 +36,7 @@ bool Scene::Awake()
 bool Scene::Start()
 {
 	// L03: DONE: Load map
+	app->LoadGameRequest("save_game.xml");
 	app->map->Enable();
 	app->map->Load("snow_tileset.tmx");
 	// Load music
@@ -83,14 +84,17 @@ bool Scene::Start()
 	}
 	//BIRDS
 	//app->entity->AddEntity(EntityTipe::EnemyAir, 1633, 600);
-	app->entity->AddEntity(EntityTipe::EnemyAir, 3343, 670);
+
+	/*app->entity->AddEntity(EntityTipe::EnemyAir, 3343, 670);
 	app->entity->AddEntity(EntityTipe::EnemyAir, 4300, 550);
-	app->entity->AddEntity(EntityTipe::EnemyAir, 5005, 560);
+	app->entity->AddEntity(EntityTipe::EnemyAir, 5005, 560);*/
 	//ZOMBIES
-	app->entity->AddEntity(EntityTipe::EnemyGround, 1876, 450);
+
+	/*app->entity->AddEntity(EntityTipe::EnemyGround, 1876, 450);
 	app->entity->AddEntity(EntityTipe::EnemyGround, 3022, 770);
 	app->entity->AddEntity(EntityTipe::EnemyGround, 3839, 644);
-	app->entity->AddEntity(EntityTipe::EnemyGround, 4619, 513);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 4619, 513);*/
+
 	//app->entity->AddEntity(EntityTipe::EnemyGround, 5405, 513);
 
 	/*app->entity->AddEntity(EntityTipe::EnemyGround, 1899, 435);
