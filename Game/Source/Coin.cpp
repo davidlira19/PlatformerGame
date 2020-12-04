@@ -7,12 +7,12 @@
 
 Coin::Coin(int x, int y) : Entity(x, y)
 {
-	coinAnim.PushBack({ 4 / 2,3 / 2,85 / 2,85 / 2 });
-	coinAnim.PushBack({ 94 / 2,3 / 2,85 / 2,85 / 2 });
-	coinAnim.PushBack({ 184 / 2,3 / 2,85 / 2,85 / 2 });
-	coinAnim.PushBack({ 4 / 2,93 / 2,85 / 2,85 / 2 });
-	coinAnim.PushBack({ 94 / 2,93 / 2,85 / 2,85 / 2 });
-	coinAnim.PushBack({ 184 / 2,93 / 2,85 / 2,85 / 2 });
+	coinAnim.PushBack({ 4 / 2,4 / 2,85 / 2,85 / 2 });
+	coinAnim.PushBack({ 94 / 2,4 / 2,85 / 2,85 / 2 });
+	coinAnim.PushBack({ 184 / 2,4 / 2,85 / 2,85 / 2 });
+	coinAnim.PushBack({ 4 / 2,94 / 2,85 / 2,85 / 2 });
+	coinAnim.PushBack({ 94 / 2,94 / 2,85 / 2,85 / 2 });
+	coinAnim.PushBack({ 184 / 2,94 / 2,85 / 2,85 / 2 });
 	coinAnim.loop = true;
 	coinAnim.speed = 0.15f;
 	//////
