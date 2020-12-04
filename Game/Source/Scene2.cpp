@@ -141,6 +141,14 @@ bool Scene2::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		app->map->ChangeCollisionsDraw();
+		if (app->entity->drawItems == true)
+		{
+			app->entity->drawItems = false;
+		}
+		else if (app->entity->drawItems == false)
+		{
+			app->entity->drawItems = true;
+		}
 	}
 
 	//CAMERA.X LIMITS
