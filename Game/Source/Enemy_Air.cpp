@@ -25,8 +25,12 @@ EnemyAir::~EnemyAir()
 
 void EnemyAir::Update()
 {
-	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y-40);
-	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y-34);
+	if (playerWin != nullptr && collider != nullptr)
+	{
+		playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y - 40);
+		collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y - 34);
+	}
+	
 	
 	currentAnim->Update();
 

@@ -74,8 +74,11 @@ EnemyGround::~EnemyGround()
 
 void EnemyGround::Update()
 {
-	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y - 20);
-	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y + 6 - 20);
+	if (playerWin!=nullptr&& collider != nullptr)
+	{
+		playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y - 20);
+		collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y + 6 - 20);
+	}
 
 	if (dire == -1)
 	{

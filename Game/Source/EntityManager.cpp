@@ -204,6 +204,13 @@ void EntityManager::OnCollision(Collider* c1, Collider* c2)
 
 bool EntityManager::LoadState(pugi::xml_node* nodo)
 {
+	ListItem<Entity*>* listItem;
+	listItem = entityList.start;
+	while (listItem != nullptr) {
+		listItem->data->path.ResetPath();
+		delete listItem->data;
+		listItem = listItem->next;
+	}
 	entityList.Clear();
 	pugi::xml_node auxiliar;
 	auxiliar = nodo->child("data");
