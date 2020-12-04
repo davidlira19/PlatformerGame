@@ -39,6 +39,7 @@ bool Scene::Start()
 	app->map->Enable();
 	app->map->Load("snow_tileset.tmx");
 	// Load music
+	app->audio->Enable();
 	app->audio->PlayMusic("Assets/audio/music/christmas_music.ogg");
 	//Load Position
 	app->render->camera.x = -580;
@@ -338,7 +339,7 @@ bool Scene::CleanUp()
 	app->map->Disable();
 
 	app->entity->Disable();
-	app->audio->CleanUp();
+	app->audio->Disable();
 	app->collisions->Disable();
 	colliders.Clear();
 	

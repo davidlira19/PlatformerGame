@@ -35,6 +35,7 @@ bool Scene2::Awake()
 bool Scene2::Start()
 {
 	// L03: DONE: Load map
+	app->audio->Enable();
 	app->map->Enable();
 	app->map->Load("snow_tileset_lvl2.tmx");
 	// Load music
