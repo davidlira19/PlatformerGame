@@ -34,7 +34,6 @@ void Audio::Unload()
 		Mix_FreeChunk(item->data);
 	}
 	fx.Clear();
-	Mix_CloseAudio();
 }
 // Called before render is available
 bool Audio::Awake(pugi::xml_node& config)

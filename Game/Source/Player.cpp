@@ -564,11 +564,22 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 					app->audio->PlayFx(jumpFx);
 				}
 				state = playerState::null;
-				if (velocity > 80)
+				int sum = 0;
+				while (true) 
 				{
-					Position.y -= velocity * 0.05 * 2;
-
+					if (c1->Intersects(c2->rect) == true) 
+					{
+						sum -= 1;
+						c1->rect.y -= 1;
+						if (c1->Intersects(c2->rect) == false) {
+							c1->rect.y += 1;
+							sum += 1;
+							break;
+						}
+					}
 				}
+				Position.y += sum;
+			
 				
 				velocity = 0;
 			}

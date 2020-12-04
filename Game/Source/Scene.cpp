@@ -339,6 +339,7 @@ bool Scene::CleanUp()
 	app->map->Disable();
 
 	app->entity->Disable();
+	app->audio->Unload();
 	app->audio->Disable();
 	app->collisions->Disable();
 	colliders.Clear();
