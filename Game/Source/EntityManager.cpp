@@ -206,7 +206,7 @@ void EntityManager::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (c2->type == c2->PLAYER)
 			{
-				if (c1 == listItem->data->playerWin || c1 == listItem->data->playerWin2)
+				if (c1 == listItem->data->playerWin)
 				{
 					listItem->data->OnCollision(c1,c2);
 				}

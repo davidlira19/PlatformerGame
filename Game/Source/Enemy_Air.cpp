@@ -15,7 +15,6 @@ EnemyAir::EnemyAir(int x, int y) : Entity(x, y)
 	birdAnim.speed = 0.1f;
 	currentAnim = &birdAnim;
 	playerWin = app->collisions->AddCollider({ 0, 0, 88, 4 }, Collider::ENEMY1, (Module*)app->entity);
-	playerWin2 = app->collisions->AddCollider({ 0, 52, 88, 4 }, Collider::ENEMY1, (Module*)app->entity);
 	collider = app->collisions->AddCollider({ 0, 6, 88, 56 }, Collider::ENEMY2, (Module*)app->entity);
 
 }
@@ -23,12 +22,10 @@ EnemyAir::~EnemyAir()
 {
 	collider->pendingToDelete = true;
 	playerWin->pendingToDelete = true;
-	playerWin2->pendingToDelete = true;
 }
 void EnemyAir::Update()
 {
 	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y-40);
-	playerWin2->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y + 23);
 	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y-34);
 	
 	currentAnim->Update();
@@ -46,8 +43,6 @@ void EnemyAir::Draw()
 		SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 		SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
 		SDL_RenderFillRect(app->render->renderer, &playerWin->rect);
-		SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-		SDL_RenderFillRect(app->render->renderer, &playerWin2->rect);
 		SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
 		SDL_RenderFillRect(app->render->renderer, &collider->rect);
 	}

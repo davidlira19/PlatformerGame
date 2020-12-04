@@ -123,7 +123,7 @@ bool Player::Start()
 	result = collisionPosition::null;
 	Intro = true;
 	godMode = false;
-	lifes = 3;
+	lifes = 6;
 	points = 0;
 	//LOAD TEXTURES
 	santa = app->tex->Load("Assets/textures/santa_animation.png");
@@ -150,10 +150,8 @@ bool Player::Start()
 	velocity = 0;
 
 	//collider = { Position.x, Position.y, 42, 76 };
-	SDL_Rect rect = { Position.x, Position.y, 40, 5 };
+	SDL_Rect rect = { Position.x, Position.y, 38, 5 };
 	playerDown = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
-	rect = { Position.x, Position.y, 40, 5 };
-	playerUp = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
 	rect = { Position.x, Position.y, 5, 74 };
 	playerRight = app->collisions->AddCollider(rect, Collider::PLAYERRIGHT, (Module*)this);
 	rect = { Position.x, Position.y, 5, 74 };
@@ -176,18 +174,7 @@ bool Player::Update(float dt)
 		noise = true;
 	}
 	LOG("%d %d", points, lifes);
-	if ((Position.x >= 1000 && Position.x <= 2140 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) || (Position.x >= 4900 && Position.x <= 5700 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN))
-	{
-		Position.x = 2141;
-		Position.y = 435;
-	}
-	else if (Position.x >= 2141 && Position.x <= 4903 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
-	{
-		Position.x = 4900;
-		Position.y = 563;
-	}
-	playerDown->SetPos(Position.x + app->render->camera.x + 47, Position.y + app->render->camera.y + 73);
-	playerUp->SetPos(Position.x + app->render->camera.x + 47, Position.y + app->render->camera.y - 5);
+	playerDown->SetPos(Position.x + app->render->camera.x + 48, Position.y + app->render->camera.y + 73);
 	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y + 0);
 	playerLeft->SetPos(Position.x + app->render->camera.x + 40, Position.y + app->render->camera.y + 0);
 	if (godMode == false)
@@ -409,23 +396,23 @@ bool Player::PostUpdate()
 
 	switch (lifes)
 	{
-	case 5:
+	case 10:
 		rect = { 0,0,270,58 };
 		app->render->DrawTexture(LifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
 		break;
-	case 4:
+	case 8:
 		rect = { 0,0,216,58 };
 		app->render->DrawTexture(LifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
 		break;
-	case 3:
+	case 6:
 		rect = { 0,0,162,58 };
 		app->render->DrawTexture(LifesTex,app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
-	case 2:
+	case 4:
 		rect = { 0,0,108,58 };
 		app->render->DrawTexture(LifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
-	case 1:
+	case 2:
 		rect = { 0,0,54,58 };
 		app->render->DrawTexture(LifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
@@ -452,7 +439,6 @@ bool Player::PostUpdate()
 				currentAnimation = &DeadLeft;
 			}
 			canMove = false;
-			
 		}
 	}
 	
@@ -511,7 +497,7 @@ void Player::JumpFunction(float dt)
 			currentAnimation = &JumpRight;
 		}
 		lastPosition = Position;
-		Position.y -= 150*(dt/1000);
+		Position.y -= 200*(dt/1000);
 		app->render->camera.y += 150*(dt/1000);
 		jumpingCount+= (dt/15);
 		
@@ -600,7 +586,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				points += 50;
 				app->audio->PlayFx(lifeFx);
-				lifes++;
+				lifes+=2;
 				c2->pendingToDelete = true;
 			}
 
@@ -643,7 +629,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				{
 					if (aux->data->collider == c2)
 					{
-						if (aux->data->deadZ == true) {}
+						if (aux->data->deadZ == true && Dead==false) {}
 						else
 						{
 							Dead = true;
@@ -663,7 +649,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				points += 50;
 				app->audio->PlayFx(lifeFx);
-				lifes++;
+				lifes+=2;
 				c2->pendingToDelete = true;
 			}
 		}
@@ -717,7 +703,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				points += 50;
 				app->audio->PlayFx(lifeFx);
-				lifes++;
+				lifes+=2;
 				c2->pendingToDelete = true;
 			}
 		}

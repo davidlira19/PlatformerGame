@@ -36,7 +36,7 @@ bool Scene::Awake()
 bool Scene::Start()
 {
 	// L03: DONE: Load map
-	app->LoadGameRequest("save_game.xml");
+	//app->LoadGameRequest("save_game.xml");
 	app->map->Enable();
 	app->map->Load("snow_tileset.tmx");
 	// Load music
@@ -90,18 +90,19 @@ bool Scene::Start()
 	app->entity->AddEntity(EntityTipe::EnemyAir, 5005, 560);
 	//ZOMBIES
 
-	app->entity->AddEntity(EntityTipe::EnemyGround, 1876, 450);
-	app->entity->AddEntity(EntityTipe::EnemyGround, 3022, 770);
-	app->entity->AddEntity(EntityTipe::EnemyGround, 3839, 644);
-	app->entity->AddEntity(EntityTipe::EnemyGround, 4619, 513);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 1876, 456);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 3022, 776);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 3839, 650);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 4619, 519);
 
 	//app->entity->AddEntity(EntityTipe::EnemyGround, 5405, 513);
-
+/*
 	app->entity->AddEntity(EntityTipe::EnemyGround, 1899, 435);
 	app->entity->AddEntity(EntityTipe::EnemyGround, 3034, 755);
 	app->entity->AddEntity(EntityTipe::EnemyGround, 3832, 628);
 	app->entity->AddEntity(EntityTipe::EnemyGround, 4631, 500);
 	app->entity->AddEntity(EntityTipe::EnemyGround, 5404, 499);
+	*/
 	//COIN
 	app->entity->AddEntity(EntityTipe::Coin, 1860, 435);
 	app->entity->AddEntity(EntityTipe::Coin, 3000, 755);
@@ -185,7 +186,16 @@ bool Scene::Update(float dt)
 			app->entity->drawItems = true;
 		}
 	}
-	
+	if ((app->player->Position.x >= 1000 && app->player->Position.x <= 2140 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) || (app->player->Position.x >= 4900 && app->player->Position.x <= 5700 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN))
+	{
+		app->player->Position.x = 2141;
+		app->player->Position.y = 435;
+	}
+	else if (app->player->Position.x >= 2141 && app->player->Position.x <= 4903 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+	{
+		app->player->Position.x = 4900;
+		app->player->Position.y = 563;
+	}
 	//CAMERA.X LIMITS
 	if (app->render->camera.x > 0)
 	{

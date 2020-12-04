@@ -85,9 +85,9 @@ bool Scene2::Start()
 	app->entity->AddEntity(EntityTipe::EnemyAir, 3528, 386);
 	app->entity->AddEntity(EntityTipe::EnemyAir, 1975, 671);
 	//ZOMBIES
-	app->entity->AddEntity(EntityTipe::EnemyGround, 4766, 1202);
-	app->entity->AddEntity(EntityTipe::EnemyGround, 5977, 1007);
-	app->entity->AddEntity(EntityTipe::EnemyGround, 1814, 1145);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 4766, 1217);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 5977, 1022);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 1814, 1160);
 	//COIN
 	app->entity->AddEntity(EntityTipe::Coin, 2552, 681);
 	app->entity->AddEntity(EntityTipe::Coin, 1971, 1066);
@@ -123,6 +123,16 @@ bool Scene2::PreUpdate()
 // Called each loop iteration
 bool Scene2::Update(float dt)
 {
+	if ((app->player->Position.x >= 0 && app->player->Position.x <= 2264 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) || (app->player->Position.x >= 4107 && app->player->Position.x <= 10000 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN))
+	{
+		app->player->Position.x = 2465;
+		app->player->Position.y = 1199;
+	}
+	else if (app->player->Position.x >= 2465 && app->player->Position.x <= 4108 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+	{
+		app->player->Position.x = 4108;
+		app->player->Position.y = 751;
+	}
 	if (freeCamera == false)
 	{
 		app->render->camera.x = (app->player->Position.x - 500) * -1;
@@ -146,7 +156,7 @@ bool Scene2::Update(float dt)
 	//CAMERA.Y LIMITS
 	if (app->render->camera.y <= -750)
 	{
-		app->render->camera.y = -750;
+		//app->render->camera.y = -750;
 	}
 	else if (app->render->camera.y >= 0)
 	{

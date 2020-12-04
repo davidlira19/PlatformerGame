@@ -85,9 +85,6 @@ void Map::Draw()
 							SDL_RenderFillRect(app->render->renderer, &app->player->playerDown->rect);
 
 							SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-							SDL_RenderFillRect(app->render->renderer, &app->player->playerUp->rect);
-
-							SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
 							SDL_RenderFillRect(app->render->renderer, &app->player->playerRight->rect);
 
 							SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);

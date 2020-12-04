@@ -9,51 +9,51 @@
 
 EnemyGround::EnemyGround(int x, int y) : Entity(x, y)
 {
-	zombieMoveLeft.PushBack({ 1,312 / 2,99 / 2,154 / 2 });
-	zombieMoveLeft.PushBack({ 222 / 2,312 / 2,100 / 2,154 / 2 });
-	zombieMoveLeft.PushBack({ 445 / 2,313 / 2,99 / 2,153 / 2 });
-	zombieMoveLeft.PushBack({ 667 / 2,313 / 2,99 / 2,153 / 2 });
-	zombieMoveLeft.PushBack({ 889 / 2,314 / 2,99 / 2,152 / 2 });
-	zombieMoveLeft.PushBack({ 1110 / 2,313 / 2,98 / 2,153 / 2 });
-	zombieMoveLeft.PushBack({ 1332 / 2,313 / 2,99 / 2,153 / 2 });
-	zombieMoveLeft.PushBack({ 1554 / 2,312 / 2,100 / 2,154 / 2 });
-	zombieMoveLeft.PushBack({ 1776 / 2,311 / 2,100 / 2,155 / 2 });
-	zombieMoveLeft.PushBack({ 1998 / 2,311 / 2,99 / 2,155 / 2 });
+	zombieMoveLeft.PushBack({ 0,156,52,77 });
+	zombieMoveLeft.PushBack({ 111,156,52,77 });
+	zombieMoveLeft.PushBack({ 222,156,52,77 });
+	zombieMoveLeft.PushBack({ 333,156,52,77 });
+	zombieMoveLeft.PushBack({ 444,156,52,77 });
+	zombieMoveLeft.PushBack({ 555,156,52,77 });
+	zombieMoveLeft.PushBack({ 666,156,52,77 });
+	zombieMoveLeft.PushBack({ 777,156,52,77 });
+	zombieMoveLeft.PushBack({ 888,156,52,77 });
+	zombieMoveLeft.PushBack({ 999,156,52,77 });
 	zombieMoveLeft.loop = true;
 	zombieMoveLeft.speed = 0.15f;
 
-	zombieMoveRight.PushBack({ 59,387,50,77 });
-	zombieMoveRight.PushBack({ 170,387,50,77 });
-	zombieMoveRight.PushBack({ 280,387,50,77 });
-	zombieMoveRight.PushBack({ 392,387,50,77 });
-	zombieMoveRight.PushBack({ 504,387,50,77 });
-	zombieMoveRight.PushBack({ 614,387,50,77 });
-	zombieMoveRight.PushBack({ 726,387,50,77 });
-	zombieMoveRight.PushBack({ 837,387,50,77 });
-	zombieMoveRight.PushBack({ 948,387,50,77 });
-	zombieMoveRight.PushBack({ 1059,387,50,77 });
+	zombieMoveRight.PushBack({ 1058,390,52,77 });
+	zombieMoveRight.PushBack({ 947,390,52,77 });
+	zombieMoveRight.PushBack({ 836,390,52,77 });
+	zombieMoveRight.PushBack({ 725,390,52,77 });
+	zombieMoveRight.PushBack({ 614,390,52,77 });
+	zombieMoveRight.PushBack({ 503,390,52,77 });
+	zombieMoveRight.PushBack({ 392,390,52,77 });
+	zombieMoveRight.PushBack({ 281,390,52,77 });
+	zombieMoveRight.PushBack({ 170,390,52,77 });
+	zombieMoveRight.PushBack({ 59,390,110,77 });
 	zombieMoveRight.loop = true;
 	zombieMoveRight.speed = 0.15f;
 
-	zombieDeadLeft.PushBack({ 17,2,58,72 });
-	zombieDeadLeft.PushBack({ 125,9,69,66 });
-	zombieDeadLeft.PushBack({ 239,19,71,55 });
-	zombieDeadLeft.PushBack({ 353,36,69,38 });
-	zombieDeadLeft.PushBack({ 464,38,75,36 });
-	zombieDeadLeft.PushBack({ 575,48,78,26 });
-	zombieDeadLeft.PushBack({ 679,61,96,13 });
-	zombieDeadLeft.PushBack({ 776,68,113,6 });
+	zombieDeadLeft.PushBack({ 0,0,110,77 });
+	zombieDeadLeft.PushBack({ 111,0,110,77 });
+	zombieDeadLeft.PushBack({ 222,0,110,77 });
+	zombieDeadLeft.PushBack({ 333,0,110,77 });
+	zombieDeadLeft.PushBack({ 444,0,110,77 });
+	zombieDeadLeft.PushBack({ 555,0,110,77 });
+	zombieDeadLeft.PushBack({ 666,0,110,77 });
+	zombieDeadLeft.PushBack({ 777,0,110,77 });
 	zombieDeadLeft.loop = false;
 	zombieDeadLeft.speed = 0.15f;
 
-	zombieDeadRight.PushBack({ 1034,236,58,72 });
-	zombieDeadRight.PushBack({ 915,243,69,66 });
-	zombieDeadRight.PushBack({ 799,254,71,55 });
-	zombieDeadRight.PushBack({ 687,271,69,38 });
-	zombieDeadRight.PushBack({ 570,273,75,36 });
-	zombieDeadRight.PushBack({ 455,283,78,26 });
-	zombieDeadRight.PushBack({ 334,296,96,13 });
-	zombieDeadRight.PushBack({ 220,303,113,6 });
+	zombieDeadRight.PushBack({ 999,234,110,77 });
+	zombieDeadRight.PushBack({ 888,234,110,77 });
+	zombieDeadRight.PushBack({ 777,234,110,77 });
+	zombieDeadRight.PushBack({ 666,234,110,77 });
+	zombieDeadRight.PushBack({ 555,234,110,77 });
+	zombieDeadRight.PushBack({ 444,234,110,77 });
+	zombieDeadRight.PushBack({ 333,234,110,77 });
+	zombieDeadRight.PushBack({ 222,234,110,77 });
 	zombieDeadRight.loop = false;
 	zombieDeadRight.speed = 0.15f;
 	//////
@@ -116,7 +116,7 @@ void EnemyGround::Draw()
 
 	if (&zombieDeadLeft == currentAnim|| &zombieDeadRight == currentAnim)
 	{
-		app->render->DrawTexture(groundEnemiesTexture, position.x, position.y + 50, &rect);
+		app->render->DrawTexture(groundEnemiesTexture, position.x, position.y-20, &rect);
 	}
 	else 
 	{
