@@ -344,6 +344,10 @@ bool Player::Update(float dt)
 			godMode = false;
 		}
 	}
+	if (lifes <= 0)
+	{
+		currentAnimation == &DeadRight;
+	}
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) 
 	{
 		app->SaveGameRequest("save_game.xml");
@@ -385,7 +389,6 @@ bool Player::Update(float dt)
 		{
 			Gravity(dt);
 		}
-		
 	}
 	if ((currentAnimation == &DeadRight || currentAnimation == &DeadLeft) && currentAnimation->HasFinished() == true)
 	{
@@ -425,11 +428,6 @@ bool Player::PostUpdate()
 		break;
 	default:
 		break;
-	}
-
-	if (canMove == false)
-	{
-		currentAnimation == &DeadRight;
 	}
 
 	if (Dead == true)
@@ -482,6 +480,7 @@ bool Player::CleanUp()
 	app->tex->UnLoad(santa);
 	app->tex->UnLoad(IntroTex);
 	app->scene->Disable();
+	app->scene2->Disable();
 	return true;
 }
 

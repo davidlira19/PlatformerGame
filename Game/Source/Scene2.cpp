@@ -35,18 +35,18 @@ bool Scene2::Awake()
 bool Scene2::Start()
 {
 	// L03: DONE: Load map
-	app->audio->Enable();
 	app->map->Enable();
 	app->map->Load("snow_tileset_lvl2.tmx");
-	// Load music
+
+	app->audio->Enable();
 	app->audio->PlayMusic("Assets/audio/music/christmas_music.ogg");
 	//Load Position
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
+	app->player->currentLevel = 2;
 	//Player position
 	app->player->Position.x = 600;
 	app->player->Position.y = 100;
-	app->player->currentLevel = 2;
 	//Load Texture
 	bg_snow = app->tex->Load("Assets/textures/snow_background.png");
 	//app->player->Enable();
@@ -57,17 +57,17 @@ bool Scene2::Start()
 	SDL_Rect rect;
 	for (int y = 0; y < app->map->data.tilesets.start->data->numTilesHeight; y++)
 	{
-		for (int x =0 ; x < app->map->data.tilesets.start->data->numTilesWidth; x++)
+		for (int x = 0; x < app->map->data.tilesets.start->data->numTilesWidth; x++)
 		{
 			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 61)
 			{
-				
-				rect = { x* app->map->data.tilesets.start->data->tileWidth ,y* app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
-			
+
+				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
+
 				colliders.Add(app->collisions->AddCollider(rect, Collider::FLOOR));
-				
+
 			}
-			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 62) 
+			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 62)
 			{
 				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
 
@@ -76,16 +76,23 @@ bool Scene2::Start()
 			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 63)
 			{
 				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
-				colliders.Add(app->collisions->AddCollider(rect, Collider::CHECKPOINT,(Module*)app->player));
+				colliders.Add(app->collisions->AddCollider(rect, Collider::CHECKPOINT, (Module*)app->player));
 			}
 		}
 	}
 	//BIRDS
-
+	app->entity->AddEntity(EntityTipe::EnemyAir, 5771, 809);
+	app->entity->AddEntity(EntityTipe::EnemyAir, 3528, 386);
+	app->entity->AddEntity(EntityTipe::EnemyAir, 1975, 671);
 	//ZOMBIES
-
+	app->entity->AddEntity(EntityTipe::EnemyGround, 4766, 1202);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 5977, 1007);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 1814, 1145);
 	//COIN
-
+	app->entity->AddEntity(EntityTipe::Coin, 2552, 681);
+	app->entity->AddEntity(EntityTipe::Coin, 1971, 1066);
+	//HEART
+	app->entity->AddEntity(EntityTipe::Heart, 692, 925);
 	return true;
 }
 
@@ -127,7 +134,6 @@ bool Scene2::Update(float dt)
 		app->map->ChangeCollisionsDraw();
 
 	}
-	LOG("%d %d", app->render->camera.x, app->render->camera.y);
 	//CAMERA.X LIMITS
 	if (app->render->camera.x > 0)
 	{
@@ -154,7 +160,7 @@ bool Scene2::Update(float dt)
 		{
 			freeCamera = false;
 		}
-		else
+		else if(freeCamera == false)
 		{
 			freeCamera = true;
 		}
@@ -230,7 +236,14 @@ bool Scene2::Update(float dt)
 	//	app->map->ResetPath();
 	//	app->map->finalPath.Clear();
 	//}
-
+	if (app->player->Position.y >= 1310)
+	{
+		app->player->Dead = true;
+	}
+	if (app->player->Position.x >= 6726)
+	{
+		app->player->Win = true;
+	}
 
 	//LOG("Position x: %d ------ Position y: %d", app->render->camera.x, app->render->camera.y);
 
@@ -269,9 +282,12 @@ bool Scene2::CleanUp()
 	app->render->camera.y = 0;
 	app->tex->UnLoad(bg_snow);
 	app->map->Disable();
+
+	app->entity->Disable();
 	app->audio->Unload();
-	colliders.Clear();
+	app->audio->Disable();
 	app->collisions->Disable();
+	colliders.Clear();
 	
 	
 	return true;
