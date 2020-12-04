@@ -34,7 +34,9 @@ public:
 	bool CleanUp();
 
 	bool freeCamera;
+
 private:
+
 	List<Collider*>colliders;
 	SDL_Texture* img;
 	SDL_Texture* bg_snow;

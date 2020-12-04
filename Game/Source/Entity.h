@@ -1,11 +1,13 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
+
 #include "Point.h"
 #include "Animation.h"
 #include "Textures.h"
 #include "Collider.h"
 #include "PathFinding.h"
 #include "Render.h"
+
 enum class EntityTipe
 {
 	NO_TYPE,
@@ -14,6 +16,7 @@ enum class EntityTipe
 	Coin,
 	Heart
 };
+
 class Entity
 {
 public:
@@ -40,11 +43,14 @@ public:
 public:
 	int dire;
 	void destr();
+
 	// Current Position in the world
 	iPoint position;
 	bool pendientedeelim = false;
+
 	// The enemy's texture
 	EntityTipe type;
+
 	// Sound fx when destroyed
 	SDL_Texture* airEnemiesTexture;
 	SDL_Texture* groundEnemiesTexture;
@@ -52,6 +58,7 @@ public:
 	SDL_Texture* lifeTexture;
 	Collider* playerWin = nullptr;
 	Collider* playerWin2 = nullptr;
+
 	// The enemy's collider
 	Collider* collider = nullptr;
 	PathFinding path;
@@ -61,8 +68,8 @@ public:
 	bool left;
 	bool drawPath;
 	unsigned int birdFx;
-protected:
 
+protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 	

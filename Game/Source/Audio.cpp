@@ -4,12 +4,11 @@
 #include "Defs.h"
 #include "Log.h"
 
-// NOTE: Recommended using: Additional Include Directories,
-// instead of 'hardcoding' library location path in code logic
+// Recommended using: Additional Include Directories, instead of 'hardcoding' library location path in code logic
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
-// NOTE: Library linkage is configured in Linker Options
+// Library linkage is configured in Linker Options
 #pragma comment(lib, "../Game/Source/External/SDL_mixer/libx86/SDL2_mixer.lib")
 
 Audio::Audio(bool startEnabled) : Module(startEnabled)
@@ -35,6 +34,7 @@ void Audio::Unload()
 	}
 	fx.Clear();
 }
+
 // Called before render is available
 bool Audio::Awake(pugi::xml_node& config)
 {
@@ -67,7 +67,6 @@ bool Audio::Awake(pugi::xml_node& config)
 		isEnabled = false;
 		ret = true;
 	}
-
 	Mix_VolumeMusic(10);
 
 	return ret;
@@ -96,6 +95,7 @@ bool Audio::Update(float dt)
 
 	return true;
 }
+
 // Called before quitting
 bool Audio::CleanUp()
 {
@@ -141,7 +141,7 @@ bool Audio::PlayMusic(const char* path, float fade_time)
 			Mix_HaltMusic();
 		}
 
-		// this call blocks until fade out is done
+		// This call blocks until fade out is done
 		Mix_FreeMusic(music);
 	}
 

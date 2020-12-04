@@ -9,9 +9,11 @@ class position;
 class collisions
 {
 public:
+
 	collisionPosition getCollision(position positionChek,SDL_Rect rect,int id);
 	bool checkIfCollision(int id, position positionToChek);
 };
+
 class Scene : public Module
 {
 public:
@@ -40,7 +42,9 @@ public:
 	bool CleanUp();
 
 	bool freeCamera;
+
 private:
+
 	List<Collider*>colliders;
 	SDL_Texture* img;
 	SDL_Texture* bg_snow;

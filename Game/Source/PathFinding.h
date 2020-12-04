@@ -1,10 +1,15 @@
 #ifndef _PATHFINDING_H_
 #define _PATHFINDING_H_
+
 #include"List.h"
 #include"Queue.h"
 #include"Point.h"
-class PathFinding {
+
+class PathFinding 
+{
+
 public:
+
 	PathFinding();
 	~PathFinding();
 	bool PropagateAStar();
@@ -19,11 +24,12 @@ public:
 	Queue<iPoint> frontier;
 	List<iPoint> finalPath;
 	bool semiFind;
+
 private:
+
 	List<iPoint> frontierr;
 	List<iPoint> breadcrumps;
 	List<iPoint> tileValue;
 };
-
 
 #endif

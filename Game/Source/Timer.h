@@ -15,6 +15,7 @@ public:
 	float ReadSec() const;
 
 private:
+
 	uint startTime;
 };
 

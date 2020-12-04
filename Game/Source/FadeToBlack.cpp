@@ -4,15 +4,13 @@
 #include "SDL/include/SDL_render.h"
 #include "Render.h"
 #include "Window.h"
+
 ModuleFadeToBlack::ModuleFadeToBlack(bool startEnabled) : Module(startEnabled)
 {
 	screenRect = { 0, 0, 1280,720 };
 }
 
-ModuleFadeToBlack::~ModuleFadeToBlack()
-{
-
-}
+ModuleFadeToBlack::~ModuleFadeToBlack() {}
 
 bool ModuleFadeToBlack::Start()
 {
@@ -33,13 +31,14 @@ bool ModuleFadeToBlack::Update(float dt)
 		++frameCount;
 		if (frameCount >= maxFadeFrames)
 		{
-			// TODO 1: Enable / Disable the modules received when FadeToBlacks(...) gets called
+			// Enable / Disable the modules received when FadeToBlacks(...) gets called
 			currentStep = Fade_Step::FROM_BLACK;
 
 			moduleToDisable->Disable();
 			moduleToEnable->Enable();
 		}
 	}
+
 	else
 	{
 		--frameCount;
@@ -77,7 +76,7 @@ bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEna
 		frameCount = 0;
 		maxFadeFrames = frames;
 
-		// TODO 1: How do we keep track of the modules received in this function?
+		// How do we keep track of the modules received in this function?
 		this->moduleToDisable = moduleToDisable;
 		this->moduleToEnable = moduleToEnable;
 

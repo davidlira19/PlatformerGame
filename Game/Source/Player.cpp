@@ -13,6 +13,7 @@
 #include"Dead.h"
 #include"Collisions.h"
 #include "EntityManager.h"
+
 Player::Player(bool startEnabled) : Module(startEnabled)
 {
 	//ANIMATION WHEN SANTA IS NOT MOVING RIGHT
@@ -38,7 +39,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	JumpRight.PushBack({ 811 / 2,1138 / 2,270 / 2,156 / 2 });
 	JumpRight.PushBack({ 1082 / 2,1138 / 2,270 / 2,156 / 2 });
 
-	JumpRight.speed = 0.2f;
+	JumpRight.speed = 0.12f;
 	JumpRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS DEAD RIGHT
@@ -87,7 +88,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	JumpLeft.PushBack({ 1621 / 2,1138 / 2,270 / 2,156 / 2 });
 	JumpLeft.PushBack({ 1351 / 2,1138 / 2,270 / 2,156 / 2 });
 
-	JumpLeft.speed = 0.2f;
+	JumpLeft.speed = 0.12f;
 	JumpLeft.loop = true;
 
 	//ANIMATION WHEN SANTA IS DEAD LEFT
@@ -115,6 +116,7 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	RunLeft.loop = true;
 	name.Create("player");
 }
+
 bool Player::Start()
 {
 	noise = true;
@@ -125,6 +127,7 @@ bool Player::Start()
 	godMode = false;
 	lifes = 6;
 	points = 0;
+
 	//LOAD TEXTURES
 	santa = app->tex->Load("Assets/textures/santa_animation.png");
 	WinTex = app->tex->Load("Assets/textures/win_screen.png");
@@ -136,20 +139,17 @@ bool Player::Start()
 	lifeFx = app->audio->LoadFx("Assets/audio/fx/life.wav");
 	checkpointFx = app->audio->LoadFx("Assets/audio/fx/checkpoint.wav");
 	LifesTex = app->tex->Load("Assets/textures/lifes.png");
-	//2300
 	currentAnimation = &StopRight;
+
 	//INITIALIZE VARIABLES
 	isJumping = false;
-
 	canMove = true;
-
 	Win = false;
 	Dead = false;
 
 	aceleration = 13.0f;
 	velocity = 0;
 
-	//collider = { Position.x, Position.y, 42, 76 };
 	SDL_Rect rect = { Position.x, Position.y, 38, 5 };
 	playerDown = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
 	rect = { Position.x, Position.y, 5, 74 };
@@ -161,14 +161,9 @@ bool Player::Start()
 	lastPosition = Position;
 	return true;
 }
-//void Player::updatePosition()
-//{
-//	collider.x = Position.x;
-//	collider.y = Position.y;
-//}
+
 bool Player::Update(float dt)
 {
-	//updatePosition();
 	if (Position.x>=2610 && Position.x <= 2620)
 	{
 		noise = true;
@@ -177,75 +172,6 @@ bool Player::Update(float dt)
 	playerDown->SetPos(Position.x + app->render->camera.x + 48, Position.y + app->render->camera.y + 73);
 	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y + 0);
 	playerLeft->SetPos(Position.x + app->render->camera.x + 40, Position.y + app->render->camera.y + 0);
-	if (godMode == false)
-	{
-		/*result = playerCollisions.getCollision(Position, collider, 61);
-		if (result == collisionPosition::down)
-		{
-			if (((currentAnimation == &JumpLeft) || (currentAnimation == &StopLeft) || (currentAnimation == &StopRight) || (currentAnimation == &JumpRight)) && (velocity > 0)) 
-			{
-				app->audio->PlayFx(landFx);
-			}
-			if (state == playerState::jumping)
-			{
-				JumpFunction();
-			}
-			else
-			{
-				if (lastanimation == &JumpLeft) 
-				{
-					lastanimation = currentAnimation;
-					currentAnimation = &StopLeft;
-				}
-				else if (lastanimation == &JumpRight)
-				{
-					lastanimation = currentAnimation;
-					currentAnimation = &StopRight;
-				}
-			}
-			velocity = 0;
-		}
-		else
-		{
-			if (state != playerState::jumping)
-			{
-				Gravity();
-			}
-		}
-		if (state == playerState::jumping)
-		{
-			currentAnimation->Update();
-			JumpFunction();
-		}
-		if (result == collisionPosition::right)
-		{
-			Position.x -= 10;
-			Position.y -= 4;
-		}
-		if (result == collisionPosition::downAndRight)
-		{
-			Position.x -= 4;
-			Position.y -= 4;
-		}
-		if (result == collisionPosition::downAndLeft)
-		{
-			Position.x += 4;
-			Position.y -= 4;
-		}
-		else if (result == collisionPosition::left)
-		{
-			Position.x += 10;
-			Position.y -= 4;
-		}*/
-	}
-
-
-	///////////
-	
- 
-	
-	//////////
-	//LOG("POSITION X: %d --- POSITION Y: %d", Position.x, Position.y);
 
 	//INPUT TO MOVE THE PLAYER
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && canMove == true)
@@ -262,12 +188,11 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &JumpRight;
 			}
-			//app->scene->freeCamera = false;
 			lastPosition = Position;
 		    Position.x += 300* (dt / 1000);
-			//////app->render->camera.x -= 300* (dt / 1000);
 		}
 	}
+
 	else if ((app->input->GetKey(SDL_SCANCODE_A)) == (KEY_REPEAT) && (canMove == true))
 	{
 		if (lateralsL == false) {
@@ -283,7 +208,6 @@ bool Player::Update(float dt)
 			}
 			lastPosition = Position;
 			Position.x -= 300 * (dt / 1000);
-			//////app->render->camera.x += 300 * (dt / 1000);
 		}
 	}
 
@@ -294,6 +218,7 @@ bool Player::Update(float dt)
 			Position.y -= 300 * (dt / 1000);
 		}
 	}
+
 	else if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) && (canMove == true))
 	{
 		if (godMode == true) 
@@ -321,7 +246,6 @@ bool Player::Update(float dt)
 			currentAnimation->Update();
 		}
 		
-		//JumpFunction();
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -334,45 +258,55 @@ bool Player::Update(float dt)
 			godMode = false;
 		}
 	}
+
 	if (lifes <= 0)
 	{
 		currentAnimation == &DeadRight;
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) 
 	{
 		app->SaveGameRequest("save_game.xml");
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
 		app->LoadGameRequest("save_game.xml");
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN || ((app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)) && currentLevel == 1)
 	{
 		app->fade->FadeToBlack(this, (Module*)app->scene, 60);
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN || ((app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)) && currentLevel == 2)
 	{
 		app->fade->FadeToBlack(this, (Module*)app->scene2, 60);
 	}
+
 	//JUST UPDATE THE ANIMATION
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
 	{
 		lastanimation = currentAnimation;
 		currentAnimation = &StopRight;
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
 	{
 		lastanimation = currentAnimation;
 		currentAnimation = &StopLeft;
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
 		DeadAction();
 	}
+
 	if (state == playerState::jumping)
 	{
 		JumpFunction(dt);
 	}
+
 	else if (state != playerState::null && state != playerState::jumping)
 	{
 		if (godMode == false) 
@@ -380,17 +314,19 @@ bool Player::Update(float dt)
 			Gravity(dt);
 		}
 	}
+
 	if ((currentAnimation == &DeadRight || currentAnimation == &DeadLeft) && currentAnimation->HasFinished() == true)
 	{
 		Dead = false;
 		app->fade->FadeToBlack(this, (Module*)app->dead, 50);
 	}
 	currentAnimation->Update();
+
 	return true;
 }
+
 bool Player::PostUpdate() 
 {
-	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(santa, Position.x, Position.y, &rect);
 
@@ -425,9 +361,9 @@ bool Player::PostUpdate()
 		if (lifes != 0)
 		{
 			Dead = false;
-			lifes--;
 			app->LoadGameRequest("save_game.xml");
 		}
+
 		if (lifes <= 0)
 		{
 			if (currentAnimation == &RunRight || currentAnimation == &StopRight || currentAnimation == &JumpRight)
@@ -444,19 +380,16 @@ bool Player::PostUpdate()
 	
 	if (Win == true)
 	{
-		/*canMove = false;
-		app->scene->freeCamera = false;
-		app->render->DrawTexture(WinTex, app->render->camera.x * -1, app->render->camera.y * -1);*/
 		app->fade->FadeToBlack(this, (Module*)app->winp, 50);
 		Win = false;
 		canMove = false;
 	}
 	
-
 	if (state != playerState::jumping) 
 	{
 		state = playerState::free;
 	}
+
 	lateralsR = false;
 	lateralsL = false;
 	return true;
@@ -480,6 +413,7 @@ void Player::Gravity(float dt)
 	Position.y += velocity * 0.05 * 100 * (dt / 1000);
 	app->render->camera.y -= velocity * 0.05 * 100 * (dt/1000);
 }
+
 //PLAYER FUNCTIONS
 void Player::JumpFunction(float dt)
 {
@@ -504,15 +438,14 @@ void Player::JumpFunction(float dt)
 	}
 	else 
 	{
-		//result = collisionPosition::null;
 		lastPosition = Position;
 		state = playerState::free;
 		jumpingCount = 0;
 		Position.y += 3;
-		//////app->render->camera.y -= 3;
 		velocity = 5.0f;
 	}
 }
+
 void Player::DeadAction()
 {
 	if ((currentAnimation == &RunRight) || (currentAnimation == &StopRight) || (currentAnimation == &JumpRight))
@@ -528,6 +461,7 @@ void Player::DeadAction()
 		currentAnimation->Update();
 	}
 }
+
 bool Player::SaveState(pugi::xml_node* nodo)
 {
 	pugi::xml_node node=nodo->append_child("data");
@@ -537,6 +471,7 @@ bool Player::SaveState(pugi::xml_node* nodo)
 	
 	return true;
 }
+
 bool Player::LoadState(pugi::xml_node* nodo)
 {
 	Position.x = nodo->child("data").attribute("x").as_int();
@@ -544,6 +479,7 @@ bool Player::LoadState(pugi::xml_node* nodo)
 	aceleration = nodo->child("data").attribute("aceleration").as_int();
 	return true;
 }
+
 void Player::OnCollision(Collider* c1, Collider* c2) 
 {
 	if (godMode == false)
@@ -572,8 +508,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 					}
 				}
 				Position.y += sum;
-			
-				
 				velocity = 0;
 			}
 			else if (c2->type == Collider::COIN)
@@ -589,7 +523,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				lifes+=2;
 				c2->pendingToDelete = true;
 			}
-
 		}
 		else if (c1->type == Collider::PLAYERRIGHT)
 		{
@@ -597,16 +530,12 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				if (state == playerState::null)
 				{
-					//state = playerState::free;
 					lateralsR = true;
 				}
 				else
 				{
-
 					lateralsR = true;
 				}
-
-
 			}
 			else if (c2->type == Collider::CHECKPOINT)
 			{
@@ -633,11 +562,11 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 						else
 						{
 							Dead = true;
+							lifes--;;
 						}
 					}
 					aux = aux->next;
 				}
-
 			}
 			else if (c2->type == Collider::COIN)
 			{
@@ -659,7 +588,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				if (state == playerState::null)
 				{
-					//state = playerState::free;
 					lateralsL = true;
 				}
 				else
@@ -667,15 +595,11 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 					lateralsL = true;
 				}
-
-
 			}
 			else if (c2->type == Collider::WALL)
 			{
-
 				state = playerState::free;
 				lateralsL = true;
-
 			}
 			else if (c2->type == Collider::ENEMY2)
 			{
@@ -688,6 +612,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 						else
 						{
 							Dead = true;
+							lifes--;
 						}
 					}
 					aux = aux->next;
@@ -709,6 +634,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 }
+
 bool Player::HasThePlayerMove() 
 {
 	iPoint actual, previous;
@@ -721,8 +647,8 @@ bool Player::HasThePlayerMove()
 	else {
 		return false;
 	}
-
 }
+
 iPoint Player:: GetPosition()
 {
 	iPoint point;

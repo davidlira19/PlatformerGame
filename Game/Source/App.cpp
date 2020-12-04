@@ -101,7 +101,7 @@ bool App::Awake()
 
 	bool ret = false;
 
-	// L01: DONE 3: Load config from XML
+	// Load config from XML
 	config = LoadConfig(configFile);
 
 	if (config.empty() == false)
@@ -110,12 +110,11 @@ bool App::Awake()
 		configApp = config.child("app");
 		configRenderer = config.child("renderer");
 
-		// L01: DONE 4: Read the title from the config file
+		// Read the title from the config file
 		title.Create(configApp.child("title").child_value());
 		organization.Create(configApp.child("organization").child_value());
 
-		// L08: TODO 1: Read from config file your framerate cap
-
+		// Read from config file your framerate cap
 		maxFPS = configApp.attribute("framerate_cap").as_int();
 		vsync = configRenderer.child("vsync").attribute("value").as_bool();
 	}
@@ -127,7 +126,7 @@ bool App::Awake()
 
 		while ((item != NULL) && (ret == true))
 		{
-			// L01: DONE 5: Add a new argument to the Awake method to receive a pointer to an xml node.
+			// Add a new argument to the Awake method to receive a pointer to an xml node.
 			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
 			// that can be used to read all variables for that module.
 			// Send nullptr if the node does not exist in config.xml
@@ -157,8 +156,6 @@ bool App::Start()
 			ret = item->data->Start();
 		}
 		item = item->next;
-		
-		
 	}
 
 	PERF_PEEK(ptimer);
@@ -201,13 +198,12 @@ pugi::xml_node App::LoadConfig(pugi::xml_document& configFile) const
 	return ret;
 }
 
-// ---------------------------------------------
 void App::PrepareUpdate()
 {
 	frameCount++;
 	lastSecFrameCount++;
 
-	// L08: TODO 4: Calculate the dt: differential time since last frame
+	// Calculate the dt: differential time since last frame
 	dt = frameTime.Read();
 	frameTime.Start();
 
@@ -233,14 +229,13 @@ void App::PrepareUpdate()
 	}
 }
 
-// ---------------------------------------------
 void App::FinishUpdate()
 {
-	// L02: DONE 1: This is a good place to call Load / Save methods
+	// This is a good place to call Load / Save methods
 	if (loadGameRequested == true) LoadGame();
 	if (saveGameRequested == true) SaveGame();
 
-	// L07: DONE 4: Now calculate:
+	// Now calculate:
 	// Amount of frames since startup
 	// Amount of time since game start (use a low resolution timer)
 	// Average FPS for the whole game life
@@ -272,16 +267,14 @@ void App::FinishUpdate()
 
 	app->win->SetTitle(title);
 
-	// L08: TODO 2: Use SDL_Delay to make sure you get your capped framerate
+	// Use SDL_Delay to make sure you get your capped framerate
 	if (maxFPS > 0 && lastFrameMs < maxFPS)
 	{
 		PERF_START(ptimer);
 		SDL_Delay(maxFPS);
 		PERF_PEEK(ptimer);
 
-		//LOG("We waited for %d milliseconds and got back in %.6f", maxFPS, perfTimerWait);
 	}
-	// L08: TODO 3: Measure accurately the amount of time SDL_Delay() actually waits compared to what was expected
 }
 
 // Call modules before each loop iteration
@@ -369,13 +362,11 @@ bool App::CleanUp()
 	return ret;
 }
 
-// ---------------------------------------
 int App::GetArgc() const
 {
 	return argc;
 }
 
-// ---------------------------------------
 const char* App::GetArgv(int index) const
 {
 	if(index < argc)
@@ -384,42 +375,33 @@ const char* App::GetArgv(int index) const
 		return NULL;
 }
 
-// ---------------------------------------
 const char* App::GetTitle() const
 {
 	return title.GetString();
 }
 
-// ---------------------------------------
 const char* App::GetOrganization() const
 {
 	return organization.GetString();
 }
 
 // Load / Save
-// L02: TODO 7: Implement the xml save method for current state
+// Implement the xml save method for current state
 void App::LoadGameRequest(const char* name)
 {
-	// NOTE: We should check if SAVE_STATE_FILENAME actually exist
+	// We should check if SAVE_STATE_FILENAME actually exist
 	loadGameRequested = true;
 	loadedGame.Create("save_game.xml");
 	
 }
 
-// ---------------------------------------
 void App::SaveGameRequest(const char* name) const
 {
-	// NOTE: We should check if SAVE_STATE_FILENAME actually exist and... should we overwriten
+	//We should check if SAVE_STATE_FILENAME actually exist and... should we overwriten
 	saveGameRequested = true;
-	/*if (savedGame != loadedGame)
-	{
-		
-	}*/
-	
-	
 }
-// L02: TODO 5: Create a method to actually load an xml file
-// then call all the modules to load themselves
+
+// Create a method to actually load an xml file then call all the modules to load themselves
 void App::LoadGame() 
 {
 	ListItem<Module*>* item = nullptr;
@@ -432,13 +414,13 @@ void App::LoadGame()
 	{
 		item->data->LoadState(&load.child(item->data->name.GetString()));
 	}
+
 	loadGameRequested = false;
 }
+
 void App::SaveGame() 
 {
-	
 	pugi::xml_document SaveFile;
-	//pugi::xml_node Save;
 	auto Save = SaveFile.append_child("game_state");
 	ListItem<Module*>* item = nullptr;
 
@@ -447,6 +429,7 @@ void App::SaveGame()
 		Save.append_child(item->data->name.GetString());
 		item->data->SaveState(&Save.child(item->data->name.GetString()));
 	}
+
 	SaveFile.save_file("save_game.xml");
 	saveGameRequested = false;
 }

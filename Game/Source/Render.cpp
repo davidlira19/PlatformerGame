@@ -1,7 +1,6 @@
 #include "App.h"
 #include "Window.h"
 #include "Render.h"
-
 #include "Defs.h"
 #include "Log.h"
 
@@ -17,8 +16,7 @@ Render::Render(bool startEnabled) : Module(startEnabled)
 }
 
 // Destructor
-Render::~Render()
-{}
+Render::~Render() {}
 
 // Called before render is available
 bool Render::Awake(pugi::xml_node& config)
@@ -56,7 +54,6 @@ bool Render::Awake(pugi::xml_node& config)
 bool Render::Start()
 {
 	LOG("render start");
-	// back background
 	SDL_RenderGetViewport(renderer, &viewport);
 	return true;
 }
@@ -87,12 +84,6 @@ bool Render::CleanUp()
 	SDL_DestroyRenderer(renderer);
 	return true;
 }
-
-// TODO 6: Create a method to load the state
-// for now it will be camera's x and y
-
-// TODO 8: Create a method to save the state of the renderer
-// using append_child and append_attribute
 
 void Render::SetBackgroundColor(SDL_Color color)
 {
@@ -144,7 +135,6 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 
 	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
 	{
-		//LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
 	}
 
@@ -202,8 +192,8 @@ bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b,
 
 	return ret;
 }
-// L02: TODO 6: Implement a method to load the state
-// for now load camera's x and y
+
+// Implement a method to load the state for now load camera's x and y
 bool Render::LoadState(pugi::xml_node* nodo) 
 {
 	camera.x = nodo->child("camera").attribute("x").as_int();
@@ -211,8 +201,8 @@ bool Render::LoadState(pugi::xml_node* nodo)
 	
 	return true;
 }
-// L02: TODO 8: Create a method to save the state of the renderer
-// using append_child and append_attribute
+
+// Create a method to save the state of the renderer using append_child and append_attribute
 bool Render::SaveState(pugi::xml_node* nodo) 
 {
 	pugi::xml_node node;
@@ -221,8 +211,8 @@ bool Render::SaveState(pugi::xml_node* nodo)
 	node.append_attribute("y") = camera.y;
 	return true;
 
-
 }
+
 bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
 {
 	bool ret = true;

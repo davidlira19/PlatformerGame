@@ -1,11 +1,9 @@
 #include "Enemy_Ground.h"
-
 #include "App.h"
 #include "EntityManager.h"
 #include "Collisions.h"
 #include "Player.h"
 #include "Audio.h"
-
 
 EnemyGround::EnemyGround(int x, int y) : Entity(x, y)
 {
@@ -56,7 +54,7 @@ EnemyGround::EnemyGround(int x, int y) : Entity(x, y)
 	zombieDeadRight.PushBack({ 222,234,110,77 });
 	zombieDeadRight.loop = false;
 	zombieDeadRight.speed = 0.15f;
-	//////
+
 	currentAnim = &zombieMoveLeft;
 
 	left = true;
@@ -67,11 +65,13 @@ EnemyGround::EnemyGround(int x, int y) : Entity(x, y)
 
 	zombieFx = app->audio->LoadFx("Assets/audio/fx/zombie_pain.wav");
 }
+
 EnemyGround::~EnemyGround()
 {
 	collider->pendingToDelete = true;
 	playerWin->pendingToDelete = true;
 }
+
 void EnemyGround::Update()
 {
 	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y - 20);
@@ -105,13 +105,14 @@ void EnemyGround::Update()
 		pendientedeelim = true;
 		cont = 0;
 	}
+
 	currentAnim->Update();
 
 	Entity::Update();
 }
+
 void EnemyGround::Draw()
 {
-
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 
 	if (&zombieDeadLeft == currentAnim|| &zombieDeadRight == currentAnim)
@@ -122,7 +123,6 @@ void EnemyGround::Draw()
 	{
 		app->render->DrawTexture(groundEnemiesTexture, position.x, position.y-20, &rect);
 	}
-	
 
 	if (app->entity->drawItems == true)
 	{

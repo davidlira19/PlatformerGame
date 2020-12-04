@@ -4,10 +4,12 @@
 #include "SDL/include/SDL_Rect.h"
 
 class Module;
+
 enum class collisionPosition
 {
 	down, right, left, downAndRight, downAndLeft, null
 };
+
 struct Collider
 {
 	enum Type
@@ -28,4 +30,5 @@ struct Collider
 	Type type;
 	Module* listener = nullptr;
 };
+
 #endif // !__COLLIDER_H__

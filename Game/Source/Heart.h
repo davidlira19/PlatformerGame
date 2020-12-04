@@ -1,7 +1,9 @@
 #ifndef __HEART_H__
 #define __HEART_H__
+
 #include "Animation.h"
 #include "Entity.h"
+
 class Heart : public Entity
 {
 public:
@@ -15,9 +17,10 @@ public:
 	void Draw();
 
 private:
-	// The position (as ratio) in the wave at a specific moment
 
+	// The position (as ratio) in the wave at a specific moment
 	Collider* playerWin = nullptr;
+
 	// The enemy animation
 	Animation heartAnim;
 

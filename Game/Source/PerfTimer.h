@@ -5,6 +5,7 @@
 
 class PerfTimer
 {
+
 public:
 
 	// Constructor
@@ -15,6 +16,7 @@ public:
 	uint ReadTicks() const;
 
 private:
+
 	uint startTime;
 	static uint frequency;
 };

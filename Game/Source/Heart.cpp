@@ -1,5 +1,4 @@
 #include "Heart.h"
-
 #include "App.h"
 #include "EntityManager.h"
 #include "Collisions.h"
@@ -15,16 +14,17 @@ Heart::Heart(int x, int y) : Entity(x, y)
 	heartAnim.PushBack({ 132,67,62,62 });
 	heartAnim.loop = true;
 	heartAnim.speed = 0.15f;
-	//////
+
 	currentAnim = &heartAnim;
+
 	collider = app->collisions->AddCollider({ 0, 0, 42, 42 }, Collider::HEART, (Module*)app->entity);
-
-
 }
+
 Heart::~Heart()
 {
 	collider->pendingToDelete = true;
 }
+
 void Heart::Update()
 {
 	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y + 6);
@@ -33,9 +33,9 @@ void Heart::Update()
 
 	Entity::Update();
 }
+
 void Heart::Draw()
 {
-
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 	app->render->DrawTexture(lifeTexture, position.x, position.y, &rect);
 

@@ -1,9 +1,7 @@
 #include "Enemy_Air.h"
-
 #include "EntityManager.h"
 #include "App.h"
 #include "Collisions.h"
-
 
 EnemyAir::EnemyAir(int x, int y) : Entity(x, y)
 {
@@ -18,11 +16,13 @@ EnemyAir::EnemyAir(int x, int y) : Entity(x, y)
 	collider = app->collisions->AddCollider({ 0, 6, 88, 56 }, Collider::ENEMY2, (Module*)app->entity);
 
 }
+
 EnemyAir::~EnemyAir() 
 {
 	collider->pendingToDelete = true;
 	playerWin->pendingToDelete = true;
 }
+
 void EnemyAir::Update()
 {
 	playerWin->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y-40);
@@ -32,9 +32,9 @@ void EnemyAir::Update()
 
 	Entity::Update();
 }
+
 void EnemyAir::Draw()
 {
-
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 	app->render->DrawTexture(airEnemiesTexture, position.x, position.y-40, &rect);
 

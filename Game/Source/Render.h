@@ -2,9 +2,7 @@
 #define __RENDER_H__
 
 #include "Module.h"
-
 #include "Point.h"
-
 #include "SDL/include/SDL.h"
 
 class Render : public Module
@@ -23,6 +21,7 @@ public:
 	bool Start();
 	bool LoadState(pugi::xml_node* nodo);
 	bool SaveState(pugi::xml_node* nodo);
+
 	// Called each loop iteration
 	bool PreUpdate();
 	bool Update(float dt);

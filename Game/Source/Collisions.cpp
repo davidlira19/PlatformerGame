@@ -1,7 +1,5 @@
 #include "Collisions.h"
-
 #include "App.h"
-
 #include "Render.h"
 #include "Input.h"
 #include "SDL/include/SDL_Scancode.h"
@@ -147,22 +145,21 @@ bool ModuleCollisions::PreUpdate()
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
-		// skip empty colliders
+		// Skip empty colliders
 		if (colliders[i] == nullptr)
 			continue;
 
 		c1 = colliders[i];
 
-		// avoid checking collisions already checked
+		// Avoid checking collisions already checked
 		for (uint k = i + 1; k < MAX_COLLIDERS; ++k)
 		{
-			// skip empty colliders
+			// Skip empty colliders
 			if (colliders[k] == nullptr)
 				continue;
 
 			c2 = colliders[k];
-			/*collisionPosition position = collisionPosition::null;
-			position = */
+
 			if (c1->Intersects(c2->rect))
 			{
 				
@@ -180,22 +177,17 @@ bool ModuleCollisions::PreUpdate()
 
 bool ModuleCollisions::Update()
 {
-
 	return true;
 }
 
 bool ModuleCollisions::PostUpdate()
 {
-
 	return true;
 }
-
 
 // Called before quitting
 bool ModuleCollisions::CleanUp()
 {
-	
-
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		if (colliders[i] != nullptr)

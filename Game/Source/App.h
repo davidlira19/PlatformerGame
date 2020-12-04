@@ -4,14 +4,12 @@
 #include "Module.h"
 #include "PerfTimer.h"
 #include "Timer.h"
-
 #include "List.h"
 
 #include "PugiXml/src/pugixml.hpp"
 
 #define CONFIG_FILENAME		"config.xml"
 #define SAVE_STATE_FILENAME "save_game.xml"
-
 
 // Modules
 class Window;
@@ -35,6 +33,7 @@ class App
 public:
 	void LoadGame();
 	void SaveGame();
+
 	// Constructor
 	App(int argc, char* args[]);
 
@@ -105,6 +104,7 @@ public:
 	Dead* dead;
 	Win* winp;
 	ModuleCollisions* collisions;
+
 private:
 
 	int argc;
@@ -114,7 +114,7 @@ private:
 
 	List<Module *> modules;
 
-	// TODO 2: Create new variables from pugui namespace:
+	// Create new variables from pugui namespace:
 	// a xml_document to store the config file and
 	// two xml_node to read specific branches of the xml
 	pugi::xml_document configFile;
@@ -122,15 +122,13 @@ private:
 	pugi::xml_node configApp;
 
 	uint frames;
-	//float dt;
 
 	mutable bool saveGameRequested;
 	bool loadGameRequested;
 	SString loadedGame;
 	SString savedGame;
 
-	// L07: DONE 4: Calculate some timing measures
-	// required variables are provided:
+	// Calculate some timing measures required variables are provided:
 	PerfTimer ptimer;
 	PerfTimer dif;
 

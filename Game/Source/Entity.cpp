@@ -1,8 +1,6 @@
 #include "Entity.h"
 #include "Textures.h"
 #include "App.h"
-//#include "Collisions.h"
-//#include "ModuleParticles.h"
 #include "Player.h"
 #include "EntityManager.h"
 #include "Audio.h"
@@ -25,10 +23,6 @@ Entity::~Entity()
 	
 }
 
-/*const Collider* Enem::GetCollider() const
-{
-	return collider;
-}*/
 void Entity::Update()
 {
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
@@ -46,11 +40,9 @@ void Entity::Update()
 	{
 		if (type == EntityTipe::EnemyAir || type == EntityTipe::EnemyGround) {
 			numCounter++;
-			//app->player->HasThePlayerMove()==true
 			if (app->player->HasThePlayerMove() == true || numCounter == 1)
 			{
 				path.ResetPath();
-				//hacer reset path
 				if (type == EntityTipe::EnemyAir) 
 				{
 					path.start = app->map->WorldToMap(position.x, position.y);
@@ -59,25 +51,25 @@ void Entity::Update()
 				{
 					path.start = app->map->WorldToMap(position.x, position.y);
 				}
-				
 
 				path.goal = app->map->WorldToMap(app->player->Position.x + 64, app->player->Position.y+128);
 				path.frontier.Push(path.start);
 				path.visited.Add(path.start);
 				path.PropagateAStar();
-
-
 			}
+
 			if (path.ExistPath() == true) 
 			{
 				if (drawPath == true)
 				{
 					path.DrawPath();
 				}
+
 				iPoint nextTile;
 				ListItem<iPoint>* auxiliar;
 				iPoint positionn = app->map->WorldToMap(position.x, position.y);
 				auxiliar = path.finalPath.end;
+
 				while (auxiliar != nullptr)
 				{
 					if (auxiliar->data == positionn)
@@ -92,7 +84,6 @@ void Entity::Update()
 					{
 						auxiliar = auxiliar->prev;
 					}
-
 				}
 				if (deadZ == false)
 				{
@@ -105,7 +96,6 @@ void Entity::Update()
 								dire = 1;
 								position.x += 2;
 							}
-							
 						}
 						else if (((app->player->Position.y > position.y - 64) || (app->player->Position.y < position.y + 64)) && (app->player->Position.x > position.x - 200) && app->map->numberToMap(position.x) > nextTile.x )
 						{
@@ -114,7 +104,6 @@ void Entity::Update()
 								dire = -1;
 								position.x -= 2;
 							}
-							
 						}
 						else 
 						{
@@ -143,8 +132,6 @@ void Entity::Update()
 								}
 							}		
 						}
-						
-				
 					}
 					if (type == EntityTipe::EnemyAir)
 					{
@@ -194,7 +181,6 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 			}
 			pendientedeelim = true;
 		}
-		
 	}
 	if (collidere->type == Collider::PLAYER || collidere->type == Collider::PLAYERLEFT || collidere->type == Collider::PLAYERRIGHT)
 	{
@@ -202,7 +188,6 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 		{
 			pendientedeelim = true;
 		}
-
 	}
 }
 

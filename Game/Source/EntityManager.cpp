@@ -8,9 +8,7 @@
 #include "SDL/include/SDL.h"
 #include "SDL_image/include/SDL_image.h"
 
-
 #define SPAWN_MARGIN 50
-
 
 EntityManager::EntityManager(bool startEnabled) : Module(startEnabled)
 {
@@ -38,7 +36,6 @@ bool EntityManager::Start()
 bool EntityManager::PreUpdate()
 {
 	// Remove all enemies scheduled for deletion
-
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
 	while (listItem != nullptr) {
@@ -69,11 +66,6 @@ bool EntityManager::Update(float dt)
 
 bool EntityManager::PostUpdate()
 {
-	/*for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (enemies[i] != nullptr)
-			enemies[i]->Draw();
-	}*/
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
 	while (listItem != nullptr) {
@@ -128,7 +120,7 @@ void EntityManager::HandleEnemiesSpawn()
 		if (spawnQueue[i].type != EntityTipe::NO_TYPE)
 		{
 			SpawnEnemy(spawnQueue[i]);
-			spawnQueue[i].type = EntityTipe::NO_TYPE; // Removing the newly spawned enemy from the queue
+			spawnQueue[i].type = EntityTipe::NO_TYPE;
 		}
 
 	}
@@ -136,15 +128,6 @@ void EntityManager::HandleEnemiesSpawn()
 
 void EntityManager::HandleEnemiesDespawn()
 {
-	// Iterate existing enemies
-	//for (int i = 0; i < MAX_ENEMIES; i++)
-	//{
-	//	if (enemies[i] != nullptr&&enemies[i]->pendientedeelim==true)
-	//	{
-	//		delete enemies[i];
-	//		enemies[i] = nullptr;
-	//	}
-	//}
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
 	while (listItem != nullptr) {
@@ -183,7 +166,6 @@ void EntityManager::SpawnEnemy(const EnemySpawnpoint& info)
 	entityList.Add(entity);
 }
 
-
 void EntityManager::OnCollision(Collider* c1, Collider* c2)
 {
 	ListItem<Entity*>* listItem;
@@ -194,12 +176,6 @@ void EntityManager::OnCollision(Collider* c1, Collider* c2)
 			if (c2->type == c2->PLAYERLEFT || c2->type == c2->PLAYERRIGHT)
 			{
 				break;
-				/*if (c1 == listItem->data->collider)
-				{
-					delete listItem->data;
-					entityList.Del(listItem);
-
-				}*/
 			}
 		}
 		else if (c1->type == c1->ENEMY1)
@@ -210,7 +186,6 @@ void EntityManager::OnCollision(Collider* c1, Collider* c2)
 				{
 					listItem->data->OnCollision(c1,c2);
 				}
-				
 			}
 		}
 		else if (c1->type == c1->COIN || c1->type == c1->HEART)
@@ -221,12 +196,10 @@ void EntityManager::OnCollision(Collider* c1, Collider* c2)
 				{
 					listItem->data->OnCollision(c1, c2);
 				}
-
 			}
 		}
 		listItem = listItem->next;
 	}
-
 }
 
 bool EntityManager::LoadState(pugi::xml_node* nodo)
@@ -251,8 +224,8 @@ bool EntityManager::LoadState(pugi::xml_node* nodo)
 		auxiliar = auxiliar.next_sibling();
 	}
 	return true;
-
 }
+
 bool EntityManager::SaveState(pugi::xml_node* nodo) 
 {
 	return 0;

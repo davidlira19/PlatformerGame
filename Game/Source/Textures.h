@@ -2,7 +2,6 @@
 #define __TEXTURES_H__
 
 #include "Module.h"
-
 #include "List.h"
 
 struct SDL_Texture;
@@ -36,6 +35,5 @@ public:
 
 	List<SDL_Texture*> textures;
 };
-
 
 #endif // __TEXTURES_H__

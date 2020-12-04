@@ -4,7 +4,6 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
-//#include "Scene.h"
 #include "Scene2.h"
 #include "Map.h"
 #include "Player.h"
@@ -19,8 +18,7 @@ Scene2::Scene2(bool startEnabled) : Module(startEnabled)
 }
 
 // Destructor
-Scene2::~Scene2()
-{}
+Scene2::~Scene2() {}
 
 // Called before render is available
 bool Scene2::Awake()
@@ -34,43 +32,42 @@ bool Scene2::Awake()
 // Called before the first frame
 bool Scene2::Start()
 {
-	// L03: DONE: Load map
+	// Load map
 	app->map->Enable();
 	app->map->Load("snow_tileset_lvl2.tmx");
 
 	app->audio->Enable();
 	app->audio->PlayMusic("Assets/audio/music/christmas_music.ogg");
+
 	//Load Position
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->player->currentLevel = 2;
+
 	//Player position
 	app->player->Position.x = 600;
 	app->player->Position.y = 100;
+
 	//Load Texture
 	bg_snow = app->tex->Load("Assets/textures/snow_background.png");
-	//app->player->Enable();
 	freeCamera = false;
 	app->collisions->Enable();
 	app->player->Enable();
 	app->entity->Enable();
 	SDL_Rect rect;
+
 	for (int y = 0; y < app->map->data.tilesets.start->data->numTilesHeight; y++)
 	{
 		for (int x = 0; x < app->map->data.tilesets.start->data->numTilesWidth; x++)
 		{
 			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 61)
 			{
-
 				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
-
 				colliders.Add(app->collisions->AddCollider(rect, Collider::FLOOR));
-
 			}
 			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 62)
 			{
 				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
-
 				colliders.Add(app->collisions->AddCollider(rect, Collider::WALL));
 			}
 			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 63)
@@ -80,17 +77,21 @@ bool Scene2::Start()
 			}
 		}
 	}
+
 	//BIRDS
 	app->entity->AddEntity(EntityTipe::EnemyAir, 5771, 809);
 	app->entity->AddEntity(EntityTipe::EnemyAir, 3528, 386);
 	app->entity->AddEntity(EntityTipe::EnemyAir, 1975, 671);
+
 	//ZOMBIES
-	app->entity->AddEntity(EntityTipe::EnemyGround, 4766, 1217);
-	app->entity->AddEntity(EntityTipe::EnemyGround, 5977, 1022);
-	app->entity->AddEntity(EntityTipe::EnemyGround, 1814, 1160);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 4766, 1226);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 5977, 1034);
+	app->entity->AddEntity(EntityTipe::EnemyGround, 1814, 1163);
+
 	//COIN
-	app->entity->AddEntity(EntityTipe::Coin, 2552, 681);
+	app->entity->AddEntity(EntityTipe::Coin, 2562, 681);
 	app->entity->AddEntity(EntityTipe::Coin, 1971, 1066);
+
 	//HEART
 	app->entity->AddEntity(EntityTipe::Heart, 692, 925);
 	return true;
@@ -113,9 +114,7 @@ bool Scene2::PreUpdate()
 				auxiliar = auxiliar->next;
 			}
 		}
-
 	}
-	
 	
 	return true;
 }
@@ -142,8 +141,8 @@ bool Scene2::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		app->map->ChangeCollisionsDraw();
-
 	}
+
 	//CAMERA.X LIMITS
 	if (app->render->camera.x > 0)
 	{
@@ -153,10 +152,11 @@ bool Scene2::Update(float dt)
 	{
 		app->render->camera.x = -5860;
 	}
+
 	//CAMERA.Y LIMITS
-	if (app->render->camera.y <= -750)
+	if (app->render->camera.y <= -1000)
 	{
-		//app->render->camera.y = -750;
+		app->render->camera.y = -1000;
 	}
 	else if (app->render->camera.y >= 0)
 	{
@@ -176,7 +176,6 @@ bool Scene2::Update(float dt)
 		}
 	}
 
-
 	if (freeCamera == true)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
@@ -191,6 +190,7 @@ bool Scene2::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 			app->render->camera.x -= 500 * (dt / 1000);
 	}
+
 	//DRAW BACKGROUND
 	app->render->DrawTexture(bg_snow, -3600/2, 0);
 	app->render->DrawTexture(bg_snow, 0, 0);
@@ -204,58 +204,15 @@ bool Scene2::Update(float dt)
 	app->render->DrawTexture(bg_snow, 10800 / 2, 893);
 	app->map->Draw();
 
-	//if (app->input->GetMouseButtonDown(1) == KEY_DOWN)
-	//{
-	//	app->input->GetMousePosition(app->map->goal.x, app->map->goal.y);
-	//	app->map->goal.x -= app->render->camera.x;
-	//	app->map->goal.y -= app->render->camera.y;
-	//	app->map->goal = app->map->WorldToMap(app->map->goal.x, app->map->goal.y);
-	//}
-	//if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
-	//{
-	//	if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
-	//	{
-	//		app->map->PropagateBFS();
-	//		//app->map->DrawPath();
-	//	}
-	//}
-	//if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-	//{
-	//	if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
-	//	{
-	//		app->map->PropagateAStar();
-	//		//app->map->DrawPath();
-	//	}
-	//}
-	//// L03: DONE 7: Set the window title with map/tileset info
-	//if ((app->map->goal.x != -1) && (app->map->goal.y != -1))
-	//{
-	//	TileSet* tileset = app->map->GetTilesetFromTileId(62);
-
-	//	SDL_Rect rec = tileset->GetTileRect(62);
-	//	iPoint pos = app->map->MapToWorld(app->map->goal.x, app->map->goal.y);
-
-	//	app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
-	//	app->map->DrawPath();
-	//}
-	//// L03: DONE 7: Set the window title with map/tileset info
-	//if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
-	//{
-	//	app->map->goal.x = -1;
-	//	app->map->goal.y = -1;
-	//	app->map->ResetPath();
-	//	app->map->finalPath.Clear();
-	//}
 	if (app->player->Position.y >= 1310)
 	{
 		app->player->Dead = true;
+		app->player->lifes-=2;
 	}
 	if (app->player->Position.x >= 6726)
 	{
 		app->player->Win = true;
 	}
-
-	//LOG("Position x: %d ------ Position y: %d", app->render->camera.x, app->render->camera.y);
 
 	return true;
 }
@@ -267,19 +224,6 @@ bool Scene2::PostUpdate()
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
-	
-	
-	/*ListItem<Collider*>* auxiliar;
-	auxiliar = colliders.start;
-	while (auxiliar != nullptr) {
-		SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
-		SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-		SDL_RenderFillRect(app->render->renderer, &auxiliar->data->rect);
-		auxiliar = auxiliar->next;
-	}*/
-	
-		
-	
 	
 	return ret;
 }
@@ -298,7 +242,6 @@ bool Scene2::CleanUp()
 	app->audio->Disable();
 	app->collisions->Disable();
 	colliders.Clear();
-	
 	
 	return true;
 }
