@@ -181,6 +181,7 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 	{
 		if (collideri->type == Collider::COIN ||collideri->type == Collider::HEART)
 		{
+			app->SaveGameRequest("save_game.xml");
 			pendientedeelim = true;
 		}
 	}
