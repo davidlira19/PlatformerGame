@@ -171,6 +171,17 @@ bool Player::Update(float dt)
 	playerRight->SetPos(position.x + app->render->camera.x + 90, position.y + app->render->camera.y + 0);
 	playerLeft->SetPos(position.x + app->render->camera.x + 40, position.y + app->render->camera.y + 0);
 
+	if ((currentAnimation == &deadLeft || currentAnimation == &deadRight))
+	{
+		canMove = false;
+
+	}
+	if (lifes <= 0 && (currentAnimation == &stopLeft || currentAnimation == &stopRight))
+	{
+		dead = false;
+		app->fade->FadeToBlack(this, (Module*)app->dead, 50);
+	}
+
 	//INPUT TO MOVE THE PLAYER
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && canMove == true)
 	{
