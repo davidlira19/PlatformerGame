@@ -1,8 +1,9 @@
-# PlatformerGame
+# Santa's Run
 
 ## Description
 
 Santa's Run is an amazing christmas platformer game developed by 2C1V for the Videogames Development subject in CITM (UPC), run and jump over the platforms to get into the igloo!
+Win points getting coins and killing enemies by jumping on them!
 
 ## Key Features
 
@@ -34,7 +35,8 @@ Santa's Run is an amazing christmas platformer game developed by 2C1V for the Vi
  - [DOWN] Move Down
 
  DEBUG KEYS
- - [F1/F2] Start from the first level
+ - [F1] Start from the first level
+ - [F2] Start from the second level
  - [F3] Start from the beginning of the current level
  - [F5] Save the current game state
  - [F6] Load the previous state
@@ -42,7 +44,8 @@ Santa's Run is an amazing christmas platformer game developed by 2C1V for the Vi
  - [F10] God Mode
  
  EXTRA KEYS
- - [3/4] Music volume up/down
+ - [4/3] Music volume up/down
+ - [T] Checkpoints Teleport
  - [M] Dead animation
  - [F] Enable/disable free camera mode
  - [ESC] Exit Game
@@ -76,3 +79,45 @@ https://creativecommons.org/licenses/by/3.0/
 Jump Landing Effect: https://opengameart.org/content/jump-landing-sound
 
 https://creativecommons.org/publicdomain/zero/1.0/
+
+Zombie animation: https://opengameart.org/content/zombie-animations
+
+https://creativecommons.org/licenses/by/3.0/
+
+Bird Animation: https://opengameart.org/content/bird-cute-bird
+
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Points Font: https://opengameart.org/content/custom-numeric-fonts
+
+https://creativecommons.org/licenses/by/3.0/
+
+Zombie Death Sound: https: //opengameart.org/content/zombie-pain
+
+https://creativecommons.org/licenses/by/3.0/
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Life Sound Effect: https://opengameart.org/content/spell-3
+
+https://creativecommons.org/licenses/by/3.0/
+https://creativecommons.org/licenses/by-sa/3.0/
+http://www.gnu.org/licenses/gpl-3.0.html
+http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+https://opengameart.org/content/oga-by-30-faq
+
+Checkpoint Sound Effect: https://opengameart.org/content/point-bell
+
+https://opengameart.org/content/oga-by-30-faq
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Coin Sound Effect: https://opengameart.org/content/coin-drop
+
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Fall Sound Effect: https://opengameart.org/content/falling-body
+
+https://creativecommons.org/licenses/by-sa/3.0/
+http://www.gnu.org/licenses/gpl-3.0.html
+http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+
+(Coin and hearts animations and textures are self made)
