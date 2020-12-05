@@ -128,16 +128,16 @@ bool Player::Start()
 	lifes = 3;
 	points = 0;
 	//LOAD TEXTURES
-	santa = app->tex->Load("Assets/textures/santa_animation.png");
-	winTex = app->tex->Load("Assets/textures/win_screen.png");
-	deadTex = app->tex->Load("Assets/textures/dead_screen.png");
-	introTex = app->tex->Load("Assets/textures/title_screen.png");
-	jumpFx = app->audio->LoadFx("Assets/audio/fx/santa_jump.ogg");
-	landFx = app->audio->LoadFx("Assets/audio/fx/santa_land.wav");
-	coinFx = app->audio->LoadFx("Assets/audio/fx/coin_drop.wav");
-	lifeFx = app->audio->LoadFx("Assets/audio/fx/life.wav");
-	checkpointFx = app->audio->LoadFx("Assets/audio/fx/checkpoint.wav");
-	lifesTex = app->tex->Load("Assets/textures/lifes.png");
+	santa = app->tex->Load("Assets/Textures/santa_animation.png");
+	winTex = app->tex->Load("Assets/Textures/win_screen.png");
+	deadTex = app->tex->Load("Assets/Textures/dead_screen.png");
+	introTex = app->tex->Load("Assets/Textures/title_screen.png");
+	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/santa_jump.ogg");
+	landFx = app->audio->LoadFx("Assets/Audio/Fx/santa_land.wav");
+	coinFx = app->audio->LoadFx("Assets/Audio/Fx/coin_drop.wav");
+	lifeFx = app->audio->LoadFx("Assets/Audio/Fx/life.wav");
+	checkpointFx = app->audio->LoadFx("Assets/Audio/Fx/checkpoint.wav");
+	lifesTex = app->tex->Load("Assets/Textures/lifes.png");
 	currentAnimation = &stopRight;
 
 	//INITIALIZE VARIABLES
@@ -147,7 +147,7 @@ bool Player::Start()
 	dead = false;
 
 	acceleration = 13.0f;
-	velocity = 0;
+	velocity = 0.0f;
 
 	SDL_Rect rect = { position.x, position.y, 38, 5 };
 	playerDown = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
@@ -420,9 +420,9 @@ bool Player::CleanUp()
 void Player::Gravity(float dt)
 {
 	lastPosition = position;
-	velocity += acceleration * 0.05 * 100 * (dt / 1000);
-	position.y += velocity * 0.05 * 100 * (dt / 1000);
-	app->render->camera.y -= velocity * 0.05 * 100 * (dt / 1000);
+	velocity += acceleration * 0.05f * 100.0f * (dt / 1000.0f);
+	position.y += velocity * 0.05f * 100.0f * (dt / 1000.0f);
+	app->render->camera.y -= velocity * 0.05f * 100.0f * (dt / 1000.0f);
 }
 
 //PLAYER FUNCTIONS
@@ -548,7 +548,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 					}
 				}
 				position.y += sum;
-				velocity = 0;
+				velocity = 0.0f;
 			}
 			else if (c2->type == Collider::COIN)
 			{

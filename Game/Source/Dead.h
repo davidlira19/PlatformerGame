@@ -32,7 +32,7 @@ public:
 	// Called before the first frame
 	bool Start() 
 	{
-		deadScreen = app->tex->Load("Assets/textures/dead_screen.png");
+		deadScreen = app->tex->Load("Assets/Textures/dead_screen.png");
 	
 		return true;
 	}

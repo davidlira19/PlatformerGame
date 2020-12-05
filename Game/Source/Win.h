@@ -33,7 +33,7 @@ public:
 	// Called before the first frame
 	bool Start() 
 	{
-		winScreen = app->tex->Load("Assets/textures/win_screen.png");
+		winScreen = app->tex->Load("Assets/Textures/win_screen.png");
 		return true;
 	}
 

@@ -38,7 +38,7 @@ bool Scene2::Start()
 	app->map->Load("snow_tileset_lvl2.tmx");
 
 	app->audio->Enable();
-	app->audio->PlayMusic("Assets/audio/music/christmas_music.ogg");
+	app->audio->PlayMusic("Assets/Audio/Music/christmas_music.ogg");
 
 	//Load Position
 	app->render->camera.x = 0;
@@ -50,9 +50,9 @@ bool Scene2::Start()
 	app->player->position.y = 380;
 
 	//Load Texture
-	mysteryTex = app->tex->Load("Assets/textures/mystery.png");
-	screamFx = app->audio->LoadFx("Assets/audio/fx/scream.wav");
-	bgSnow = app->tex->Load("Assets/textures/snow_background.png");
+	mysteryTex = app->tex->Load("Assets/Textures/mystery.png");
+	screamFx = app->audio->LoadFx("Assets/Audio/Fx/scream.wav");
+	bgSnow = app->tex->Load("Assets/Textures/snow_background.png");
 	freeCamera = false;
 	app->collisions->Enable();
 	app->player->Enable();
@@ -100,7 +100,7 @@ bool Scene2::Start()
 	app->entity->AddEntity(EntityTipe::Heart, 692, 925);
 
 	char lookupTable[] = { "0123456789" };
-	numbers = app->fonts->Load("Assets/textures/numbers.png", lookupTable, 1);
+	numbers = app->fonts->Load("Assets/Textures/numbers.png", lookupTable, 1);
 
 	return true;
 }

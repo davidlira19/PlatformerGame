@@ -28,7 +28,7 @@ public:
 
 	// Called before the first frame
 	bool Start() {
-		intro=app->tex->Load("Assets/textures/logo_screen.png");
+		intro=app->tex->Load("Assets/Textures/logo_screen.png");
 		return true;
 	}
 

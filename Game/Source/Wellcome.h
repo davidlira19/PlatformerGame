@@ -31,7 +31,7 @@ public:
 	// Called before the first frame
 	bool Start() 
 	{
-		wellcome = app->tex->Load("Assets/textures/title_screen.png");
+		wellcome = app->tex->Load("Assets/Textures/title_screen.png");
 		return true;
 	}
 

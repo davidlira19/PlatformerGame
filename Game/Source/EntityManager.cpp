@@ -20,12 +20,12 @@ EntityManager::~EntityManager() {}
 bool EntityManager::Start()
 {
 
-	birdTexture = app->tex->Load("Assets/textures/bird_animation.png");
-	zombieTexture = app->tex->Load("Assets/textures/zombie_animation.png");
-	coinTexture = app->tex->Load("Assets/textures/coin_animation.png");
-	heartTexture = app->tex->Load("Assets/textures/heart_animation.png");
-	birdFx = app->audio->LoadFx("Assets/audio/fx/fall.wav");
-	zombieFx = app->audio->LoadFx("Assets/audio/fx/zombie_pain.wav");
+	birdTexture = app->tex->Load("Assets/Textures/bird_animation.png");
+	zombieTexture = app->tex->Load("Assets/Textures/zombie_animation.png");
+	coinTexture = app->tex->Load("Assets/Textures/coin_animation.png");
+	heartTexture = app->tex->Load("Assets/Textures/heart_animation.png");
+	birdFx = app->audio->LoadFx("Assets/Audio/Fx/fall.wav");
+	zombieFx = app->audio->LoadFx("Assets/Audio/Fx/zombie_pain.wav");
 
 	drawItems = false;
 

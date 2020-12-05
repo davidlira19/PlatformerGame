@@ -42,7 +42,7 @@ bool Scene::Start()
 
 	// Load music
 	app->audio->Enable();
-	app->audio->PlayMusic("Assets/audio/music/christmas_music.ogg");
+	app->audio->PlayMusic("Assets/Audio/Music/christmas_music.ogg");
 
 	//Load Position
 	app->render->camera.x = -580;
@@ -54,7 +54,7 @@ bool Scene::Start()
 	app->player->position.y = 610;
 
 	//Load Texture
-	bgSnow = app->tex->Load("Assets/textures/snow_background.png");
+	bgSnow = app->tex->Load("Assets/Textures/snow_background.png");
 	freeCamera = false;
 	app->collisions->Enable();
 	app->player->Enable();
@@ -104,7 +104,7 @@ bool Scene::Start()
 	app->entity->AddEntity(EntityTipe::Heart, 1000, 435);
 
 	char lookupTable[] = { "0123456789" };
-	numbers = app->fonts->Load("Assets/textures/numbers.png", lookupTable, 1);
+	numbers = app->fonts->Load("Assets/Textures/numbers.png", lookupTable, 1);
 
 	return true;
 }
