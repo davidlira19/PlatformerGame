@@ -72,19 +72,22 @@ void Map::Draw()
 					{
 						SDL_Rect rect = tileset->GetTileRect(tileId);
 						iPoint point = MapToWorld(x, y);
-						app->render->DrawTexture(tileset->textureTile, point.x, point.y, &rect);
-						if (tileset->name == "colisiones")
+						if (point.x + app->render->camera.x >-62 && point.x + app->render->camera.x < app->render->camera.w&& point.y + app->render->camera.y >-62 && point.y + app->render->camera.y < app->render->camera.h)
 						{
-							SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
-							SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-							SDL_RenderFillRect(app->render->renderer, &app->player->playerDown->rect);
+							app->render->DrawTexture(tileset->textureTile, point.x, point.y, &rect);
+							if (tileset->name == "colisiones")
+							{
+								SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+								SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+								SDL_RenderFillRect(app->render->renderer, &app->player->playerDown->rect);
 
-							SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-							SDL_RenderFillRect(app->render->renderer, &app->player->playerRight->rect);
+								SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+								SDL_RenderFillRect(app->render->renderer, &app->player->playerRight->rect);
 
-							SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
-							SDL_RenderFillRect(app->render->renderer, &app->player->playerLeft->rect);
+								SDL_SetRenderDrawColor(app->render->renderer, 0, 255, 255, 80);
+								SDL_RenderFillRect(app->render->renderer, &app->player->playerLeft->rect);
 
+							}
 						}
 					}
 				}

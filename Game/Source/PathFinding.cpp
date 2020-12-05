@@ -149,6 +149,20 @@ bool PathFinding::IsWalkable(int x, int y) const
 void PathFinding::DrawPath()
 {
 		iPoint point;
+
+		ListItem<iPoint>* auxiliar = visited.start;
+		while (auxiliar)
+		{
+			point = auxiliar->data;
+			TileSet* tileset = app->map->GetTilesetFromTileId(65);
+
+			SDL_Rect rec = tileset->GetTileRect(65);
+			iPoint pos = app->map->MapToWorld(point.x, point.y);
+
+			app->render->DrawTexture(tileset->textureTile, pos.x, pos.y, &rec);
+			auxiliar = auxiliar->next;
+		}
+
 		ListItem<iPoint>* auxiliarItem = finalPath.start;
 		while (auxiliarItem)
 		{
@@ -162,6 +176,7 @@ void PathFinding::DrawPath()
 
 			auxiliarItem = auxiliarItem->next;
 		}
+		
 }
 
 // Draw frontier
