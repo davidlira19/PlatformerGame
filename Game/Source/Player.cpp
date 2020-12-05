@@ -17,103 +17,103 @@
 Player::Player(bool startEnabled) : Module(startEnabled)
 {
 	//ANIMATION WHEN SANTA IS NOT MOVING RIGHT
-	StopRight.PushBack({ 1082 / 2,327 / 2,270 / 2,156 / 2 });
-	StopRight.PushBack({ 1 / 2,597 / 2,270 / 2,156 / 2 });
-	StopRight.PushBack({ 271 / 2,597 / 2,270 / 2,156 / 2 });
-	StopRight.PushBack({ 541 / 2,597 / 2,270 / 2,156 / 2 });
-	StopRight.PushBack({ 811 / 2,597 / 2,270 / 2,156 / 2 });
-	StopRight.PushBack({ 1082 / 2,597 / 2,270 / 2,156 / 2 });
-	StopRight.PushBack({ 1 / 2,867 / 2,270 / 2,156 / 2 });
-	StopRight.PushBack({ 271 / 2,867 / 2,270 / 2,156 / 2 });
+	stopRight.PushBack({ 1082 / 2,327 / 2,270 / 2,156 / 2 });
+	stopRight.PushBack({ 1 / 2,597 / 2,270 / 2,156 / 2 });
+	stopRight.PushBack({ 271 / 2,597 / 2,270 / 2,156 / 2 });
+	stopRight.PushBack({ 541 / 2,597 / 2,270 / 2,156 / 2 });
+	stopRight.PushBack({ 811 / 2,597 / 2,270 / 2,156 / 2 });
+	stopRight.PushBack({ 1082 / 2,597 / 2,270 / 2,156 / 2 });
+	stopRight.PushBack({ 1 / 2,867 / 2,270 / 2,156 / 2 });
+	stopRight.PushBack({ 271 / 2,867 / 2,270 / 2,156 / 2 });
 
-	StopRight.speed = 0.2f;
-	StopRight.loop = true;
+	stopRight.speed = 0.2f;
+	stopRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS JUMPING RIGHT
-	JumpRight.PushBack({ 541 / 2,867 / 2,270 / 2,156 / 2 });
-	JumpRight.PushBack({ 811 / 2,867 / 2,270 / 2,156 / 2 });
-	JumpRight.PushBack({ 1082 / 2,867 / 2,270 / 2,156 / 2 });
-	JumpRight.PushBack({ 1 / 2,1138 / 2,270 / 2,156 / 2 });
-	JumpRight.PushBack({ 271 / 2,1138 / 2,270 / 2,156 / 2 });
-	JumpRight.PushBack({ 541 / 2,1138 / 2,270 / 2,156 / 2 });
-	JumpRight.PushBack({ 811 / 2,1138 / 2,270 / 2,156 / 2 });
-	JumpRight.PushBack({ 1082 / 2,1138 / 2,270 / 2,156 / 2 });
+	jumpRight.PushBack({ 541 / 2,867 / 2,270 / 2,156 / 2 });
+	jumpRight.PushBack({ 811 / 2,867 / 2,270 / 2,156 / 2 });
+	jumpRight.PushBack({ 1082 / 2,867 / 2,270 / 2,156 / 2 });
+	jumpRight.PushBack({ 1 / 2,1138 / 2,270 / 2,156 / 2 });
+	jumpRight.PushBack({ 271 / 2,1138 / 2,270 / 2,156 / 2 });
+	jumpRight.PushBack({ 541 / 2,1138 / 2,270 / 2,156 / 2 });
+	jumpRight.PushBack({ 811 / 2,1138 / 2,270 / 2,156 / 2 });
+	jumpRight.PushBack({ 1082 / 2,1138 / 2,270 / 2,156 / 2 });
 
-	JumpRight.speed = 0.12f;
-	JumpRight.loop = true;
+	jumpRight.speed = 0.12f;
+	jumpRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS DEAD RIGHT
-	DeadRight.PushBack({ 1 / 2,57 / 2,270 / 2,156 / 2 });
-	DeadRight.PushBack({ 271 / 2,57 / 2,270 / 2,156 / 2 });
-	DeadRight.PushBack({ 541 / 2,57 / 2,270 / 2,156 / 2 });
-	DeadRight.PushBack({ 811 / 2,57 / 2,270 / 2,156 / 2 });
-	DeadRight.PushBack({ 1082 / 2,57 / 2,270 / 2,156 / 2 });
-	DeadRight.PushBack({ 1 / 2,327 / 2,270 / 2,156 / 2 });
-	DeadRight.PushBack({ 271 / 2,327 / 2,270 / 2,156 / 2 });
-	DeadRight.PushBack({ 541 / 2,327 / 2,270 / 2,156 / 2 });
+	deadRight.PushBack({ 1 / 2,57 / 2,270 / 2,156 / 2 });
+	deadRight.PushBack({ 271 / 2,57 / 2,270 / 2,156 / 2 });
+	deadRight.PushBack({ 541 / 2,57 / 2,270 / 2,156 / 2 });
+	deadRight.PushBack({ 811 / 2,57 / 2,270 / 2,156 / 2 });
+	deadRight.PushBack({ 1082 / 2,57 / 2,270 / 2,156 / 2 });
+	deadRight.PushBack({ 1 / 2,327 / 2,270 / 2,156 / 2 });
+	deadRight.PushBack({ 271 / 2,327 / 2,270 / 2,156 / 2 });
+	deadRight.PushBack({ 541 / 2,327 / 2,270 / 2,156 / 2 });
 
-	DeadRight.speed = 0.2f;
-	DeadRight.loop = false;
+	deadRight.speed = 0.2f;
+	deadRight.loop = false;
 
 	//ANIMATION WHEN SANTA IS RUNNING RIGHT
-	RunRight.PushBack({ 1 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 271 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 541 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 811 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunRight.PushBack({ 1082 / 2,1407 / 2,260 / 2,156 / 2 });
+	runRight.PushBack({ 1 / 2,1407 / 2,260 / 2,156 / 2 });
+	runRight.PushBack({ 271 / 2,1407 / 2,260 / 2,156 / 2 });
+	runRight.PushBack({ 541 / 2,1407 / 2,260 / 2,156 / 2 });
+	runRight.PushBack({ 811 / 2,1407 / 2,260 / 2,156 / 2 });
+	runRight.PushBack({ 1082 / 2,1407 / 2,260 / 2,156 / 2 });
 
-	RunRight.speed = 0.2f;
-	RunRight.loop = true;
+	runRight.speed = 0.2f;
+	runRight.loop = true;
 
 	//ANIMATION WHEN SANTA IS NOT MOVING LEFT
-	StopLeft.PushBack({ 1351 / 2,327 / 2,270 / 2,156 / 2 });
-	StopLeft.PushBack({ 2431 / 2,597 / 2,270 / 2,156 / 2 });
-	StopLeft.PushBack({ 2162 / 2,597 / 2,270 / 2,156 / 2 });
-	StopLeft.PushBack({ 1891 / 2,597 / 2,270 / 2,156 / 2 });
-	StopLeft.PushBack({ 1621 / 2,597 / 2,270 / 2,156 / 2 });
-	StopLeft.PushBack({ 1351 / 2,597 / 2,270 / 2,156 / 2 });
-	StopLeft.PushBack({ 2432 / 2,867 / 2,270 / 2,156 / 2 });
-	StopLeft.PushBack({ 2162 / 2,867 / 2,270 / 2,156 / 2 });
+	stopLeft.PushBack({ 1351 / 2,327 / 2,270 / 2,156 / 2 });
+	stopLeft.PushBack({ 2431 / 2,597 / 2,270 / 2,156 / 2 });
+	stopLeft.PushBack({ 2162 / 2,597 / 2,270 / 2,156 / 2 });
+	stopLeft.PushBack({ 1891 / 2,597 / 2,270 / 2,156 / 2 });
+	stopLeft.PushBack({ 1621 / 2,597 / 2,270 / 2,156 / 2 });
+	stopLeft.PushBack({ 1351 / 2,597 / 2,270 / 2,156 / 2 });
+	stopLeft.PushBack({ 2432 / 2,867 / 2,270 / 2,156 / 2 });
+	stopLeft.PushBack({ 2162 / 2,867 / 2,270 / 2,156 / 2 });
 
-	StopLeft.speed = 0.2f;
-	StopLeft.loop = true;
+	stopLeft.speed = 0.2f;
+	stopLeft.loop = true;
 
 	//ANIMATION WHEN SANTA IS JUMPING LEFT
-	JumpLeft.PushBack({ 1891 / 2,867 / 2,270 / 2,156 / 2 });
-	JumpLeft.PushBack({ 1621 / 2,867 / 2,270 / 2,156 / 2 });
-	JumpLeft.PushBack({ 1351 / 2,867 / 2,270 / 2,156 / 2 });
-	JumpLeft.PushBack({ 2432 / 2,1138 / 2,270 / 2,156 / 2 });
-	JumpLeft.PushBack({ 2162 / 2,1138 / 2,270 / 2,156 / 2 });
-	JumpLeft.PushBack({ 1891 / 2,1138 / 2,270 / 2,156 / 2 });
-	JumpLeft.PushBack({ 1621 / 2,1138 / 2,270 / 2,156 / 2 });
-	JumpLeft.PushBack({ 1351 / 2,1138 / 2,270 / 2,156 / 2 });
+	jumpLeft.PushBack({ 1891 / 2,867 / 2,270 / 2,156 / 2 });
+	jumpLeft.PushBack({ 1621 / 2,867 / 2,270 / 2,156 / 2 });
+	jumpLeft.PushBack({ 1351 / 2,867 / 2,270 / 2,156 / 2 });
+	jumpLeft.PushBack({ 2432 / 2,1138 / 2,270 / 2,156 / 2 });
+	jumpLeft.PushBack({ 2162 / 2,1138 / 2,270 / 2,156 / 2 });
+	jumpLeft.PushBack({ 1891 / 2,1138 / 2,270 / 2,156 / 2 });
+	jumpLeft.PushBack({ 1621 / 2,1138 / 2,270 / 2,156 / 2 });
+	jumpLeft.PushBack({ 1351 / 2,1138 / 2,270 / 2,156 / 2 });
 
-	JumpLeft.speed = 0.12f;
-	JumpLeft.loop = true;
+	jumpLeft.speed = 0.12f;
+	jumpLeft.loop = true;
 
 	//ANIMATION WHEN SANTA IS DEAD LEFT
-	DeadLeft.PushBack({ 2431 / 2,57 / 2,270 / 2,156 / 2 });
-	DeadLeft.PushBack({ 2162 / 2,57 / 2,270 / 2,156 / 2 });
-	DeadLeft.PushBack({ 1891 / 2,57 / 2,270 / 2,156 / 2 });
-	DeadLeft.PushBack({ 1621 / 2,57 / 2,270 / 2,156 / 2 });
-	DeadLeft.PushBack({ 1351 / 2,57 / 2,270 / 2,156 / 2 });
-	DeadLeft.PushBack({ 2431 / 2,327 / 2,270 / 2,156 / 2 });
-	DeadLeft.PushBack({ 2162 / 2,327 / 2,270 / 2,156 / 2 });
-	DeadLeft.PushBack({ 1891 / 2,327 / 2,270 / 2,156 / 2 });
-	DeadLeft.PushBack({ 1621 / 2,327 / 2,270 / 2,156 / 2 });
+	deadLeft.PushBack({ 2431 / 2,57 / 2,270 / 2,156 / 2 });
+	deadLeft.PushBack({ 2162 / 2,57 / 2,270 / 2,156 / 2 });
+	deadLeft.PushBack({ 1891 / 2,57 / 2,270 / 2,156 / 2 });
+	deadLeft.PushBack({ 1621 / 2,57 / 2,270 / 2,156 / 2 });
+	deadLeft.PushBack({ 1351 / 2,57 / 2,270 / 2,156 / 2 });
+	deadLeft.PushBack({ 2431 / 2,327 / 2,270 / 2,156 / 2 });
+	deadLeft.PushBack({ 2162 / 2,327 / 2,270 / 2,156 / 2 });
+	deadLeft.PushBack({ 1891 / 2,327 / 2,270 / 2,156 / 2 });
+	deadLeft.PushBack({ 1621 / 2,327 / 2,270 / 2,156 / 2 });
 
-	DeadLeft.speed = 0.2f;
-	DeadLeft.loop = false;
+	deadLeft.speed = 0.2f;
+	deadLeft.loop = false;
 
 	//ANIMATION WHEN SANTA IS RUNNING LEFT
-	RunLeft.PushBack({ 2431 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunLeft.PushBack({ 2162 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunLeft.PushBack({ 1891 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunLeft.PushBack({ 1621 / 2,1407 / 2,260 / 2,156 / 2 });
-	RunLeft.PushBack({ 1351 / 2,1407 / 2,260 / 2,156 / 2 });
+	runLeft.PushBack({ 2431 / 2,1407 / 2,260 / 2,156 / 2 });
+	runLeft.PushBack({ 2162 / 2,1407 / 2,260 / 2,156 / 2 });
+	runLeft.PushBack({ 1891 / 2,1407 / 2,260 / 2,156 / 2 });
+	runLeft.PushBack({ 1621 / 2,1407 / 2,260 / 2,156 / 2 });
+	runLeft.PushBack({ 1351 / 2,1407 / 2,260 / 2,156 / 2 });
 	
-	RunLeft.speed = 0.2f;
-	RunLeft.loop = true;
+	runLeft.speed = 0.2f;
+	runLeft.loop = true;
 	name.Create("player");
 }
 
@@ -123,54 +123,54 @@ bool Player::Start()
 	cont = 0;
 	app->SaveGameRequest("save_game.xml");
 	result = collisionPosition::null;
-	Intro = true;
+	intro = true;
 	godMode = false;
 	lifes = 3;
 	points = 0;
 
 	//LOAD TEXTURES
 	santa = app->tex->Load("Assets/textures/santa_animation.png");
-	WinTex = app->tex->Load("Assets/textures/win_screen.png");
-	DeadTex = app->tex->Load("Assets/textures/dead_screen.png");
-	IntroTex = app->tex->Load("Assets/textures/title_screen.png");
+	winTex = app->tex->Load("Assets/textures/win_screen.png");
+	deadTex = app->tex->Load("Assets/textures/dead_screen.png");
+	introTex = app->tex->Load("Assets/textures/title_screen.png");
 	jumpFx = app->audio->LoadFx("Assets/audio/fx/santa_jump.ogg");
 	landFx = app->audio->LoadFx("Assets/audio/fx/santa_land.wav");
 	coinFx = app->audio->LoadFx("Assets/audio/fx/coin_drop.wav");
 	lifeFx = app->audio->LoadFx("Assets/audio/fx/life.wav");
 	checkpointFx = app->audio->LoadFx("Assets/audio/fx/checkpoint.wav");
-	LifesTex = app->tex->Load("Assets/textures/lifes.png");
-	currentAnimation = &StopRight;
+	lifesTex = app->tex->Load("Assets/textures/lifes.png");
+	currentAnimation = &stopRight;
 
 	//INITIALIZE VARIABLES
 	isJumping = false;
 	canMove = true;
-	Win = false;
-	Dead = false;
+	win = false;
+	dead = false;
 
 	aceleration = 13.0f;
 	velocity = 0;
 
-	SDL_Rect rect = { Position.x, Position.y, 38, 5 };
+	SDL_Rect rect = { position.x, position.y, 38, 5 };
 	playerDown = app->collisions->AddCollider(rect, Collider::PLAYER, (Module*)this);
-	rect = { Position.x, Position.y, 5, 74 };
+	rect = { position.x, position.y, 5, 74 };
 	playerRight = app->collisions->AddCollider(rect, Collider::PLAYERRIGHT, (Module*)this);
-	rect = { Position.x, Position.y, 5, 74 };
+	rect = { position.x, position.y, 5, 74 };
 	playerLeft = app->collisions->AddCollider(rect, Collider::PLAYERLEFT, (Module*)this);
 	lateralsR = false;
 	lateralsL = false;
-	lastPosition = Position;
+	lastPosition = position;
 	return true;
 }
 
 bool Player::Update(float dt)
 {
-	if (Position.x>=2610 && Position.x <= 2620)
+	if (position.x>=2610 && position.x <= 2620)
 	{
 		noise = true;
 	}
-	playerDown->SetPos(Position.x + app->render->camera.x + 48, Position.y + app->render->camera.y + 73);
-	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y + 0);
-	playerLeft->SetPos(Position.x + app->render->camera.x + 40, Position.y + app->render->camera.y + 0);
+	playerDown->SetPos(position.x + app->render->camera.x + 48, position.y + app->render->camera.y + 73);
+	playerRight->SetPos(position.x + app->render->camera.x + 90, position.y + app->render->camera.y + 0);
+	playerLeft->SetPos(position.x + app->render->camera.x + 40, position.y + app->render->camera.y + 0);
 
 	//INPUT TO MOVE THE PLAYER
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && canMove == true)
@@ -181,15 +181,15 @@ bool Player::Update(float dt)
 			if ((state == playerState::null) && (godMode == false))
 			{
 				lastanimation = currentAnimation;
-				currentAnimation = &RunRight;
+				currentAnimation = &runRight;
 				currentAnimation->Update();
 			}
 			if (state == playerState::jumping) 
 			{
-				currentAnimation = &JumpRight;
+				currentAnimation = &jumpRight;
 			}
-			lastPosition = Position;
-		    Position.x += 300* (dt / 1000);
+			lastPosition = position;
+		    position.x += 300* (dt / 1000);
 		}
 	}
 
@@ -200,15 +200,15 @@ bool Player::Update(float dt)
 			if (state==playerState::null)
 			{
 				lastanimation = currentAnimation;
-				currentAnimation = &RunLeft;
+				currentAnimation = &runLeft;
 				currentAnimation->Update();
 			}
 			if ((state) == (playerState::jumping))
 			{
-				currentAnimation = &JumpLeft;
+				currentAnimation = &jumpLeft;
 			}
-			lastPosition = Position;
-			Position.x -= 300 * (dt / 1000);
+			lastPosition = position;
+			position.x -= 300 * (dt / 1000);
 		}
 	}
 
@@ -216,7 +216,7 @@ bool Player::Update(float dt)
 	{
 		if(godMode == true)
 		{
-			Position.y -= 300 * (dt / 1000);
+			position.y -= 300 * (dt / 1000);
 		}
 	}
 
@@ -224,7 +224,7 @@ bool Player::Update(float dt)
 	{
 		if (godMode == true) 
 		{
-			Position.y += 300 * (dt/1000);
+			position.y += 300 * (dt/1000);
 		}
 	}
 
@@ -232,15 +232,15 @@ bool Player::Update(float dt)
 	{
 		if (state==playerState::null) 
 		{
-			if (currentAnimation == &RunRight || currentAnimation == &StopRight )
+			if (currentAnimation == &runRight || currentAnimation == &stopRight )
 			{
 				lastanimation = currentAnimation;
-				currentAnimation = &JumpRight;
+				currentAnimation = &jumpRight;
 			}
-			else if (currentAnimation == &RunLeft || currentAnimation == &StopLeft)
+			else if (currentAnimation == &runLeft || currentAnimation == &stopLeft)
 			{
 				lastanimation = currentAnimation;
-				currentAnimation = &JumpLeft;
+				currentAnimation = &jumpLeft;
 
 			}
 			state = playerState::jumping;
@@ -262,7 +262,7 @@ bool Player::Update(float dt)
 
 	if (lifes <= 0)
 	{
-		currentAnimation == &DeadRight;
+		currentAnimation == &deadRight;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) 
@@ -289,13 +289,13 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
 	{
 		lastanimation = currentAnimation;
-		currentAnimation = &StopRight;
+		currentAnimation = &stopRight;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
 	{
 		lastanimation = currentAnimation;
-		currentAnimation = &StopLeft;
+		currentAnimation = &stopLeft;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
@@ -316,9 +316,9 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if ((currentAnimation == &DeadRight || currentAnimation == &DeadLeft) && currentAnimation->HasFinished() == true)
+	if ((currentAnimation == &deadRight || currentAnimation == &deadLeft) && currentAnimation->HasFinished() == true)
 	{
-		Dead = false;
+		dead = false;
 		app->fade->FadeToBlack(this, (Module*)app->dead, 50);
 	}
 	currentAnimation->Update();
@@ -329,60 +329,60 @@ bool Player::Update(float dt)
 bool Player::PostUpdate() 
 {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(santa, Position.x, Position.y, &rect);
+	app->render->DrawTexture(santa, position.x, position.y, &rect);
 
 	switch (lifes)
 	{
 	case 5:
 		rect = { 0,0,270,58 };
-		app->render->DrawTexture(LifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
+		app->render->DrawTexture(lifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
 		break;
 	case 4:
 		rect = { 0,0,216,58 };
-		app->render->DrawTexture(LifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
+		app->render->DrawTexture(lifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
 		break;
 	case 3:
 		rect = { 0,0,162,58 };
-		app->render->DrawTexture(LifesTex,app->render->camera.x*-1, app->render->camera.y*-1, &rect);
+		app->render->DrawTexture(lifesTex,app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
 	case 2:
 		rect = { 0,0,108,58 };
-		app->render->DrawTexture(LifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
+		app->render->DrawTexture(lifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
 	case 1:
 		rect = { 0,0,54,58 };
-		app->render->DrawTexture(LifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
+		app->render->DrawTexture(lifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
 		break;
 	default:
 		break;
 	}
 
-	if (Dead == true)
+	if (dead == true)
 	{
 		if (lifes != 0)
 		{
-			Dead = false;
+			dead = false;
 			app->LoadGameRequest("save_game.xml");
 		}
 
 		if (lifes <= 0)
 		{
-			if (currentAnimation == &RunRight || currentAnimation == &StopRight || currentAnimation == &JumpRight)
+			if (currentAnimation == &runRight || currentAnimation == &stopRight || currentAnimation == &jumpRight)
 			{
-				currentAnimation = &DeadRight;
+				currentAnimation = &deadRight;
 			}
-			else if (currentAnimation == &RunLeft || currentAnimation == &StopLeft || currentAnimation == &JumpLeft)
+			else if (currentAnimation == &runLeft || currentAnimation == &stopLeft || currentAnimation == &jumpLeft)
 			{
-				currentAnimation = &DeadLeft;
+				currentAnimation = &deadLeft;
 			}
 			canMove = false;
 		}
 	}
 	
-	if (Win == true)
+	if (win == true)
 	{
 		app->fade->FadeToBlack(this, (Module*)app->winp, 50);
-		Win = false;
+		win = false;
 		canMove = false;
 	}
 	
@@ -398,10 +398,10 @@ bool Player::PostUpdate()
 
 bool Player::CleanUp() 
 {
-	app->tex->UnLoad(WinTex);
-	app->tex->UnLoad(DeadTex);
+	app->tex->UnLoad(winTex);
+	app->tex->UnLoad(deadTex);
 	app->tex->UnLoad(santa);
-	app->tex->UnLoad(IntroTex);
+	app->tex->UnLoad(introTex);
 	app->scene->Disable();
 	app->scene2->Disable();
 	return true;
@@ -409,9 +409,9 @@ bool Player::CleanUp()
 
 void Player::Gravity(float dt)
 {
-	lastPosition = Position;
+	lastPosition = position;
 	velocity += aceleration * 0.05 * 100 * (dt / 1000);
-	Position.y += velocity * 0.05 * 100 * (dt / 1000);
+	position.y += velocity * 0.05 * 100 * (dt / 1000);
 	app->render->camera.y -= velocity * 0.05 * 100 * (dt/1000);
 }
 
@@ -421,44 +421,44 @@ void Player::JumpFunction(float dt)
 	collisionPosition result;
 	if (jumpingCount < 30)
 	{
-		if (((lastanimation == &RunLeft) || (lastanimation == &StopLeft)))
+		if (((lastanimation == &runLeft) || (lastanimation == &stopLeft)))
 		{
 			lastanimation = currentAnimation;
-			currentAnimation = &JumpLeft;
+			currentAnimation = &jumpLeft;
 		}
-		if (((lastanimation == &RunRight) || (lastanimation == &StopRight)))
+		if (((lastanimation == &runRight) || (lastanimation == &stopRight)))
 		{
 			lastanimation = currentAnimation;
-			currentAnimation = &JumpRight;
+			currentAnimation = &jumpRight;
 		}
-		lastPosition = Position;
-		Position.y -= 200*(dt/1000);
+		lastPosition = position;
+		position.y -= 200*(dt/1000);
 		app->render->camera.y += 150*(dt/1000);
 		jumpingCount+= (dt/15);
 		
 	}
 	else 
 	{
-		lastPosition = Position;
+		lastPosition = position;
 		state = playerState::free;
 		jumpingCount = 0;
-		Position.y += 3;
+		position.y += 3;
 		velocity = 5.0f;
 	}
 }
 
 void Player::DeadAction()
 {
-	if ((currentAnimation == &RunRight) || (currentAnimation == &StopRight) || (currentAnimation == &JumpRight))
+	if ((currentAnimation == &runRight) || (currentAnimation == &stopRight) || (currentAnimation == &jumpRight))
 	{
 		lastanimation = currentAnimation;
-		currentAnimation = &DeadRight;
+		currentAnimation = &deadRight;
 		currentAnimation->Update();
 	}
-	else if ((currentAnimation == &RunLeft) || (currentAnimation == &StopLeft) || (currentAnimation == &JumpLeft))
+	else if ((currentAnimation == &runLeft) || (currentAnimation == &stopLeft) || (currentAnimation == &jumpLeft))
 	{
 		lastanimation = currentAnimation;
-		currentAnimation = &DeadLeft;
+		currentAnimation = &deadLeft;
 		currentAnimation->Update();
 	}
 }
@@ -466,8 +466,8 @@ void Player::DeadAction()
 bool Player::SaveState(pugi::xml_node* nodo)
 {
 	pugi::xml_node node=nodo->append_child("data");
-	node.append_attribute("x").set_value(Position.x);
-	node.append_attribute("y").set_value(Position.y);
+	node.append_attribute("x").set_value(position.x);
+	node.append_attribute("y").set_value(position.y);
 	node.append_attribute("aceleration") = aceleration;
 	
 	return true;
@@ -475,8 +475,8 @@ bool Player::SaveState(pugi::xml_node* nodo)
 
 bool Player::LoadState(pugi::xml_node* nodo)
 {
-	Position.x = nodo->child("data").attribute("x").as_int();
-	Position.y = nodo->child("data").attribute("y").as_int();
+	position.x = nodo->child("data").attribute("x").as_int();
+	position.y = nodo->child("data").attribute("y").as_int();
 	aceleration = nodo->child("data").attribute("aceleration").as_int();
 	return true;
 }
@@ -508,7 +508,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 						}
 					}
 				}
-				Position.y += sum;
+				position.y += sum;
 				velocity = 0;
 			}
 			else if (c2->type == Collider::COIN)
@@ -559,10 +559,10 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				{
 					if (aux->data->collider == c2)
 					{
-						if (aux->data->deadZ == true && Dead==false) {}
+						if (aux->data->deadZ == true && dead==false) {}
 						else
 						{
-							Dead = true;
+							dead = true;
 							lifes--;;
 						}
 					}
@@ -612,7 +612,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 						if (aux->data->deadZ == true) {}
 						else
 						{
-							Dead = true;
+							dead = true;
 							lifes--;
 						}
 					}
@@ -639,7 +639,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 bool Player::HasThePlayerMove() 
 {
 	iPoint actual, previous;
-	actual=app->map->WorldToMap(Position.x, Position.y);
+	actual=app->map->WorldToMap(position.x, position.y);
 	previous = app->map->WorldToMap(lastPosition.x, lastPosition.y);
 	if (actual != previous) 
 	{
@@ -654,7 +654,7 @@ bool Player::HasThePlayerMove()
 iPoint Player:: GetPosition()
 {
 	iPoint point;
-	point.x = Position.x;
-	point.y = Position.y;
+	point.x = position.x;
+	point.y = position.y;
 	return point;
 }

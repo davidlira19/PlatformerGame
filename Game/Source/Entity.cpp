@@ -50,7 +50,7 @@ void Entity::Update()
 					path.start = app->map->WorldToMap(position.x, position.y);
 				}
 
-				path.goal = app->map->WorldToMap(app->player->Position.x + 64, app->player->Position.y+50);
+				path.goal = app->map->WorldToMap(app->player->position.x + 64, app->player->position.y+50);
 				path.frontier.Push(path.start);
 				path.visited.Add(path.start);
 				path.PropagateAStar();
@@ -87,7 +87,7 @@ void Entity::Update()
 				{
 					if (type == EntityTipe::EnemyGround)
 					{
-						if (((app->player->Position.y > position.y - 64) || (app->player->Position.y < position.y + 64)) &&(app->player->Position.x < position.x + 200)  && app->map->numberToMap(position.x) < nextTile.x )
+						if (((app->player->position.y > position.y - 64) || (app->player->position.y < position.y + 64)) &&(app->player->position.x < position.x + 200)  && app->map->numberToMap(position.x) < nextTile.x )
 						{
 							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64) 
 							{
@@ -95,7 +95,7 @@ void Entity::Update()
 								position.x += 2;
 							}
 						}
-						else if (((app->player->Position.y > position.y - 64) || (app->player->Position.y < position.y + 64)) && (app->player->Position.x > position.x - 200) && app->map->numberToMap(position.x) > nextTile.x )
+						else if (((app->player->position.y > position.y - 64) || (app->player->position.y < position.y + 64)) && (app->player->position.x > position.x - 200) && app->map->numberToMap(position.x) > nextTile.x )
 						{
 							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64) 
 							{

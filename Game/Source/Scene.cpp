@@ -49,8 +49,8 @@ bool Scene::Start()
 	app->player->currentLevel = 1;
 
 	//Player position
-	app->player->Position.x = 2300 / 2;
-	app->player->Position.y = 1060 / 2;
+	app->player->position.x = 2300 / 2;
+	app->player->position.y = 1060 / 2;
 
 	//Load Texture
 	bg_snow = app->tex->Load("Assets/textures/snow_background.png");
@@ -130,8 +130,8 @@ bool Scene::Update(float dt)
 {
 	if (freeCamera == false)
 	{
-		app->render->camera.x = (app->player->Position.x - 500) * -1;
-		app->render->camera.y = (app->player->Position.y - 250) * -1;
+		app->render->camera.x = (app->player->position.x - 500) * -1;
+		app->render->camera.y = (app->player->position.y - 250) * -1;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
@@ -148,16 +148,16 @@ bool Scene::Update(float dt)
 		}
 	}
 
-	if ((app->player->Position.x >= 1000 && app->player->Position.x <= 2140 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) || (app->player->Position.x >= 4900 && app->player->Position.x <= 5700 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN))
+	if ((app->player->position.x >= 1000 && app->player->position.x <= 2140 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) || (app->player->position.x >= 4900 && app->player->position.x <= 5700 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN))
 	{
-		app->player->Position.x = 2141;
-		app->player->Position.y = 435;
+		app->player->position.x = 2141;
+		app->player->position.y = 435;
 	}
 
-	else if (app->player->Position.x >= 2141 && app->player->Position.x <= 4903 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+	else if (app->player->position.x >= 2141 && app->player->position.x <= 4903 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
 	{
-		app->player->Position.x = 4900;
-		app->player->Position.y = 563;
+		app->player->position.x = 4900;
+		app->player->position.y = 563;
 	}
 
 	//CAMERA.X LIMITS
@@ -217,14 +217,14 @@ bool Scene::Update(float dt)
 	app->map->Draw();
 
 	//CONDITIONS TO WIN - LOSE
-	if (app->player->Position.y >= 1602 / 2)
+	if (app->player->position.y >= 1602 / 2)
 	{
-		app->player->Dead = true;
+		app->player->dead = true;
 		app->player->lifes--;
 	}
-	if (app->player->Position.x >= 11350 / 2)
+	if (app->player->position.x >= 11350 / 2)
 	{
-		app->player->Win = true;
+		app->player->win = true;
 	}
 
 	return true;

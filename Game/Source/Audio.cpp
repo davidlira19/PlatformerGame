@@ -15,7 +15,7 @@ Audio::Audio(bool startEnabled) : Module(startEnabled)
 {
 	music = NULL;
 	name.Create("audio");
-	Volume = 10;
+	volume = 10;
 }
 
 // Destructor
@@ -75,21 +75,21 @@ bool Audio::Update(float dt)
 {
 	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 	{
-		Volume += 5;
-		if (Volume >= 100)
+		volume += 5;
+		if (volume >= 100)
 		{
-			Volume = 100;
+			volume = 100;
 		}
-		Mix_VolumeMusic(Volume);
+		Mix_VolumeMusic(volume);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 	{
-		Volume -= 5;
-		if (Volume <= 0)
+		volume -= 5;
+		if (volume <= 0)
 		{
-			Volume = 0;
+			volume = 0;
 		}
-		Mix_VolumeMusic(Volume);
+		Mix_VolumeMusic(volume);
 	}
 
 	return true;

@@ -35,7 +35,7 @@ public:
 	void Unload();
 
 private:
-	int Volume;
+	int volume;
 	_Mix_Music* music;
 	List<Mix_Chunk *>	fx;
 };

@@ -15,7 +15,7 @@ struct SDL_Renderer;
 
 enum class  playerState
 {
-	null, jumping,free
+	null, jumping, free
 };
 
 class position
@@ -50,34 +50,34 @@ public:
 	void DeadAction();
 
 	//PLAYER POSITION
-	position Position,lastPosition;
+	position position, lastPosition;
 	collisionPosition result;
 
 	//PLAYER ANIMATIONS
 	Animation* lastanimation = nullptr;
 	Animation* currentAnimation = nullptr;
 	float aceleration, velocity;
-	Animation StopRight;
-	Animation JumpRight;
-	Animation RunRight;
-	Animation DeadRight;
+	Animation stopRight;
+	Animation jumpRight;
+	Animation runRight;
+	Animation deadRight;
 	SDL_Rect collider;
-	Animation StopLeft;
-	Animation JumpLeft;
-	Animation RunLeft;
-	Animation DeadLeft;
+	Animation stopLeft;
+	Animation jumpLeft;
+	Animation runLeft;
+	Animation deadLeft;
 	collisions playerCollisions;
 	int jumpingCount;
 	bool godMode;
 	bool canMove;
-	bool Intro;
+	bool intro;
 	bool LoadState(pugi::xml_node* nodo);
 	bool SaveState(pugi::xml_node* nodo);
 
 	// WIN-LOSE TEXTURES
-	SDL_Texture* WinTex = nullptr;
-	SDL_Texture* DeadTex = nullptr;
-	SDL_Texture* IntroTex = nullptr;
+	SDL_Texture* winTex = nullptr;
+	SDL_Texture* deadTex = nullptr;
+	SDL_Texture* introTex = nullptr;
 
 	//FX AUDIO
 	unsigned int jumpFx;
@@ -89,8 +89,8 @@ public:
 	bool lateralsL;
 
 	// WIN-LOSE BOOLS
-	bool Win;
-	bool Dead;
+	bool win;
+	bool dead;
 	Collider* playerDown;
 	Collider* playerRight;
 	Collider* playerLeft;
@@ -103,6 +103,6 @@ private:
 	int cont;
 	bool noise;
 	SDL_Texture* santa = nullptr;
-	SDL_Texture* LifesTex = nullptr;
+	SDL_Texture* lifesTex = nullptr;
 };
 #endif
