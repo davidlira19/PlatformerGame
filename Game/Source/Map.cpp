@@ -72,7 +72,7 @@ void Map::Draw()
 					{
 						SDL_Rect rect = tileset->GetTileRect(tileId);
 						iPoint point = MapToWorld(x, y);
-						if (point.x + app->render->camera.x >-62 && point.x + app->render->camera.x < app->render->camera.w&& point.y + app->render->camera.y >-62 && point.y + app->render->camera.y < app->render->camera.h)
+						if (point.x + app->render->camera.x > -62 && point.x + app->render->camera.x < app->render->camera.w && point.y + app->render->camera.y >-62 && point.y + app->render->camera.y < app->render->camera.h)
 						{
 							app->render->DrawTexture(tileset->textureTile, point.x, point.y, &rect);
 							if (tileset->name == "colisiones")
@@ -145,7 +145,7 @@ iPoint Map::MapToWorld(int x, int y) const
 
 int Map::numberToMap(int number) 
 {
-	return number/data.tileWidth;
+	return number / data.tileWidth;
 }
 
 // Add orthographic world to map coordinates
@@ -252,7 +252,7 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	rect.w = tileWidth;
 	rect.h = tileHeight;
 	int num = texWidth / tileWidth;
-	int usa=id-firstgid+1;
+	int usa = id - firstgid + 1;
 	int res = usa / num;
 	int hond = usa % num;
 	if (hond == 0) 

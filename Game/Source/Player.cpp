@@ -199,7 +199,7 @@ bool Player::Update(float dt)
 				currentAnimation = &jumpRight;
 			}
 			lastPosition = position;
-		    position.x += 300* (dt / 1000);
+			position.x += 300 * (dt / 1000);
 		}
 	}
 
@@ -234,7 +234,7 @@ bool Player::Update(float dt)
 	{
 		if (godMode == true) 
 		{
-			position.y += 300 * (dt/1000);
+			position.y += 300 * (dt / 1000);
 		}
 	}
 
@@ -353,15 +353,15 @@ bool Player::PostUpdate()
 		break;
 	case 3:
 		rect = { 0,0,162,58 };
-		app->render->DrawTexture(lifesTex,app->render->camera.x*-1, app->render->camera.y*-1, &rect);
+		app->render->DrawTexture(lifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
 		break;
 	case 2:
 		rect = { 0,0,108,58 };
-		app->render->DrawTexture(lifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
+		app->render->DrawTexture(lifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
 		break;
 	case 1:
 		rect = { 0,0,54,58 };
-		app->render->DrawTexture(lifesTex, app->render->camera.x*-1, app->render->camera.y*-1, &rect);
+		app->render->DrawTexture(lifesTex, app->render->camera.x * -1, app->render->camera.y * -1, &rect);
 		break;
 	default:
 		break;
@@ -422,7 +422,7 @@ void Player::Gravity(float dt)
 	lastPosition = position;
 	velocity += acceleration * 0.05 * 100 * (dt / 1000);
 	position.y += velocity * 0.05 * 100 * (dt / 1000);
-	app->render->camera.y -= velocity * 0.05 * 100 * (dt/1000);
+	app->render->camera.y -= velocity * 0.05 * 100 * (dt / 1000);
 }
 
 //PLAYER FUNCTIONS
@@ -442,9 +442,9 @@ void Player::JumpFunction(float dt)
 			currentAnimation = &jumpRight;
 		}
 		lastPosition = position;
-		position.y -= 200*(dt/1000);
-		app->render->camera.y += 150*(dt/1000);
-		jumpingCount+= (dt/15);
+		position.y -= 200 * (dt / 1000);
+		app->render->camera.y += 150 * (dt / 1000);
+		jumpingCount += (dt / 15);
 		
 	}
 	else 

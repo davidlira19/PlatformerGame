@@ -108,22 +108,22 @@ class Map : public Module
 {
 public:
 
-    Map(bool startEnabled);
+	Map(bool startEnabled);
 
-    // Destructor
-    virtual ~Map();
+	// Destructor
+	virtual ~Map();
 
-    // Called before render is available
-    bool Awake(pugi::xml_node& conf);
+	// Called before render is available
+	bool Awake(pugi::xml_node& conf);
 
-    // Called each loop iteration
-    void Draw();
+	// Called each loop iteration
+	void Draw();
 
-    // Called before quitting
-    bool CleanUp();
+	// Called before quitting
+	bool CleanUp();
 
-    // Load new map
-    bool Load(const char* path);
+	// Load new map
+	bool Load(const char* path);
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
 	int numberToMap(int number);
@@ -145,14 +145,14 @@ public:
 	TileSet* GetTilesetFromTileId(int id) const;
 	void ChangeCollisionsDraw();
 
-    // Add your struct for map info
+	// Add your struct for map info
 	MapData data;
 	
 private:
 	
-    pugi::xml_document mapFile;
-    SString folder;
-    bool mapLoaded;
+	pugi::xml_document mapFile;
+	SString folder;
+	bool mapLoaded;
 };
 
 #endif // __MAP_H__

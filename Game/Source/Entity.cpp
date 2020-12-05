@@ -49,7 +49,7 @@ void Entity::Update(float dt)
 					path.start = app->map->WorldToMap(position.x, position.y);
 				}
 
-				path.goal = app->map->WorldToMap(app->player->position.x + 64, app->player->position.y+50);
+				path.goal = app->map->WorldToMap(app->player->position.x + 64, app->player->position.y + 50);
 				path.frontier.Push(path.start);
 				path.visited.Add(path.start);
 				path.PropagateAStar();
@@ -91,7 +91,7 @@ void Entity::Update(float dt)
 							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64) 
 							{
 								dire = 1;
-								position.x += 150 * (dt/1000);
+								position.x += 150 * (dt / 1000);
 							}
 						}
 						else if (((app->player->position.y > position.y - 64) || (app->player->position.y < position.y + 64)) && (app->player->position.x > position.x - 200) && app->map->numberToMap(position.x) > nextTile.x )
@@ -106,7 +106,7 @@ void Entity::Update(float dt)
 						{
 							if (left == true)
 							{
-								if (app->map->GetTileIdFromPosition(((position.x-10)/64) , position.y/64, "collisions") == 64)
+								if (app->map->GetTileIdFromPosition(((position.x - 10) / 64), position.y / 64, "collisions") == 64)
 								{
 									dire = -1;
 									position.x -= 100 * (dt / 1000);
@@ -118,7 +118,7 @@ void Entity::Update(float dt)
 							}
 							else 
 							{
-								if (app->map->GetTileIdFromPosition(((position.x +30)/64), position.y/64, "collisions") == 64)
+								if (app->map->GetTileIdFromPosition(((position.x + 30) / 64), position.y / 64, "collisions") == 64)
 								{
 									dire = 1;
 									position.x += 100 * (dt / 1000);

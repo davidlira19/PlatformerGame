@@ -119,11 +119,11 @@ void EnemyGround::Draw()
 
 	if (&zombieDeadLeft == currentAnim|| &zombieDeadRight == currentAnim)
 	{
-		app->render->DrawTexture(groundEnemiesTexture, position.x, position.y-20, &rect);
+		app->render->DrawTexture(groundEnemiesTexture, position.x, position.y - 20, &rect);
 	}
 	else 
 	{
-		app->render->DrawTexture(groundEnemiesTexture, position.x, position.y-20, &rect);
+		app->render->DrawTexture(groundEnemiesTexture, position.x, position.y - 20, &rect);
 	}
 
 	if (app->entity->drawItems == true)

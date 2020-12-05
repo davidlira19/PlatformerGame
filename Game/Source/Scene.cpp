@@ -67,7 +67,7 @@ bool Scene::Start()
 		{
 			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 61)
 			{
-				rect = { x* app->map->data.tilesets.start->data->tileWidth ,y* app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
+				rect = { x * app->map->data.tilesets.start->data->tileWidth ,y * app->map->data.tilesets.start->data->tileHeight,app->map->data.tilesets.start->data->tileWidth,app->map->data.tilesets.start->data->tileHeight };
 				colliders.Add(app->collisions->AddCollider(rect, Collider::FLOOR));
 			}
 			if (app->map->GetTileIdFromPosition(x, y, "collisions") == 62) 
@@ -121,7 +121,7 @@ bool Scene::PreUpdate()
 			
 			if ((app->map->GetTileIdFromPosition(x, y, "collisions") == 61 || app->map->GetTileIdFromPosition(x, y, "collisions") == 62) || app->map->GetTileIdFromPosition(x, y, "collisions") == 63 && auxiliar!=NULL)
 			{		
-				auxiliar->data->SetPos(x * app->map->data.tilesets.start->data->tileWidth+app->render->camera.x, y * app->map->data.tilesets.start->data->tileHeight + app->render->camera.y);
+				auxiliar->data->SetPos(x * app->map->data.tilesets.start->data->tileWidth + app->render->camera.x, y * app->map->data.tilesets.start->data->tileHeight + app->render->camera.y);
 				auxiliar = auxiliar->next;
 			}
 		}
@@ -210,15 +210,15 @@ bool Scene::Update(float dt)
 			app->render->camera.x += 500 * (dt / 1000);
 
 		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-			app->render->camera.x -= 500 * (dt/1000);
+			app->render->camera.x -= 500 * (dt / 1000);
 	}
 
 	//DRAW BACKGROUND
-	app->render->DrawTexture(bgSnow, -3600/2, 0);
+	app->render->DrawTexture(bgSnow, -3600 / 2, 0);
 	app->render->DrawTexture(bgSnow, 0, 0);
-	app->render->DrawTexture(bgSnow, 3600/2, 0);
-	app->render->DrawTexture(bgSnow, 7200/2, 0);
-	app->render->DrawTexture(bgSnow, 10800/2, 0);
+	app->render->DrawTexture(bgSnow, 3600 / 2, 0);
+	app->render->DrawTexture(bgSnow, 7200 / 2, 0);
+	app->render->DrawTexture(bgSnow, 10800 / 2, 0);
 	app->map->Draw();
 
 	//CONDITIONS TO WIN - LOSE

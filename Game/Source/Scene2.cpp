@@ -117,7 +117,7 @@ bool Scene2::PreUpdate()
 			
 			if ((app->map->GetTileIdFromPosition(x, y, "collisions") == 61 || app->map->GetTileIdFromPosition(x, y, "collisions") == 62) || app->map->GetTileIdFromPosition(x, y, "collisions") == 63 && auxiliar!=NULL)
 			{		
-				auxiliar->data->SetPos(x * app->map->data.tilesets.start->data->tileWidth+app->render->camera.x, y * app->map->data.tilesets.start->data->tileHeight + app->render->camera.y);
+				auxiliar->data->SetPos(x * app->map->data.tilesets.start->data->tileWidth + app->render->camera.x, y * app->map->data.tilesets.start->data->tileHeight + app->render->camera.y);
 					
 				auxiliar = auxiliar->next;
 			}
@@ -207,11 +207,11 @@ bool Scene2::Update(float dt)
 	}
 
 	//DRAW BACKGROUND
-	app->render->DrawTexture(bgSnow, -3600/2, 0);
+	app->render->DrawTexture(bgSnow, -3600 / 2, 0);
 	app->render->DrawTexture(bgSnow, 0, 0);
-	app->render->DrawTexture(bgSnow, 3600/2, 0);
-	app->render->DrawTexture(bgSnow, 7200/2, 0);
-	app->render->DrawTexture(bgSnow, 10800/2, 0);
+	app->render->DrawTexture(bgSnow, 3600 / 2, 0);
+	app->render->DrawTexture(bgSnow, 7200 / 2, 0);
+	app->render->DrawTexture(bgSnow, 10800 / 2, 0);
 	app->render->DrawTexture(bgSnow, -3600 / 2, 893);
 	app->render->DrawTexture(bgSnow, 0, 893);
 	app->render->DrawTexture(bgSnow, 3600 / 2, 893);
