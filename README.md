@@ -22,7 +22,7 @@ Win points getting coins and killing enemies by jumping over them!
  - Delta time and vsync
  - Checkpoints (and teleportation)
  - Audio Feedback
- 
+ - Easter Egg...
  
 ## Controls
 
