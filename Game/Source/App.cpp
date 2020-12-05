@@ -221,13 +221,13 @@ void App::PrepareUpdate()
 			vsync = false;
 		}
 
-		if (maxFPS == 13)
+		if (maxFPS == 16)
 		{
-			maxFPS = 30;
+			maxFPS = 32;
 		}
-		else if (maxFPS == 30)
+		else if (maxFPS == 32)
 		{
-			maxFPS = 13;
+			maxFPS = 16;
 		}
 	}
 }
