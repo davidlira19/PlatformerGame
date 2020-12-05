@@ -50,11 +50,14 @@ bool Scene2::Start()
 	app->player->position.y = 100;
 
 	//Load Texture
+	misteryTex = app->tex->Load("Assets/textures/mistery.png");
+	screamFx = app->audio->LoadFx("Assets/audio/fx/scream.wav");
 	bgSnow = app->tex->Load("Assets/textures/snow_background.png");
 	freeCamera = false;
 	app->collisions->Enable();
 	app->player->Enable();
 	app->entity->Enable();
+	counter = 1000;
 	SDL_Rect rect;
 
 	for (int y = 0; y < app->map->data.tilesets.start->data->numTilesHeight; y++)
@@ -225,7 +228,8 @@ bool Scene2::Update(float dt)
 	{
 		app->player->win = true;
 	}
-
+	
+	
 	return true;
 }
 
@@ -241,7 +245,17 @@ bool Scene2::PostUpdate()
 
 	sprintf_s(scoreText, 10, "%5d", score);
 	app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 75) * -1, numbers, scoreText);
-	
+
+	if (app->player->points == 1750 && counter >= 0)
+	{
+		EasterEgg();
+		counter -= 10;
+	}
+	if (counter == 0)
+	{
+		app->player->points += 5000;
+		counter = -1;
+	}
 	return ret;
 }
 
@@ -261,4 +275,13 @@ bool Scene2::CleanUp()
 	colliders.Clear();
 	
 	return true;
+}
+
+void Scene2::EasterEgg()
+{
+	if (counter == 1000)
+	{
+		app->audio->PlayFx(screamFx);
+	}
+	app->render->DrawTexture(misteryTex, (app->render->camera.x * -1), (app->render->camera.y * -1));
 }

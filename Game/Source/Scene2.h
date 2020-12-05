@@ -37,13 +37,17 @@ public:
 
 private:
 
+	void EasterEgg();
+
+	int counter;
 	uint score = 000000;
 	int numbers = -1;
 	char scoreText[5] = { "\0" };
-
+	unsigned int screamFx;
 	List<Collider*> colliders;
 	SDL_Texture* img;
 	SDL_Texture* bgSnow;
+	SDL_Texture* misteryTex;
 };
 
 #endif // __SCENE_H__
