@@ -2,7 +2,6 @@
 #define __SSTRING_H__
 
 #include "Defs.h"
-
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>

@@ -157,9 +157,8 @@ public:
 		return(p_item->data);
 	}
 
-	/**
-	* const read operator access directly to a position in the list
-	*/
+
+	// Const read operator access directly to a position in the list
 	const tdata& operator [](const unsigned int index) const
 	{
 		long				  pos;
@@ -183,9 +182,7 @@ public:
 		return(p_item->data);
 	}
 
-	/**
-	* const read operator access directly to a position in the list
-	*/
+	// const read operator access directly to a position in the list
 	const List<tdata>& operator +=(const List<tdata>& other_list)
 	{
 		ListItem<tdata>*   p_item = other_list.start;
@@ -199,9 +196,7 @@ public:
 		return(*this);
 	}
 
-	/**
-	* const access to a node in a position in the list
-	*/
+	// const access to a node in a position in the list
 	const ListItem<tdata>* At(unsigned int index) const
 	{
 		long				  pos = 0;
@@ -217,10 +212,8 @@ public:
 
 		return p_item;
 	}
-
-	/**
-	* access to a node in a position in the list
-	*/
+	
+	// Access to a node in a position in the list
 	ListItem<tdata>* At(unsigned int index)
 	{
 		long				  pos = 0;
@@ -264,9 +257,7 @@ public:
 		return ret;
 	}
 
-	/**
-	* returns the first apperance of data as index (-1 if not found)
-	*/
+	// Returns the first apperance of data as index (-1 if not found)
 	int Find(const tdata& data)
 	{
 		ListItem<tdata>* tmp = start;

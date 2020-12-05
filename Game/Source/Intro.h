@@ -8,6 +8,7 @@
 #include"Render.h"
 #include"Textures.h"
 #include"Wellcome.h"
+
 class Intro :public Module {
 public:
 	Intro(bool startEnabled) : Module(startEnabled) {
@@ -30,8 +31,6 @@ public:
 		intro=app->tex->Load("Assets/textures/logo_screen.png");
 		return true;
 	}
-
-	
 
 	// Called each loop iteration
 	bool Update(float dt) {

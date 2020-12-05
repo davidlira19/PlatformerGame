@@ -37,9 +37,9 @@ public:
 
 private:
 
-	List<Collider*>colliders;
+	List<Collider*> colliders;
 	SDL_Texture* img;
-	SDL_Texture* bg_snow;
+	SDL_Texture* bgSnow;
 };
 
 #endif // __SCENE_H__

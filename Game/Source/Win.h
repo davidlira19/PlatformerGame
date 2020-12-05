@@ -9,6 +9,7 @@
 #include"Textures.h"
 #include"Wellcome.h"
 #include"Audio.h"
+
 class Win :public Module {
 public:
 	Win(bool startEnabled) : Module(startEnabled) 
@@ -36,8 +37,6 @@ public:
 		return true;
 	}
 
-
-
 	// Called each loop iteration
 	bool Update(float dt) 
 	{
@@ -58,7 +57,7 @@ public:
 			}
 			else 
 			{
-				app->fade->FadeToBlack(this, (Module*)app->scene, 60);
+				app->fade->FadeToBlack(this, (Module*)app->wellcome, 60);
 			}
 		}
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)

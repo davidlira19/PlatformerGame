@@ -15,7 +15,7 @@
 	<scene />
 	<scene2 />
 	<EntityManager>
-		<data num="8">
+		<data num="12">
 			<Enemy x="1633" y="202" type="EnemyAir" />
 			<Enemy x="3343" y="670" type="EnemyAir" />
 			<Enemy x="4300" y="550" type="EnemyAir" />
@@ -24,6 +24,10 @@
 			<Enemy x="3022" y="776" type="EnemyGround" />
 			<Enemy x="3839" y="650" type="EnemyGround" />
 			<Enemy x="4619" y="519" type="EnemyGround" />
+			<Enemy x="1860" y="435" type="Coin" />
+			<Enemy x="3000" y="755" type="Coin" />
+			<Enemy x="100" y="100" type="Coin" />
+			<Enemy x="1000" y="435" type="Heart" />
 		</data>
 	</EntityManager>
 	<map />

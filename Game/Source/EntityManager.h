@@ -15,7 +15,7 @@
 struct EnemySpawnpoint
 {
 	EntityTipe type = EntityTipe::NO_TYPE;
-	int x, y, direccion;
+	int x, y, direction;
 };
 
 class EntityManager : public Module

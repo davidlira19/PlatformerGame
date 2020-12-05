@@ -147,7 +147,7 @@ bool Player::Start()
 	win = false;
 	dead = false;
 
-	aceleration = 13.0f;
+	acceleration = 13.0f;
 	velocity = 0;
 
 	SDL_Rect rect = { position.x, position.y, 38, 5 };
@@ -410,7 +410,7 @@ bool Player::CleanUp()
 void Player::Gravity(float dt)
 {
 	lastPosition = position;
-	velocity += aceleration * 0.05 * 100 * (dt / 1000);
+	velocity += acceleration * 0.05 * 100 * (dt / 1000);
 	position.y += velocity * 0.05 * 100 * (dt / 1000);
 	app->render->camera.y -= velocity * 0.05 * 100 * (dt/1000);
 }
@@ -468,7 +468,7 @@ bool Player::SaveState(pugi::xml_node* nodo)
 	pugi::xml_node node=nodo->append_child("data");
 	node.append_attribute("x").set_value(position.x);
 	node.append_attribute("y").set_value(position.y);
-	node.append_attribute("aceleration") = aceleration;
+	node.append_attribute("aceleration") = acceleration;
 	
 	return true;
 }
@@ -477,7 +477,7 @@ bool Player::LoadState(pugi::xml_node* nodo)
 {
 	position.x = nodo->child("data").attribute("x").as_int();
 	position.y = nodo->child("data").attribute("y").as_int();
-	aceleration = nodo->child("data").attribute("aceleration").as_int();
+	acceleration = nodo->child("data").attribute("aceleration").as_int();
 	return true;
 }
 

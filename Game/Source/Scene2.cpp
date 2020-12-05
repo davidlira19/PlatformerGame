@@ -49,7 +49,7 @@ bool Scene2::Start()
 	app->player->position.y = 100;
 
 	//Load Texture
-	bg_snow = app->tex->Load("Assets/textures/snow_background.png");
+	bgSnow = app->tex->Load("Assets/textures/snow_background.png");
 	freeCamera = false;
 	app->collisions->Enable();
 	app->player->Enable();
@@ -199,16 +199,16 @@ bool Scene2::Update(float dt)
 	}
 
 	//DRAW BACKGROUND
-	app->render->DrawTexture(bg_snow, -3600/2, 0);
-	app->render->DrawTexture(bg_snow, 0, 0);
-	app->render->DrawTexture(bg_snow, 3600/2, 0);
-	app->render->DrawTexture(bg_snow, 7200/2, 0);
-	app->render->DrawTexture(bg_snow, 10800/2, 0);
-	app->render->DrawTexture(bg_snow, -3600 / 2, 893);
-	app->render->DrawTexture(bg_snow, 0, 893);
-	app->render->DrawTexture(bg_snow, 3600 / 2, 893);
-	app->render->DrawTexture(bg_snow, 7200 / 2, 893);
-	app->render->DrawTexture(bg_snow, 10800 / 2, 893);
+	app->render->DrawTexture(bgSnow, -3600/2, 0);
+	app->render->DrawTexture(bgSnow, 0, 0);
+	app->render->DrawTexture(bgSnow, 3600/2, 0);
+	app->render->DrawTexture(bgSnow, 7200/2, 0);
+	app->render->DrawTexture(bgSnow, 10800/2, 0);
+	app->render->DrawTexture(bgSnow, -3600 / 2, 893);
+	app->render->DrawTexture(bgSnow, 0, 893);
+	app->render->DrawTexture(bgSnow, 3600 / 2, 893);
+	app->render->DrawTexture(bgSnow, 7200 / 2, 893);
+	app->render->DrawTexture(bgSnow, 10800 / 2, 893);
 	app->map->Draw();
 
 	if (app->player->position.y >= 1310)
@@ -241,7 +241,7 @@ bool Scene2::CleanUp()
 	LOG("Freeing scene");
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
-	app->tex->UnLoad(bg_snow);
+	app->tex->UnLoad(bgSnow);
 	app->map->Disable();
 
 	app->entity->Disable();

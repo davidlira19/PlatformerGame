@@ -56,7 +56,7 @@ public:
 	//PLAYER ANIMATIONS
 	Animation* lastanimation = nullptr;
 	Animation* currentAnimation = nullptr;
-	float aceleration, velocity;
+	float acceleration, velocity;
 	Animation stopRight;
 	Animation jumpRight;
 	Animation runRight;

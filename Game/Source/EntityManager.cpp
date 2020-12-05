@@ -209,8 +209,7 @@ bool EntityManager::LoadState(pugi::xml_node* nodo)
 {
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
-	while (listItem != nullptr) 
-	{
+	while (listItem != nullptr) {
 		listItem->data->path.ResetPath();
 		delete listItem->data;
 		listItem = listItem->next;
@@ -232,6 +231,14 @@ bool EntityManager::LoadState(pugi::xml_node* nodo)
 		{
 			auxiliarTipe = EntityTipe::EnemyGround;
 		}
+		else if (string == "Coin")
+		{
+			auxiliarTipe = EntityTipe::Coin;
+		}
+		else if (string == "Heart")
+		{
+			auxiliarTipe = EntityTipe::Heart;
+		}
 		AddEntity(auxiliarTipe, auxiliar.attribute("x").as_int(), auxiliar.attribute("y").as_int());
 		auxiliar = auxiliar.next_sibling();
 	}
@@ -240,40 +247,33 @@ bool EntityManager::LoadState(pugi::xml_node* nodo)
 
 bool EntityManager::SaveState(pugi::xml_node* nodo)
 {
-
-	int num = 0;
+	int num = entityList.count();
 	ListItem<Entity*>* list;
-	list = entityList.start;
 	pugi::xml_node auxiliar;
 	auxiliar = nodo->append_child("data");
-	while (list != nullptr)
-	{
-		if (list->data->type == EntityTipe::EnemyAir || list->data->type == EntityTipe::EnemyGround) {
-			num++;
-		}
-		list = list->next;
-	}
 	list = entityList.start;
 	auxiliar.append_attribute("num").set_value(num);
 	while (list != nullptr)
 	{
-		if (list->data->type == EntityTipe::EnemyAir || list->data->type == EntityTipe::EnemyGround) 
+		auxiliar.append_child("Enemy").append_attribute("x").set_value(list->data->position.x);
+		auxiliar.last_child().append_attribute("y").set_value(list->data->position.y);
+		if (list->data->type == EntityTipe::EnemyAir)
 		{
-			auxiliar.append_child("Enemy").append_attribute("x").set_value(list->data->position.x);
-			auxiliar.last_child().append_attribute("y").set_value(list->data->position.y);
-			if (list->data->type == EntityTipe::EnemyAir)
-			{
-				auxiliar.last_child().append_attribute("type").set_value("EnemyAir");
-			}
-			else if (list->data->type == EntityTipe::EnemyGround)
-			{
-				auxiliar.last_child().append_attribute("type").set_value("EnemyGround");
-			}
+			auxiliar.last_child().append_attribute("type").set_value("EnemyAir");
+		}
+		else if (list->data->type == EntityTipe::EnemyGround)
+		{
+			auxiliar.last_child().append_attribute("type").set_value("EnemyGround");
+		}
+		else if (list->data->type == EntityTipe::Coin)
+		{
+			auxiliar.last_child().append_attribute("type").set_value("Coin");
+		}
+		else if (list->data->type == EntityTipe::Heart)
+		{
+			auxiliar.last_child().append_attribute("type").set_value("Heart");
 		}
 		list = list->next;
-
 	}
 	return true;
 }
-
-
