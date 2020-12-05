@@ -24,7 +24,7 @@ Coin::~Coin()
 
 void Coin::Update(float dt)
 {
-	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y+6);
+	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y + 6);
 	
 	currentAnim->Update();
 
