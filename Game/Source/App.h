@@ -62,7 +62,7 @@ public:
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
 
-	// L02: DONE 1: Create methods to request Load / Save
+	//Create methods to request Load / Save
 	void LoadGameRequest(const char* name);
 	void SaveGameRequest(const char* name) const;
 

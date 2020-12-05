@@ -24,13 +24,13 @@ Heart::~Heart()
 	collider->pendingToDelete = true;
 }
 
-void Heart::Update()
+void Heart::Update(float dt)
 {
 	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y + 6);
 
 	currentAnim->Update();
 
-	Entity::Update();
+	Entity::Update(dt);
 }
 
 void Heart::Draw()

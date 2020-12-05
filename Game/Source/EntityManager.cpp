@@ -56,7 +56,7 @@ bool EntityManager::Update(float dt)
 	listItem = entityList.start;
 	while (listItem != nullptr) 
 	{
-		listItem->data->Update();
+		listItem->data->Update(dt);
 		listItem = listItem->next;
 	}
 

@@ -22,13 +22,13 @@ Coin::~Coin()
 	collider->pendingToDelete = true;
 }
 
-void Coin::Update()
+void Coin::Update(float dt)
 {
 	collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y+6);
 	
 	currentAnim->Update();
 
-	Entity::Update();
+	Entity::Update(dt);
 }
 
 void Coin::Draw()

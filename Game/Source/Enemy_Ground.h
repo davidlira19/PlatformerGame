@@ -13,7 +13,7 @@ public:
 	~EnemyGround();
 
 	// The enemy is going to perform a sinusoidal movement
-	void Update();
+	void Update(float dt);
 	void Draw();
 	void OnCollision(Collider* collideri, Collider* collidere);
 

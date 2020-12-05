@@ -13,7 +13,7 @@ public:
 	Heart(int x, int y);
 	~Heart();
 	// The enemy is going to perform a sinusoidal movement
-	void Update();
+	void Update(float dt);
 	void Draw();
 
 private:

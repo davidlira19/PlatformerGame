@@ -19,7 +19,7 @@ Entity::Entity(int x, int y) : position(x, y)
 
 Entity::~Entity() {}
 
-void Entity::Update()
+void Entity::Update(float dt)
 {
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
@@ -91,7 +91,7 @@ void Entity::Update()
 							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64) 
 							{
 								dire = 1;
-								position.x += 2;
+								position.x += 150 * (dt/1000);
 							}
 						}
 						else if (((app->player->position.y > position.y - 64) || (app->player->position.y < position.y + 64)) && (app->player->position.x > position.x - 200) && app->map->numberToMap(position.x) > nextTile.x )
@@ -99,7 +99,7 @@ void Entity::Update()
 							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64) 
 							{
 								dire = -1;
-								position.x -= 2;
+								position.x -= 150 * (dt / 1000);
 							}
 						}
 						else 
@@ -109,7 +109,7 @@ void Entity::Update()
 								if (app->map->GetTileIdFromPosition(((position.x-10)/64) , position.y/64, "collisions") == 64)
 								{
 									dire = -1;
-									position.x -= 1;
+									position.x -= 100 * (dt / 1000);
 								}
 								else
 								{
@@ -121,7 +121,7 @@ void Entity::Update()
 								if (app->map->GetTileIdFromPosition(((position.x +30)/64), position.y/64, "collisions") == 64)
 								{
 									dire = 1;
-									position.x += 1;
+									position.x += 100 * (dt / 1000);
 								}
 								else 
 								{
@@ -135,23 +135,23 @@ void Entity::Update()
 						if (app->map->numberToMap(position.x) < nextTile.x )
 						{
 							dire = 1;
-							position.x += 2;
+							position.x += 150 * (dt / 1000);
 						}
 						else if (app->map->numberToMap(position.x) > nextTile.x)
 						{
 							dire = -1;
-							position.x -= 2;
+							position.x -= 150 * (dt / 1000);
 						}
 
 						if (app->map->numberToMap(position.y) < nextTile.y)
 						{
 							dire = 1;
-							position.y += 2;
+							position.y += 150 * (dt / 1000);
 						}
 						else if (app->map->numberToMap(position.y) > nextTile.y)
 						{
 							dire = -1;
-							position.y -= 2;
+							position.y -= 150 * (dt / 1000);
 						}
 					}
 					counter = false;

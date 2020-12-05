@@ -31,7 +31,7 @@ EnemyAir::~EnemyAir()
 	playerWin->pendingToDelete = true;
 }
 
-void EnemyAir::Update()
+void EnemyAir::Update(float dt)
 {
 	if (playerWin != nullptr && collider != nullptr)
 	{
@@ -63,7 +63,7 @@ void EnemyAir::Update()
 	}
 	currentAnim->Update();
 
-	Entity::Update();
+	Entity::Update(dt);
 }
 
 void EnemyAir::Draw()

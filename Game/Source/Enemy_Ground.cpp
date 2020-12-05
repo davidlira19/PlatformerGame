@@ -71,7 +71,7 @@ EnemyGround::~EnemyGround()
 	playerWin->pendingToDelete = true;
 }
 
-void EnemyGround::Update()
+void EnemyGround::Update(float dt)
 {
 	if (playerWin!=nullptr&& collider != nullptr)
 	{
@@ -110,7 +110,7 @@ void EnemyGround::Update()
 
 	currentAnim->Update();
 
-	Entity::Update();
+	Entity::Update(dt);
 }
 
 void EnemyGround::Draw()
