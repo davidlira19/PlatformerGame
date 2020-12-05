@@ -68,6 +68,7 @@ public:
 	bool left;
 	bool drawPath;
 	unsigned int birdFx;
+	unsigned int zombieFx;
 
 protected:
 	// A ptr to the current animation

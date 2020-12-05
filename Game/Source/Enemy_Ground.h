@@ -19,7 +19,6 @@ public:
 
 	bool left;
 	int cont = 0;
-	unsigned int zombieFx;
 
 private:
 	// The position (as ratio) in the wave at a specific moment

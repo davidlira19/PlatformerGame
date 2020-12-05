@@ -72,6 +72,8 @@ private:
 	SDL_Texture* coinTexture;
 	SDL_Texture* heartTexture;
 	int destroyedFx = 0;
+	unsigned int birdFx;
+	unsigned int zombieFx;
 	
 	// A queue with all spawn points information
 	EnemySpawnpoint spawnQueue[MAX_ENEMIES];

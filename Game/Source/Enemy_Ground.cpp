@@ -63,7 +63,6 @@ EnemyGround::EnemyGround(int x, int y) : Entity(x, y)
 	playerWin = app->collisions->AddCollider({ 0, 0, 48, 4 }, Collider::ENEMY1, (Module*)app->entity);
 	collider = app->collisions->AddCollider({ 0, 6, 48, 77 }, Collider::ENEMY2, (Module*)app->entity);
 
-	zombieFx = app->audio->LoadFx("Assets/audio/fx/zombie_pain.wav");
 }
 
 EnemyGround::~EnemyGround()

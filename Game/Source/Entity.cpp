@@ -15,7 +15,6 @@ Entity::Entity(int x, int y) : position(x, y)
 	numCounter = 0;
 	left = true;
 	drawPath = false;
-	birdFx = app->audio->LoadFx("Assets/audio/fx/fall.wav");
 }
 
 Entity::~Entity() {}

@@ -22,7 +22,6 @@ Heart::Heart(int x, int y) : Entity(x, y)
 Heart::~Heart()
 {
 	collider->pendingToDelete = true;
-	playerWin->pendingToDelete = true;
 }
 
 void Heart::Update()

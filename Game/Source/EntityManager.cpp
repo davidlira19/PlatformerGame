@@ -24,6 +24,8 @@ bool EntityManager::Start()
 	zombieTexture = app->tex->Load("Assets/textures/zombie_animation.png");
 	coinTexture = app->tex->Load("Assets/textures/coin_animation.png");
 	heartTexture = app->tex->Load("Assets/textures/heart_animation.png");
+	birdFx = app->audio->LoadFx("Assets/audio/fx/fall.wav");
+	zombieFx = app->audio->LoadFx("Assets/audio/fx/zombie_pain.wav");
 
 	drawItems = false;
 
@@ -150,10 +152,12 @@ void EntityManager::SpawnEnemy(const EnemySpawnpoint& info)
 	case EntityTipe::EnemyAir:
 		entity = new EnemyAir(info.x, info.y);
 		entity->airEnemiesTexture = birdTexture;
+		entity->birdFx = birdFx;
 		break;
 	case EntityTipe::EnemyGround:
 		entity = new EnemyGround(info.x, info.y);
 		entity->groundEnemiesTexture = zombieTexture;
+		entity->zombieFx = zombieFx;
 		break;
 	case EntityTipe::Coin:
 		entity = new Coin(info.x, info.y);
