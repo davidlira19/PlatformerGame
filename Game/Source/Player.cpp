@@ -127,7 +127,6 @@ bool Player::Start()
 	godMode = false;
 	lifes = 3;
 	points = 0;
-
 	//LOAD TEXTURES
 	santa = app->tex->Load("Assets/textures/santa_animation.png");
 	winTex = app->tex->Load("Assets/textures/win_screen.png");
@@ -468,8 +467,23 @@ bool Player::SaveState(pugi::xml_node* nodo)
 	pugi::xml_node node=nodo->append_child("data");
 	node.append_attribute("x").set_value(position.x);
 	node.append_attribute("y").set_value(position.y);
+	node.append_attribute("level").set_value(currentLevel);
 	node.append_attribute("aceleration") = acceleration;
 	
+	return true;
+}
+
+bool Player::SavePL()
+{
+	pugi::xml_document LoadFile;
+	pugi::xml_node load;
+	LoadFile.load_file("save_game.xml");
+	load = LoadFile.append_child("game_state");
+	pugi::xml_node node;
+	node = load.append_child("player");
+	node.append_child("data").append_attribute("lifes").set_value(lifes);
+	node.append_child("data").append_attribute("points").set_value(points);
+
 	return true;
 }
 
@@ -477,7 +491,21 @@ bool Player::LoadState(pugi::xml_node* nodo)
 {
 	position.x = nodo->child("data").attribute("x").as_int();
 	position.y = nodo->child("data").attribute("y").as_int();
+	currentLevel = nodo->child("data").attribute("level").as_int();
 	acceleration = nodo->child("data").attribute("aceleration").as_int();
+	return true;
+}
+
+bool Player::LoadPL()
+{
+	pugi::xml_document LoadFile;
+	pugi::xml_node load;
+	LoadFile.load_file("save_game.xml");
+	load = LoadFile.child("game_state");
+	pugi::xml_node node;
+	node = load.child("player");
+	lifes = node.child("data").attribute("lifes").as_int();
+	points = node.child("data").attribute("points").as_int();
 	return true;
 }
 

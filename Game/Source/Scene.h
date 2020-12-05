@@ -45,6 +45,10 @@ public:
 
 private:
 
+	uint score = 000000;
+	int numbers = -1;
+	char scoreText[5] = { "\0" };
+
 	List<Collider*> colliders;
 	SDL_Texture* img;
 	SDL_Texture* bgSnow;

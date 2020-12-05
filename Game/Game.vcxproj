@@ -97,6 +97,7 @@
     <ClCompile Include="Source\Enemy_Air.cpp" />
     <ClCompile Include="Source\Enemy_Ground.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
+    <ClCompile Include="Source\Fonts.cpp" />
     <ClCompile Include="Source\Heart.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Source\Enemy_Air.h" />
     <ClInclude Include="Source\Enemy_Ground.h" />
     <ClInclude Include="Source\FadeToBlack.h" />
+    <ClInclude Include="Source\Fonts.h" />
     <ClInclude Include="Source\Heart.h" />
     <ClInclude Include="Source\Intro.h" />
     <ClInclude Include="Source\Map.h" />

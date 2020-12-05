@@ -40,9 +40,8 @@ public:
 
 	//PLAYER VARIABLES
 	int lifes;
-	bool isJumping;
 	int points;
-	int maxPoints;
+	bool isJumping;
 	int currentLevel;
 
 	//PLAYER FUNCTIONS
@@ -73,7 +72,8 @@ public:
 	bool intro;
 	bool LoadState(pugi::xml_node* nodo);
 	bool SaveState(pugi::xml_node* nodo);
-
+	bool LoadPL();
+	bool SavePL();
 	// WIN-LOSE TEXTURES
 	SDL_Texture* winTex = nullptr;
 	SDL_Texture* deadTex = nullptr;

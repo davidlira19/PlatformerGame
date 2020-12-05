@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Defs.h"
 #include "Log.h"
+#include "Fonts.h"
 #include "Collisions.h"
 #include "FadeToBlack.h"
 #include "EntityManager.h"
@@ -101,6 +102,10 @@ bool Scene::Start()
 
 	//HEART
 	app->entity->AddEntity(EntityTipe::Heart, 1000, 435);
+
+	char lookupTable[] = { "0123456789" };
+	numbers = app->fonts->Load("Assets/textures/numbers.png", lookupTable, 1);
+
 	return true;
 }
 
@@ -238,6 +243,11 @@ bool Scene::PostUpdate()
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 	
+	score = app->player->points;
+
+	sprintf_s(scoreText, 10, "%5d", score);
+	app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 75) * -1, numbers, scoreText);
+
 	return ret;
 }
 

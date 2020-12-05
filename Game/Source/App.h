@@ -27,6 +27,7 @@ class Intro;
 class Wellcome;
 class Dead;
 class Win;
+class Fonts;
 class ModuleCollisions;
 class App
 {
@@ -103,6 +104,7 @@ public:
 	Wellcome* wellcome;
 	Dead* dead;
 	Win* winp;
+	Fonts* fonts;
 	ModuleCollisions* collisions;
 
 private:

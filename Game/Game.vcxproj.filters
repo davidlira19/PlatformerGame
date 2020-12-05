@@ -30,6 +30,7 @@
     <ClCompile Include="Source\PathFinding.cpp" />
     <ClCompile Include="Source\Scene2.cpp" />
     <ClCompile Include="Source\Heart.cpp" />
+    <ClCompile Include="Source\Fonts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -97,6 +98,7 @@
     <ClInclude Include="Source\PathFinding.h" />
     <ClInclude Include="Source\Scene2.h" />
     <ClInclude Include="Source\Heart.h" />
+    <ClInclude Include="Source\Fonts.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
