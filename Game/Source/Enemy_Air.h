@@ -20,7 +20,8 @@ public:
 private:
 	// The position (as ratio) in the wave at a specific moment
 	// The enemy animation
-	Animation birdAnim;
+	Animation birdLeft;
+	Animation birdRight;
 };
 
 #endif

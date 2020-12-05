@@ -20,6 +20,7 @@ Coin::Coin(int x, int y) : Entity(x, y)
 Coin::~Coin()
 {
 	collider->pendingToDelete = true;
+	playerWin->pendingToDelete = true;
 }
 
 void Coin::Update()

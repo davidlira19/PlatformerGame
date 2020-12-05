@@ -5,16 +5,24 @@
 
 EnemyAir::EnemyAir(int x, int y) : Entity(x, y)
 {
-	birdAnim.PushBack({ 0,0,88,58 });
-	birdAnim.PushBack({ 90,0,88,58 });
-	birdAnim.PushBack({ 181,0,88,58 });
-	birdAnim.PushBack({ 272,0,88,58 });
-	birdAnim.loop = true;
-	birdAnim.speed = 0.1f;
-	currentAnim = &birdAnim;
+	birdLeft.PushBack({ 0,0,88,58 });
+	birdLeft.PushBack({ 92,0,88,58 });
+	birdLeft.PushBack({ 184,0,88,58 });
+	birdLeft.PushBack({ 276,0,88,58 });
+	birdLeft.loop = true;
+	birdLeft.speed = 0.1f;
+	currentAnim = &birdLeft;
+
+	birdRight.PushBack({ 368,0,88,58 });
+	birdRight.PushBack({ 460,0,88,58 });
+	birdRight.PushBack({ 552,0,88,58 });
+	birdRight.PushBack({ 644,0,88,58 });
+	birdRight.loop = true;
+	birdRight.speed = 0.1f;
+	currentAnim = &birdRight;
+
 	playerWin = app->collisions->AddCollider({ 0, 0, 88, 4 }, Collider::ENEMY1, (Module*)app->entity);
 	collider = app->collisions->AddCollider({ 0, 6, 88, 56 }, Collider::ENEMY2, (Module*)app->entity);
-
 }
 
 EnemyAir::~EnemyAir() 
@@ -31,7 +39,28 @@ void EnemyAir::Update()
 		collider->SetPos(position.x + app->render->camera.x, position.y + app->render->camera.y - 34);
 	}
 	
-	
+	if (dire == -1)
+	{
+		if (deadZ == false)
+		{
+			currentAnim = &birdLeft;
+		}
+		else
+		{
+			currentAnim = &birdLeft;
+		}
+	}
+	else
+	{
+		if (deadZ == false)
+		{
+			currentAnim = &birdRight;
+		}
+		else
+		{
+			currentAnim = &birdRight;
+		}
+	}
 	currentAnim->Update();
 
 	Entity::Update();

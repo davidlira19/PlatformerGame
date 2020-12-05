@@ -3,7 +3,6 @@
 #include "EntityManager.h"
 #include "Collisions.h"
 
-
 Heart::Heart(int x, int y) : Entity(x, y)
 {
 	heartAnim.PushBack({ 2,2,62,62 });
@@ -23,6 +22,7 @@ Heart::Heart(int x, int y) : Entity(x, y)
 Heart::~Heart()
 {
 	collider->pendingToDelete = true;
+	playerWin->pendingToDelete = true;
 }
 
 void Heart::Update()
