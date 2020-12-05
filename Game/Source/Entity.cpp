@@ -14,7 +14,14 @@ Entity::Entity(int x, int y) : position(x, y)
 	counter = false;
 	numCounter = 0;
 	left = true;
-	drawPath = false;
+	if (app->entity->drawItems == false) 
+	{
+		drawPath = false;
+	}
+	else 
+	{
+		drawPath = true;
+	}
 }
 
 Entity::~Entity() {}
