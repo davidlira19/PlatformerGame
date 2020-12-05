@@ -19,8 +19,7 @@ Audio::Audio(bool startEnabled) : Module(startEnabled)
 }
 
 // Destructor
-Audio::~Audio()
-{}
+Audio::~Audio() {}
 void Audio::Unload()
 {
 	if (music != NULL)

@@ -13,8 +13,7 @@ Map::Map(bool startEnabled) : Module(startEnabled), mapLoaded(false)
 }
 
 // Destructor
-Map::~Map()
-{}
+Map::~Map() {}
 
 // Ask for the value of a custom property
 int Properties::GetProperty(const char* value, int defaultValue) const

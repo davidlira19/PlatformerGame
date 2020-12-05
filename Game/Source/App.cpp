@@ -263,7 +263,7 @@ void App::FinishUpdate()
 		vsyncCharacter.Create("off");
 	}
 	static char title[256];
-	sprintf_s(title, 256, "FPS: %i / Avg.FPS: %.2f / Last-Frame MS: %.3f / Vsync: %s /lifes: %d", framesOnLastUpdate, averageFps, dt, vsyncCharacter.GetString(),app->player->lifes);
+	sprintf_s(title, 256, "FPS: %i / Avg.FPS: %.2f / Last-Frame MS: %.3f / Vsync: %s", framesOnLastUpdate, averageFps, dt, vsyncCharacter.GetString());
 
 	app->win->SetTitle(title);
 

@@ -52,10 +52,7 @@ struct Properties
 {
 
 	Property propety;
-	~Properties()
-	{
-		//...
-	}
+	~Properties() {}
 
 	// Method to ask for the value of a custom property
 	int GetProperty(const char* name, int default_value = 0) const;
@@ -73,8 +70,7 @@ struct MapLayer
 	// Support custom properties
 	Properties properties;
 
-	MapLayer() : data(NULL)
-	{}
+	MapLayer() : data(NULL) {}
 
 	~MapLayer()
 	{

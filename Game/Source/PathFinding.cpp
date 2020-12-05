@@ -4,15 +4,9 @@
 #include"Render.h"
 #include"Input.h"
 
-PathFinding::PathFinding() 
-{
+PathFinding::PathFinding() {}
 
-}
-
-PathFinding::~PathFinding()
-{
-
-}
+PathFinding::~PathFinding() {}
 
 bool PathFinding::PropagateAStar()
 {
@@ -123,7 +117,8 @@ bool PathFinding::PropagateAStar()
 		FindFinalPath();
 		return true;
 	}
-	else {
+	else 
+	{
 		return false;
 	}
 }

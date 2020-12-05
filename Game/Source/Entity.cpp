@@ -18,10 +18,7 @@ Entity::Entity(int x, int y) : position(x, y)
 	birdFx = app->audio->LoadFx("Assets/audio/fx/fall.wav");
 }
 
-Entity::~Entity()
-{
-	
-}
+Entity::~Entity() {}
 
 void Entity::Update()
 {
@@ -38,7 +35,8 @@ void Entity::Update()
 	}
 	if (app->player->godMode == false)
 	{
-		if (type == EntityTipe::EnemyAir || type == EntityTipe::EnemyGround) {
+		if (type == EntityTipe::EnemyAir || type == EntityTipe::EnemyGround) 
+		{
 			numCounter++;
 			if (app->player->HasThePlayerMove() == true || numCounter == 1)
 			{
@@ -164,9 +162,7 @@ void Entity::Update()
 	}
 }
 
-void Entity::Draw()
-{
-}
+void Entity::Draw() {}
 
 void Entity::OnCollision(Collider* collideri, Collider* collidere)
 {
@@ -191,6 +187,4 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 	}
 }
 
-void Entity::destr()
-{
-}
+void Entity::destr() {}

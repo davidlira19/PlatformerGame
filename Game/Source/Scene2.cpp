@@ -137,7 +137,6 @@ bool Scene2::Update(float dt)
 		app->render->camera.x = (app->player->Position.x - 500) * -1;
 		app->render->camera.y = (app->player->Position.y - 250) * -1;
 	}
-	LOG("%d %d", app->player->Position.x, app->player->Position.y);
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		app->map->ChangeCollisionsDraw();

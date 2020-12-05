@@ -123,10 +123,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 }
 
 // Destructor
-ModuleCollisions::~ModuleCollisions()
-{
-
-}
+ModuleCollisions::~ModuleCollisions() {}
 
 bool ModuleCollisions::PreUpdate()
 {

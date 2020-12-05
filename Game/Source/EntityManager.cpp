@@ -15,10 +15,7 @@ EntityManager::EntityManager(bool startEnabled) : Module(startEnabled)
 	name.Create("EntityManager");
 }
 
-EntityManager::~EntityManager()
-{
-
-}
+EntityManager::~EntityManager() {}
 
 bool EntityManager::Start()
 {
@@ -38,7 +35,8 @@ bool EntityManager::PreUpdate()
 	// Remove all enemies scheduled for deletion
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
-	while (listItem != nullptr) {
+	while (listItem != nullptr) 
+	{
 		if (listItem->data->pendientedeelim == true)
 		{
 			entityList.Del(listItem);
@@ -54,7 +52,8 @@ bool EntityManager::Update(float dt)
 
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
-	while (listItem != nullptr) {
+	while (listItem != nullptr) 
+	{
 		listItem->data->Update();
 		listItem = listItem->next;
 	}
@@ -68,7 +67,8 @@ bool EntityManager::PostUpdate()
 {
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
-	while (listItem != nullptr) {
+	while (listItem != nullptr) 
+	{
 		listItem->data->Draw();
 		listItem = listItem->next;
 	}
@@ -86,7 +86,8 @@ bool EntityManager::CleanUp()
 	app->tex->UnLoad(heartTexture);
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
-	while (listItem != nullptr) {
+	while (listItem != nullptr) 
+	{
 		listItem->data->path.ResetPath();
 		delete listItem->data;	
 		listItem = listItem->next;
@@ -130,7 +131,8 @@ void EntityManager::HandleEnemiesDespawn()
 {
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
-	while (listItem != nullptr) {
+	while (listItem != nullptr) 
+	{
 		if (listItem->data->pendientedeelim == true)
 		{
 			delete listItem->data;
@@ -170,7 +172,8 @@ void EntityManager::OnCollision(Collider* c1, Collider* c2)
 {
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
-	while (listItem != nullptr) {
+	while (listItem != nullptr) 
+	{
 		if (c1->type == c1->ENEMY2)
 		{
 			if (c2->type == c2->PLAYERLEFT || c2->type == c2->PLAYERRIGHT)
@@ -206,7 +209,8 @@ bool EntityManager::LoadState(pugi::xml_node* nodo)
 {
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
-	while (listItem != nullptr) {
+	while (listItem != nullptr) 
+	{
 		listItem->data->path.ResetPath();
 		delete listItem->data;
 		listItem = listItem->next;
@@ -253,7 +257,8 @@ bool EntityManager::SaveState(pugi::xml_node* nodo)
 	auxiliar.append_attribute("num").set_value(num);
 	while (list != nullptr)
 	{
-		if (list->data->type == EntityTipe::EnemyAir || list->data->type == EntityTipe::EnemyGround) {
+		if (list->data->type == EntityTipe::EnemyAir || list->data->type == EntityTipe::EnemyGround) 
+		{
 			auxiliar.append_child("Enemy").append_attribute("x").set_value(list->data->position.x);
 			auxiliar.last_child().append_attribute("y").set_value(list->data->position.y);
 			if (list->data->type == EntityTipe::EnemyAir)

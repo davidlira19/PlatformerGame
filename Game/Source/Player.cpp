@@ -168,7 +168,6 @@ bool Player::Update(float dt)
 	{
 		noise = true;
 	}
-	LOG("%d %d", points, lifes);
 	playerDown->SetPos(Position.x + app->render->camera.x + 48, Position.y + app->render->camera.y + 73);
 	playerRight->SetPos(Position.x + app->render->camera.x + 90, Position.y + app->render->camera.y + 0);
 	playerLeft->SetPos(Position.x + app->render->camera.x + 40, Position.y + app->render->camera.y + 0);
@@ -176,7 +175,8 @@ bool Player::Update(float dt)
 	//INPUT TO MOVE THE PLAYER
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && canMove == true)
 	{
-		if (lateralsR == false) {
+		if (lateralsR == false) 
+		{
 	
 			if ((state == playerState::null) && (godMode == false))
 			{
@@ -195,7 +195,8 @@ bool Player::Update(float dt)
 
 	else if ((app->input->GetKey(SDL_SCANCODE_A)) == (KEY_REPEAT) && (canMove == true))
 	{
-		if (lateralsL == false) {
+		if (lateralsL == false) 
+		{
 			if (state==playerState::null)
 			{
 				lastanimation = currentAnimation;
@@ -644,7 +645,8 @@ bool Player::HasThePlayerMove()
 	{
 		return true;
 	}
-	else {
+	else 
+	{
 		return false;
 	}
 }

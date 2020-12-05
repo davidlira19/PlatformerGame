@@ -17,9 +17,7 @@ public:
 	
 	}
 
-	void Init()
-	{
-	}
+	void Init() {}
 
 	// Called before render is available
 	// Sending config file to all modules
