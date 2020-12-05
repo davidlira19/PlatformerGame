@@ -47,10 +47,10 @@ bool Scene2::Start()
 
 	//Player position
 	app->player->position.x = 600;
-	app->player->position.y = 100;
+	app->player->position.y = 380;
 
 	//Load Texture
-	misteryTex = app->tex->Load("Assets/textures/mistery.png");
+	mysteryTex = app->tex->Load("Assets/textures/mystery.png");
 	screamFx = app->audio->LoadFx("Assets/audio/fx/scream.wav");
 	bgSnow = app->tex->Load("Assets/textures/snow_background.png");
 	freeCamera = false;
@@ -259,6 +259,15 @@ bool Scene2::PostUpdate()
 	return ret;
 }
 
+void Scene2::EasterEgg()
+{
+	if (counter == 1000)
+	{
+		app->audio->PlayFx(screamFx);
+	}
+	app->render->DrawTexture(mysteryTex, ((app->render->camera.x - 300) * -1), (app->render->camera.y * -1));
+}
+
 // Called before quitting
 bool Scene2::CleanUp()
 {
@@ -266,8 +275,8 @@ bool Scene2::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->tex->UnLoad(bgSnow);
+	app->tex->UnLoad(mysteryTex);
 	app->map->Disable();
-
 	app->entity->Disable();
 	app->audio->Unload();
 	app->audio->Disable();
@@ -275,13 +284,4 @@ bool Scene2::CleanUp()
 	colliders.Clear();
 	
 	return true;
-}
-
-void Scene2::EasterEgg()
-{
-	if (counter == 1000)
-	{
-		app->audio->PlayFx(screamFx);
-	}
-	app->render->DrawTexture(misteryTex, (app->render->camera.x * -1), (app->render->camera.y * -1));
 }

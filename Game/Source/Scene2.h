@@ -47,7 +47,7 @@ private:
 	List<Collider*> colliders;
 	SDL_Texture* img;
 	SDL_Texture* bgSnow;
-	SDL_Texture* misteryTex;
+	SDL_Texture* mysteryTex;
 };
 
 #endif // __SCENE_H__
