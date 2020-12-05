@@ -3,7 +3,7 @@
 ## Description
 
 Santa's Run is an amazing christmas platformer game developed by 2C1V for the Videogames Development subject in CITM (UPC), run and jump over the platforms to get into the igloo!
-Win points getting coins and killing enemies by jumping on them!
+Win points getting coins and killing enemies by jumping over them!
 
 ## Key Features
 
@@ -14,6 +14,15 @@ Win points getting coins and killing enemies by jumping on them!
  - Debug Keys
  - Intro/Death/Win screens
  - Music/FX
+ - Enemies you can kill by jumping over them
+ - Enemies pathfinding
+ - Points system
+ - Lifes system
+ - 2nd Level
+ - Delta time and vsync
+ - Checkpoints (and teleportation)
+ - Audio Feedback
+ 
  
 ## Controls
 
@@ -119,5 +128,13 @@ Fall Sound Effect: https://opengameart.org/content/falling-body
 https://creativecommons.org/licenses/by-sa/3.0/
 http://www.gnu.org/licenses/gpl-3.0.html
 http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+
+Ester Egg Sound Effect: https://opengameart.org/content/girly-scream
+
+https://creativecommons.org/licenses/by/3.0/
+https://creativecommons.org/licenses/by-sa/3.0/
+http://www.gnu.org/licenses/gpl-3.0.html
+http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+https://creativecommons.org/publicdomain/zero/1.0/
 
 (Coin and hearts animations and textures are self made)
