@@ -51,7 +51,7 @@ public:
 		bool ret = true;
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		{
-			app->fade->FadeToBlack(this, (Module*)app->scene, 60);
+			app->fade->FadeToBlack(this, (Module*)app->sceneLevel1, 60);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{

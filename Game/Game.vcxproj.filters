@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
-    <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Input.cpp" />
@@ -22,20 +21,20 @@
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\Collisions.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
-    <ClCompile Include="Source\Enemy_Air.cpp" />
-    <ClCompile Include="Source\Enemy_Ground.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="Source\Coin.cpp" />
     <ClCompile Include="Source\PathFinding.cpp" />
-    <ClCompile Include="Source\Scene2.cpp" />
     <ClCompile Include="Source\Heart.cpp" />
     <ClCompile Include="Source\Fonts.cpp" />
+    <ClCompile Include="Source\SceneLevel1.cpp" />
+    <ClCompile Include="Source\SceneLevel2.cpp" />
+    <ClCompile Include="Source\EnemyGround.cpp" />
+    <ClCompile Include="Source\EnemyAir.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Textures.h" />
-    <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Input.h" />
@@ -90,15 +89,16 @@
     </ClInclude>
     <ClInclude Include="Source\Collisions.h" />
     <ClInclude Include="Source\Collider.h" />
-    <ClInclude Include="Source\Enemy_Air.h" />
-    <ClInclude Include="Source\Enemy_Ground.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\Coin.h" />
     <ClInclude Include="Source\PathFinding.h" />
-    <ClInclude Include="Source\Scene2.h" />
     <ClInclude Include="Source\Heart.h" />
     <ClInclude Include="Source\Fonts.h" />
+    <ClInclude Include="Source\SceneLevel1.h" />
+    <ClInclude Include="Source\SceneLevel2.h" />
+    <ClInclude Include="Source\EnemyGround.h" />
+    <ClInclude Include="Source\EnemyAir.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

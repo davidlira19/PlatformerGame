@@ -55,11 +55,11 @@ public:
 		{
 			if (app->player->currentLevel == 1)
 			{
-				app->fade->FadeToBlack(this, (Module*)app->scene, 60);
+				app->fade->FadeToBlack(this, (Module*)app->sceneLevel1, 60);
 			}
 			else if (app->player->currentLevel == 2)
 			{
-				app->fade->FadeToBlack(this, (Module*)app->scene2, 60);
+				app->fade->FadeToBlack(this, (Module*)app->sceneLevel2, 60);
 			}
 		}
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) 

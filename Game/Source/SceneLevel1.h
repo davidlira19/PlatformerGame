@@ -1,5 +1,5 @@
-#ifndef __SCENE_H__
-#define __SCENE_H__
+#ifndef __SCENELEVEL1_H__
+#define __SCENELEVEL1_H__
 
 #include "Module.h"
 
@@ -14,14 +14,14 @@ public:
 	bool checkIfCollision(int id, position positionToChek);
 };
 
-class Scene : public Module
+class SceneLevel1 : public Module
 {
 public:
 
-	Scene(bool startEnabled);
+	SceneLevel1(bool startEnabled);
 
 	// Destructor
-	virtual ~Scene();
+	virtual ~SceneLevel1();
 
 	// Called before render is available
 	bool Awake();
@@ -54,4 +54,4 @@ private:
 	SDL_Texture* bgSnow;
 };
 
-#endif // __SCENE_H__
+#endif // __SCENELEVEL1_H__

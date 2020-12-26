@@ -53,7 +53,7 @@ public:
 		{
 			if (app->player->currentLevel == 1) 
 			{
-				app->fade->FadeToBlack(this, (Module*)app->scene2, 60);
+				app->fade->FadeToBlack(this, (Module*)app->sceneLevel2, 60);
 			}
 			else 
 			{

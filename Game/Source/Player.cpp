@@ -287,12 +287,12 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN || ((app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)) && currentLevel == 1)
 	{
-		app->fade->FadeToBlack(this, (Module*)app->scene, 60);
+		app->fade->FadeToBlack(this, (Module*)app->sceneLevel1, 60);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN || ((app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)) && currentLevel == 2)
 	{
-		app->fade->FadeToBlack(this, (Module*)app->scene2, 60);
+		app->fade->FadeToBlack(this, (Module*)app->sceneLevel2, 60);
 	}
 
 	//JUST UPDATE THE ANIMATION
@@ -412,8 +412,8 @@ bool Player::CleanUp()
 	app->tex->UnLoad(deadTex);
 	app->tex->UnLoad(santa);
 	app->tex->UnLoad(introTex);
-	app->scene->Disable();
-	app->scene2->Disable();
+	app->sceneLevel1->Disable();
+	app->sceneLevel2->Disable();
 	return true;
 }
 

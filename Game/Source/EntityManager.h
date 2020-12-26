@@ -3,8 +3,8 @@
 
 #include "Entity.h"
 #include "Module.h"
-#include "Enemy_Air.h"
-#include "Enemy_Ground.h"
+#include "EnemyAir.h"
+#include "EnemyGround.h"
 #include "Coin.h"
 #include "Heart.h"
 #include "List.h"

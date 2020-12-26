@@ -6,8 +6,8 @@
 #include"Textures.h"
 #include"Animation.h"
 #include"Module.h"
-#include "Scene.h"
-#include "Scene2.h"
+#include "SceneLevel1.h"
+#include "SceneLevel2.h"
 
 struct SDL_Rect;
 struct SDL_Texture;

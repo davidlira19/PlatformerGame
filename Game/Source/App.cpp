@@ -6,8 +6,8 @@
 #include "Audio.h"
 #include "Player.h"
 #include "EntityManager.h"
-#include "Scene.h"
-#include "Scene2.h"
+#include "SceneLevel1.h"
+#include "SceneLevel2.h"
 #include "Intro.h"
 #include "Map.h"
 #include "FadeToBlack.h"
@@ -33,8 +33,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	audio = new Audio(true);
 	player = new Player(false);
-	scene = new Scene(false);
-	scene2 = new Scene2(false);
+	sceneLevel1 = new SceneLevel1(false);
+	sceneLevel2 = new SceneLevel2(false);
 	entity = new EntityManager(false);
 	map = new Map(false);
 	fade = new ModuleFadeToBlack(true);
@@ -58,8 +58,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fade);	
 	AddModule(player);
 	AddModule(fonts);
-	AddModule(scene);
-	AddModule(scene2);
+	AddModule(sceneLevel1);
+	AddModule(sceneLevel2);
 	AddModule(entity);
 	AddModule(map);
 	AddModule(collisions);
