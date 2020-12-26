@@ -8,13 +8,16 @@
 #include"Render.h"
 #include"Textures.h"
 #include"Input.h"
+#include"GuiManager.h"
 
 class Wellcome :public Module {
 public:
-	Wellcome(bool startEnabled) : Module(startEnabled) {
+	Wellcome(bool startEnabled) : Module(startEnabled) 
+	{
+		
 	
 	}
-
+	
 	// Destructor
 	virtual ~Wellcome() 
 	{
@@ -32,27 +35,39 @@ public:
 	bool Start() 
 	{
 		wellcome = app->tex->Load("Assets/Textures/title_screen.png");
+
+		SDL_Rect rect = { 50,50,300,300 };
+		start = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "START");
+		start->SetObserver(this);
+		/*rect = { 350,350,150,150 };
+		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "Exit");
+		exit->SetObserver(this);*/
 		return true;
 	}
-
+	bool OnGuiMouseClickEvent(GuiControl* control)
+	{
+		if (control == start) 
+		{
+			app->fade->FadeToBlack(this, (Module*)app->sceneLevel1, 60);
+		}
+		if (control == exit)
+		{
+			
+		}
+		return true;
+	}
 
 
 	// Called each loop iteration
-	bool Update(float dt)override 
-	{
-	
-
-		return true;
-	}
 
 	// Called before all Updates
 	bool PostUpdate()override 
 	{
 		bool ret = true;
-		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		/*if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		{
 			app->fade->FadeToBlack(this, (Module*)app->sceneLevel1, 60);
-		}
+		}*/
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
 			ret = false;
@@ -64,12 +79,13 @@ public:
 	// Called before quitting
 	bool CleanUp() 
 	{
-
+		app->gui->DestroyAllGuiControl();
 		app->tex->UnLoad(wellcome);
 		return true;
 	}
 private:
 	SDL_Texture* wellcome;
-
+	GuiControl* start;
+	GuiControl* exit;
 };
 #endif

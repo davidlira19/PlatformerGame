@@ -31,6 +31,18 @@
     <ClCompile Include="Source\SceneLevel2.cpp" />
     <ClCompile Include="Source\EnemyGround.cpp" />
     <ClCompile Include="Source\EnemyAir.cpp" />
+    <ClCompile Include="Source\GuiButton.cpp">
+      <Filter>External\GuiControls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiCheckBox.cpp">
+      <Filter>External\GuiControls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiManager.cpp">
+      <Filter>External\GuiControls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiSlider.cpp">
+      <Filter>External\GuiControls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -99,6 +111,21 @@
     <ClInclude Include="Source\SceneLevel2.h" />
     <ClInclude Include="Source\EnemyGround.h" />
     <ClInclude Include="Source\EnemyAir.h" />
+    <ClInclude Include="Source\GuiButton.h">
+      <Filter>External\GuiControls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiCheckBox.h">
+      <Filter>External\GuiControls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControl.h">
+      <Filter>External\GuiControls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiManager.h">
+      <Filter>External\GuiControls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiSlider.h">
+      <Filter>External\GuiControls</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -109,6 +136,9 @@
     </Filter>
     <Filter Include="External\PugiXml">
       <UniqueIdentifier>{2855ff7f-53a1-413d-a75b-18b4ade921dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\GuiControls">
+      <UniqueIdentifier>{e68eecc6-89c2-47e4-9225-b9d9d3d76ca6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

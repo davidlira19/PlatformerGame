@@ -18,6 +18,7 @@
 #include "Win.h"
 #include "Fonts.h"
 #include "Collisions.h"
+#include"GuiManager.h"
 #include <iostream>
 #include <sstream>
 
@@ -32,6 +33,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render(true);
 	tex = new Textures(true);
 	audio = new Audio(true);
+	gui = new GuiManager(true);
 	player = new Player(false);
 	sceneLevel1 = new SceneLevel1(false);
 	sceneLevel2 = new SceneLevel2(false);
@@ -64,6 +66,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(collisions);
 	// Render last to swap buffer
+	AddModule(gui);
 	AddModule(render);
 
 	PERF_PEEK(ptimer);

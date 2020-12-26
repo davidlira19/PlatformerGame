@@ -4,7 +4,7 @@
 #include"Collider.h"
 #include "SString.h"
 #include "PugiXml/src/pugixml.hpp"
-
+class GuiControl;
 class App;
 
 class Module
@@ -90,7 +90,10 @@ public:
 	{
 
 	}
-
+	virtual bool OnGuiMouseClickEvent(GuiControl* control)
+	{
+		return true;
+	}
 public:
 
 	bool isEnabled = true;

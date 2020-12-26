@@ -29,6 +29,7 @@ class Dead;
 class Win;
 class Fonts;
 class ModuleCollisions;
+class GuiManager;
 class App
 {
 public:
@@ -106,7 +107,7 @@ public:
 	Win* winp;
 	Fonts* fonts;
 	ModuleCollisions* collisions;
-
+	GuiManager* gui;
 private:
 
 	int argc;

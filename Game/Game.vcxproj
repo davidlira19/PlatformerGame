@@ -98,6 +98,10 @@
     <ClCompile Include="Source\EnemyGround.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\Fonts.cpp" />
+    <ClCompile Include="Source\GuiButton.cpp" />
+    <ClCompile Include="Source\GuiCheckBox.cpp" />
+    <ClCompile Include="Source\GuiManager.cpp" />
+    <ClCompile Include="Source\GuiSlider.cpp" />
     <ClCompile Include="Source\Heart.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -124,6 +128,11 @@
     <ClInclude Include="Source\EnemyGround.h" />
     <ClInclude Include="Source\FadeToBlack.h" />
     <ClInclude Include="Source\Fonts.h" />
+    <ClInclude Include="Source\GuiButton.h" />
+    <ClInclude Include="Source\GuiCheckBox.h" />
+    <ClInclude Include="Source\GuiControl.h" />
+    <ClInclude Include="Source\GuiManager.h" />
+    <ClInclude Include="Source\GuiSlider.h" />
     <ClInclude Include="Source\Heart.h" />
     <ClInclude Include="Source\Intro.h" />
     <ClInclude Include="Source\Map.h" />
