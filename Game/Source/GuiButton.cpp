@@ -46,10 +46,11 @@ bool GuiButton::Update( float dt)
 bool GuiButton::Draw()
 {
     // Draw the right button depending on state
-    SDL_Rect rect = { 776,218,200,81 };
-    SDL_Rect rect2 = { 91,218,200,81 };
-    SDL_Rect rect3 = { 319,218,200,81 };
-    SDL_Rect rect4 = { 548,218,200,81 };
+    SDL_Rect rect = { 771,213,213,99 };
+    SDL_Rect rect2 = { 86,213,213,99 };
+    SDL_Rect rect3 = { 314,213,213,99 };
+    SDL_Rect rect4 = { 543,213,213,99 };
+
     switch (state)
     {
     case GuiControlState::DISABLED: 

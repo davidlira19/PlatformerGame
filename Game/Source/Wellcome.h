@@ -42,12 +42,22 @@ public:
 		start->SetObserver(this);
 
 		rect = { 525,200,200,81 };
-		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 2, rect, "EXIT");
-		exit->SetObserver(this);
+		load = app->gui->CreateGuiControl(GuiControlType::BUTTON, 2, rect, "LOAD");
+		load->SetObserver(this);
+		load->state = GuiControlState::DISABLED;
 
 		rect = { 525,300,200,81 };
-		credits = app->gui->CreateGuiControl(GuiControlType::BUTTON, 3, rect, "CREDITS");
+		settings = app->gui->CreateGuiControl(GuiControlType::BUTTON, 3, rect, "SETTINGS");
+		settings->SetObserver(this);
+
+		rect = { 525,400,200,81 };
+		credits = app->gui->CreateGuiControl(GuiControlType::BUTTON, 4, rect, "CREDITS");
 		credits->SetObserver(this);
+
+		rect = { 525,500,200,81 };
+		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 5, rect, "EXIT");
+		exit->SetObserver(this);
+
 		return true;
 	}
 	bool OnGuiMouseClickEvent(GuiControl* control)
@@ -56,13 +66,21 @@ public:
 		{
 			app->fade->FadeToBlack(this, (Module*)app->sceneLevel1, 60);
 		}
-		if (control == exit)
+		if (control == load)
 		{
-			toExit = true;
+			app->LoadGameRequest("save_game.xml");
+		}
+		if (control == settings)
+		{
+			
 		}
 		if (control == credits)
 		{
 			creditsCondition = true;
+		}
+		if (control == exit)
+		{
+			toExit = true;
 		}
 
 		return true;
@@ -112,6 +130,8 @@ private:
 	SDL_Texture* wellcome;
 	SDL_Texture* textureCredits;
 	GuiControl* start;
+	GuiControl* load;
+	GuiControl* settings;
 	GuiControl* exit;
 	GuiControl* credits;
 

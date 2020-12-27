@@ -55,6 +55,7 @@ private:
 	SDL_Texture* img;
 	SDL_Texture* bgSnow;
 	GuiControl* resume;
+	GuiControl* load;
 	GuiControl* settings;
 	GuiControl* title;
 	GuiControl* exit;

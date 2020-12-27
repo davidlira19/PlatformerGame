@@ -328,7 +328,10 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 {
 	if (control == resume)
 	{
+		app->gui->DestroyAllGuiControl();
 		menu = false;
+		app->player->godMode = false;
+		app->player->canMove = true;
 	}
 	if (control == settings)
 	{
@@ -336,6 +339,9 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	if (control == title)
 	{
+		app->player->Disable();
+		app->entity->Disable();
+		app->gui->DestroyAllGuiControl();
 		app->fade->FadeToBlack(this, (Module*)app->wellcome, 60);
 	}
 	if (control == exit)

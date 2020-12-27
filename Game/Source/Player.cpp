@@ -412,6 +412,7 @@ bool Player::CleanUp()
 	app->tex->UnLoad(deadTex);
 	app->tex->UnLoad(santa);
 	app->tex->UnLoad(introTex);
+	app->tex->UnLoad(lifesTex);
 	app->sceneLevel1->Disable();
 	app->sceneLevel2->Disable();
 	return true;
