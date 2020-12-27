@@ -15,7 +15,8 @@
 #include "FadeToBlack.h"
 #include "EntityManager.h"
 #include "PathFinding.h"
-
+#include"GuiButton.h"
+#include"GuiManager.h"
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");

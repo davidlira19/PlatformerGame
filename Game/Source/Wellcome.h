@@ -12,48 +12,49 @@
 
 class Wellcome :public Module {
 public:
-	Wellcome(bool startEnabled) : Module(startEnabled) 
+	Wellcome(bool startEnabled) : Module(startEnabled)
 	{
-		
-	
+		toExit = false;
+
 	}
-	
+
 	// Destructor
-	virtual ~Wellcome() 
+	virtual ~Wellcome()
 	{
 
 	}
 
 	// Called before render is available
-	bool Awake() 
+	bool Awake()
 	{
-		
+
 		return true;
 	}
 
 	// Called before the first frame
-	bool Start() 
+	bool Start()
 	{
 		wellcome = app->tex->Load("Assets/Textures/title_screen.png");
 
 		SDL_Rect rect = { 50,50,300,300 };
 		start = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "START");
 		start->SetObserver(this);
-		/*rect = { 350,350,150,150 };
-		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "Exit");
-		exit->SetObserver(this);*/
+		rect = { 350,350,150,150 };
+		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "EXIT");
+		exit->SetObserver(this);
 		return true;
 	}
 	bool OnGuiMouseClickEvent(GuiControl* control)
 	{
-		if (control == start) 
+		if (control == start)
 		{
 			app->fade->FadeToBlack(this, (Module*)app->sceneLevel1, 60);
 		}
 		if (control == exit)
 		{
-			
+			toExit = true;
 		}
+
 		return true;
 	}
 
@@ -61,14 +62,14 @@ public:
 	// Called each loop iteration
 
 	// Called before all Updates
-	bool PostUpdate()override 
+	bool PostUpdate()override
 	{
 		bool ret = true;
 		/*if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		{
 			app->fade->FadeToBlack(this, (Module*)app->sceneLevel1, 60);
 		}*/
-		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || toExit == true)
 		{
 			ret = false;
 		}
@@ -77,7 +78,7 @@ public:
 	}
 
 	// Called before quitting
-	bool CleanUp() 
+	bool CleanUp()
 	{
 		app->gui->DestroyAllGuiControl();
 		app->tex->UnLoad(wellcome);
@@ -87,5 +88,7 @@ private:
 	SDL_Texture* wellcome;
 	GuiControl* start;
 	GuiControl* exit;
+
+	bool toExit;
 };
 #endif

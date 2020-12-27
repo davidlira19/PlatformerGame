@@ -41,6 +41,25 @@ bool GuiManager::PostUpdate()
 	}
 	return true;
 }
+void GuiManager::DestroyGuiControl(GuiControl* entity)
+{
+	int idex = controls.Find(entity);
+
+	ListItem<GuiControl*>* auxiliar;
+	auxiliar = controls.start;
+	int cont = 0;
+	while (auxiliar != nullptr)
+	{
+		if (cont == idex) {
+			delete auxiliar->data;
+			controls.Del(auxiliar);
+			auxiliar = nullptr;
+			break;
+		}
+		cont++;
+		auxiliar = auxiliar->next;
+	}
+}
 bool GuiManager::Update(float dt)
 {
 	accumulatedTime += dt;
