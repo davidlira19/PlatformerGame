@@ -1,15 +1,19 @@
 #include "GuiManager.h"
-
+#include"Audio.h"
 #include "GuiButton.h"
 GuiManager::GuiManager(bool startEnabled) : Module(startEnabled)
 {
-	
 
 }
 GuiManager::~GuiManager() {
 
 }
-
+bool GuiManager::Start() 
+{
+	clickedFx =app->audio->LoadFx("Assets/Audio/Fx/button_press.wav");
+	focusedFx =app->audio->LoadFx("Assets/Audio/Fx/zip_click.wav");
+	return true;
+}
 GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, SDL_Rect rect, const char* text)
 {
 	GuiControl* control = nullptr;
@@ -17,7 +21,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, SDL_Rect r
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		control = new GuiButton(id, rect, text);
+		control = new GuiButton(id, rect, text, clickedFx, focusedFx);
 		break;
 	default: 
 		break;

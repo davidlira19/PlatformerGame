@@ -31,12 +31,14 @@ public:
 	void DestroyAllGuiControl();
 	//bool Start();
 	bool PostUpdate();
+	bool Start();
 	//void AddGuiControl(GuiControl* entity);
 	//bool Awake(pugi::xml_node&);
 public:
 
 	List<GuiControl*> controls;
-	
+	unsigned int focusedFx;
+	unsigned int clickedFx;
 	float accumulatedTime = 0.0f;
 	float updateMsCycle = 0.0f;
 	bool doLogic = false;

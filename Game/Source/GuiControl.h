@@ -93,7 +93,9 @@ public:
 
     //Font font;              // Text font
 
-    Module* observer;        // Observer module (it should probably be an array/list)
+    Module* observer;
+	unsigned int focusedFX;
+	unsigned int clickedFX;// Observer module (it should probably be an array/list)
 };
 
 #endif // __GUICONTROL_H__
