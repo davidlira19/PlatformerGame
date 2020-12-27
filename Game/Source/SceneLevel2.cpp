@@ -130,6 +130,29 @@ bool SceneLevel2::PreUpdate()
 // Called each loop iteration
 bool SceneLevel2::Update(float dt)
 {
+	frames++;
+	if (app->vsync == false)
+	{
+		if (frames % 60 == 0)
+		{
+			timerLvl2--;
+		}
+	}
+	else
+	{
+		if (frames % 30 == 0)
+		{
+			timerLvl2--;
+		}
+	}
+	if (timerLvl2 == 0)
+	{
+		frames = 0;
+		timerLvl2 = 100;
+		app->player->lifes--;
+		app->player->dead = true;
+	}
+
 	if ((app->player->position.x >= 0 && app->player->position.x <= 2264 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) || (app->player->position.x >= 4107 && app->player->position.x <= 10000 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN))
 	{
 		app->player->position.x = 2465;
@@ -223,6 +246,8 @@ bool SceneLevel2::Update(float dt)
 	{
 		app->player->dead = true;
 		app->player->lifes--;
+		timerLvl2 = 100;
+		frames = 0;
 	}
 	if (app->player->position.x >= 6726)
 	{
@@ -245,6 +270,9 @@ bool SceneLevel2::PostUpdate()
 
 	sprintf_s(scoreText, 10, "%5d", score);
 	app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 75) * -1, numbers, scoreText);
+
+	sprintf_s(timerText, 10, "%5d", timerLvl2);
+	app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 150) * -1, numbers, timerText);
 
 	if (app->player->points == 1750 && counter >= 0)
 	{

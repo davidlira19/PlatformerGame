@@ -602,7 +602,18 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 						else
 						{
 							dead = true;
-							lifes--;;
+							lifes--;
+							if (app->player->currentLevel==1)
+							{
+								app->sceneLevel1->timerLvl1 = 100;
+								app->sceneLevel1->frames = 0;
+							}
+							else
+							{
+								app->sceneLevel2->timerLvl2 = 100;
+								app->sceneLevel2->frames = 0;
+							}
+							
 						}
 					}
 					aux = aux->next;
@@ -653,6 +664,16 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 						{
 							dead = true;
 							lifes--;
+							if (app->player->currentLevel == 1)
+							{
+								app->sceneLevel1->timerLvl1 = 100;
+								app->sceneLevel1->frames = 0;
+							}
+							else
+							{
+								app->sceneLevel2->timerLvl2 = 100;
+								app->sceneLevel2->frames = 0;
+							}
 						}
 					}
 					aux = aux->next;

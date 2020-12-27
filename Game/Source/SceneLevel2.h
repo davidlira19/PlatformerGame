@@ -43,11 +43,15 @@ private:
 	uint score = 000000;
 	int numbers = -1;
 	char scoreText[5] = { "\0" };
+	char timerText[3] = { "\0" };
 	unsigned int screamFx;
 	List<Collider*> colliders;
 	SDL_Texture* img;
 	SDL_Texture* bgSnow;
 	SDL_Texture* mysteryTex;
+public:
+	uint frames = 0;
+	uint timerLvl2 = 100;
 };
 
 #endif // __SCENE_H__

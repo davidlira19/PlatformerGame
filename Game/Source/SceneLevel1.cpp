@@ -59,6 +59,7 @@ bool SceneLevel1::Start()
 	app->collisions->Enable();
 	app->player->Enable();
 	app->entity->Enable();
+
 	SDL_Rect rect;
 
 	for (int y = 0; y < app->map->data.tilesets.start->data->numTilesHeight; y++)
@@ -133,6 +134,29 @@ bool SceneLevel1::PreUpdate()
 // Called each loop iteration
 bool SceneLevel1::Update(float dt)
 {
+	frames++;
+	if (app->vsync == false)
+	{
+		if (frames % 60 == 0)
+		{
+			timerLvl1--;
+		}
+	}
+	else
+	{
+		if (frames % 30 == 0)
+		{
+			timerLvl1--;
+		}
+	}
+	if (timerLvl1 == 0)
+	{
+		frames = 0;
+		timerLvl1 = 100;
+		app->player->lifes--;
+		app->player->dead = true;
+	}
+
 	if (freeCamera == false)
 	{
 		app->render->camera.x = (app->player->position.x - 500) * -1;
@@ -226,6 +250,8 @@ bool SceneLevel1::Update(float dt)
 	{
 		app->player->dead = true;
 		app->player->lifes--;
+		timerLvl1 = 100;
+		frames = 0;
 	}
 	if (app->player->position.x >= 11350 / 2)
 	{
@@ -247,6 +273,9 @@ bool SceneLevel1::PostUpdate()
 
 	sprintf_s(scoreText, 10, "%5d", score);
 	app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 75) * -1, numbers, scoreText);
+
+	//sprintf_s(timerText, 10, "%5d", timerLvl1);
+	//app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 150) * -1, numbers, timerText);
 
 	return ret;
 }
