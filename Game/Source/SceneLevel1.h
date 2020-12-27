@@ -41,6 +41,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
 	bool freeCamera;
 
 private:
@@ -56,6 +58,8 @@ private:
 	GuiControl* settings;
 	GuiControl* title;
 	GuiControl* exit;
+	bool menu = false;
+	int contMenu = 0;
 public:
 	uint frames = 0;
 	uint timerLvl1 = 100;

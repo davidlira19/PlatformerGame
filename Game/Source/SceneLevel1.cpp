@@ -135,27 +135,30 @@ bool SceneLevel1::PreUpdate()
 // Called each loop iteration
 bool SceneLevel1::Update(float dt)
 {
-	frames++;
-	if (app->vsync == false)
+	if (menu == false)
 	{
-		if (frames % 60 == 0)
+		frames++;
+		if (app->vsync == false)
 		{
-			timerLvl1--;
+			if (frames % 60 == 0)
+			{
+				timerLvl1--;
+			}
 		}
-	}
-	else
-	{
-		if (frames % 30 == 0)
+		else
 		{
-			timerLvl1--;
+			if (frames % 30 == 0)
+			{
+				timerLvl1--;
+			}
 		}
-	}
-	if (timerLvl1 == 0)
-	{
-		frames = 0;
-		timerLvl1 = 100;
-		app->player->lifes--;
-		app->player->dead = true;
+		if (timerLvl1 == 0)
+		{
+			frames = 0;
+			timerLvl1 = 100;
+			app->player->lifes--;
+			app->player->dead = true;
+		}
 	}
 
 	if (freeCamera == false)
@@ -259,8 +262,13 @@ bool SceneLevel1::Update(float dt)
 		app->player->win = true;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	if (menu == true && contMenu == 0)
 	{
+		contMenu++;
+
+		app->player->godMode = true;
+		app->player->canMove = false;
+
 		SDL_Rect rect = { app->player->position.x - 500 + 400,app->player->position.y - 250 + 200,100,50 };
 		resume = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "RESUME");
 		resume->SetObserver(this);
@@ -276,6 +284,21 @@ bool SceneLevel1::Update(float dt)
 		SDL_Rect rect4 = { app->player->position.x - 500 + 600,app->player->position.y - 250 + 300,100,50 };
 		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 4, rect4, "EXIT");
 		exit->SetObserver(this);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		if ((menu == false) && ((app->player->currentAnimation != &app->player->jumpLeft) && (app->player->currentAnimation != &app->player->jumpRight)))
+		{
+			menu = true;
+			contMenu = 0;
+		}
+		else
+		{
+			app->gui->DestroyAllGuiControl();
+			menu = false;
+			app->player->godMode = false;
+			app->player->canMove = true;
+		}
 	}
 
 
@@ -299,6 +322,28 @@ bool SceneLevel1::PostUpdate()
 	//app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 150) * -1, numbers, timerText);
 
 	return ret;
+}
+
+bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
+{
+	if (control == resume)
+	{
+		menu = false;
+	}
+	if (control == settings)
+	{
+		
+	}
+	if (control == title)
+	{
+		app->fade->FadeToBlack(this, (Module*)app->wellcome, 60);
+	}
+	if (control == exit)
+	{
+		SDL_Quit();
+	}
+
+	return true;
 }
 
 // Called before quitting

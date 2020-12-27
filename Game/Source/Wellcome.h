@@ -35,13 +35,19 @@ public:
 	bool Start()
 	{
 		wellcome = app->tex->Load("Assets/Textures/title_screen.png");
+		textureCredits = app->tex->Load("Assets/Textures/credits.png");
 
 		SDL_Rect rect = { 50,50,300,300 };
 		start = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "START");
 		start->SetObserver(this);
+
 		rect = { 350,350,150,150 };
-		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "EXIT");
+		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 2, rect, "EXIT");
 		exit->SetObserver(this);
+
+		rect = { 500,500,150,150 };
+		credits = app->gui->CreateGuiControl(GuiControlType::BUTTON, 3, rect, "CREDITS");
+		credits->SetObserver(this);
 		return true;
 	}
 	bool OnGuiMouseClickEvent(GuiControl* control)
@@ -53,6 +59,10 @@ public:
 		if (control == exit)
 		{
 			toExit = true;
+		}
+		if (control == credits)
+		{
+			creditsCondition = true;
 		}
 
 		return true;
@@ -73,7 +83,21 @@ public:
 		{
 			ret = false;
 		}
+
 		app->render->DrawTexture(wellcome, 0, 0);
+
+		if (creditsCondition == true)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+			{
+				creditsCondition = false;
+				app->tex->UnLoad(wellcome);
+				app->fade->FadeToBlack(this, (Module*)app->wellcome, 60);
+			}
+			app->gui->DestroyAllGuiControl();
+			app->render->DrawTexture(textureCredits, 0, 0);
+		}
+
 		return ret;
 	}
 
@@ -86,9 +110,12 @@ public:
 	}
 private:
 	SDL_Texture* wellcome;
+	SDL_Texture* textureCredits;
 	GuiControl* start;
 	GuiControl* exit;
+	GuiControl* credits;
 
+	bool creditsCondition = false;
 	bool toExit;
 };
 #endif

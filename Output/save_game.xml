@@ -10,28 +10,30 @@
 	<:anonymous />
 	<:anonymous />
 	<player>
-		<data x="600" y="380" level="2" aceleration="13" />
+		<data x="996" y="446" level="1" aceleration="13" />
 	</player>
 	<:anonymous />
 	<scene />
 	<scene2 />
 	<EntityManager>
-		<data num="9">
-			<Enemy x="5768" y="809" type="EnemyAir" />
-			<Enemy x="3525" y="386" type="EnemyAir" />
-			<Enemy x="1975" y="671" type="EnemyAir" />
-			<Enemy x="4766" y="1226" type="EnemyGround" />
-			<Enemy x="5977" y="1034" type="EnemyGround" />
-			<Enemy x="1814" y="1163" type="EnemyGround" />
-			<Enemy x="2562" y="681" type="Coin" />
-			<Enemy x="1971" y="1066" type="Coin" />
-			<Enemy x="692" y="925" type="Heart" />
+		<data num="11">
+			<Enemy x="1624" y="464" type="EnemyAir" />
+			<Enemy x="3286" y="670" type="EnemyAir" />
+			<Enemy x="4252" y="550" type="EnemyAir" />
+			<Enemy x="4957" y="560" type="EnemyAir" />
+			<Enemy x="1798" y="456" type="EnemyGround" />
+			<Enemy x="2984" y="776" type="EnemyGround" />
+			<Enemy x="3801" y="650" type="EnemyGround" />
+			<Enemy x="4587" y="519" type="EnemyGround" />
+			<Enemy x="1860" y="435" type="Coin" />
+			<Enemy x="3000" y="755" type="Coin" />
+			<Enemy x="100" y="100" type="Coin" />
 		</data>
 	</EntityManager>
 	<map />
 	<:anonymous />
 	<:anonymous />
 	<renderer>
-		<camera x="-100" y="-130" />
+		<camera x="-496" y="-196" />
 	</renderer>
 </game_state>

@@ -12,6 +12,8 @@
 #include "Fonts.h"
 #include "Collisions.h"
 #include "EntityManager.h"
+#include"GuiButton.h"
+#include"GuiManager.h"
 
 SceneLevel2::SceneLevel2(bool startEnabled) : Module(startEnabled)
 {
@@ -130,29 +132,32 @@ bool SceneLevel2::PreUpdate()
 // Called each loop iteration
 bool SceneLevel2::Update(float dt)
 {
-	frames++;
-	if (app->vsync == false)
+	if (menu == false)
 	{
-		if (frames % 60 == 0)
+		frames++;
+		if (app->vsync == false)
 		{
-			timerLvl2--;
+			if (frames % 60 == 0)
+			{
+				timerLvl2--;
+			}
+		}
+		else
+		{
+			if (frames % 30 == 0)
+			{
+				timerLvl2--;
+			}
+		}
+		if (timerLvl2 == 0)
+		{
+			frames = 0;
+			timerLvl2 = 100;
+			app->player->lifes--;
+			app->player->dead = true;
 		}
 	}
-	else
-	{
-		if (frames % 30 == 0)
-		{
-			timerLvl2--;
-		}
-	}
-	if (timerLvl2 == 0)
-	{
-		frames = 0;
-		timerLvl2 = 100;
-		app->player->lifes--;
-		app->player->dead = true;
-	}
-
+	
 	if ((app->player->position.x >= 0 && app->player->position.x <= 2264 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) || (app->player->position.x >= 4107 && app->player->position.x <= 10000 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN))
 	{
 		app->player->position.x = 2465;
@@ -254,6 +259,44 @@ bool SceneLevel2::Update(float dt)
 		app->player->win = true;
 	}
 	
+	if (menu == true && contMenu == 0)
+	{
+		contMenu++;
+
+		app->player->godMode = true;
+		app->player->canMove = false;
+
+		SDL_Rect rect = { app->player->position.x - 500 + 400,app->player->position.y - 250 + 200,100,50 };
+		resume = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "RESUME");
+		resume->SetObserver(this);
+
+		SDL_Rect rect2 = { app->player->position.x - 500 + 600,app->player->position.y - 250 + 200,100,50 };
+		settings = app->gui->CreateGuiControl(GuiControlType::BUTTON, 2, rect2, "SETTINGS");
+		settings->SetObserver(this);
+
+		SDL_Rect rect3 = { app->player->position.x - 500 + 400,app->player->position.y - 250 + 300,100,50 };
+		title = app->gui->CreateGuiControl(GuiControlType::BUTTON, 3, rect3, "TITLE");
+		title->SetObserver(this);
+
+		SDL_Rect rect4 = { app->player->position.x - 500 + 600,app->player->position.y - 250 + 300,100,50 };
+		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 4, rect4, "EXIT");
+		exit->SetObserver(this);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		if ((menu == false) && ((app->player->currentAnimation != &app->player->jumpLeft) && (app->player->currentAnimation != &app->player->jumpRight)))
+		{
+			menu = true;
+			contMenu = 0;
+		}
+		else
+		{
+			app->gui->DestroyAllGuiControl();
+			menu = false;
+			app->player->godMode = false;
+			app->player->canMove = true;
+		}
+	}
 	
 	return true;
 }

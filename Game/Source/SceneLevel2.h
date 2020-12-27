@@ -49,6 +49,12 @@ private:
 	SDL_Texture* img;
 	SDL_Texture* bgSnow;
 	SDL_Texture* mysteryTex;
+	bool menu = false;
+	int contMenu = 0;
+	GuiControl* resume;
+	GuiControl* exit;
+	GuiControl* title;
+	GuiControl* settings;
 public:
 	uint frames = 0;
 	uint timerLvl2 = 100;
