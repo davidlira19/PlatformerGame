@@ -17,6 +17,18 @@ GuiButton::~GuiButton()
 
 bool GuiButton::Update( float dt)
 {
+    if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+    {
+        if (buttonsColliders == false)
+        {
+            buttonsColliders = true;
+        }
+        else
+        {
+            buttonsColliders = false;
+        }
+    }
+
     if (state != GuiControlState::DISABLED)
     {
         int mouseX, mouseY;
@@ -53,17 +65,6 @@ bool GuiButton::Update( float dt)
 
 bool GuiButton::Draw()
 {
-	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) 
-	{
-		if (buttonsColliders == false) 
-		{
-			buttonsColliders = true;
-		}
-		else 
-		{
-			buttonsColliders = false;
-		}
-	}
 	SDL_Rect rect;
 	SDL_Rect rect2;
 	SDL_Rect rect3;
