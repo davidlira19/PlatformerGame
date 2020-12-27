@@ -258,6 +258,26 @@ bool SceneLevel1::Update(float dt)
 		app->player->win = true;
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		SDL_Rect rect = { app->player->position.x - 500 + 400,app->player->position.y - 250 + 200,100,50 };
+		resume = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "RESUME");
+		resume->SetObserver(this);
+
+		SDL_Rect rect2 = { app->player->position.x - 500 + 600,app->player->position.y - 250 + 200,100,50 };
+		settings = app->gui->CreateGuiControl(GuiControlType::BUTTON, 2, rect2, "SETTINGS");
+		settings->SetObserver(this);
+
+		SDL_Rect rect3 = { app->player->position.x - 500 + 400,app->player->position.y - 250 + 300,100,50 };
+		title = app->gui->CreateGuiControl(GuiControlType::BUTTON, 3, rect3, "TITLE");
+		title->SetObserver(this);
+
+		SDL_Rect rect4 = { app->player->position.x - 500 + 600,app->player->position.y - 250 + 300,100,50 };
+		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 4, rect4, "EXIT");
+		exit->SetObserver(this);
+	}
+
+
 	return true;
 }
 

@@ -52,6 +52,10 @@ private:
 	List<Collider*> colliders;
 	SDL_Texture* img;
 	SDL_Texture* bgSnow;
+	GuiControl* resume;
+	GuiControl* settings;
+	GuiControl* title;
+	GuiControl* exit;
 public:
 	uint frames = 0;
 	uint timerLvl1 = 100;
