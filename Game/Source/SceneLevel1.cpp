@@ -15,8 +15,9 @@
 #include "FadeToBlack.h"
 #include "EntityManager.h"
 #include "PathFinding.h"
-#include"GuiButton.h"
-#include"GuiManager.h"
+#include "GuiButton.h"
+#include "GuiManager.h"
+
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");
@@ -270,19 +271,19 @@ bool SceneLevel1::Update(float dt)
 		app->player->canMove = false;
 
 		SDL_Rect rect = { app->player->position.x - 500 + 500,app->player->position.y - 250 + 200,200,81 };
-		resume = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "RESUME");
+		resume = app->gui->CreateGuiControl(GuiControlType::BUTTON, 6, rect, "RESUME");
 		resume->SetObserver(this);
 
 		SDL_Rect rect2 = { app->player->position.x - 500 + 500,app->player->position.y - 250 + 300,200,81 };
-		settings = app->gui->CreateGuiControl(GuiControlType::BUTTON, 2, rect2, "SETTINGS");
+		settings = app->gui->CreateGuiControl(GuiControlType::BUTTON, 3, rect2, "SETTINGS");
 		settings->SetObserver(this);
 
 		SDL_Rect rect3 = { app->player->position.x - 500 + 500,app->player->position.y - 250 + 400,200,81 };
-		title = app->gui->CreateGuiControl(GuiControlType::BUTTON, 3, rect3, "TITLE");
+		title = app->gui->CreateGuiControl(GuiControlType::BUTTON, 7, rect3, "TITLE");
 		title->SetObserver(this);
 
 		SDL_Rect rect4 = { app->player->position.x - 500 + 500,app->player->position.y - 250 + 500,200,81 };
-		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 4, rect4, "EXIT");
+		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 5, rect4, "EXIT");
 		exit->SetObserver(this);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
@@ -342,7 +343,7 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 		app->player->Disable();
 		app->entity->Disable();
 		app->gui->DestroyAllGuiControl();
-		app->fade->FadeToBlack(this, (Module*)app->wellcome, 60);
+		app->fade->FadeToBlack(this, (Module*)app->welcome, 60);
 	}
 	if (control == exit)
 	{
@@ -359,7 +360,6 @@ bool SceneLevel1::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->tex->UnLoad(bgSnow);
-	app->map->Disable();
 	app->entity->Disable();
 	app->audio->Unload();
 	app->audio->Disable();

@@ -10,16 +10,16 @@
 #include"Input.h"
 #include"GuiManager.h"
 
-class Wellcome :public Module {
+class Welcome :public Module {
 public:
-	Wellcome(bool startEnabled) : Module(startEnabled)
+	Welcome(bool startEnabled) : Module(startEnabled)
 	{
 		toExit = false;
 
 	}
 
 	// Destructor
-	virtual ~Wellcome()
+	virtual ~Welcome()
 	{
 
 	}
@@ -37,27 +37,26 @@ public:
 		wellcome = app->tex->Load("Assets/Textures/title_screen.png");
 		textureCredits = app->tex->Load("Assets/Textures/credits.png");
 
-		SDL_Rect rect = { 525,100,200,81 };
+		SDL_Rect rect = { 500,210,200,81 };
 		start = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "START");
 		start->SetObserver(this);
 
-		rect = { 525,200,200,81 };
-		load = app->gui->CreateGuiControl(GuiControlType::BUTTON, 2, rect, "LOAD");
+		rect = { 500,310,200,81 };
+		load = app->gui->CreateGuiControl(GuiControlType::BUTTON, 2, rect, "CONTINUE");
 		load->SetObserver(this);
 		load->state = GuiControlState::DISABLED;
 
-		rect = { 525,300,200,81 };
+		rect = { 500,410,200,81 };
 		settings = app->gui->CreateGuiControl(GuiControlType::BUTTON, 3, rect, "SETTINGS");
 		settings->SetObserver(this);
 
-		rect = { 525,400,200,81 };
-		credits = app->gui->CreateGuiControl(GuiControlType::BUTTON, 4, rect, "CREDITS");
-		credits->SetObserver(this);
-
-		rect = { 525,500,200,81 };
+		rect = { 500,610,200,81 };
 		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 5, rect, "EXIT");
 		exit->SetObserver(this);
 
+		rect = { 500,510,200,81 };
+		credits = app->gui->CreateGuiControl(GuiControlType::BUTTON, 4, rect, "CREDITS");
+		credits->SetObserver(this);
 		return true;
 	}
 	bool OnGuiMouseClickEvent(GuiControl* control)
@@ -110,7 +109,7 @@ public:
 			{
 				creditsCondition = false;
 				app->tex->UnLoad(wellcome);
-				app->fade->FadeToBlack(this, (Module*)app->wellcome, 60);
+				app->fade->FadeToBlack(this, (Module*)app->welcome, 60);
 			}
 			app->gui->DestroyAllGuiControl();
 			app->render->DrawTexture(textureCredits, 0, 0);

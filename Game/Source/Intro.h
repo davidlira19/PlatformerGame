@@ -7,7 +7,7 @@
 #include"App.h"
 #include"Render.h"
 #include"Textures.h"
-#include"Wellcome.h"
+#include"Welcome.h"
 
 class Intro :public Module {
 public:
@@ -44,7 +44,7 @@ public:
 
 		if (counter ==150) 
 		{
-			app->fade->FadeToBlack(this, (Module*)app->wellcome, 60);
+			app->fade->FadeToBlack(this, (Module*)app->welcome, 60);
 		}
 		app->render->DrawTexture(intro, 0, 0);
 		return true;

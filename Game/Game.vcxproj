@@ -149,7 +149,7 @@
     <ClInclude Include="Source\SceneLevel2.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
-    <ClInclude Include="Source\Wellcome.h" />
+    <ClInclude Include="Source\Welcome.h" />
     <ClInclude Include="Source\Win.h" />
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />

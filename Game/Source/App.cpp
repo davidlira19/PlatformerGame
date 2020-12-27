@@ -13,12 +13,12 @@
 #include "FadeToBlack.h"
 #include "Defs.h"
 #include "Log.h"
-#include "Wellcome.h"
+#include "Welcome.h"
 #include "Dead.h"
 #include "Win.h"
 #include "Fonts.h"
 #include "Collisions.h"
-#include"GuiManager.h"
+#include "GuiManager.h"
 #include <iostream>
 #include <sstream>
 
@@ -41,7 +41,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(false);
 	fade = new ModuleFadeToBlack(true);
 	intro = new Intro(true);
-	wellcome= new Wellcome(false);
+	welcome= new Welcome(false);
 	dead = new Dead(false);
 	winp = new Win(false);
 	fonts = new Fonts(false);
@@ -54,7 +54,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	
 	AddModule(intro);
-	AddModule(wellcome);
+	AddModule(welcome);
 	AddModule(dead);
 	AddModule(winp);
 	AddModule(fade);	

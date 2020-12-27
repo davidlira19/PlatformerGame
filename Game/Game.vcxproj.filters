@@ -90,9 +90,6 @@
     <ClInclude Include="Source\Intro.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Wellcome.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Dead.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -125,6 +122,9 @@
     </ClInclude>
     <ClInclude Include="Source\GuiSlider.h">
       <Filter>External\GuiControls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Welcome.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

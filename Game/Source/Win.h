@@ -7,7 +7,7 @@
 #include"App.h"
 #include"Render.h"
 #include"Textures.h"
-#include"Wellcome.h"
+#include"Welcome.h"
 #include"Audio.h"
 
 class Win :public Module {
@@ -85,7 +85,7 @@ public:
 			}
 			else
 			{
-				app->fade->FadeToBlack(this, (Module*)app->wellcome, 60);
+				app->fade->FadeToBlack(this, (Module*)app->welcome, 60);
 			}
 		}
 		else if (control == exit)

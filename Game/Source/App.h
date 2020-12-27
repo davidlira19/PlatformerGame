@@ -24,7 +24,7 @@ class SceneLevel2;
 class Map;
 class ModuleFadeToBlack;
 class Intro;
-class Wellcome;
+class Welcome;
 class Dead;
 class Win;
 class Fonts;
@@ -102,7 +102,7 @@ public:
 	Map* map;
 	ModuleFadeToBlack* fade;
 	Intro* intro;
-	Wellcome* wellcome;
+	Welcome* welcome;
 	Dead* dead;
 	Win* winp;
 	Fonts* fonts;

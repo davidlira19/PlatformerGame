@@ -18,6 +18,7 @@ public:
     bool Draw()override;
 
 private:
+
     SDL_Texture* textureButtons;
     // Gui Button specific properties
     // Maybe some animation properties for state change?
