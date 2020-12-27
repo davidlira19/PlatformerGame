@@ -266,19 +266,19 @@ bool SceneLevel2::Update(float dt)
 		app->player->godMode = true;
 		app->player->canMove = false;
 
-		SDL_Rect rect = { app->player->position.x - 500 + 400,app->player->position.y - 250 + 200,100,50 };
+		SDL_Rect rect = { app->player->position.x - 500 + 500,app->player->position.y - 250 + 200,200,81 };
 		resume = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "RESUME");
 		resume->SetObserver(this);
 
-		SDL_Rect rect2 = { app->player->position.x - 500 + 600,app->player->position.y - 250 + 200,100,50 };
+		SDL_Rect rect2 = { app->player->position.x - 500 + 500,app->player->position.y - 250 + 300,200,81 };
 		settings = app->gui->CreateGuiControl(GuiControlType::BUTTON, 2, rect2, "SETTINGS");
 		settings->SetObserver(this);
 
-		SDL_Rect rect3 = { app->player->position.x - 500 + 400,app->player->position.y - 250 + 300,100,50 };
+		SDL_Rect rect3 = { app->player->position.x - 500 + 500,app->player->position.y - 250 + 400,200,81 };
 		title = app->gui->CreateGuiControl(GuiControlType::BUTTON, 3, rect3, "TITLE");
 		title->SetObserver(this);
 
-		SDL_Rect rect4 = { app->player->position.x - 500 + 600,app->player->position.y - 250 + 300,100,50 };
+		SDL_Rect rect4 = { app->player->position.x - 500 + 500,app->player->position.y - 250 + 500,200,81 };
 		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 4, rect4, "EXIT");
 		exit->SetObserver(this);
 	}
