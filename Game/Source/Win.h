@@ -34,10 +34,10 @@ public:
 	bool Start()
 	{
 		winScreen = app->tex->Load("Assets/Textures/win_screen.png");
-		SDL_Rect rect = { 0,0,300,300 };
+		SDL_Rect rect = { 0,0,200,81 };
 		nextLevel = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "NextLevel");
 		nextLevel->SetObserver(this);
-		rect = { 300,300,100,100 };
+		rect = { 300,300,200,81 };
 		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "exit");
 		exit->SetObserver(this);
 

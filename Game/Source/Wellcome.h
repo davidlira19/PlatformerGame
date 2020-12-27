@@ -37,15 +37,15 @@ public:
 		wellcome = app->tex->Load("Assets/Textures/title_screen.png");
 		textureCredits = app->tex->Load("Assets/Textures/credits.png");
 
-		SDL_Rect rect = { 50,50,300,300 };
+		SDL_Rect rect = { 525,100,200,81 };
 		start = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "START");
 		start->SetObserver(this);
 
-		rect = { 350,350,150,150 };
+		rect = { 525,200,200,81 };
 		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 2, rect, "EXIT");
 		exit->SetObserver(this);
 
-		rect = { 500,500,150,150 };
+		rect = { 525,300,200,81 };
 		credits = app->gui->CreateGuiControl(GuiControlType::BUTTON, 3, rect, "CREDITS");
 		credits->SetObserver(this);
 		return true;
