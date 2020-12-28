@@ -38,7 +38,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, SDL_Rect r
 		control = new GuiCheckBox(id, rect, text, clickedFx, focusedFx, textureButton);
 		break;
 	case GuiControlType::SLIDER:
-		control = new GuiSlider(id, rect, text, clickedFx, focusedFx, textureSlider);
+		control = new GuiSlider(id, rect, text, clickedFx, focusedFx, textureButton, textureSlider);
 		break;
 	default: 
 		break;

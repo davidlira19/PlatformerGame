@@ -15,7 +15,8 @@ Audio::Audio(bool startEnabled) : Module(startEnabled)
 {
 	music = NULL;
 	name.Create("audio");
-	volumeMusic = 10;
+	volumeMusic = 20;
+	volumeFx = 100;
 }
 
 // Destructor

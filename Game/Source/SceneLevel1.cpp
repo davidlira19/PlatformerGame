@@ -352,20 +352,20 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	if (control == settings)
 	{
-		SDL_Rect rect = { app->player->position.x - 500 + 800,app->player->position.y - 250 + 400,91,96 };
+		SDL_Rect rect = { app->player->position.x - 500 + 725,app->player->position.y - 250 + 400,91,96 };
 		fullscreen = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "FULLSCREEN");
 		fullscreen->SetObserver(this);
 
-		rect = { app->player->position.x - 500 + 800,app->player->position.y - 250 + 500,91,96 };
-		vsync = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "VSYNC");
+		rect = { app->player->position.x - 500 + 725,app->player->position.y - 250 + 500,91,96 };
+		vsync = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 9, rect, "VSYNC");
 		vsync->SetObserver(this);
 
-		rect = { app->player->position.x - 500 + 800,app->player->position.y - 250 + 200,359,57 };
+		rect = { app->player->position.x - 500 + 825,app->player->position.y - 250 + 200,359,57 };
 		musicVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 1, rect, "MUSIC");
 		musicVolume->SetObserver(this);
 
-		rect = { app->player->position.x - 500 + 800,app->player->position.y - 250 + 300,359,57 };
-		fxVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 1, rect, "FX");
+		rect = { app->player->position.x - 500 + 825,app->player->position.y - 250 + 300,359,57 };
+		fxVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 2, rect, "FX");
 		fxVolume->SetObserver(this);
 	}
 	if (control == fullscreen)

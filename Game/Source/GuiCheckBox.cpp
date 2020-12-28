@@ -65,6 +65,7 @@ bool GuiCheckBox::Draw()
     SDL_Rect rect6;
     SDL_Rect rect7;
     SDL_Rect rect8;
+    SDL_Rect rect9;
     if (id == 8)
     {
         rect = { 297,1360,91,96 };
@@ -75,8 +76,19 @@ bool GuiCheckBox::Draw()
         rect6 = { 1648,376,91,96 };
         rect7 = { 1752,376,91,96 };
         rect8 = { 1853,376,91,96 };
+        rect9 = { 132,1263,260,45 };
     }
-
+    if (id == 9)
+    {
+        rect = { 297,1360,91,96 };
+        rect2 = { 403,1360,91,96 };
+        rect3 = { 507,1360,91,96 };
+        rect4 = { 613,1360,91,96 };
+        rect5 = { 1546,376,91,96 };
+        rect6 = { 1648,376,91,96 };
+        rect7 = { 1752,376,91,96 };
+        rect9 = { 131,1333,147,45 };
+    }
     // Draw the right button depending on state
     switch (state)
     {
@@ -84,21 +96,25 @@ bool GuiCheckBox::Draw()
     {
         if (checked) 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect8);
         else 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect4);
+        app->render->DrawTexture(textureButtons, bounds.x + 95, bounds.y + 15, &rect9);
     } break;
     case GuiControlState::NORMAL: 
     {
         if (checked) 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect5);
         else 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
+        app->render->DrawTexture(textureButtons, bounds.x + 95, bounds.y + 15, &rect9);
     } break;
     case GuiControlState::FOCUSED: 	
     {
         if (checked) 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect6);
         else 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect2);
+        app->render->DrawTexture(textureButtons, bounds.x + 95, bounds.y + 15, &rect9);
     } break;
     case GuiControlState::PRESSED: 	
     {
         if (checked) 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect7);
         else 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect3);
+        app->render->DrawTexture(textureButtons, bounds.x + 95, bounds.y + 15, &rect9);
     } break;
     default:
         break;

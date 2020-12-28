@@ -10,7 +10,7 @@ class GuiSlider : public GuiControl
 {
 public:
 
-    GuiSlider(int id, SDL_Rect bounds, const char* text, unsigned int clickedFx, unsigned int focusedFx, SDL_Texture* textureButton);
+    GuiSlider(int id, SDL_Rect bounds, const char* text, unsigned int clickedFx, unsigned int focusedFx, SDL_Texture* textureButton, SDL_Texture* textureSlider);
     virtual ~GuiSlider();
 
     bool Update( float dt);

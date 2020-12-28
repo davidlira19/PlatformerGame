@@ -103,15 +103,15 @@ public:
 			fullscreen->SetObserver(this);
 	
 			rect = { 720,510,91,96 };
-			vsync = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "VSYNC");
+			vsync = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 9, rect, "VSYNC");
 			vsync->SetObserver(this);
 
-			rect = { 720,210,200,81 };
+			rect = { 820,210,359,57 };
 			musicVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 1, rect, "MUSIC");
 			musicVolume->SetObserver(this);
 
-			rect = { 720,310,200,81 };
-			fxVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 1, rect, "FX");
+			rect = { 820,310,359,57 };
+			fxVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 2, rect, "FX");
 			fxVolume->SetObserver(this);
 		}
 		if (control == fullscreen)

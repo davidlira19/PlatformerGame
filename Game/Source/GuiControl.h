@@ -94,6 +94,7 @@ public:
 
     //Font font;              // Text font
 	SDL_Texture* textureButtons;
+    SDL_Texture* textureSliders;
     Module* observer;
 	unsigned int focusedFX;
 	unsigned int clickedFX;// Observer module (it should probably be an array/list)
