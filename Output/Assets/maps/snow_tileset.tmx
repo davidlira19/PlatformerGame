@@ -6007,8 +6007,8 @@
    <tile/>
    <tile/>
    <tile gid="62"/>
-   <tile/>
-   <tile/>
+   <tile gid="62"/>
+   <tile gid="62"/>
    <tile gid="62"/>
    <tile/>
    <tile/>
@@ -6116,10 +6116,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="62"/>
-   <tile gid="62"/>
-   <tile gid="62"/>
-   <tile gid="62"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
