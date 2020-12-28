@@ -15,7 +15,7 @@ Audio::Audio(bool startEnabled) : Module(startEnabled)
 {
 	music = NULL;
 	name.Create("audio");
-	volume = 10;
+	volumeMusic = 10;
 }
 
 // Destructor
@@ -107,21 +107,29 @@ bool Audio::Awake(pugi::xml_node& config)
 
 bool Audio::Update(float dt)
 {
-	Mix_VolumeMusic(volume);
+	ListItem<Mix_Chunk*>*auxiliar;
+	auxiliar = fx.start;
+	while (auxiliar != nullptr) 
+	{
+		Mix_VolumeChunk(auxiliar->data, volumeFx);
+		auxiliar = auxiliar->next;
+	}
+	
+	Mix_VolumeMusic(volumeMusic);
 	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 	{
-		volume += 5;
-		if (volume >= 100)
+		volumeMusic += 5;
+		if (volumeMusic >= 100)
 		{
-			volume = 100;
+			volumeMusic = 100;
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 	{
-		volume -= 5;
-		if (volume <= 0)
+		volumeMusic -= 5;
+		if (volumeMusic <= 0)
 		{
-			volume = 0;
+			volumeMusic = 0;
 		}
 	}
 

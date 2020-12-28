@@ -170,7 +170,7 @@ bool GuiButton::Draw()
     return false;
 }
 
-int GuiButton::GetValue()
+int GuiButton::GetMusicValue()
 {
     return 0;
 }

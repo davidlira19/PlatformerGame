@@ -107,7 +107,7 @@ bool GuiCheckBox::Draw()
     return false;
 }
 
-int GuiCheckBox::GetValue()
+int GuiCheckBox::GetMusicValue()
 {
     return 0;
 }

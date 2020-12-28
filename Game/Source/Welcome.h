@@ -140,11 +140,11 @@ public:
 		}
 		if (control == musicVolume)
 		{
-			app->audio->volume = musicVolume->GetValue();
+			app->audio->volumeMusic = musicVolume->GetMusicValue();
 		}
 		if (control == fxVolume)
 		{
-
+			app->audio->volumeFx = fxVolume->GetMusicValue();
 		}
 		if (control == credits)
 		{

@@ -34,7 +34,8 @@ public:
 	bool PlayFx(unsigned int fx, int repeat = 0);
 	void Unload();
 
-	int volume;
+	int volumeMusic;
+	int volumeFx;
 private:
 	
 	_Mix_Music* music;

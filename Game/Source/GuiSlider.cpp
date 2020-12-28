@@ -7,6 +7,9 @@ GuiSlider::GuiSlider(int id, SDL_Rect bounds, const char* text, unsigned int cli
     this->text = text;
     minValue = 0;
     maxValue = 100;
+	focusedFX = focusedFx;
+	clickedFX = clickedFx;
+	textureButtons = textureButton;
 }
 
 GuiSlider::~GuiSlider()
@@ -33,6 +36,8 @@ bool GuiSlider::Update(float dt)
             {
                 state = GuiControlState::PRESSED;
                 value = ((maxValue - minValue) * (mouseX - (float)(bounds.x + slider.w / 2))) / (float)(bounds.w - slider.w) + minValue;
+				
+				NotifyObserver();
               
                 if (slider.w > 0)
                 {
@@ -61,17 +66,21 @@ bool GuiSlider::Update(float dt)
 bool GuiSlider::Draw()
 {
     // Draw the right button depending on state
+	SDL_Rect rect = {3486,3838,359,57};
+	SDL_Rect rect2;
+	SDL_Rect rect3;
+	SDL_Rect rect4;
     switch (state)
     {
-    case GuiControlState::DISABLED: app->render->DrawRectangle(bounds,  100, 100, 100, 255 );
+    case GuiControlState::DISABLED: app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
         break;
-    case GuiControlState::NORMAL: app->render->DrawRectangle(bounds,  0, 255, 0, 255 );
+    case GuiControlState::NORMAL: app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
         break;
-    case GuiControlState::FOCUSED: app->render->DrawRectangle(bounds,  255, 255, 0, 255 );
+    case GuiControlState::FOCUSED: app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
         break;
-    case GuiControlState::PRESSED: app->render->DrawRectangle(bounds,  0, 255, 255, 255 );
+    case GuiControlState::PRESSED: app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
         break;
-    case GuiControlState::SELECTED: app->render->DrawRectangle(bounds, 0, 255, 0, 255 );
+    case GuiControlState::SELECTED: app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
         break;
     default:
         break;
@@ -80,7 +89,7 @@ bool GuiSlider::Draw()
     return false;
 }
 
-int GuiSlider::GetValue()
+int GuiSlider::GetMusicValue()
 {
     return value;
 }

@@ -17,7 +17,7 @@ public:
     bool Update(float dt);
     bool Draw()override;
 
-    int GetValue() override;
+    int GetMusicValue() override;
 
 private:
 	bool buttonsColliders;

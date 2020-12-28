@@ -17,7 +17,7 @@
 	<scene2 />
 	<EntityManager>
 		<data num="12">
-			<Enemy x="1633" y="202" type="EnemyAir" />
+			<Enemy x="1633" y="203" type="EnemyAir" />
 			<Enemy x="3343" y="670" type="EnemyAir" />
 			<Enemy x="4300" y="550" type="EnemyAir" />
 			<Enemy x="5005" y="560" type="EnemyAir" />

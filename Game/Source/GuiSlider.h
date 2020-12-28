@@ -17,11 +17,11 @@ public:
     bool Draw();
 
     int value;
-
     int minValue;
     int maxValue;
 
-    int GetValue() override;
+    int GetMusicValue() override;
+	
 
 private:
 

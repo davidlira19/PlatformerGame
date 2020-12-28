@@ -36,6 +36,7 @@ public:
 	//bool Awake(pugi::xml_node&);
 public:
 	SDL_Texture* textureButton;
+	SDL_Texture* textureSlider;
 	List<GuiControl*> controls;
 	unsigned int focusedFx;
 	unsigned int clickedFx;

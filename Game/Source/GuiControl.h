@@ -78,8 +78,7 @@ public:
         observer->OnGuiMouseClickEvent(this);
     }
 
-    virtual int GetValue() = 0;
-
+    virtual int GetMusicValue() = 0;
 public:
 
     int id;

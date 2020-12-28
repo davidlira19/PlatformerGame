@@ -373,8 +373,8 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 		musicVolume->SetObserver(this);
 
 		rect = { app->player->position.x - 500 + 800,app->player->position.y - 250 + 300,200,81 };
-		musicVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 1, rect, "FX");
-		musicVolume->SetObserver(this);
+		fxVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 1, rect, "FX");
+		fxVolume->SetObserver(this);
 	}
 	if (control == fullscreen)
 	{
@@ -402,11 +402,11 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	if (control == musicVolume)
 	{
-		app->audio->volume = musicVolume->GetValue();
+		app->audio->volumeMusic = musicVolume->GetMusicValue();
 	}
 	if (control == fxVolume)
 	{
-
+		app->audio->volumeFx = fxVolume->GetMusicValue();
 	}
 	if (control == title)
 	{

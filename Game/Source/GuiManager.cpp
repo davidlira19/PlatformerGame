@@ -16,10 +16,12 @@ bool GuiManager::Start(bool newGame)
 	textureButton = app->tex->Load("Assets/Textures/buttons.png");
 	clickedFx =app->audio->LoadFx("Assets/Audio/Fx/button_press.wav");
 	focusedFx =app->audio->LoadFx("Assets/Audio/Fx/zip_click.wav");
+	textureSlider= app->tex->Load("Assets/Textures/slider.png");
 	return true;
 }
 bool GuiManager::CleanUp()
 {
+	app->tex->UnLoad(textureSlider);
 	app->tex->UnLoad(textureButton);
 	return true;
 }
@@ -36,7 +38,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, SDL_Rect r
 		control = new GuiCheckBox(id, rect, text, clickedFx, focusedFx, textureButton);
 		break;
 	case GuiControlType::SLIDER:
-		control = new GuiSlider(id, rect, text, clickedFx, focusedFx, textureButton);
+		control = new GuiSlider(id, rect, text, clickedFx, focusedFx, textureSlider);
 		break;
 	default: 
 		break;

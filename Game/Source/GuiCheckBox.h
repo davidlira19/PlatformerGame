@@ -16,7 +16,7 @@ public:
     bool Update(float dt);
     bool Draw();
 
-    int GetValue() override;
+    int GetMusicValue() override;
 
 private:
 
