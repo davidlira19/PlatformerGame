@@ -156,7 +156,7 @@ bool SceneLevel1::Update(float dt)
 		if (timerLvl1 == 0)
 		{
 			frames = 0;
-			timerLvl1 = 100;
+			timerLvl1 = 99;
 			app->player->lifes--;
 			app->player->dead = true;
 		}
@@ -255,7 +255,7 @@ bool SceneLevel1::Update(float dt)
 	{
 		app->player->dead = true;
 		app->player->lifes--;
-		timerLvl1 = 100;
+		timerLvl1 = 99;
 		frames = 0;
 	}
 	if (app->player->position.x >= 11350 / 2)
@@ -319,8 +319,8 @@ bool SceneLevel1::PostUpdate()
 	sprintf_s(scoreText, 10, "%5d", score);
 	app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 75) * -1, numbers, scoreText);
 
-	/*sprintf_s(timerText, 10, "%5d", timerLvl1);
-	app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 150) * -1, numbers, timerText);*/
+	sprintf_s(timerText, 10, "%2d", timerLvl1);
+	app->fonts->BlitText((app->render->camera.x - 5) * -1, (app->render->camera.y - 150) * -1, numbers, timerText);
 
 	return ret;
 }

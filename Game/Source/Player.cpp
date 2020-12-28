@@ -606,12 +606,12 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 							lifes--;
 							if (app->player->currentLevel==1)
 							{
-								app->sceneLevel1->timerLvl1 = 100;
+								app->sceneLevel1->timerLvl1 = 99;
 								app->sceneLevel1->frames = 0;
 							}
 							else
 							{
-								app->sceneLevel2->timerLvl2 = 100;
+								app->sceneLevel2->timerLvl2 = 99;
 								app->sceneLevel2->frames = 0;
 							}
 							
@@ -667,12 +667,12 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 							lifes--;
 							if (app->player->currentLevel == 1)
 							{
-								app->sceneLevel1->timerLvl1 = 100;
+								app->sceneLevel1->timerLvl1 = 99;
 								app->sceneLevel1->frames = 0;
 							}
 							else
 							{
-								app->sceneLevel2->timerLvl2 = 100;
+								app->sceneLevel2->timerLvl2 = 99;
 								app->sceneLevel2->frames = 0;
 							}
 						}

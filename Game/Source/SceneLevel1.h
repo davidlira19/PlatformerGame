@@ -49,7 +49,7 @@ private:
 	uint score = 000000;
 	int numbers = -1;
 	char scoreText[5] = { "\0" };
-	char timerText[3] = { "\0" };
+	char timerText[2] = { "\0" };
 
 	List<Collider*> colliders;
 	SDL_Texture* img;
@@ -63,7 +63,7 @@ private:
 	int contMenu = 0;
 public:
 	uint frames = 0;
-	uint timerLvl1 = 100;
+	uint timerLvl1 = 99;
 };
 
 #endif // __SCENELEVEL1_H__
