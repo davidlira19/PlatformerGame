@@ -15,6 +15,11 @@ bool GuiManager::Start(bool newGame)
 	focusedFx =app->audio->LoadFx("Assets/Audio/Fx/zip_click.wav");
 	return true;
 }
+bool GuiManager::CleanUp()
+{
+	app->tex->UnLoad(textureButton);
+	return true;
+}
 GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, SDL_Rect rect, const char* text)
 {
 	GuiControl* control = nullptr;

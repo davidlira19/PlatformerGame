@@ -23,7 +23,7 @@ public:
 	bool Update(float dt);
 	// Called before quitting
 	bool CleanUp();
-
+	bool Start(bool newGame);
 	// Play a music file
 	bool PlayMusic(const char* path, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 

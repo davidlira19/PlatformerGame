@@ -26,7 +26,7 @@ public:
 	// Additional methods
 	GuiControl* CreateGuiControl(GuiControlType type,int id,SDL_Rect rect,const char* text);
 	bool Update(float dt);
-	//bool CleanUp();
+	bool CleanUp();
 	void DestroyGuiControl(GuiControl* entity);
 	void DestroyAllGuiControl();
 	//bool Start();

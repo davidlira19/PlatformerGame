@@ -32,11 +32,38 @@ public:
 	// Called before the first frame
 	bool Start(bool newGame)
 	{
+		app->audio->Enable();
 		deadScreen = app->tex->Load("Assets/Textures/dead_screen.png");
+		app->gui->Enable();
+		SDL_Rect rect = { 500,400,200,81 };
+		nextLevel = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "NextLevel");
+		nextLevel->SetObserver(this);
+		rect = { 500,500,200,81 };
+		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 5, rect, "exit");
+		exit->SetObserver(this);
 	
 		return true;
 	}
+	bool OnGuiMouseClickEvent(GuiControl* control)
+	{
+		if (control == nextLevel)
+		{
+			if (app->player->currentLevel == 1)
+			{
+				app->fade->FadeToBlack(this, (Module*)app->sceneLevel1, 60);
+			}
+			else
+			{
+				app->fade->FadeToBlack(this, (Module*)app->sceneLevel2, 60);
+			}
+		}
+		else if (control == exit)
+		{
+			toExit = true;
+		}
 
+		return true;
+	}
 
 
 	// Called each loop iteration
@@ -74,12 +101,16 @@ public:
 	// Called before quitting
 	bool CleanUp() 
 	{
-
+		app->gui->DestroyAllGuiControl();
+		app->gui->Disable();
 		app->tex->UnLoad(deadScreen);
+		app->audio->Disable();
 		return true;
 	}
 private:
 	SDL_Texture* deadScreen;
-
+	GuiControl* nextLevel;
+	GuiControl* exit;
+	bool toExit;
 };
 #endif

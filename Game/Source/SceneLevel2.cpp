@@ -37,6 +37,7 @@ bool SceneLevel2::Awake()
 bool SceneLevel2::Start(bool newGame)
 {
 	// Load map
+	app->gui->Enable();
 	app->map->Enable();
 	app->map->Load("snow_tileset_lvl2.tmx");
 
@@ -378,10 +379,11 @@ bool SceneLevel2::CleanUp()
 	app->tex->UnLoad(mysteryTex);
 	app->map->Disable();
 	app->entity->Disable();
-	app->audio->Unload();
-	app->audio->Disable();
+	//app->audio->Unload();
+	app->gui->Disable();
 	app->collisions->Disable();
 	colliders.Clear();
+	app->audio->Disable();
 	
 	return true;
 }

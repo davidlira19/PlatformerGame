@@ -40,7 +40,7 @@ public:
 		pugi::xml_node nodo = load.child("player");
 		x = nodo.child("data").attribute("x").as_int();
 		y = nodo.child("data").attribute("y").as_int();
-		if (x == 1150 && y == 562)
+		if (x == 1150 && y == 560)
 		{
 			return true;
 		}
@@ -145,6 +145,7 @@ public:
 	// Called before quitting
 	bool CleanUp()
 	{
+		app->gui->Disable();
 		app->gui->DestroyAllGuiControl();
 		app->tex->UnLoad(wellcome);
 		return true;
