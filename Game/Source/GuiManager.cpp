@@ -1,6 +1,9 @@
 #include "GuiManager.h"
-#include"Audio.h"
+#include "Audio.h"
 #include "GuiButton.h"
+#include "GuiCheckbox.h"
+#include "GuiSlider.h"
+
 GuiManager::GuiManager(bool startEnabled) : Module(startEnabled)
 {
 
@@ -28,6 +31,12 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, SDL_Rect r
 	{
 	case GuiControlType::BUTTON:
 		control = new GuiButton(id, rect, text, clickedFx, focusedFx, textureButton);
+		break;
+	case GuiControlType::CHECKBOX:
+		control = new GuiCheckBox(id, rect, text, clickedFx, focusedFx, textureButton);
+		break;
+	case GuiControlType::SLIDER:
+		control = new GuiSlider(id, rect, text, clickedFx, focusedFx, textureButton);
 		break;
 	default: 
 		break;

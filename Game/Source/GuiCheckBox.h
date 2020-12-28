@@ -10,7 +10,7 @@ class GuiCheckBox : public GuiControl
 {
 public:
 
-    GuiCheckBox(int id, SDL_Rect bounds, const char *text);
+    GuiCheckBox(int id, SDL_Rect bounds, const char* text, unsigned int clickedFx, unsigned int focusedFx, SDL_Texture* textureButton);
     virtual ~GuiCheckBox();
 
     bool Update(float dt);

@@ -57,6 +57,8 @@ private:
 	GuiControl* exit;
 	GuiControl* title;
 	GuiControl* settings;
+	GuiControl* fullscreen;
+	GuiControl* vsync;
 public:
 	uint frames = 0;
 	uint timerLvl2 = 99;

@@ -360,7 +360,13 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	if (control == settings)
 	{
+		SDL_Rect rect = { app->player->position.x - 500 + 800,app->player->position.y - 250 + 400,91,96 };
+		fullscreen = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "FULLSCREEN");
+		fullscreen->SetObserver(this);
 
+		rect = { app->player->position.x - 500 + 800,app->player->position.y - 250 + 500,91,96 };
+		vsync = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "VSYNC");
+		vsync->SetObserver(this);
 	}
 	if (control == title)
 	{

@@ -59,6 +59,8 @@ private:
 	GuiControl* settings;
 	GuiControl* title;
 	GuiControl* exit;
+	GuiControl* fullscreen;
+	GuiControl* vsync;
 	bool menu = false;
 	int contMenu = 0;
 public:

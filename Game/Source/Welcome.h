@@ -53,7 +53,8 @@ public:
 	// Called before the first frame
 	bool Start(bool newGame)
 	{
-		wellcome = app->tex->Load("Assets/Textures/title_screen.png");
+		app->gui->Enable();
+		welcome = app->tex->Load("Assets/Textures/title_screen.png");
 		textureCredits = app->tex->Load("Assets/Textures/credits.png");
 
 		SDL_Rect rect = { 500,210,200,81 };
@@ -95,7 +96,13 @@ public:
 		}
 		if (control == settings)
 		{
-			
+			SDL_Rect rect = {720,410,91,96 };
+			fullscreen = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "FULLSCREEN");
+			fullscreen->SetObserver(this);
+
+			rect = { 720,510,91,96 };
+			vsync = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "VSYNC");
+			vsync->SetObserver(this);
 		}
 		if (control == credits)
 		{
@@ -125,14 +132,14 @@ public:
 			ret = false;
 		}
 
-		app->render->DrawTexture(wellcome, 0, 0);
+		app->render->DrawTexture(welcome, 0, 0);
 
 		if (creditsCondition == true)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 			{
 				creditsCondition = false;
-				app->tex->UnLoad(wellcome);
+				app->tex->UnLoad(welcome);
 				app->fade->FadeToBlack(this, (Module*)app->welcome, 60);
 			}
 			app->gui->DestroyAllGuiControl();
@@ -147,17 +154,19 @@ public:
 	{
 		app->gui->Disable();
 		app->gui->DestroyAllGuiControl();
-		app->tex->UnLoad(wellcome);
+		app->tex->UnLoad(welcome);
 		return true;
 	}
 private:
-	SDL_Texture* wellcome;
+	SDL_Texture* welcome;
 	SDL_Texture* textureCredits;
 	GuiControl* start;
 	GuiControl* load;
 	GuiControl* settings;
 	GuiControl* exit;
 	GuiControl* credits;
+	GuiControl* fullscreen;
+	GuiControl* vsync;
 	
 	bool creditsCondition = false;
 	bool toExit;
