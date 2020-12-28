@@ -21,7 +21,6 @@ public:
     int maxValue;
 
     int GetMusicValue() override;
-	
 
 private:
 

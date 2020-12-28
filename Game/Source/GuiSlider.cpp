@@ -1,5 +1,6 @@
 #include "GuiSlider.h"
 #include "Log.h"
+#include "Audio.h"
 
 GuiSlider::GuiSlider(int id, SDL_Rect bounds, const char* text, unsigned int clickedFx, unsigned int focusedFx, SDL_Texture* textureButton) : GuiControl(GuiControlType::SLIDER, id)
 {
@@ -65,22 +66,27 @@ bool GuiSlider::Update(float dt)
 
 bool GuiSlider::Draw()
 {
+    SDL_Rect rect = { 3486,3838,359,57 };
+    SDL_Rect rect2 = { 3450,3955, 3.41 * value,46 };
     // Draw the right button depending on state
-	SDL_Rect rect = {3486,3838,359,57};
-	SDL_Rect rect2;
-	SDL_Rect rect3;
-	SDL_Rect rect4;
     switch (state)
     {
-    case GuiControlState::DISABLED: app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
+    case GuiControlState::DISABLED:
+        app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
+        app->render->DrawTexture(textureButtons, bounds.x + 8, bounds.y + 6, &rect2);
         break;
-    case GuiControlState::NORMAL: app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
+    case GuiControlState::NORMAL:
+        app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
+        app->render->DrawTexture(textureButtons, bounds.x + 8, bounds.y + 6, &rect2);
         break;
-    case GuiControlState::FOCUSED: app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
+    case GuiControlState::FOCUSED:
+        app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
+        app->render->DrawTexture(textureButtons, bounds.x + 8, bounds.y + 6, &rect2);
         break;
-    case GuiControlState::PRESSED: app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
+    case GuiControlState::PRESSED:
+        app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
+        app->render->DrawTexture(textureButtons, bounds.x + 8, bounds.y + 6, &rect2);
         break;
-    case GuiControlState::SELECTED: app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
         break;
     default:
         break;
