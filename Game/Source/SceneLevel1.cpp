@@ -53,7 +53,7 @@ bool SceneLevel1::Start()
 
 	//Player position
 	app->player->position.x = 1150;
-	app->player->position.y = 610;
+	app->player->position.y = 560;
 
 	//Load Texture
 	bgSnow = app->tex->Load("Assets/Textures/snow_background.png");

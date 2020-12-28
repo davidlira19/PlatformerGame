@@ -50,7 +50,7 @@ bool SceneLevel2::Start()
 
 	//Player position
 	app->player->position.x = 600;
-	app->player->position.y = 380;
+	app->player->position.y = 330;
 
 	//Load Texture
 	mysteryTex = app->tex->Load("Assets/Textures/mystery.png");
