@@ -70,6 +70,7 @@ bool GuiSlider::Draw()
     SDL_Rect rect = { 3486,3838,359,57 };
     SDL_Rect rect2 = { 3450,3955, 3.41 * value,46 };
     SDL_Rect rect3;
+	
     if (id == 1)
     {
         rect3 = { 1074,921, 91,96 };

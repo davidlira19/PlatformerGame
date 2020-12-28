@@ -98,7 +98,7 @@ public:
 	iPoint GetPosition();
 
 private:
-
+	int pathCounter;
 	//PLAYER TEXTURE
 	int cont;
 	bool noise;

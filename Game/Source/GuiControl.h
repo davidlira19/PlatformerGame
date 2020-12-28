@@ -47,6 +47,7 @@ public:
     {
         color.r = 255; color.g = 255; color.b = 255;
         texture = NULL;
+		
     }
 	virtual ~GuiControl() 
 	{
@@ -91,7 +92,7 @@ public:
 
     SDL_Texture* texture;   // Texture atlas reference
     SDL_Rect section;       // Texture atlas base section
-
+	
     //Font font;              // Text font
 	SDL_Texture* textureButtons;
     SDL_Texture* textureSliders;

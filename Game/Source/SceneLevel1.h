@@ -63,9 +63,10 @@ private:
 	GuiControl* vsync;
 	GuiControl* musicVolume;
 	GuiControl* fxVolume;
-	bool menu = false;
+	
 	int contMenu = 0;
 public:
+	bool menu = false;
 	uint frames = 0;
 	uint timerLvl1 = 99;
 };

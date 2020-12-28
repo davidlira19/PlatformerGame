@@ -131,6 +131,7 @@ bool Player::Start(bool newGame)
 	godMode = false;
 	lifes = 3;
 	points = 0;
+	pathCounter = 0;
 	//LOAD TEXTURES
 	santa = app->tex->Load("Assets/Textures/santa_animation.png");
 	winTex = app->tex->Load("Assets/Textures/win_screen.png");
@@ -167,6 +168,7 @@ bool Player::Start(bool newGame)
 
 bool Player::Update(float dt)
 {
+
 	if (position.x>=2610 && position.x <= 2620)
 	{
 		noise = true;
@@ -319,6 +321,7 @@ bool Player::Update(float dt)
 
 	if (state == playerState::jumping)
 	{
+		pathCounter = 0;
 		JumpFunction(dt);
 	}
 
@@ -326,6 +329,7 @@ bool Player::Update(float dt)
 	{
 		if (godMode == false) 
 		{
+			pathCounter = 0;
 			Gravity(dt);
 		}
 	}
@@ -424,16 +428,18 @@ bool Player::CleanUp()
 
 void Player::Gravity(float dt)
 {
-	lastPosition = position;
+	
 	velocity += acceleration * 0.05f * 100.0f * (dt / 1000.0f);
 	position.y += velocity * 0.05f * 100.0f * (dt / 1000.0f);
 	app->render->camera.y -= velocity * 0.05f * 100.0f * (dt / 1000.0f);
+	
 }
 
 //PLAYER FUNCTIONS
 void Player::JumpFunction(float dt)
 {
 	collisionPosition result;
+	
 	if (jumpingCount < 30)
 	{
 		if (((lastanimation == &runLeft) || (lastanimation == &stopLeft)))
@@ -446,7 +452,7 @@ void Player::JumpFunction(float dt)
 			lastanimation = currentAnimation;
 			currentAnimation = &jumpRight;
 		}
-		lastPosition = position;
+		
 		position.y -= 200 * (dt / 1000);
 		app->render->camera.y += 150 * (dt / 1000);
 		jumpingCount += (dt / 15);
@@ -454,11 +460,11 @@ void Player::JumpFunction(float dt)
 	}
 	else 
 	{
-		lastPosition = position;
+		//lastPosition = position;
 		state = playerState::free;
 		jumpingCount = 0;
-		position.y += 3;
-		velocity = 5.0f;
+		//position.y += 3;
+		//velocity = 5.0f;
 	}
 }
 
@@ -529,6 +535,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 {
 	if (godMode == false)
 	{
+		
 		if (c1->type == Collider::PLAYER)
 		{
 			if (c2->type == Collider::FLOOR)
@@ -552,6 +559,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 						}
 					}
 				}
+				//lastPosition = position;
 				position.y += sum;
 				velocity = 0.0f;
 			}
@@ -703,10 +711,19 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 bool Player::HasThePlayerMove() 
 {
+	bool canNotify = true;
+	if (state == playerState::null&& pathCounter==0)
+	{
+		pathCounter = 1;
+	}
+	else if (pathCounter !=0)
+	{
+		canNotify = false;
+	}
 	iPoint actual, previous;
 	actual=app->map->WorldToMap(position.x, position.y);
 	previous = app->map->WorldToMap(lastPosition.x, lastPosition.y);
-	if (actual != previous) 
+	if (actual != previous|| canNotify == true)
 	{
 		return true;
 	}

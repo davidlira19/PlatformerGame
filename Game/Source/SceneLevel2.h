@@ -51,7 +51,7 @@ private:
 	SDL_Texture* img;
 	SDL_Texture* bgSnow;
 	SDL_Texture* mysteryTex;
-	bool menu = false;
+	
 	int contMenu = 0;
 	GuiControl* resume;
 	GuiControl* exit;
@@ -62,6 +62,7 @@ private:
 	GuiControl* musicVolume;
 	GuiControl* fxVolume;
 public:
+	bool menu = false;
 	uint frames = 0;
 	uint timerLvl2 = 99;
 };

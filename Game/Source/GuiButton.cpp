@@ -116,11 +116,13 @@ bool GuiButton::Draw()
     }
     if (id == 7)
     {
+		
         rect = { 771,1045,213,99 };
         rect2 = { 86,1045,213,99 };
         rect3 = { 314,1045,213,99 };
         rect4 = { 543,1045,213,99 };
     }
+
 	switch (state)
 	{
 	case GuiControlState::DISABLED:

@@ -3,7 +3,7 @@
 
 #include "Module.h"
 #include "GuiControl.h"
-
+#include"Animation.h"
 #include "List.h"
 
 class GuiManager : public Module
@@ -38,6 +38,7 @@ public:
 	SDL_Texture* textureButton;
 	SDL_Texture* textureSlider;
 	List<GuiControl*> controls;
+	Animation pausedAnimation;
 	unsigned int focusedFx;
 	unsigned int clickedFx;
 	float accumulatedTime = 0.0f;

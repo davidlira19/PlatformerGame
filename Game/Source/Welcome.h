@@ -55,6 +55,7 @@ public:
 	// Called before the first frame
 	bool Start(bool newGame)
 	{
+		menu = false;
 		app->gui->Enable();
 		welcome = app->tex->Load("Assets/Textures/title_screen.png");
 		textureCredits = app->tex->Load("Assets/Textures/credits.png");
@@ -98,6 +99,7 @@ public:
 		}
 		if (control == settings)
 		{
+			menu = true;
 			SDL_Rect rect = {720,410,91,96 };
 			fullscreen = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "FULLSCREEN");
 			fullscreen->SetObserver(this);
@@ -199,6 +201,7 @@ public:
 		app->tex->UnLoad(welcome);
 		return true;
 	}
+	bool menu;
 private:
 	SDL_Texture* welcome;
 	SDL_Texture* textureCredits;

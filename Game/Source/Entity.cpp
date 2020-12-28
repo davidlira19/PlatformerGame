@@ -43,8 +43,12 @@ void Entity::Update(float dt)
 	{
 		if (type == EntityTipe::EnemyAir || type == EntityTipe::EnemyGround) 
 		{
-			numCounter++;
-			if (app->player->HasThePlayerMove() == true || numCounter == 1)
+			if (numCounter <= 30) 
+			{
+				numCounter++;
+			}
+			
+			if (app->player->HasThePlayerMove() == true || numCounter == 30)
 			{
 				path.ResetPath();
 				if (type == EntityTipe::EnemyAir) 

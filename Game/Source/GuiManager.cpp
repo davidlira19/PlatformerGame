@@ -3,7 +3,10 @@
 #include "GuiButton.h"
 #include "GuiCheckbox.h"
 #include "GuiSlider.h"
-
+#include"SceneLevel1.h"
+#include"SceneLevel2.h"
+#include"Player.h"
+#include"Welcome.h"
 GuiManager::GuiManager(bool startEnabled) : Module(startEnabled)
 {
 
@@ -13,6 +16,17 @@ GuiManager::~GuiManager() {
 }
 bool GuiManager::Start(bool newGame)
 {
+	pausedAnimation.PushBack({ 2773,975,451,770 });
+	pausedAnimation.PushBack({ 2323,1003,451,742 });
+	pausedAnimation.PushBack({ 1873,1027,451,721 });
+	pausedAnimation.PushBack({ 1423,1055,451,693 });
+	pausedAnimation.PushBack({ 973,1086,451,662 });
+	pausedAnimation.PushBack({ 523,1116,451,632 });
+	pausedAnimation.PushBack({ 73,1116,451,632 });
+	pausedAnimation.loop = false;
+	pausedAnimation.pingpong = false;
+	pausedAnimation.speed = 0.25f;
+
 	textureButton = app->tex->Load("Assets/Textures/buttons.png");
 	clickedFx =app->audio->LoadFx("Assets/Audio/Fx/button_press.wav");
 	focusedFx =app->audio->LoadFx("Assets/Audio/Fx/zip_click.wav");
@@ -55,6 +69,15 @@ bool GuiManager::PostUpdate()
 {
 	ListItem<GuiControl*>* auxiliar;
 	auxiliar = controls.start;
+	if (app->sceneLevel1->menu == true || app->sceneLevel2->menu == true)
+	{
+		
+		if (pausedAnimation.HasFinished() == false)
+		{	
+			pausedAnimation.Update();
+		}
+		app->render->DrawTexture(textureSlider, app->player->position.x - 115, app->player->position.y - 200, &pausedAnimation.GetCurrentFrame());
+	}
 	while (auxiliar != nullptr) 
 	{
 		auxiliar->data->Draw();
