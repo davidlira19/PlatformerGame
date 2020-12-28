@@ -20,7 +20,7 @@ public:
 	bool Awake(pugi::xml_node&);
 
 	// Called before the first frame
-	bool Start();
+	bool Start(bool newGame);
 
 	// Called before quitting
 	bool CleanUp();

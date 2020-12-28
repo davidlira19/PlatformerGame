@@ -8,7 +8,7 @@ GuiManager::GuiManager(bool startEnabled) : Module(startEnabled)
 GuiManager::~GuiManager() {
 
 }
-bool GuiManager::Start() 
+bool GuiManager::Start(bool newGame)
 {
 	textureButton = app->tex->Load("Assets/Textures/buttons.png");
 	clickedFx =app->audio->LoadFx("Assets/Audio/Fx/button_press.wav");

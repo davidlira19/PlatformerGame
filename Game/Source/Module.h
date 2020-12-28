@@ -27,7 +27,7 @@ public:
 	}
 
 	// Called before the first frame
-	virtual bool Start()
+	virtual bool Start(bool newGame)
 	{
 		return true;
 	}
@@ -72,7 +72,7 @@ public:
 		if (!isEnabled)
 		{
 			isEnabled = true;
-			Start();
+			Start(false);
 		}
 	}
 

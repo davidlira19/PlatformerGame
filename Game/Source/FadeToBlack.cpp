@@ -12,7 +12,7 @@ ModuleFadeToBlack::ModuleFadeToBlack(bool startEnabled) : Module(startEnabled)
 
 ModuleFadeToBlack::~ModuleFadeToBlack() {}
 
-bool ModuleFadeToBlack::Start()
+bool ModuleFadeToBlack::Start(bool newGame)
 {
 	LOG("Preparing Fade Screen");
 

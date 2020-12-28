@@ -34,7 +34,7 @@ bool Textures::Awake(pugi::xml_node& config)
 }
 
 // Called before the first frame
-bool Textures::Start()
+bool Textures::Start(bool newGame)
 {
 	LOG("start textures");
 	bool ret = true;

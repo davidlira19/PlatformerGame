@@ -34,7 +34,7 @@ bool SceneLevel2::Awake()
 }
 
 // Called before the first frame
-bool SceneLevel2::Start()
+bool SceneLevel2::Start(bool newGame)
 {
 	// Load map
 	app->map->Enable();

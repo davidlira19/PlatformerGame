@@ -30,9 +30,28 @@ public:
 
 		return true;
 	}
+	bool isNewGame()
+	{
+		int x, y;
+		pugi::xml_document LoadFile;
+		pugi::xml_node load;
+		LoadFile.load_file("save_game.xml");
+		load = LoadFile.child("game_state");
+		pugi::xml_node nodo = load.child("player");
+		x = nodo.child("data").attribute("x").as_int();
+		y = nodo.child("data").attribute("y").as_int();
+		if (x == 1150 && y == 562)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
 
+
+	}
 	// Called before the first frame
-	bool Start()
+	bool Start(bool newGame)
 	{
 		wellcome = app->tex->Load("Assets/Textures/title_screen.png");
 		textureCredits = app->tex->Load("Assets/Textures/credits.png");
@@ -44,7 +63,10 @@ public:
 		rect = { 500,310,200,81 };
 		load = app->gui->CreateGuiControl(GuiControlType::BUTTON, 2, rect, "CONTINUE");
 		load->SetObserver(this);
-		load->state = GuiControlState::DISABLED;
+		if (isNewGame() == true)
+		{
+			load->state = GuiControlState::DISABLED;
+		}
 
 		rect = { 500,410,200,81 };
 		settings = app->gui->CreateGuiControl(GuiControlType::BUTTON, 3, rect, "SETTINGS");
@@ -67,7 +89,9 @@ public:
 		}
 		if (control == load)
 		{
-			app->LoadGameRequest("save_game.xml");
+			app->sceneLevel1->isEnabled = true;
+			app->sceneLevel1->Start(true);
+			this->Disable();
 		}
 		if (control == settings)
 		{
@@ -133,7 +157,7 @@ private:
 	GuiControl* settings;
 	GuiControl* exit;
 	GuiControl* credits;
-
+	
 	bool creditsCondition = false;
 	bool toExit;
 };

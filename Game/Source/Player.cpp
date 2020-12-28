@@ -117,11 +117,15 @@ Player::Player(bool startEnabled) : Module(startEnabled)
 	name.Create("player");
 }
 
-bool Player::Start()
+bool Player::Start(bool newGame)
 {
 	noise = true;
 	cont = 0;
-	app->SaveGameRequest("save_game.xml");
+	if (newGame==false)
+	{
+		app->SaveGameRequest("save_game.xml");
+	}
+	
 	result = collisionPosition::null;
 	intro = true;
 	godMode = false;

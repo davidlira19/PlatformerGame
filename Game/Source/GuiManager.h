@@ -31,7 +31,7 @@ public:
 	void DestroyAllGuiControl();
 	//bool Start();
 	bool PostUpdate();
-	bool Start();
+	bool Start(bool newGame);
 	//void AddGuiControl(GuiControl* entity);
 	//bool Awake(pugi::xml_node&);
 public:

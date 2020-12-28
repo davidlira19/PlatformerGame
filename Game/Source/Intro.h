@@ -27,7 +27,7 @@ public:
 	}
 
 	// Called before the first frame
-	bool Start() {
+	bool Start(bool newGame) {
 		intro=app->tex->Load("Assets/Textures/logo_screen.png");
 		return true;
 	}

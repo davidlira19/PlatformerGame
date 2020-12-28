@@ -17,7 +17,7 @@ EntityManager::EntityManager(bool startEnabled) : Module(startEnabled)
 
 EntityManager::~EntityManager() {}
 
-bool EntityManager::Start()
+bool EntityManager::Start(bool newGame)
 {
 
 	birdTexture = app->tex->Load("Assets/Textures/bird_animation.png");

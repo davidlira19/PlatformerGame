@@ -30,7 +30,7 @@ public:
 
 	// Called when the module is activated
 	// Loads the necessary textures for the enemies
-	bool Start();
+	bool Start(bool newGame);
 
 	// Called at the beginning of the application loop
 	// Removes all enemies pending to delete

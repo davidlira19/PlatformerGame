@@ -159,7 +159,7 @@ bool App::Start()
 	{
 		if (item->data->isEnabled == true) 
 		{
-			ret = item->data->Start();
+			ret = item->data->Start(false);
 		}
 		item = item->next;
 	}

@@ -31,7 +31,7 @@ public:
 	}
 
 	// Called before the first frame
-	bool Start()
+	bool Start(bool newGame)
 	{
 		winScreen = app->tex->Load("Assets/Textures/win_screen.png");
 		SDL_Rect rect = { 500,400,200,81 };

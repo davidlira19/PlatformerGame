@@ -18,7 +18,7 @@ public:
 	bool Awake(pugi::xml_node&);
 
 	// Called before the first frame
-	bool Start();
+	bool Start(bool newGame);
 	bool LoadState(pugi::xml_node* nodo);
 	bool SaveState(pugi::xml_node* nodo);
 

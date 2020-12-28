@@ -30,7 +30,7 @@ public:
 	}
 
 	// Called before the first frame
-	bool Start() 
+	bool Start(bool newGame)
 	{
 		deadScreen = app->tex->Load("Assets/Textures/dead_screen.png");
 	

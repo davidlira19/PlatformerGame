@@ -32,7 +32,7 @@ public:
 	playerState state;
 	void Gravity(float dt);
 	Player(bool startEnabled);
-	bool Start();
+	bool Start(bool newGame);
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
