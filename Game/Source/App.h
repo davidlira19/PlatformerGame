@@ -146,9 +146,8 @@ private:
 
 	int	cappedMs = -1;
 
-	int maxFPS;
-
 public:
+	int maxFPS;
 	bool vsync;
 };
 

@@ -360,6 +360,30 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 		vsync = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "VSYNC");
 		vsync->SetObserver(this);
 	}
+	if (control == fullscreen)
+	{
+		if (app->win->fullScreenWindow == true)
+		{
+			app->win->fullScreenWindow = false;
+		}
+		else
+		{
+			app->win->fullScreenWindow = true;
+		}
+	}
+	if (control == vsync)
+	{
+		if (app->maxFPS == 13)
+		{
+			app->maxFPS = 30;
+			app->vsync = true;
+		}
+		else if (app->maxFPS == 30)
+		{
+			app->maxFPS = 13;
+			app->vsync = false;
+		}
+	}
 	if (control == title)
 	{
 		app->player->Disable();

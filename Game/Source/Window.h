@@ -18,6 +18,7 @@ public:
 	// Called before render is available
 	bool Awake(pugi::xml_node&);
 
+	bool Update(float dt);
 	// Called before quitting
 	bool CleanUp();
 
@@ -39,7 +40,7 @@ public:
 	SDL_Surface* screenSurface;
 	uint width;
 	uint height;
-
+	bool fullScreenWindow;
 private:
 
 	SString title;

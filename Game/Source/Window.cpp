@@ -10,6 +10,7 @@ Window::Window(bool startEnabled) : Module(startEnabled)
 	window = NULL;
 	screenSurface = NULL;
 	name.Create("window");
+	fullScreenWindow = false;
 }
 
 // Destructor
@@ -77,6 +78,19 @@ bool Window::Awake(pugi::xml_node& config)
 	}
 
 	return ret;
+}
+
+bool Window::Update(float dt)
+{
+	if (fullScreenWindow == true)
+	{
+		SDL_SetWindowFullscreen(window, true);
+	}
+	else
+	{
+		SDL_SetWindowFullscreen(window, false);
+	}
+	return true;
 }
 
 // Called before quitting

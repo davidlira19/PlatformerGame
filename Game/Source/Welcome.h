@@ -9,6 +9,7 @@
 #include"Textures.h"
 #include"Input.h"
 #include"GuiManager.h"
+#include "Window.h"
 
 class Welcome :public Module {
 public:
@@ -99,10 +100,34 @@ public:
 			SDL_Rect rect = {720,410,91,96 };
 			fullscreen = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "FULLSCREEN");
 			fullscreen->SetObserver(this);
-
+	
 			rect = { 720,510,91,96 };
 			vsync = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "VSYNC");
 			vsync->SetObserver(this);
+		}
+		if (control == fullscreen)
+		{
+			if (app->win->fullScreenWindow == true)
+			{
+				app->win->fullScreenWindow = false;
+			}
+			else
+			{
+				app->win->fullScreenWindow = true;
+			}
+		}
+		if (control == vsync)
+		{
+			if (app->maxFPS == 13)
+			{
+				app->maxFPS = 30;
+				app->vsync = true;
+			}
+			else if (app->maxFPS == 30)
+			{
+				app->maxFPS = 13;
+				app->vsync = false;
+			}
 		}
 		if (control == credits)
 		{

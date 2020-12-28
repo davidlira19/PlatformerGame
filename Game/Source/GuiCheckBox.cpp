@@ -1,5 +1,6 @@
 #include "GuiCheckBox.h"
 #include "Audio.h"
+#include "Window.h"
 
 GuiCheckBox::GuiCheckBox(int id, SDL_Rect bounds, const char* text, unsigned int clickedFx, unsigned int focusedFx, SDL_Texture* textureButton) : GuiControl(GuiControlType::CHECKBOX, id)
 {
@@ -48,6 +49,8 @@ bool GuiCheckBox::Update( float dt)
         }
         else state = GuiControlState::NORMAL;
     }
+
+    
 
     return false;
 }
