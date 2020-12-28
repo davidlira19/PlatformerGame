@@ -36,22 +36,53 @@ bool SceneLevel2::Awake()
 // Called before the first frame
 bool SceneLevel2::Start(bool newGame)
 {
-	// Load map
+	app->audio->Enable();
 	app->gui->Enable();
+	app->entity->Enable();
+
+	if (newGame == true)
+	{
+		app->LoadGameRequest("save_game.xml");
+		app->player->isEnabled = true;
+		app->player->Start(true);
+	}
+	else 
+	{
+		app->player->Enable();
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		app->player->currentLevel = 2;
+
+		//Player position
+		app->player->position.x = 600;
+		app->player->position.y = 330;
+
+
+		app->entity->AddEntity(EntityTipe::EnemyAir, 5771, 809);
+		app->entity->AddEntity(EntityTipe::EnemyAir, 3528, 386);
+		app->entity->AddEntity(EntityTipe::EnemyAir, 1975, 671);
+
+		//ZOMBIES
+		app->entity->AddEntity(EntityTipe::EnemyGround, 4766, 1226);
+		app->entity->AddEntity(EntityTipe::EnemyGround, 5977, 1034);
+		app->entity->AddEntity(EntityTipe::EnemyGround, 1814, 1163);
+
+		//COIN
+		app->entity->AddEntity(EntityTipe::Coin, 2562, 681);
+		app->entity->AddEntity(EntityTipe::Coin, 1971, 1066);
+
+		//HEART
+		app->entity->AddEntity(EntityTipe::Heart, 692, 925);
+	}
+
 	app->map->Enable();
 	app->map->Load("snow_tileset_lvl2.tmx");
 
-	app->audio->Enable();
+	
 	app->audio->PlayMusic("Assets/Audio/Music/christmas_music.ogg");
 
 	//Load Position
-	app->render->camera.x = 0;
-	app->render->camera.y = 0;
-	app->player->currentLevel = 2;
-
-	//Player position
-	app->player->position.x = 600;
-	app->player->position.y = 330;
+	
 
 	//Load Texture
 	mysteryTex = app->tex->Load("Assets/Textures/mystery.png");
@@ -59,8 +90,8 @@ bool SceneLevel2::Start(bool newGame)
 	bgSnow = app->tex->Load("Assets/Textures/snow_background.png");
 	freeCamera = false;
 	app->collisions->Enable();
-	app->player->Enable();
-	app->entity->Enable();
+	
+	
 	counter = 1000;
 	SDL_Rect rect;
 
@@ -87,21 +118,7 @@ bool SceneLevel2::Start(bool newGame)
 	}
 
 	//BIRDS
-	app->entity->AddEntity(EntityTipe::EnemyAir, 5771, 809);
-	app->entity->AddEntity(EntityTipe::EnemyAir, 3528, 386);
-	app->entity->AddEntity(EntityTipe::EnemyAir, 1975, 671);
-
-	//ZOMBIES
-	app->entity->AddEntity(EntityTipe::EnemyGround, 4766, 1226);
-	app->entity->AddEntity(EntityTipe::EnemyGround, 5977, 1034);
-	app->entity->AddEntity(EntityTipe::EnemyGround, 1814, 1163);
-
-	//COIN
-	app->entity->AddEntity(EntityTipe::Coin, 2562, 681);
-	app->entity->AddEntity(EntityTipe::Coin, 1971, 1066);
-
-	//HEART
-	app->entity->AddEntity(EntityTipe::Heart, 692, 925);
+	
 
 	char lookupTable[] = { "0123456789" };
 	numbers = app->fonts->Load("Assets/Textures/numbers.png", lookupTable, 1);

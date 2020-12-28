@@ -38,9 +38,10 @@ bool SceneLevel1::Awake()
 // Called before the first frame
 bool SceneLevel1::Start(bool newGame)
 {
+	app->audio->Enable();
 	app->gui->Enable();
 	app->entity->Enable();
-	app->audio->Enable();
+	
 	if (newGame == true)
 	{
 		app->LoadGameRequest("save_game.xml");
@@ -375,6 +376,7 @@ bool SceneLevel1::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->tex->UnLoad(bgSnow);
+	app->map->Disable();
 	app->entity->Disable();
 	//app->audio->Unload();
 	app->gui->Disable();
