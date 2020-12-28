@@ -35,7 +35,7 @@ public:
 	//void AddGuiControl(GuiControl* entity);
 	//bool Awake(pugi::xml_node&);
 public:
-
+	SDL_Texture* textureButton;
 	List<GuiControl*> controls;
 	unsigned int focusedFx;
 	unsigned int clickedFx;

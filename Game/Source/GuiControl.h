@@ -92,7 +92,7 @@ public:
     SDL_Rect section;       // Texture atlas base section
 
     //Font font;              // Text font
-
+	SDL_Texture* textureButtons;
     Module* observer;
 	unsigned int focusedFX;
 	unsigned int clickedFX;// Observer module (it should probably be an array/list)

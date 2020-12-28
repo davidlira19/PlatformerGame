@@ -1,13 +1,14 @@
 #include "GuiButton.h"
 
-GuiButton::GuiButton(int id, SDL_Rect bounds, const char* text,unsigned int clickedFx, unsigned int focusedFx) : GuiControl(GuiControlType::BUTTON, id)
+GuiButton::GuiButton(int id, SDL_Rect bounds, const char* text,unsigned int clickedFx, unsigned int focusedFx, SDL_Texture* textureButton) : GuiControl(GuiControlType::BUTTON, id)
 {
-    textureButtons = app->tex->Load("Assets/Textures/buttons.png");
+    
     this->bounds = bounds;
     this->text = text;
 	buttonsColliders = false;
 	focusedFX = focusedFx;
 	clickedFX = clickedFx;
+	textureButtons = textureButton;
 }
 
 GuiButton::~GuiButton()

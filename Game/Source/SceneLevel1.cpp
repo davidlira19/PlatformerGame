@@ -319,8 +319,8 @@ bool SceneLevel1::PostUpdate()
 	sprintf_s(scoreText, 10, "%5d", score);
 	app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 75) * -1, numbers, scoreText);
 
-	//sprintf_s(timerText, 10, "%5d", timerLvl1);
-	//app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 150) * -1, numbers, timerText);
+	/*sprintf_s(timerText, 10, "%5d", timerLvl1);
+	app->fonts->BlitText((app->render->camera.x) * -1, (app->render->camera.y - 150) * -1, numbers, timerText);*/
 
 	return ret;
 }

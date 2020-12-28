@@ -10,6 +10,7 @@ GuiManager::~GuiManager() {
 }
 bool GuiManager::Start() 
 {
+	textureButton = app->tex->Load("Assets/Textures/buttons.png");
 	clickedFx =app->audio->LoadFx("Assets/Audio/Fx/button_press.wav");
 	focusedFx =app->audio->LoadFx("Assets/Audio/Fx/zip_click.wav");
 	return true;
@@ -21,7 +22,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, SDL_Rect r
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		control = new GuiButton(id, rect, text, clickedFx, focusedFx);
+		control = new GuiButton(id, rect, text, clickedFx, focusedFx, textureButton);
 		break;
 	default: 
 		break;
