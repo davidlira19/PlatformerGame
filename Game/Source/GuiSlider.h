@@ -16,15 +16,19 @@ public:
     bool Update( float dt);
     bool Draw();
 
+    int value;
+
+    int minValue;
+    int maxValue;
+
+    int GetValue() override;
+
 private:
 
     // GuiSlider specific properties
     // Maybe some animation properties for state change?
     SDL_Rect slider;
-    int value;
-
-    int minValue;
-    int maxValue;
+    
 };
 
 #endif // __GUISLIDER_H__

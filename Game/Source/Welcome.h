@@ -10,6 +10,7 @@
 #include"Input.h"
 #include"GuiManager.h"
 #include "Window.h"
+#include "GuiSlider.h"
 
 class Welcome :public Module {
 public:
@@ -104,6 +105,14 @@ public:
 			rect = { 720,510,91,96 };
 			vsync = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "VSYNC");
 			vsync->SetObserver(this);
+
+			rect = { 720,210,200,81 };
+			musicVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 1, rect, "MUSIC");
+			musicVolume->SetObserver(this);
+
+			rect = { 720,310,200,81 };
+			fxVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 1, rect, "FX");
+			fxVolume->SetObserver(this);
 		}
 		if (control == fullscreen)
 		{
@@ -128,6 +137,14 @@ public:
 				app->maxFPS = 13;
 				app->vsync = false;
 			}
+		}
+		if (control == musicVolume)
+		{
+			app->audio->volume = musicVolume->GetValue();
+		}
+		if (control == fxVolume)
+		{
+
 		}
 		if (control == credits)
 		{
@@ -192,6 +209,8 @@ private:
 	GuiControl* credits;
 	GuiControl* fullscreen;
 	GuiControl* vsync;
+	GuiControl* musicVolume;
+	GuiControl* fxVolume;
 	
 	bool creditsCondition = false;
 	bool toExit;

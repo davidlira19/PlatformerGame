@@ -17,6 +17,8 @@ public:
     bool Update(float dt);
     bool Draw()override;
 
+    int GetValue() override;
+
 private:
 	bool buttonsColliders;
 	

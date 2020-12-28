@@ -107,6 +107,7 @@ bool Audio::Awake(pugi::xml_node& config)
 
 bool Audio::Update(float dt)
 {
+	Mix_VolumeMusic(volume);
 	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 	{
 		volume += 5;
@@ -114,7 +115,6 @@ bool Audio::Update(float dt)
 		{
 			volume = 100;
 		}
-		Mix_VolumeMusic(volume);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 	{
@@ -123,7 +123,6 @@ bool Audio::Update(float dt)
 		{
 			volume = 0;
 		}
-		Mix_VolumeMusic(volume);
 	}
 
 	return true;

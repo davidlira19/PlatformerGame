@@ -59,6 +59,8 @@ private:
 	GuiControl* settings;
 	GuiControl* fullscreen;
 	GuiControl* vsync;
+	GuiControl* musicVolume;
+	GuiControl* fxVolume;
 public:
 	uint frames = 0;
 	uint timerLvl2 = 99;

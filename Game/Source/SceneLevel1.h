@@ -61,6 +61,8 @@ private:
 	GuiControl* exit;
 	GuiControl* fullscreen;
 	GuiControl* vsync;
+	GuiControl* musicVolume;
+	GuiControl* fxVolume;
 	bool menu = false;
 	int contMenu = 0;
 public:

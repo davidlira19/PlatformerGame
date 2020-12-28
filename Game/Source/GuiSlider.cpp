@@ -1,9 +1,12 @@
 #include "GuiSlider.h"
+#include "Log.h"
 
 GuiSlider::GuiSlider(int id, SDL_Rect bounds, const char* text, unsigned int clickedFx, unsigned int focusedFx, SDL_Texture* textureButton) : GuiControl(GuiControlType::SLIDER, id)
 {
     this->bounds = bounds;
     this->text = text;
+    minValue = 0;
+    maxValue = 100;
 }
 
 GuiSlider::~GuiSlider()
@@ -12,6 +15,8 @@ GuiSlider::~GuiSlider()
 
 bool GuiSlider::Update(float dt)
 {
+
+    LOG("%d", value);
     if (state != GuiControlState::DISABLED)
     {
         int mouseX, mouseY;
@@ -28,7 +33,7 @@ bool GuiSlider::Update(float dt)
             {
                 state = GuiControlState::PRESSED;
                 value = ((maxValue - minValue) * (mouseX - (float)(bounds.x + slider.w / 2))) / (float)(bounds.w - slider.w) + minValue;
-
+              
                 if (slider.w > 0)
                 {
                     slider.x = mouseX - slider.w / 2;
@@ -50,7 +55,6 @@ bool GuiSlider::Update(float dt)
             value = minValue;
         }
     }
-
     return false;
 }
 
@@ -74,4 +78,9 @@ bool GuiSlider::Draw()
     }
 
     return false;
+}
+
+int GuiSlider::GetValue()
+{
+    return value;
 }

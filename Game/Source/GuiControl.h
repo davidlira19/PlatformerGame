@@ -78,6 +78,8 @@ public:
         observer->OnGuiMouseClickEvent(this);
     }
 
+    virtual int GetValue() = 0;
+
 public:
 
     int id;

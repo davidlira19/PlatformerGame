@@ -169,3 +169,8 @@ bool GuiButton::Draw()
 	}
     return false;
 }
+
+int GuiButton::GetValue()
+{
+    return 0;
+}

@@ -106,3 +106,8 @@ bool GuiCheckBox::Draw()
 
     return false;
 }
+
+int GuiCheckBox::GetValue()
+{
+    return 0;
+}

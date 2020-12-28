@@ -367,6 +367,14 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 		rect = { app->player->position.x - 500 + 800,app->player->position.y - 250 + 500,91,96 };
 		vsync = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "VSYNC");
 		vsync->SetObserver(this);
+
+		rect = { app->player->position.x - 500 + 800,app->player->position.y - 250 + 200,200,81 };
+		musicVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 1, rect, "MUSIC");
+		musicVolume->SetObserver(this);
+
+		rect = { app->player->position.x - 500 + 800,app->player->position.y - 250 + 300,200,81 };
+		musicVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 1, rect, "FX");
+		musicVolume->SetObserver(this);
 	}
 	if (control == fullscreen)
 	{
@@ -391,6 +399,14 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 			app->maxFPS = 13;
 			app->vsync = false;
 		}
+	}
+	if (control == musicVolume)
+	{
+		app->audio->volume = musicVolume->GetValue();
+	}
+	if (control == fxVolume)
+	{
+
 	}
 	if (control == title)
 	{

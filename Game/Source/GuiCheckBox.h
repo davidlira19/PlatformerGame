@@ -16,6 +16,8 @@ public:
     bool Update(float dt);
     bool Draw();
 
+    int GetValue() override;
+
 private:
 
     // GuiCheckBox specific properties
