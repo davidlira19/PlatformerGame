@@ -92,7 +92,7 @@ public:
 		}
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) 
 		{
-			ret = false;
+			//ret = false;
 		}
 			
 		app->render->DrawTexture(deadScreen,0,0,0);

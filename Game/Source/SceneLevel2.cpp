@@ -302,7 +302,7 @@ bool SceneLevel2::Update(float dt)
 		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 5, rect4, "EXIT");
 		exit->SetObserver(this);
 	}
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
 		if ((menu == false) && ((app->player->currentAnimation != &app->player->jumpLeft) && (app->player->currentAnimation != &app->player->jumpRight)))
 		{
@@ -332,7 +332,7 @@ bool SceneLevel2::PostUpdate()
 	bool ret = true;
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+		//ret = false;
 
 	score = app->player->points;
 

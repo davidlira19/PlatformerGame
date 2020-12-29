@@ -9,6 +9,7 @@ GuiCheckBox::GuiCheckBox(int id, SDL_Rect bounds, const char* text, unsigned int
     focusedFX = focusedFx;
     clickedFX = clickedFx;
     textureButtons = textureButton;
+    drawRectangle = false;
 }
 
 GuiCheckBox::~GuiCheckBox()
@@ -17,6 +18,17 @@ GuiCheckBox::~GuiCheckBox()
 
 bool GuiCheckBox::Update( float dt)
 {
+    if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+    {
+        if (drawRectangle == false)
+        {
+            drawRectangle = true;
+        }
+        else
+        {
+            drawRectangle = false;
+        }
+    }
     if (state != GuiControlState::DISABLED)
     {
         int mouseX, mouseY;
@@ -97,24 +109,28 @@ bool GuiCheckBox::Draw()
         if (checked) 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect8);
         else 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect4);
         app->render->DrawTexture(textureButtons, bounds.x + 95, bounds.y + 15, &rect9);
+        if (drawRectangle == true) app->render->DrawRectangle(bounds, 0, 255, 0, 255);
     } break;
     case GuiControlState::NORMAL: 
     {
         if (checked) 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect5);
         else 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect);
         app->render->DrawTexture(textureButtons, bounds.x + 95, bounds.y + 15, &rect9);
+        if (drawRectangle == true) app->render->DrawRectangle(bounds, 0, 255, 0, 255);
     } break;
     case GuiControlState::FOCUSED: 	
     {
         if (checked) 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect6);
         else 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect2);
         app->render->DrawTexture(textureButtons, bounds.x + 95, bounds.y + 15, &rect9);
+        if (drawRectangle == true) app->render->DrawRectangle(bounds, 255, 255, 0, 255);
     } break;
     case GuiControlState::PRESSED: 	
     {
         if (checked) 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect7);
         else 	app->render->DrawTexture(textureButtons, bounds.x, bounds.y, &rect3);
         app->render->DrawTexture(textureButtons, bounds.x + 95, bounds.y + 15, &rect9);
+        if (drawRectangle == true) app->render->DrawRectangle(bounds, 255, 0, 0, 255);
     } break;
     default:
         break;

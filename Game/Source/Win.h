@@ -73,7 +73,7 @@ public:
 		}*/
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || toExit == true)
 		{
-			ret = false;
+			//ret = false;
 		}
 		app->render->DrawTexture(winScreen, 0, 0);
 		return ret;

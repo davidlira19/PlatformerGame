@@ -155,7 +155,7 @@ public:
 		}
 		if (control == exit)
 		{
-			toExit = true;
+			SDL_Quit();
 		}
 
 		return true;
@@ -174,14 +174,14 @@ public:
 		}*/
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || toExit == true)
 		{
-			ret = false;
+			//ret = false;
 		}
 
 		app->render->DrawTexture(welcome, 0, 0);
 
 		if (creditsCondition == true)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+			if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 			{
 				creditsCondition = false;
 				app->tex->UnLoad(welcome);

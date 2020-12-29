@@ -22,6 +22,7 @@ private:
 
     // GuiCheckBox specific properties
     // Maybe some animation properties for state change?
+    bool drawRectangle;
     bool checked;
 };
 

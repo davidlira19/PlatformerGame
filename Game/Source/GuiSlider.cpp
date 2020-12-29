@@ -12,6 +12,7 @@ GuiSlider::GuiSlider(int id, SDL_Rect bounds, const char* text, unsigned int cli
 	clickedFX = clickedFx;
 	textureButtons = textureButton;
     textureSliders = textureSlider;
+    drawRect = false;
 }
 
 GuiSlider::~GuiSlider()
@@ -20,8 +21,18 @@ GuiSlider::~GuiSlider()
 
 bool GuiSlider::Update(float dt)
 {
-
-    LOG("%d", value);
+    if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+    {
+        if (drawRect == false)
+        {
+            drawRect = true;
+        }
+        else
+        {
+            drawRect = false;
+        }
+    }
+  
     if (state != GuiControlState::DISABLED)
     {
         int mouseX, mouseY;
@@ -86,21 +97,25 @@ bool GuiSlider::Draw()
         app->render->DrawTexture(textureSliders, bounds.x, bounds.y, &rect);
         app->render->DrawTexture(textureSliders, bounds.x + 8, bounds.y + 6, &rect2);
         app->render->DrawTexture(textureButtons, bounds.x - 95, bounds.y, &rect3);
+        if (drawRect == true) app->render->DrawRectangle(bounds, 0, 255, 0, 255);
         break;
     case GuiControlState::NORMAL:
         app->render->DrawTexture(textureSliders, bounds.x, bounds.y, &rect);
         app->render->DrawTexture(textureSliders, bounds.x + 8, bounds.y + 6, &rect2);
         app->render->DrawTexture(textureButtons, bounds.x - 95, bounds.y, &rect3);
+        if (drawRect == true) app->render->DrawRectangle(bounds, 0, 255, 0, 255);
         break;
     case GuiControlState::FOCUSED:
         app->render->DrawTexture(textureSliders, bounds.x, bounds.y, &rect);
         app->render->DrawTexture(textureSliders, bounds.x + 8, bounds.y + 6, &rect2);
         app->render->DrawTexture(textureButtons, bounds.x - 95, bounds.y, &rect3);
+        if (drawRect == true) app->render->DrawRectangle(bounds, 255, 255, 0, 255);
         break;
     case GuiControlState::PRESSED:
         app->render->DrawTexture(textureSliders, bounds.x, bounds.y, &rect);
         app->render->DrawTexture(textureSliders, bounds.x + 8, bounds.y + 6, &rect2);
         app->render->DrawTexture(textureButtons, bounds.x - 95, bounds.y, &rect3);
+        if (drawRect == true) app->render->DrawRectangle(bounds, 255, 0, 0, 255);
         break;
         break;
     default:
