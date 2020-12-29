@@ -60,7 +60,7 @@ public:
 		}
 		else if (control == exit)
 		{
-			toExit = true;
+			SDL_Quit();
 		}
 
 		return true;
@@ -113,6 +113,5 @@ private:
 	SDL_Texture* deadScreen;
 	GuiControl* nextLevel;
 	GuiControl* exit;
-	bool toExit;
 };
 #endif

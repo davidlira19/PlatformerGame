@@ -14,19 +14,16 @@ class Win :public Module {
 public:
 	Win(bool startEnabled) : Module(startEnabled)
 	{
-		toExit = false;
 	}
 
 	// Destructor
 	virtual ~Win()
 	{
-
 	}
 
 	// Called before render is available
 	bool Awake()
 	{
-
 		return true;
 	}
 
@@ -43,16 +40,12 @@ public:
 		rect = { 500,500,200,81 };
 		exit = app->gui->CreateGuiControl(GuiControlType::BUTTON, 5, rect, "exit");
 		exit->SetObserver(this);
-
-
 		return true;
 	}
 
 	// Called each loop iteration
 	bool Update(float dt)
 	{
-
-
 		return true;
 	}
 
@@ -60,21 +53,6 @@ public:
 	bool PostUpdate()
 	{
 		bool ret = true;
-		/*if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-		{
-			if (app->player->currentLevel == 1)
-			{
-				app->fade->FadeToBlack(this, (Module*)app->sceneLevel2, 60);
-			}
-			else
-			{
-				app->fade->FadeToBlack(this, (Module*)app->wellcome, 60);
-			}
-		}*/
-		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || toExit == true)
-		{
-			//ret = false;
-		}
 		app->render->DrawTexture(winScreen, 0, 0);
 		return ret;
 	}
@@ -93,7 +71,7 @@ public:
 		}
 		else if (control == exit)
 		{
-			toExit = true;
+			SDL_Quit();
 		}
 
 		return true;
@@ -112,6 +90,6 @@ private:
 	SDL_Texture* winScreen;
 	GuiControl* nextLevel;
 	GuiControl* exit;
-	bool toExit;
+
 };
 #endif

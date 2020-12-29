@@ -21,6 +21,7 @@ enum class  playerState
 class position
 {
 public:
+	~position(){}
 	int x, y;
 };
 
@@ -32,11 +33,11 @@ public:
 	playerState state;
 	void Gravity(float dt);
 	Player(bool startEnabled);
+	~Player();
 	bool Start(bool newGame);
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
-	void updatePosition();
 
 	//PLAYER VARIABLES
 	int lifes;
@@ -65,7 +66,6 @@ public:
 	Animation jumpLeft;
 	Animation runLeft;
 	Animation deadLeft;
-	collisions playerCollisions;
 	int jumpingCount;
 	bool godMode;
 	bool canMove;
@@ -95,7 +95,6 @@ public:
 	Collider* playerRight;
 	Collider* playerLeft;
 	void OnCollision(Collider* c1, Collider* c2);
-	iPoint GetPosition();
 
 private:
 	int pathCounter;

@@ -377,13 +377,11 @@ bool Player::PostUpdate()
 
 	if (dead == true)
 	{
-		if (lifes != 0)
+		if (lifes > 0)
 		{
 			dead = false;
 			app->LoadGameRequest("save_game.xml");
-		}
-
-		if (lifes <= 0)
+		}else if (lifes <= 0)
 		{
 			if (currentAnimation == &runRight || currentAnimation == &stopRight || currentAnimation == &jumpRight)
 			{
@@ -413,7 +411,10 @@ bool Player::PostUpdate()
 	lateralsL = false;
 	return true;
 }
+Player::~Player() 
+{
 
+}
 bool Player::CleanUp() 
 {
 	app->tex->UnLoad(winTex);
@@ -421,6 +422,9 @@ bool Player::CleanUp()
 	app->tex->UnLoad(santa);
 	app->tex->UnLoad(introTex);
 	app->tex->UnLoad(lifesTex);
+	playerDown->pendingToDelete=true;
+	playerRight->pendingToDelete = true;
+	playerLeft->pendingToDelete = true;
 	app->sceneLevel1->Disable();
 	app->sceneLevel2->Disable();
 	return true;
@@ -731,12 +735,4 @@ bool Player::HasThePlayerMove()
 	{
 		return false;
 	}
-}
-
-iPoint Player:: GetPosition()
-{
-	iPoint point;
-	point.x = position.x;
-	point.y = position.y;
-	return point;
 }

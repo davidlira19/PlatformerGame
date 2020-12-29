@@ -38,6 +38,8 @@ bool SceneLevel2::Awake()
 // Called before the first frame
 bool SceneLevel2::Start(bool newGame)
 {
+	contMenu = 0;
+	menu = false;
 	app->gui->Enable();
 	app->entity->Enable();
 	app->collisions->Enable();
@@ -331,9 +333,6 @@ bool SceneLevel2::PostUpdate()
 {
 	bool ret = true;
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		//ret = false;
-
 	score = app->player->points;
 
 	sprintf_s(scoreText, 10, "%5d", score);
@@ -366,8 +365,7 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 		menu = false;
 		app->player->godMode = false;
 		app->player->canMove = true;
-	}
-	if (control == settings)
+	}else if (control == settings)	
 	{
 		SDL_Rect rect = { app->player->position.x - 500 + 725,app->player->position.y - 250 + 400,91,96 };
 		fullscreen = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "FULLSCREEN");
@@ -384,8 +382,7 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 		rect = { app->player->position.x - 500 + 825,app->player->position.y - 250 + 300,200,81 };
 		fxVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 2, rect, "FX");
 		fxVolume->SetObserver(this);
-	}
-	if (control == fullscreen)
+	}else if (control == fullscreen)	
 	{
 		if (app->win->fullScreenWindow == true)
 		{
@@ -395,8 +392,7 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 		{
 			app->win->fullScreenWindow = true;
 		}
-	}
-	if (control == vsync)
+	}else if (control == vsync)	
 	{
 		if (app->maxFPS == 13)
 		{
@@ -408,23 +404,19 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 			app->maxFPS = 13;
 			app->vsync = false;
 		}
-	}
-	if (control == musicVolume)
+	}else if (control == musicVolume)	
 	{
 		app->audio->volumeMusic = musicVolume->GetMusicValue();
-	}
-	if (control == fxVolume)
+	}else if (control == fxVolume)	
 	{
 		app->audio->volumeFx = fxVolume->GetMusicValue();
-	}
-	if (control == title)
+	}else if (control == title)	
 	{
-		app->player->Disable();
-		app->entity->Disable();
+		app->gui->outAnimation = false;
+		menu = false;
 		app->gui->DestroyAllGuiControl();
 		app->fade->FadeToBlack(this, (Module*)app->welcome, 60);
-	}
-	if (control == exit)
+	}else if (control == exit)	
 	{
 		SDL_Quit();
 	}

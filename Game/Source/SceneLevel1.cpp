@@ -38,11 +38,12 @@ bool SceneLevel1::Awake()
 // Called before the first frame
 bool SceneLevel1::Start(bool newGame)
 {
+	menu = false;
 	//app->audio->Enable();
 	app->gui->Enable();
 	app->collisions->Enable();
 	app->entity->Enable();
-	
+	contMenu = 0;
 	if (newGame == true)
 	{
 		app->LoadGameRequest("save_game.xml");
@@ -332,9 +333,6 @@ bool SceneLevel1::Update(float dt)
 bool SceneLevel1::PostUpdate()
 {
 	bool ret = true;
-
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		//ret = false;
 	
 	score = app->player->points;
 
@@ -358,8 +356,7 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 		menu = false;
 		app->player->godMode = false;
 		app->player->canMove = true;
-	}
-	if (control == settings)
+	}else if (control == settings)
 	{
 		SDL_Rect rect = { app->player->position.x - 500 + 725,app->player->position.y - 250 + 400,91,96 };
 		fullscreen = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "FULLSCREEN");
@@ -376,8 +373,7 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 		rect = { app->player->position.x - 500 + 825,app->player->position.y - 250 + 300,359,57 };
 		fxVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 2, rect, "FX");
 		fxVolume->SetObserver(this);
-	}
-	if (control == fullscreen)
+	}else if (control == fullscreen)	
 	{
 		if (app->win->fullScreenWindow == true)
 		{
@@ -387,8 +383,7 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 		{
 			app->win->fullScreenWindow = true;
 		}
-	}
-	if (control == vsync)
+	}else if (control == vsync)	
 	{
 		if (app->maxFPS == 13)
 		{
@@ -400,25 +395,24 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 			app->maxFPS = 13;
 			app->vsync = false;
 		}
-	}
-	if (control == musicVolume)
+	}else if (control == musicVolume)	
 	{
 		app->audio->volumeMusic = musicVolume->GetMusicValue();
 
-	}
-	if (control == fxVolume)
+	}else if (control == fxVolume)
 	{
 		app->audio->volumeFx = fxVolume->GetMusicValue();
-	}
-	if (control == title)
+	}else if (control == title)
 	{
-		app->player->Disable();
-		app->entity->Disable();
+		//app->player->Disable();
+		/*app->entity->Disable();*/
+		app->gui->outAnimation = false;
+		menu = false;
 		app->gui->DestroyAllGuiControl();
 		app->fade->FadeToBlack(this, (Module*)app->welcome, 60);
-	}
-	if (control == exit)
+	}else if (control == exit)	
 	{
+		//app->SaveGame();
 		SDL_Quit();
 	}
 
@@ -435,6 +429,7 @@ bool SceneLevel1::CleanUp()
 	app->tex->UnLoad(bgSnow);
 	app->map->Disable();
 	app->entity->Disable();
+	app->player->Disable();
 	//app->audio->Unload();
 	app->gui->Disable();
 	app->collisions->Disable();
