@@ -33,7 +33,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render(true);
 	tex = new Textures(true);
 	audio = new Audio(true);
-	gui = new GuiManager(true);
+	gui = new GuiManager(false);
 	player = new Player(false);
 	sceneLevel1 = new SceneLevel1(false);
 	sceneLevel2 = new SceneLevel2(false);
@@ -45,7 +45,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	dead = new Dead(false);
 	winp = new Win(false);
 	fonts = new Fonts(false);
-	collisions = new ModuleCollisions(true);
+	collisions = new ModuleCollisions(false);
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(input);

@@ -32,7 +32,8 @@ public:
 	// Called before the first frame
 	bool Start(bool newGame)
 	{
-		app->audio->Enable();
+		//app->audio->Enable();
+		app->audio->PlayMusic("Assets/Audio/Music/dead_song.ogg");
 		deadScreen = app->tex->Load("Assets/Textures/dead_screen.png");
 		app->gui->Enable();
 		SDL_Rect rect = { 500,400,200,81 };
@@ -101,10 +102,11 @@ public:
 	// Called before quitting
 	bool CleanUp() 
 	{
+		app->audio->Unload();
 		app->gui->DestroyAllGuiControl();
 		app->gui->Disable();
 		app->tex->UnLoad(deadScreen);
-		app->audio->Disable();
+		//app->audio->Disable();
 		return true;
 	}
 private:

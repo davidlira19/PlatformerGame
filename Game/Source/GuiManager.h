@@ -38,12 +38,15 @@ public:
 	SDL_Texture* textureButton;
 	SDL_Texture* textureSlider;
 	List<GuiControl*> controls;
-	Animation pausedAnimation;
+	Animation pausedAnimationIn;
+	Animation pausedAnimationOut;
 	unsigned int focusedFx;
 	unsigned int clickedFx;
+	unsigned int menuEfect;
 	float accumulatedTime = 0.0f;
 	float updateMsCycle = 0.0f;
 	bool doLogic = false;
+	bool outAnimation;
 };
 
 #endif // __GUIMANAGER_H__

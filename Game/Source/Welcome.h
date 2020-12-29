@@ -55,6 +55,7 @@ public:
 	// Called before the first frame
 	bool Start(bool newGame)
 	{
+		//app->audio->PlayMusic("Assets/Audio/Music/christmas_music.ogg");
 		menu = false;
 		app->gui->Enable();
 		welcome = app->tex->Load("Assets/Textures/title_screen.png");
@@ -196,9 +197,12 @@ public:
 	// Called before quitting
 	bool CleanUp()
 	{
-		app->gui->Disable();
 		app->gui->DestroyAllGuiControl();
+		app->gui->Disable();		
+		//app->audio->Disable();
 		app->tex->UnLoad(welcome);
+		app->tex->UnLoad(textureCredits);
+		
 		return true;
 	}
 	bool menu;

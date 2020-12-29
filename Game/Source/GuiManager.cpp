@@ -16,21 +16,32 @@ GuiManager::~GuiManager() {
 }
 bool GuiManager::Start(bool newGame)
 {
-	pausedAnimation.PushBack({ 2773,975,451,770 });
-	pausedAnimation.PushBack({ 2323,1003,451,742 });
-	pausedAnimation.PushBack({ 1873,1027,451,721 });
-	pausedAnimation.PushBack({ 1423,1055,451,693 });
-	pausedAnimation.PushBack({ 973,1086,451,662 });
-	pausedAnimation.PushBack({ 523,1116,451,632 });
-	pausedAnimation.PushBack({ 73,1116,451,632 });
-	pausedAnimation.loop = false;
-	pausedAnimation.pingpong = false;
-	pausedAnimation.speed = 0.25f;
+	outAnimation = false;
+	pausedAnimationIn.PushBack({ 2773,975,451,770 });
+	pausedAnimationIn.PushBack({ 2323,1003,451,742 });
+	pausedAnimationIn.PushBack({ 1873,1027,451,721 });
+	pausedAnimationIn.PushBack({ 1423,1055,451,693 });
+	pausedAnimationIn.PushBack({ 973,1086,451,662 });
+	pausedAnimationIn.PushBack({ 523,1116,451,632 });
+	pausedAnimationIn.PushBack({ 73,1116,451,632 });
+	pausedAnimationIn.loop = false;
+	pausedAnimationIn.speed = 0.25f;
 
+	pausedAnimationOut.PushBack({ 73,1116,451,632 });
+	pausedAnimationOut.PushBack({ 523,1116,451,632 });
+	pausedAnimationOut.PushBack({ 973,1086,451,662 });
+	pausedAnimationOut.PushBack({ 1423,1055,451,693 });
+	pausedAnimationOut.PushBack({ 1873,1027,451,721 });
+	pausedAnimationOut.PushBack({ 2323,1003,451,742 });
+	pausedAnimationOut.PushBack({ 2773,975,451,770 });
+	pausedAnimationOut.loop = false;
+	pausedAnimationOut.speed = 0.25f;
 	textureButton = app->tex->Load("Assets/Textures/buttons.png");
 	clickedFx =app->audio->LoadFx("Assets/Audio/Fx/button_press.wav");
 	focusedFx =app->audio->LoadFx("Assets/Audio/Fx/zip_click.wav");
 	textureSlider= app->tex->Load("Assets/Textures/slider.png");
+	menuEfect = app->audio->LoadFx("Assets/Audio/Fx/menu_efect.wav");
+	
 	return true;
 }
 bool GuiManager::CleanUp()
@@ -67,17 +78,28 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, SDL_Rect r
 }
 bool GuiManager::PostUpdate() 
 {
-	ListItem<GuiControl*>* auxiliar;
-	auxiliar = controls.start;
+	
 	if (app->sceneLevel1->menu == true || app->sceneLevel2->menu == true)
 	{
-		
-		if (pausedAnimation.HasFinished() == false)
-		{	
-			pausedAnimation.Update();
-		}
-		app->render->DrawTexture(textureSlider, app->player->position.x - 115, app->player->position.y - 200, &pausedAnimation.GetCurrentFrame());
+		SDL_Rect rect = pausedAnimationIn.GetCurrentFrame();
+		app->render->DrawTexture(textureSlider, app->player->position.x - 115, app->player->position.y - 200, &rect);
+		if (rect.x != 73) 
+		{
+			pausedAnimationIn.Update();
+		}		
 	}
+	if ((app->sceneLevel1->menu == false && outAnimation == true) || (app->sceneLevel2->menu == false && outAnimation == true))
+	{
+		SDL_Rect rect = pausedAnimationOut.GetCurrentFrame();
+		app->render->DrawTexture(textureSlider, app->player->position.x - 115, app->player->position.y - 200, &rect);
+		pausedAnimationOut.Update();
+		if (rect.x == 2773)
+		{
+			outAnimation = false;
+		}
+	}
+	ListItem<GuiControl*>* auxiliar;
+	auxiliar = controls.start;
 	while (auxiliar != nullptr) 
 	{
 		auxiliar->data->Draw();

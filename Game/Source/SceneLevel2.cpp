@@ -4,6 +4,7 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
+#include "SceneLevel1.h"
 #include "SceneLevel2.h"
 #include "Map.h"
 #include "Player.h"
@@ -13,6 +14,7 @@
 #include "Collisions.h"
 #include "FadeToBlack.h"
 #include "EntityManager.h"
+#include "PathFinding.h"
 #include "GuiButton.h"
 #include "GuiManager.h"
 
@@ -36,10 +38,9 @@ bool SceneLevel2::Awake()
 // Called before the first frame
 bool SceneLevel2::Start(bool newGame)
 {
-	app->audio->Enable();
 	app->gui->Enable();
 	app->entity->Enable();
-
+	app->collisions->Enable();
 	if (newGame == true)
 	{
 		app->LoadGameRequest("save_game.xml");
@@ -89,7 +90,7 @@ bool SceneLevel2::Start(bool newGame)
 	screamFx = app->audio->LoadFx("Assets/Audio/Fx/scream.wav");
 	bgSnow = app->tex->Load("Assets/Textures/snow_background.png");
 	freeCamera = false;
-	app->collisions->Enable();
+	
 	
 	
 	counter = 1000;
@@ -305,11 +306,16 @@ bool SceneLevel2::Update(float dt)
 	{
 		if ((menu == false) && ((app->player->currentAnimation != &app->player->jumpLeft) && (app->player->currentAnimation != &app->player->jumpRight)))
 		{
+			app->gui->pausedAnimationIn.Reset();
+			app->audio->PlayFx(app->gui->menuEfect);
 			menu = true;
 			contMenu = 0;
 		}
 		else
 		{
+			app->gui->pausedAnimationOut.Reset();
+			app->gui->outAnimation = true;
+			app->audio->PlayFx(app->gui->menuEfect);
 			app->gui->DestroyAllGuiControl();
 			menu = false;
 			app->player->godMode = false;
@@ -353,6 +359,9 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 {
 	if (control == resume)
 	{
+		app->audio->PlayFx(app->gui->menuEfect);
+		app->gui->pausedAnimationOut.Reset();
+		app->gui->outAnimation = true;
 		app->gui->DestroyAllGuiControl();
 		menu = false;
 		app->player->godMode = false;
@@ -436,17 +445,19 @@ void SceneLevel2::EasterEgg()
 bool SceneLevel2::CleanUp()
 {
 	LOG("Freeing scene");
+	app->fonts->UnLoad(numbers);
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->tex->UnLoad(bgSnow);
 	app->tex->UnLoad(mysteryTex);
 	app->map->Disable();
 	app->entity->Disable();
+	
 	//app->audio->Unload();
 	app->gui->Disable();
 	app->collisions->Disable();
 	colliders.Clear();
-	app->audio->Disable();
+	//app->audio->Disable();
 	
 	return true;
 }

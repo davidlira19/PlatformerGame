@@ -38,8 +38,9 @@ bool SceneLevel1::Awake()
 // Called before the first frame
 bool SceneLevel1::Start(bool newGame)
 {
-	app->audio->Enable();
+	//app->audio->Enable();
 	app->gui->Enable();
+	app->collisions->Enable();
 	app->entity->Enable();
 	
 	if (newGame == true)
@@ -92,7 +93,7 @@ bool SceneLevel1::Start(bool newGame)
 	//Load Texture
 	bgSnow = app->tex->Load("Assets/Textures/snow_background.png");
 	freeCamera = false;
-	app->collisions->Enable();
+	
 	
 
 	SDL_Rect rect;
@@ -282,7 +283,7 @@ bool SceneLevel1::Update(float dt)
 	if (menu == true && contMenu == 0)
 	{
 		contMenu++;
-
+		
 		app->player->godMode = true;
 		app->player->canMove = false;
 
@@ -306,11 +307,16 @@ bool SceneLevel1::Update(float dt)
 	{
 		if ((menu == false) && ((app->player->currentAnimation != &app->player->jumpLeft) && (app->player->currentAnimation != &app->player->jumpRight)))
 		{
+			app->gui->pausedAnimationIn.Reset();
+			app->audio->PlayFx(app->gui->menuEfect);
 			menu = true;
 			contMenu = 0;
 		}
 		else
 		{
+			app->gui->pausedAnimationOut.Reset();
+			app->gui->outAnimation = true;
+			app->audio->PlayFx(app->gui->menuEfect);
 			app->gui->DestroyAllGuiControl();
 			menu = false;
 			app->player->godMode = false;
@@ -345,6 +351,9 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 {
 	if (control == resume)
 	{
+		app->audio->PlayFx(app->gui->menuEfect);
+		app->gui->pausedAnimationOut.Reset();
+		app->gui->outAnimation = true;
 		app->gui->DestroyAllGuiControl();
 		menu = false;
 		app->player->godMode = false;
@@ -420,6 +429,7 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 bool SceneLevel1::CleanUp()
 {
 	LOG("Freeing scene");
+	app->fonts->UnLoad(numbers);
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->tex->UnLoad(bgSnow);
@@ -429,7 +439,8 @@ bool SceneLevel1::CleanUp()
 	app->gui->Disable();
 	app->collisions->Disable();
 	colliders.Clear();
-	app->audio->Disable();
+	
+	//app->audio->Disable();
 	
 	return true;
 }
