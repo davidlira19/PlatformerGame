@@ -66,7 +66,7 @@ public:
 	{
 		//app->audio->PlayMusic("Assets/Audio/Music/christmas_music.ogg");
 		menu = false;
-		app->gui->Enable();
+		//app->gui->Enable();
 		welcome = app->tex->Load("Assets/Textures/title_screen.png");
 		textureCredits = app->tex->Load("Assets/Textures/credits.png");
 
@@ -208,7 +208,7 @@ public:
 	bool CleanUp()
 	{
 		app->gui->DestroyAllGuiControl();
-		app->gui->Disable();		
+		//app->gui->Disable();		
 		//app->audio->Disable();
 		app->tex->UnLoad(welcome);
 		app->tex->UnLoad(textureCredits);

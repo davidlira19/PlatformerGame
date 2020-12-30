@@ -10,6 +10,7 @@ GuiCheckBox::GuiCheckBox(int id, SDL_Rect bounds, const char* text, unsigned int
     clickedFX = clickedFx;
     textureButtons = textureButton;
     drawRectangle = false;
+	pendingToDelete = false;
 }
 
 GuiCheckBox::~GuiCheckBox()

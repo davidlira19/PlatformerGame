@@ -40,7 +40,7 @@ bool SceneLevel1::Start(bool newGame)
 {
 	menu = false;
 	//app->audio->Enable();
-	app->gui->Enable();
+	//app->gui->Enable();
 	app->collisions->Enable();
 	app->entity->Enable();
 	contMenu = 0;
@@ -431,7 +431,8 @@ bool SceneLevel1::CleanUp()
 	app->entity->Disable();
 	app->player->Disable();
 	//app->audio->Unload();
-	app->gui->Disable();
+	//app->gui->Disable();
+	app->gui->DestroyAllGuiControl();
 	app->collisions->Disable();
 	colliders.Clear();
 	

@@ -32,6 +32,9 @@ public:
 	//bool Start();
 	bool PostUpdate();
 	bool Start(bool newGame);
+	//controls.Clear();
+	bool PreUpdate();
+	
 	//void AddGuiControl(GuiControl* entity);
 	//bool Awake(pugi::xml_node&);
 public:

@@ -31,7 +31,7 @@ public:
 	bool Start(bool newGame)
 	{
 		//app->audio->Enable();
-		app->gui->Enable();
+		//app->gui->Enable();
 		app->audio->PlayMusic("Assets/Audio/Music/victory_song.ogg");
 		winScreen = app->tex->Load("Assets/Textures/win_screen.png");
 		SDL_Rect rect = { 500,400,200,81 };
@@ -79,11 +79,10 @@ public:
 	// Called before quitting
 	bool CleanUp()
 	{
-		app->audio->Unload();
+
 		app->gui->DestroyAllGuiControl();
-		app->gui->Disable();
+		//app->gui->Disable();
 		app->tex->UnLoad(winScreen);
-		
 		return true;
 	}
 private:

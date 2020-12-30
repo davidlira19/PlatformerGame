@@ -37,7 +37,10 @@ class GuiControl
 {
 public:
 
-    GuiControl(GuiControlType type, int id) : type(type), id(id), state(GuiControlState::NORMAL) {}
+    GuiControl(GuiControlType type, int id) : type(type), id(id), state(GuiControlState::NORMAL) 
+	{
+		
+	}
 
     GuiControl(GuiControlType type, SDL_Rect bounds, const char* text) :
         type(type),
@@ -98,7 +101,9 @@ public:
     SDL_Texture* textureSliders;
     Module* observer;
 	unsigned int focusedFX;
-	unsigned int clickedFX;// Observer module (it should probably be an array/list)
+	unsigned int clickedFX;
+	bool pendingToDelete;
+	// Observer module (it should probably be an array/list)
 };
 
 #endif // __GUICONTROL_H__

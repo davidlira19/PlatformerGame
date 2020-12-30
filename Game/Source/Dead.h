@@ -8,7 +8,7 @@
 #include"Render.h"
 #include"Textures.h"
 #include"Welcome.h"
-
+#include "Audio.h"
 class Dead :public Module {
 public:
 	Dead(bool startEnabled) : Module(startEnabled) 
@@ -35,7 +35,7 @@ public:
 		//app->audio->Enable();
 		app->audio->PlayMusic("Assets/Audio/Music/dead_song.ogg");
 		deadScreen = app->tex->Load("Assets/Textures/dead_screen.png");
-		app->gui->Enable();
+		//app->gui->Enable();
 		SDL_Rect rect = { 500,400,200,81 };
 		nextLevel = app->gui->CreateGuiControl(GuiControlType::BUTTON, 1, rect, "NextLevel");
 		nextLevel->SetObserver(this);
@@ -102,11 +102,11 @@ public:
 	// Called before quitting
 	bool CleanUp() 
 	{
-		app->audio->Unload();
+		
 		app->gui->DestroyAllGuiControl();
-		app->gui->Disable();
+		//app->gui->Disable();
 		app->tex->UnLoad(deadScreen);
-		//app->audio->Disable();
+		
 		return true;
 	}
 private:

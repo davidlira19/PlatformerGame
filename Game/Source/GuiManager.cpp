@@ -126,6 +126,23 @@ void GuiManager::DestroyGuiControl(GuiControl* entity)
 		auxiliar = auxiliar->next;
 	}
 }
+
+//controls.Clear();
+bool GuiManager::PreUpdate()
+{
+	ListItem<GuiControl*>* auxiliar;
+	auxiliar = controls.start;
+	while (auxiliar != nullptr)
+	{
+		if (auxiliar->data->pendingToDelete == true) 
+		{
+			delete auxiliar->data;
+			controls.Del(auxiliar);
+		}
+		auxiliar = auxiliar->next;
+	}
+	return true;
+}
 bool GuiManager::Update(float dt)
 {
 	accumulatedTime += dt;
@@ -153,8 +170,8 @@ void GuiManager::DestroyAllGuiControl()
 	auxiliar = controls.start;
 	while (auxiliar != nullptr)
 	{
-		delete auxiliar->data;
+		auxiliar->data->pendingToDelete = true;
 		auxiliar = auxiliar->next;
 	}
-	controls.Clear();
+
 }

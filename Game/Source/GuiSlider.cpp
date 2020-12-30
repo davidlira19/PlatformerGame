@@ -13,6 +13,7 @@ GuiSlider::GuiSlider(int id, SDL_Rect bounds, const char* text, unsigned int cli
 	textureButtons = textureButton;
     textureSliders = textureSlider;
     drawRect = false;
+	pendingToDelete = false;
 }
 
 GuiSlider::~GuiSlider()

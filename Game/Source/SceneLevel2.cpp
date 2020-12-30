@@ -446,7 +446,8 @@ bool SceneLevel2::CleanUp()
 	app->entity->Disable();
 	
 	//app->audio->Unload();
-	app->gui->Disable();
+	//app->gui->Disable();
+	app->gui->DestroyAllGuiControl();
 	app->collisions->Disable();
 	colliders.Clear();
 	//app->audio->Disable();

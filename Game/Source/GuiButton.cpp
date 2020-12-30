@@ -9,6 +9,7 @@ GuiButton::GuiButton(int id, SDL_Rect bounds, const char* text,unsigned int clic
 	focusedFX = focusedFx;
 	clickedFX = clickedFx;
 	textureButtons = textureButton;
+	pendingToDelete = false;
 }
 
 GuiButton::~GuiButton()
