@@ -15,22 +15,15 @@
       <Filter>External\PugiXml</Filter>
     </ClCompile>
     <ClCompile Include="Source\Map.cpp" />
-    <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\Collisions.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
-    <ClCompile Include="Source\EntityManager.cpp" />
-    <ClCompile Include="Source\Entity.cpp" />
-    <ClCompile Include="Source\Coin.cpp" />
     <ClCompile Include="Source\PathFinding.cpp" />
-    <ClCompile Include="Source\Heart.cpp" />
     <ClCompile Include="Source\Fonts.cpp" />
     <ClCompile Include="Source\SceneLevel1.cpp" />
     <ClCompile Include="Source\SceneLevel2.cpp" />
-    <ClCompile Include="Source\EnemyGround.cpp" />
-    <ClCompile Include="Source\EnemyAir.cpp" />
     <ClCompile Include="Source\GuiButton.cpp">
       <Filter>External\GuiControls</Filter>
     </ClCompile>
@@ -42,6 +35,27 @@
     </ClCompile>
     <ClCompile Include="Source\GuiSlider.cpp">
       <Filter>External\GuiControls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyAir.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyGround.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityManager.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Coin.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Heart.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,7 +91,6 @@
       <Filter>External\PugiXml</Filter>
     </ClInclude>
     <ClInclude Include="Source\Map.h" />
-    <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Animation.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -90,24 +103,15 @@
     <ClInclude Include="Source\Intro.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Dead.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Win.h">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\Collisions.h" />
     <ClInclude Include="Source\Collider.h" />
-    <ClInclude Include="Source\EntityManager.h" />
-    <ClInclude Include="Source\Entity.h" />
-    <ClInclude Include="Source\Coin.h" />
     <ClInclude Include="Source\PathFinding.h" />
-    <ClInclude Include="Source\Heart.h" />
     <ClInclude Include="Source\Fonts.h" />
     <ClInclude Include="Source\SceneLevel1.h" />
     <ClInclude Include="Source\SceneLevel2.h" />
-    <ClInclude Include="Source\EnemyGround.h" />
-    <ClInclude Include="Source\EnemyAir.h" />
     <ClInclude Include="Source\GuiButton.h">
       <Filter>External\GuiControls</Filter>
     </ClInclude>
@@ -126,6 +130,28 @@
     <ClInclude Include="Source\Welcome.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EnemyAir.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyGround.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityManager.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Dead.h" />
+    <ClInclude Include="Source\Player.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Coin.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Heart.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -139,6 +165,9 @@
     </Filter>
     <Filter Include="External\GuiControls">
       <UniqueIdentifier>{e68eecc6-89c2-47e4-9225-b9d9d3d76ca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{83332ddc-549f-48ef-b66c-45800ed81c35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
