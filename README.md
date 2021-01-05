@@ -23,6 +23,7 @@ Win points getting coins and killing enemies by jumping over them!
  - Checkpoints (and teleportation)
  - Audio Feedback
  - Easter Egg...
+ - HUD
  
 ## Controls
 
@@ -136,5 +137,18 @@ https://creativecommons.org/licenses/by-sa/3.0/
 http://www.gnu.org/licenses/gpl-3.0.html
 http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 https://creativecommons.org/publicdomain/zero/1.0/
+
+Lose: https://opengameart.org/content/classicalmedieval-song
+
+https://creativecommons.org/licenses/by/3.0/
+
+Win: https://opengameart.org/content/victory-1
+
+https://creativecommons.org/licenses/by/3.0/
+
+Menu: https://opengameart.org/content/sfx-5-menu-screen-slides
+
+https://creativecommons.org/licenses/by-sa/4.0/
+https://opengameart.org/content/oga-by-30-faq
 
 (Coin and hearts animations and textures are self made)

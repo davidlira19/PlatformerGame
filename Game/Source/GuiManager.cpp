@@ -40,7 +40,7 @@ bool GuiManager::Start(bool newGame)
 	clickedFx =app->audio->LoadFx("Assets/Audio/Fx/button_press.wav");
 	focusedFx =app->audio->LoadFx("Assets/Audio/Fx/zip_click.wav");
 	textureSlider= app->tex->Load("Assets/Textures/slider.png");
-	menuEfect = app->audio->LoadFx("Assets/Audio/Fx/menu_efect.wav");
+	menuEfect = app->audio->LoadFx("Assets/Audio/Fx/menu_effect.wav");
 	
 	return true;
 }
