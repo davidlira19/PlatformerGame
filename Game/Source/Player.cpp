@@ -143,7 +143,6 @@ bool Player::Start(bool newGame)
 	lifeFx = app->audio->LoadFx("Assets/Audio/Fx/life.wav");
 	checkpointFx = app->audio->LoadFx("Assets/Audio/Fx/checkpoint.wav");
 	lifesTex = app->tex->Load("Assets/Textures/lifes.png");
-	pointsTex = app->tex->Load("Assets/Textures/coin_animation.png");
 	currentAnimation = &stopRight;
 
 	//INITIALIZE VARIABLES
@@ -375,9 +374,6 @@ bool Player::PostUpdate()
 	default:
 		break;
 	}
-
-	rect = { 2,2,41,41 };
-	app->render->DrawTexture(pointsTex, app->render->camera.x * +30, app->render->camera.y * +40, &rect);
 
 	if (dead == true)
 	{

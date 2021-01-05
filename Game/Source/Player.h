@@ -103,6 +103,5 @@ private:
 	bool noise;
 	SDL_Texture* santa = nullptr;
 	SDL_Texture* lifesTex = nullptr;
-	SDL_Texture* pointsTex = nullptr;
 };
 #endif
