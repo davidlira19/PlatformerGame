@@ -54,7 +54,9 @@ public:
     }
 	virtual ~GuiControl() 
 	{
-
+		//text.~SString();
+		text.Clear();
+		
 	}
     virtual bool Update(float dt)
     {

@@ -414,7 +414,7 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 		/*app->entity->Disable();*/
 		app->gui->outAnimation = false;
 		menu = false;
-		app->gui->DestroyAllGuiControl();
+		//app->gui->DestroyAllGuiControl();
 		app->fade->FadeToBlack(this, (Module*)app->welcome, 60);
 	}else if (control == exit)	
 	{
@@ -433,16 +433,20 @@ bool SceneLevel1::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->tex->UnLoad(bgSnow);
+	app->tex->UnLoad(watch);
 	app->map->Disable();
 	app->entity->Disable();
 	app->player->Disable();
-	//app->audio->Unload();
-	//app->gui->Disable();
+	
 	app->gui->DestroyAllGuiControl();
 	app->collisions->Disable();
-	colliders.Clear();
-	
-	//app->audio->Disable();
+	ListItem<Collider*>* auxiliar;
+	auxiliar = colliders.start;
+	while (auxiliar != nullptr) 
+	{
+		colliders.Del(auxiliar);
+		auxiliar = auxiliar->next;
+	}	
 	
 	return true;
 }

@@ -447,6 +447,8 @@ bool SceneLevel2::CleanUp()
 	app->render->camera.y = 0;
 	app->tex->UnLoad(bgSnow);
 	app->tex->UnLoad(mysteryTex);
+	app->tex->UnLoad(watch);
+	app->audio->Unload(screamFx);
 	app->map->Disable();
 	app->entity->Disable();
 	
@@ -454,8 +456,13 @@ bool SceneLevel2::CleanUp()
 	//app->gui->Disable();
 	app->gui->DestroyAllGuiControl();
 	app->collisions->Disable();
-	colliders.Clear();
-	//app->audio->Disable();
+	ListItem<Collider*>* auxiliar;
+	auxiliar = colliders.start;
+	while (auxiliar != nullptr)
+	{
+		colliders.Del(auxiliar);
+		auxiliar = auxiliar->next;
+	}
 	
 	return true;
 }

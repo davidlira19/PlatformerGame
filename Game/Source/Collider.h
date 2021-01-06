@@ -19,7 +19,7 @@ struct Collider
 
 	//Methods
 	Collider(SDL_Rect rectangle, Type type, Module* listener = nullptr);
-
+	~Collider();
 	void SetPos(int x, int y);
 
 	bool Intersects(const SDL_Rect& r) const;

@@ -185,7 +185,7 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 				app->audio->PlayFx(birdFx);
 				app->player->points += 300;
 			}
-			pendientedeelim = true;
+			pendienteDeElim = true;
 		}
 	}
 	if (collidere->type == Collider::PLAYER || collidere->type == Collider::PLAYERLEFT || collidere->type == Collider::PLAYERRIGHT)
@@ -193,7 +193,7 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 		if (collideri->type == Collider::COIN ||collideri->type == Collider::HEART)
 		{
 			app->SaveGameRequest("save_game.xml");
-			pendientedeelim = true;
+			pendienteDeElim = true;
 		}
 	}
 }

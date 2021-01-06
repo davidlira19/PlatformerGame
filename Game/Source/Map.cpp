@@ -222,6 +222,8 @@ bool Map::CleanUp()
 {
 	ListItem<TileSet*>* item;
 	item = data.tilesets.start;
+	app->tex->UnLoad(item->data->textureTile);	
+	
 
 	while (item != NULL)
 	{
@@ -229,6 +231,16 @@ bool Map::CleanUp()
 		item = item->next;
 	}
 	data.tilesets.Clear();
+
+	ListItem<Property*>* lisItem;
+	lisItem = data.layers.start->data->properties.list.start;
+	while (lisItem != NULL)
+	{
+		lisItem->data->propetyName.Clear();
+		RELEASE(lisItem->data);
+		lisItem = lisItem->next;
+	}
+
 
 	// Clean up the pugui tree
 	ListItem<MapLayer*>* ite;
@@ -240,6 +252,8 @@ bool Map::CleanUp()
 	}
 	data.layers.Clear();
 	mapFile.reset();
+
+	
 	return true;
 }
 

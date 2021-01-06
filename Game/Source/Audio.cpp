@@ -21,53 +21,60 @@ Audio::Audio(bool startEnabled) : Module(startEnabled)
 
 // Destructor
 Audio::~Audio() {}
-void Audio::Unload()
+void Audio::Unload(int id)
 {
-	if (music != NULL)
+	/*if (music != NULL)
 	{
 		Mix_FreeMusic(music);
-	}
+	}*/
 	ListItem<Mix_Chunk*>* item;
-	for (item = fx.start; item != NULL; item = item->next) 
+	int cont = 0;
+	for (item = fx.start; item != NULL && cont<=id; item = item->next) 
 	{
-		Mix_FreeChunk(item->data);
+		if (id == cont) 
+		{
+			Mix_FreeChunk(item->data);
+			fx.Del(item);
+			break;
+		}
+		cont++;
 	}
-	fx.Clear();
+	//fx.Clear();
 }
 bool Audio::Start(bool newGame) 
 {
-	LOG("Loading Audio Mixer");
-	bool ret = true;
-	SDL_Init(0);
+	//LOG("Loading Audio Mixer");
+	//bool ret = true;
+	//SDL_Init(0);
 
-	if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
-	{
-		LOG("SDL_INIT_AUDIO could not initialize! SDL_Error: %s\n", SDL_GetError());
-		isEnabled = false;
-		ret = true;
-	}
+	//if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
+	//{
+	//	LOG("SDL_INIT_AUDIO could not initialize! SDL_Error: %s\n", SDL_GetError());
+	//	isEnabled = false;
+	//	ret = true;
+	//}
 
-	// Load support for the JPG and PNG image formats
-	int flags = MIX_INIT_OGG;
-	int init = Mix_Init(flags);
+	//// Load support for the JPG and PNG image formats
+	//int flags = MIX_INIT_OGG;
+	//int init = Mix_Init(flags);
 
-	if ((init & flags) != flags)
-	{
-		LOG("Could not initialize Mixer lib. Mix_Init: %s", Mix_GetError());
-		isEnabled = false;
-		ret = true;
-	}
+	//if ((init & flags) != flags)
+	//{
+	//	LOG("Could not initialize Mixer lib. Mix_Init: %s", Mix_GetError());
+	//	isEnabled = false;
+	//	ret = true;
+	//}
 
-	// Initialize SDL_mixer
-	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
-	{
-		LOG("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
-		isEnabled = false;
-		ret = true;
-	}
-	Mix_VolumeMusic(10);
+	//// Initialize SDL_mixer
+	//if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	//{
+	//	LOG("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+	//	isEnabled = false;
+	//	ret = true;
+	//}
+	//Mix_VolumeMusic(10);
 
-	return ret;
+	return true;
 }
 // Called before render is available
 bool Audio::Awake(pugi::xml_node& config)

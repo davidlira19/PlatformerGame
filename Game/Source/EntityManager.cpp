@@ -34,17 +34,7 @@ bool EntityManager::Start(bool newGame)
 
 bool EntityManager::PreUpdate()
 {
-	// Remove all enemies scheduled for deletion
-	ListItem<Entity*>* listItem;
-	listItem = entityList.start;
-	while (listItem != nullptr) 
-	{
-		if (listItem->data->pendientedeelim == true)
-		{
-			entityList.Del(listItem);
-		}
-		listItem = listItem->next;
-	}
+	
 	return true;
 }
 
@@ -86,11 +76,14 @@ bool EntityManager::CleanUp()
 	app->tex->UnLoad(zombieTexture);
 	app->tex->UnLoad(coinTexture);
 	app->tex->UnLoad(heartTexture);
+	app->audio->Unload(birdFx);
+	app->audio->Unload(zombieFx);
+	
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
 	while (listItem != nullptr) 
 	{
-		listItem->data->path.ResetPath();
+		//listItem->data->path.ResetPath();
 		delete listItem->data;	
 		listItem = listItem->next;
 	}
@@ -135,7 +128,7 @@ void EntityManager::HandleEnemiesDespawn()
 	listItem = entityList.start;
 	while (listItem != nullptr) 
 	{
-		if (listItem->data->pendientedeelim == true)
+		if (listItem->data->pendienteDeElim == true)
 		{
 			delete listItem->data;
 			entityList.Del(listItem);
@@ -214,12 +207,12 @@ bool EntityManager::LoadState(pugi::xml_node* nodo)
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
 	while (listItem != nullptr) {
-		listItem->data->path.ResetPath();
+		//listItem->data->path.ResetPath();
 		delete listItem->data;
 		entityList.Del(listItem);
 		listItem = listItem->next;
 	}
-	entityList.Clear();
+	//entityList.Clear();
 	pugi::xml_node auxiliar;
 	auxiliar = nodo->child("data");
 	int num = auxiliar.attribute("num").as_int();

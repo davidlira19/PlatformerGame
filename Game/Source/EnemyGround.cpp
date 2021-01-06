@@ -104,7 +104,7 @@ void EnemyGround::Update(float dt)
 
 	if ((currentAnim == &zombieDeadLeft || currentAnim == &zombieDeadRight) && currentAnim->HasFinished() == true)
 	{
-		pendientedeelim = true;
+		pendienteDeElim = true;
 		cont = 0;
 	}
 

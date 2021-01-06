@@ -137,7 +137,7 @@ bool Player::Start(bool newGame)
 	winTex = app->tex->Load("Assets/Textures/win_screen.png");
 	deadTex = app->tex->Load("Assets/Textures/dead_screen.png");
 	introTex = app->tex->Load("Assets/Textures/title_screen.png");
-	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/santa_jump.ogg");
+	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/santa_jump.wav");
 	landFx = app->audio->LoadFx("Assets/Audio/Fx/santa_land.wav");
 	coinFx = app->audio->LoadFx("Assets/Audio/Fx/coin_drop.wav");
 	lifeFx = app->audio->LoadFx("Assets/Audio/Fx/life.wav");
@@ -422,6 +422,13 @@ bool Player::CleanUp()
 	app->tex->UnLoad(santa);
 	app->tex->UnLoad(introTex);
 	app->tex->UnLoad(lifesTex);
+
+	app->audio->Unload(landFx);
+	app->audio->Unload(coinFx);
+	app->audio->Unload(lifeFx);
+	app->audio->Unload(jumpFx);
+	
+	app->audio->Unload(checkpointFx);
 	playerDown->pendingToDelete=true;
 	playerRight->pendingToDelete = true;
 	playerLeft->pendingToDelete = true;

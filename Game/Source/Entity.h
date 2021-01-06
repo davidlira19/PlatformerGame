@@ -46,7 +46,7 @@ public:
 
 	// Current Position in the world
 	iPoint position;
-	bool pendientedeelim = false;
+	bool pendienteDeElim = false;
 
 	// The enemy's texture
 	EntityTipe type;
@@ -57,7 +57,6 @@ public:
 	SDL_Texture* moneyTexture;
 	SDL_Texture* lifeTexture;
 	Collider* playerWin = nullptr;
-	Collider* playerWin2 = nullptr;
 
 	// The enemy's collider
 	Collider* collider = nullptr;
