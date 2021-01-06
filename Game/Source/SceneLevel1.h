@@ -54,6 +54,8 @@ private:
 	List<Collider*> colliders;
 	SDL_Texture* img;
 	SDL_Texture* bgSnow;
+	SDL_Texture* coin;
+	SDL_Texture* watch;
 	GuiControl* resume;
 	GuiControl* load;
 	GuiControl* settings;

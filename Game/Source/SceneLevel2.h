@@ -51,7 +51,8 @@ private:
 	SDL_Texture* img;
 	SDL_Texture* bgSnow;
 	SDL_Texture* mysteryTex;
-	
+	SDL_Texture* coin;
+	SDL_Texture* watch;
 	int contMenu = 0;
 	GuiControl* resume;
 	GuiControl* exit;

@@ -91,6 +91,8 @@ bool SceneLevel2::Start(bool newGame)
 	mysteryTex = app->tex->Load("Assets/Textures/mystery.png");
 	screamFx = app->audio->LoadFx("Assets/Audio/Fx/scream.wav");
 	bgSnow = app->tex->Load("Assets/Textures/snow_background.png");
+	coin = app->tex->Load("Assets/Textures/coin_animation.png");
+	watch = app->tex->Load("Assets/Textures/watch.png");
 	freeCamera = false;
 	
 	
@@ -324,7 +326,10 @@ bool SceneLevel2::Update(float dt)
 			app->player->canMove = true;
 		}
 	}
-	
+
+	SDL_Rect rect = { 2,2,41,41 };
+	app->render->DrawTexture(coin, app->render->camera.x * -1 + 175, app->render->camera.y * -1 + 80, &rect);
+	app->render->DrawTexture(watch, app->render->camera.x * -1 + 75, app->render->camera.y * -1 + 155);
 	return true;
 }
 
@@ -375,11 +380,11 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 		vsync = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 9, rect, "VSYNC");
 		vsync->SetObserver(this);
 
-		rect = { app->player->position.x - 500 + 825,app->player->position.y - 250 + 200,200,81 };
+		rect = { app->player->position.x - 500 + 825,app->player->position.y - 250 + 200,359,57 };
 		musicVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 1, rect, "MUSIC");
 		musicVolume->SetObserver(this);
 
-		rect = { app->player->position.x - 500 + 825,app->player->position.y - 250 + 300,200,81 };
+		rect = { app->player->position.x - 500 + 825,app->player->position.y - 250 + 300,359,57 };
 		fxVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 2, rect, "FX");
 		fxVolume->SetObserver(this);
 	}else if (control == fullscreen)	

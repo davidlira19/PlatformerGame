@@ -93,6 +93,8 @@ bool SceneLevel1::Start(bool newGame)
 
 	//Load Texture
 	bgSnow = app->tex->Load("Assets/Textures/snow_background.png");
+	coin = app->tex->Load("Assets/Textures/coin_animation.png");
+	watch = app->tex->Load("Assets/Textures/watch.png");
 	freeCamera = false;
 	
 	
@@ -267,6 +269,10 @@ bool SceneLevel1::Update(float dt)
 	app->render->DrawTexture(bgSnow, 7200 / 2, 0);
 	app->render->DrawTexture(bgSnow, 10800 / 2, 0);
 	app->map->Draw();
+
+	SDL_Rect rect = { 2,2,41,41 };
+	app->render->DrawTexture(coin, app->render->camera.x * -1 + 175, app->render->camera.y * -1 + 80,&rect);
+	app->render->DrawTexture(watch, app->render->camera.x * -1 + 75, app->render->camera.y * -1 + 155);
 
 	//CONDITIONS TO WIN - LOSE
 	if (app->player->position.y >= 1602 / 2)
