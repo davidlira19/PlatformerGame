@@ -20,7 +20,7 @@ EnemyAir::EnemyAir(int x, int y) : Entity(x, y)
 	birdRight.loop = true;
 	birdRight.speed = 0.1f;
 	currentAnim = &birdRight;
-
+	deadZ = false;
 	playerWin = app->collisions->AddCollider({ 0, 0, 88, 4 }, Collider::ENEMY1, (Module*)app->entity);
 	collider = app->collisions->AddCollider({ 0, 6, 88, 56 }, Collider::ENEMY2, (Module*)app->entity);
 }

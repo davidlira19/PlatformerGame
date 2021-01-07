@@ -43,23 +43,16 @@ void Entity::Update(float dt)
 	{
 		if (type == EntityTipe::EnemyAir || type == EntityTipe::EnemyGround) 
 		{
-			if (numCounter <= 30) 
+			if (numCounter > 150) 
 			{
-				numCounter++;
+				numCounter = 0;
 			}
-			
-			if (app->player->HasThePlayerMove() == true || numCounter == 30)
+			numCounter++;
+			if (app->player->HasThePlayerMove() == true || numCounter == 120)
 			{
 				path.ResetPath();
-				if (type == EntityTipe::EnemyAir) 
-				{
-					path.start = app->map->WorldToMap(position.x, position.y);
-				}
-				else 
-				{
-					path.start = app->map->WorldToMap(position.x, position.y);
-				}
-
+				path.start = app->map->WorldToMap(position.x, position.y);
+				
 				path.goal = app->map->WorldToMap(app->player->position.x + 64, app->player->position.y + 50);
 				path.frontier.Push(path.start);
 				path.visited.Add(path.start);
@@ -97,53 +90,68 @@ void Entity::Update(float dt)
 				{
 					if (type == EntityTipe::EnemyGround)
 					{
-						if (((app->player->position.y > position.y - 64) || (app->player->position.y < position.y + 64)) &&(app->player->position.x < position.x + 200)  && app->map->numberToMap(position.x) < nextTile.x )
+						if (app->map->numberToMap(position.x) == nextTile.x) 
 						{
-							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64) 
+							if (dire == 1)
 							{
-								dire = 1;
 								position.x += 150 * (dt / 1000);
-							}
-						}
-						else if (((app->player->position.y > position.y - 64) || (app->player->position.y < position.y + 64)) && (app->player->position.x > position.x - 200) && app->map->numberToMap(position.x) > nextTile.x )
-						{
-							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64) 
-							{
-								dire = -1;
-								position.x -= 150 * (dt / 1000);
-							}
-						}
-						else 
-						{
-							if (left == true)
-							{
-								if (app->map->GetTileIdFromPosition(((position.x - 10) / 64), position.y / 64, "collisions") == 64)
-								{
-									dire = -1;
-									position.x -= 100 * (dt / 1000);
-								}
-								else
-								{
-									left = false;
-								}
 							}
 							else 
 							{
-								if (app->map->GetTileIdFromPosition(((position.x + 30) / 64), position.y / 64, "collisions") == 64)
+								position.x -= 150 * (dt / 1000);
+							}
+						}
+						else
+						{
+							if (((app->player->position.y > position.y - 64) || (app->player->position.y < position.y + 64)) && (app->player->position.x < position.x + 200) && app->map->numberToMap(position.x) < nextTile.x)
+							{
+								if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64)
 								{
 									dire = 1;
-									position.x += 100 * (dt / 1000);
+									position.x += 150 * (dt / 1000);
 								}
-								else 
+							}
+							else if (((app->player->position.y > position.y - 64) || (app->player->position.y < position.y + 64)) && (app->player->position.x > position.x - 200) && app->map->numberToMap(position.x) > nextTile.x)
+							{
+								if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64)
 								{
-									left = true;
+									dire = -1;
+									position.x -= 150 * (dt / 1000);
 								}
-							}		
+							}
+							else
+							{
+								if (left == true)
+								{
+									if (app->map->GetTileIdFromPosition(((position.x - 10) / 64), position.y / 64, "collisions") == 64)
+									{
+										dire = -1;
+										position.x -= 100 * (dt / 1000);
+									}
+									else
+									{
+										left = false;
+									}
+								}
+								else
+								{
+									if (app->map->GetTileIdFromPosition(((position.x + 30) / 64), position.y / 64, "collisions") == 64)
+									{
+										dire = 1;
+										position.x += 100 * (dt / 1000);
+									}
+									else
+									{
+										left = true;
+									}
+								}
+							}
 						}
 					}
 					if (type == EntityTipe::EnemyAir)
 					{
-						if (app->map->numberToMap(position.x) < nextTile.x )
+					
+						if (app->map->numberToMap(position.x) < nextTile.x)
 						{
 							dire = 1;
 							position.x += 150 * (dt / 1000);
@@ -156,14 +164,15 @@ void Entity::Update(float dt)
 
 						if (app->map->numberToMap(position.y) < nextTile.y)
 						{
-							dire = 1;
+							//dire = 1;
 							position.y += 150 * (dt / 1000);
 						}
 						else if (app->map->numberToMap(position.y) > nextTile.y)
 						{
-							dire = -1;
+							//dire = -1;
 							position.y -= 150 * (dt / 1000);
 						}
+						
 					}
 					counter = false;
 				}
