@@ -93,7 +93,7 @@ bool SceneLevel1::Start(bool newGame)
 
 	//Load Texture
 	bgSnow = app->tex->Load("Assets/Textures/snow_background.png");
-	coin = app->tex->Load("Assets/Textures/coin_animation.png");
+	coin = app->tex->Load("Assets/Textures/coin_points.png");
 	watch = app->tex->Load("Assets/Textures/watch.png");
 	freeCamera = false;
 	
@@ -270,7 +270,27 @@ bool SceneLevel1::Update(float dt)
 	app->render->DrawTexture(bgSnow, 10800 / 2, 0);
 	app->map->Draw();
 
-	SDL_Rect rect = { 2,2,41,41 };
+	SDL_Rect rect = { 0,210,90,41 };
+	if (score == 0 && score <= 1000)
+	{
+		rect = { 0,210,90,41 };
+	}
+	if (score >= 1001 && score <= 2000)
+	{
+		rect = { 0,168,90,41 };
+	}
+	if (score >= 2001 && score <= 3000)
+	{
+		rect = { 0,126,90,41 };
+	}
+	if (score >= 3001 && score <= 4000)
+	{
+		rect = { 0,84,90,41 };
+	}
+	if (score >= 4001 && score <= 5000)
+	{
+		rect = { 0,42,90,41 };
+	}
 	app->render->DrawTexture(coin, app->render->camera.x * -1 + 175, app->render->camera.y * -1 + 80,&rect);
 	app->render->DrawTexture(watch, app->render->camera.x * -1 + 75, app->render->camera.y * -1 + 155);
 
@@ -433,6 +453,7 @@ bool SceneLevel1::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->tex->UnLoad(bgSnow);
+	app->tex->UnLoad(coin);
 	app->tex->UnLoad(watch);
 	app->map->Disable();
 	app->entity->Disable();
