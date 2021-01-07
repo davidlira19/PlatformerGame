@@ -67,9 +67,9 @@ bool SceneLevel1::Start(bool newGame)
 		app->entity->AddEntity(EntityTipe::EnemyAir, 5005, 560);
 
 		//ZOMBIES
-		app->entity->AddEntity(EntityTipe::EnemyGround, 3022, 776);
-		app->entity->AddEntity(EntityTipe::EnemyGround, 3839, 650);
-		app->entity->AddEntity(EntityTipe::EnemyGround, 4619, 519);
+		app->entity->AddEntity(EntityTipe::EnemyGround, 3022, 778);
+		app->entity->AddEntity(EntityTipe::EnemyGround, 3839, 652);
+		app->entity->AddEntity(EntityTipe::EnemyGround, 4625, 521);
 
 		//COIN
 		app->entity->AddEntity(EntityTipe::Coin, 1860, 435);
@@ -410,14 +410,14 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 		}
 	}else if (control == vsync)	
 	{
-		if (app->maxFPS == 13)
+		if (app->maxFPS == 16)
 		{
-			app->maxFPS = 30;
+			app->maxFPS = 32;
 			app->vsync = true;
 		}
-		else if (app->maxFPS == 30)
+		else if (app->maxFPS == 32)
 		{
-			app->maxFPS = 13;
+			app->maxFPS = 16;
 			app->vsync = false;
 		}
 	}else if (control == musicVolume)	

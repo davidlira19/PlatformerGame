@@ -134,9 +134,6 @@ bool Player::Start(bool newGame)
 	pathCounter = 0;
 	//LOAD TEXTURES
 	santa = app->tex->Load("Assets/Textures/santa_animation.png");
-	winTex = app->tex->Load("Assets/Textures/win_screen.png");
-	deadTex = app->tex->Load("Assets/Textures/dead_screen.png");
-	introTex = app->tex->Load("Assets/Textures/title_screen.png");
 	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/santa_jump.wav");
 	landFx = app->audio->LoadFx("Assets/Audio/Fx/santa_land.wav");
 	coinFx = app->audio->LoadFx("Assets/Audio/Fx/coin_drop.wav");
@@ -417,10 +414,7 @@ Player::~Player()
 }
 bool Player::CleanUp() 
 {
-	app->tex->UnLoad(winTex);
-	app->tex->UnLoad(deadTex);
 	app->tex->UnLoad(santa);
-	app->tex->UnLoad(introTex);
 	app->tex->UnLoad(lifesTex);
 
 	app->audio->Unload(landFx);

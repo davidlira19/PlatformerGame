@@ -419,14 +419,14 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 		}
 	}else if (control == vsync)	
 	{
-		if (app->maxFPS == 13)
+		if (app->maxFPS == 16)
 		{
-			app->maxFPS = 30;
+			app->maxFPS = 32;
 			app->vsync = true;
 		}
-		else if (app->maxFPS == 30)
+		else if (app->maxFPS == 32)
 		{
-			app->maxFPS = 13;
+			app->maxFPS = 16;
 			app->vsync = false;
 		}
 	}else if (control == musicVolume)	
@@ -472,6 +472,7 @@ bool SceneLevel2::CleanUp()
 	app->audio->Unload(screamFx);
 	app->map->Disable();
 	app->entity->Disable();
+	app->player->Disable();
 	
 	//app->audio->Unload();
 	//app->gui->Disable();

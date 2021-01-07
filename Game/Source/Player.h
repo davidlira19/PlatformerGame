@@ -74,10 +74,6 @@ public:
 	bool SaveState(pugi::xml_node* nodo);
 	bool LoadPL();
 	bool SavePL();
-	// WIN-LOSE TEXTURES
-	SDL_Texture* winTex = nullptr;
-	SDL_Texture* deadTex = nullptr;
-	SDL_Texture* introTex = nullptr;
 
 	//FX AUDIO
 	unsigned int jumpFx;
