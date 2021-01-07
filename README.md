@@ -151,4 +151,6 @@ Menu: https://opengameart.org/content/sfx-5-menu-screen-slides
 https://creativecommons.org/licenses/by-sa/4.0/
 https://opengameart.org/content/oga-by-30-faq
 
+Watch: https://www.klipartz.com/es/sticker-png-tzwrw
+
 (Coin and hearts animations and textures are self made)
