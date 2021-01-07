@@ -344,7 +344,7 @@ bool SceneLevel2::Update(float dt)
 	{
 		rect = { 0,84,90,41 };
 	}
-	if (score >= 4001 && score <= 5000)
+	if (score >= 4001)
 	{
 		rect = { 0,42,90,41 };
 	}

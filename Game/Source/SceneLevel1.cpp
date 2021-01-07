@@ -67,7 +67,6 @@ bool SceneLevel1::Start(bool newGame)
 		app->entity->AddEntity(EntityTipe::EnemyAir, 5005, 560);
 
 		//ZOMBIES
-		app->entity->AddEntity(EntityTipe::EnemyGround, 1876, 456);
 		app->entity->AddEntity(EntityTipe::EnemyGround, 3022, 776);
 		app->entity->AddEntity(EntityTipe::EnemyGround, 3839, 650);
 		app->entity->AddEntity(EntityTipe::EnemyGround, 4619, 519);
@@ -287,7 +286,7 @@ bool SceneLevel1::Update(float dt)
 	{
 		rect = { 0,84,90,41 };
 	}
-	if (score >= 4001 && score <= 5000)
+	if (score >= 4001)
 	{
 		rect = { 0,42,90,41 };
 	}
