@@ -18,8 +18,7 @@ public:
 
     int GetMusicValue() override;
 
-private:
-
+public:
     // GuiCheckBox specific properties
     // Maybe some animation properties for state change?
     bool drawRectangle;

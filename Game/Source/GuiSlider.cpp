@@ -85,10 +85,12 @@ bool GuiSlider::Draw()
 	
     if (id == 1)
     {
+        value = app->audio->volumeMusic;
         rect3 = { 1074,921, 91,96 };
     }
     if (id == 2)
     {
+        value = app->audio->volumeFx;
         rect3 = { 1074,1029, 91,96 };
     }
     // Draw the right button depending on state

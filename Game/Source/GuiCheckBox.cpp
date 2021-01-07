@@ -81,6 +81,14 @@ bool GuiCheckBox::Draw()
     SDL_Rect rect9;
     if (id == 8)
     {
+        if (app->win->fullScreenWindow == true)
+        {
+            checked = true;
+        }
+        else
+        {
+            checked = false;
+        }
         rect = { 297,1360,91,96 };
         rect2 = { 403,1360,91,96 };
         rect3 = { 507,1360,91,96 };
@@ -93,6 +101,14 @@ bool GuiCheckBox::Draw()
     }
     if (id == 9)
     {
+        if (app->vsync == true)
+        {
+            checked = true;
+        }
+        else
+        {
+            checked = false;
+        }
         rect = { 297,1360,91,96 };
         rect2 = { 403,1360,91,96 };
         rect3 = { 507,1360,91,96 };
