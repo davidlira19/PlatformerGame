@@ -92,13 +92,16 @@ void Entity::Update(float dt)
 					{
 						if (app->map->numberToMap(position.x) == nextTile.x) 
 						{
-							if (dire == 1)
+							if (app->map->GetTileIdFromPosition(nextTile.x, nextTile.y, "collisions") == 64)
 							{
-								position.x += 150 * (dt / 1000);
-							}
-							else 
-							{
-								position.x -= 150 * (dt / 1000);
+								if (dire == 1)
+								{
+									position.x += 150 * (dt / 1000);
+								}
+								else
+								{
+									position.x -= 150 * (dt / 1000);
+								}
 							}
 						}
 						else
