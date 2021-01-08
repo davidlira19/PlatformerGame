@@ -16,8 +16,6 @@ struct TileSet
 	int	firstgid;
 	int margin;
 	int	spacing;
-	int	tileWidth;
-	int	tileHeight;
 	int tileWidth;
 	int tileHeight;
 	SDL_Texture* textureTile;
