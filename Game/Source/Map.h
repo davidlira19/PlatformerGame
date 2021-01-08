@@ -18,8 +18,8 @@ struct TileSet
 	int	spacing;
 	int	tileWidth;
 	int	tileHeight;
-	int tile_width;
-	int tile_height;
+	int tileWidth;
+	int tileHeight;
 	SDL_Texture* textureTile;
 	int	texWidth;
 	int	texHeight;

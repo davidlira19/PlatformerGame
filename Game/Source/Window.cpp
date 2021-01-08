@@ -110,9 +110,9 @@ bool Window::CleanUp()
 }
 
 // Set new window title
-void Window::SetTitle(const char* new_title)
+void Window::SetTitle(const char* newTitle)
 {
-	SDL_SetWindowTitle(window, new_title);
+	SDL_SetWindowTitle(window, newTitle);
 }
 
 void Window::GetWindowSize(uint& width, uint& height) const

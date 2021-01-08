@@ -10,19 +10,19 @@ class GuiCheckBox : public GuiControl
 {
 public:
 
-    GuiCheckBox(int id, SDL_Rect bounds, const char* text, unsigned int clickedFx, unsigned int focusedFx, SDL_Texture* textureButton);
-    virtual ~GuiCheckBox();
+	GuiCheckBox(int id, SDL_Rect bounds, const char* text, unsigned int clickedFx, unsigned int focusedFx, SDL_Texture* textureButton);
+	virtual ~GuiCheckBox();
 
-    bool Update(float dt);
-    bool Draw();
+	bool Update(float dt);
+	bool Draw();
 
-    int GetMusicValue() override;
+	int GetMusicValue() override;
 
 public:
-    // GuiCheckBox specific properties
-    // Maybe some animation properties for state change?
-    bool drawRectangle;
-    bool checked;
+	// GuiCheckBox specific properties
+	// Maybe some animation properties for state change?
+	bool drawRectangle;
+	bool checked;
 };
 
 #endif // __GUICHECKBOX_H__

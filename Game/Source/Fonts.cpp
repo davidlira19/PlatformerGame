@@ -18,21 +18,21 @@ Fonts::~Fonts()
 }
 
 // Load new texture from file path
-int Fonts::Load(const char* texture_path, const char* characters, uint rows)
+int Fonts::Load(const char* texturePath, const char* characters, uint rows)
 {
 	int id = -1;
 
-	if (texture_path == nullptr || characters == nullptr || rows == 0)
+	if (texturePath == nullptr || characters == nullptr || rows == 0)
 	{
 		LOG("Could not load font");
 		return id;
 	}
 
-	SDL_Texture* tex = app->tex->Load(texture_path);
+	SDL_Texture* tex = app->tex->Load(texturePath);
 
 	if (tex == nullptr || strlen(characters) >= MAX_FONT_CHARS)
 	{
-		LOG("Could not load font at %s with characters '%s'", texture_path, characters);
+		LOG("Could not load font at %s with characters '%s'", texturePath, characters);
 		return id;
 	}
 
@@ -43,7 +43,7 @@ int Fonts::Load(const char* texture_path, const char* characters, uint rows)
 
 	if (id == MAX_FONTS)
 	{
-		LOG("Cannot load font %s. Array is full (max %d).", texture_path, MAX_FONTS);
+		LOG("Cannot load font %s. Array is full (max %d).", texturePath, MAX_FONTS);
 		return id;
 	}
 
@@ -66,38 +66,38 @@ int Fonts::Load(const char* texture_path, const char* characters, uint rows)
 
 	uint tex_w, tex_h;
 	app->tex->GetSize(tex, tex_w, tex_h);
-	font.char_w = 32;
-	font.char_h = 55;
+	font.charw = 32;
+	font.charh = 55;
 
-	LOG("Successfully loaded BMP font from %s", texture_path);
+	LOG("Successfully loaded BMP font from %s", texturePath);
 
 	return id;
 }
 
-void Fonts::UnLoad(int font_id)
+void Fonts::UnLoad(int fontId)
 {
-	if (font_id >= 0 && font_id < MAX_FONTS && fonts[font_id].texture != nullptr)
+	if (fontId >= 0 && fontId < MAX_FONTS && fonts[fontId].texture != nullptr)
 	{
-		app->tex->UnLoad(fonts[font_id].texture);
-		fonts[font_id].texture = nullptr;
-		LOG("Successfully Unloaded BMP font_id %d", font_id);
+		app->tex->UnLoad(fonts[fontId].texture);
+		fonts[fontId].texture = nullptr;
+		LOG("Successfully Unloaded BMP font_id %d", fontId);
 	}
 }
 
-void Fonts::BlitText(int x, int y, int font_id, const char* text) const
+void Fonts::BlitText(int x, int y, int fontId, const char* text) const
 {
-	if (text == nullptr || font_id < 0 || font_id >= MAX_FONTS || fonts[font_id].texture == nullptr)
+	if (text == nullptr || fontId < 0 || fontId >= MAX_FONTS || fonts[fontId].texture == nullptr)
 	{
-		LOG("Unable to render text with bmp font id %d", font_id);
+		LOG("Unable to render text with bmp font id %d", fontId);
 		return;
 	}
 
-	const Font* font = &fonts[font_id];
+	const Font* font = &fonts[fontId];
 	SDL_Rect spriteRect;
 	uint len = strlen(text);
 
-	spriteRect.w = font->char_w;
-	spriteRect.h = font->char_h;
+	spriteRect.w = font->charw;
+	spriteRect.h = font->charh;
 
 	for (uint i = 0; i < len; ++i)
 	{

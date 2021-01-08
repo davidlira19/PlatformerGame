@@ -24,15 +24,15 @@ bool ModuleFadeToBlack::Start(bool newGame)
 bool ModuleFadeToBlack::Update(float dt)
 {
 	// Exit this function if we are not performing a fade
-	if (currentStep == Fade_Step::NONE) return true;
+	if (currentStep == FadeStep::NONE) return true;
 
-	if (currentStep == Fade_Step::TO_BLACK)
+	if (currentStep == FadeStep::TO_BLACK)
 	{
 		++frameCount;
 		if (frameCount >= maxFadeFrames)
 		{
 			// Enable / Disable the modules received when FadeToBlacks(...) gets called
-			currentStep = Fade_Step::FROM_BLACK;
+			currentStep = FadeStep::FROM_BLACK;
 
 			moduleToDisable->Disable();
 			moduleToEnable->Enable();
@@ -44,7 +44,7 @@ bool ModuleFadeToBlack::Update(float dt)
 		--frameCount;
 		if (frameCount <= 0)
 		{
-			currentStep = Fade_Step::NONE;
+			currentStep = FadeStep::NONE;
 		}
 	}
 
@@ -54,7 +54,7 @@ bool ModuleFadeToBlack::Update(float dt)
 bool ModuleFadeToBlack::PostUpdate()
 {
 	// Exit this function if we are not performing a fade
-	if (currentStep == Fade_Step::NONE) return true;
+	if (currentStep == FadeStep::NONE) return true;
 
 	float fadeRatio = (float)frameCount / (float)maxFadeFrames;
 
@@ -70,9 +70,9 @@ bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEna
 	bool ret = false;
 
 	// If we are already in a fade process, ignore this call
-	if (currentStep == Fade_Step::NONE)
+	if (currentStep == FadeStep::NONE)
 	{
-		currentStep = Fade_Step::TO_BLACK;
+		currentStep = FadeStep::TO_BLACK;
 		frameCount = 0;
 		maxFadeFrames = frames;
 

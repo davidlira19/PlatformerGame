@@ -12,96 +12,96 @@
 
 enum class GuiControlType
 {
-    BUTTON,
-    TOGGLE,
-    CHECKBOX,
-    SLIDER,
-    SLIDERBAR,
-    COMBOBOX,
-    DROPDOWNBOX,
-    INPUTBOX,
-    VALUEBOX,
-    SPINNER
+	BUTTON,
+	TOGGLE,
+	CHECKBOX,
+	SLIDER,
+	SLIDERBAR,
+	COMBOBOX,
+	DROPDOWNBOX,
+	INPUTBOX,
+	VALUEBOX,
+	SPINNER
 };
 
 enum class GuiControlState
 {
-    DISABLED,
-    NORMAL,
-    FOCUSED,
-    PRESSED,
-    SELECTED
+	DISABLED,
+	NORMAL,
+	FOCUSED,
+	PRESSED,
+	SELECTED
 };
 
 class GuiControl
 {
 public:
 
-    GuiControl(GuiControlType type, int id) : type(type), id(id), state(GuiControlState::NORMAL) 
+	GuiControl(GuiControlType type, int id) : type(type), id(id), state(GuiControlState::NORMAL) 
 	{
 		
 	}
 
-    GuiControl(GuiControlType type, SDL_Rect bounds, const char* text) :
-        type(type),
-        state(GuiControlState::NORMAL),
-        bounds(bounds),
-        text(text) 
-    {
-        color.r = 255; color.g = 255; color.b = 255;
-        texture = NULL;
+	GuiControl(GuiControlType type, SDL_Rect bounds, const char* text) :
+		type(type),
+		state(GuiControlState::NORMAL),
+		bounds(bounds),
+		text(text) 
+	{
+		color.r = 255; color.g = 255; color.b = 255;
+		texture = NULL;
 		
-    }
+	}
 	virtual ~GuiControl() 
 	{
 		//text.~SString();
 		text.Clear();
 		
 	}
-    virtual bool Update(float dt)
-    {
-        return true;
-    }
+	virtual bool Update(float dt)
+	{
+		return true;
+	}
 
-    virtual bool Draw()
-    {
-        return true;
-    }
+	virtual bool Draw()
+	{
+		return true;
+	}
 
-    void SetTexture(SDL_Texture* tex)
-    {
-        texture = tex;
-        section = { 0, 0, 0, 0 };
-    }
+	void SetTexture(SDL_Texture* tex)
+	{
+		texture = tex;
+		section = { 0, 0, 0, 0 };
+	}
 
-    void SetObserver(Module* module)
-    {
-        observer = module;
-    }
+	void SetObserver(Module* module)
+	{
+		observer = module;
+	}
 
-    void NotifyObserver()
-    {
-        observer->OnGuiMouseClickEvent(this);
-    }
+	void NotifyObserver()
+	{
+		observer->OnGuiMouseClickEvent(this);
+	}
 
-    virtual int GetMusicValue() = 0;
+	virtual int GetMusicValue() = 0;
 public:
 
-    int id;
-    GuiControlType type;
-    GuiControlState state;
+	int id;
+	GuiControlType type;
+	GuiControlState state;
 
-    SString text;           // Control text (if required)
-    SDL_Rect bounds;        // Position and size
-    SDL_Color color;        // Tint color
+	SString text;			// Control text (if required)
+	SDL_Rect bounds;		// Position and size
+	SDL_Color color;		// Tint color
 
-    SDL_Texture* texture;   // Texture atlas reference
-    SDL_Rect section;       // Texture atlas base section
+	SDL_Texture* texture;	// Texture atlas reference
+	SDL_Rect section;		// Texture atlas base section
 	
-    //Font font;              // Text font
+	//Font font;			  // Text font
 	SDL_Texture* textureButtons;
-    SDL_Texture* textureSliders;
-    Module* observer;
+	SDL_Texture* textureSliders;
+	Module* observer;
 	unsigned int focusedFX;
 	unsigned int clickedFX;
 	bool pendingToDelete;
