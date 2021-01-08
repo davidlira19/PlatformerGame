@@ -24,6 +24,9 @@ Win points getting coins and killing enemies by jumping over them!
  - Audio Feedback
  - Easter Egg...
  - HUD
+ - Buttons
+ - Sliders
+ - Checkboxes
  
 ## Controls
 
@@ -50,12 +53,13 @@ Win points getting coins and killing enemies by jumping over them!
  - [F3] Start from the beginning of the current level
  - [F5] Save the current game state
  - [F6] Load the previous state
+ - [F7] Checkpoints teleport
+ - [F8] View Buttons/Sliders/Checkbox colliders
  - [F9] View colliders
  - [F10] God Mode
  
  EXTRA KEYS
  - [4/3] Music volume up/down
- - [T] Checkpoints Teleport
  - [M] Dead animation
  - [F] Enable/disable free camera mode
  - [ESC] Exit Game
@@ -153,4 +157,4 @@ https://opengameart.org/content/oga-by-30-faq
 
 Watch: https://www.klipartz.com/es/sticker-png-tzwrw
 
-(Coin and hearts animations and textures are self made)
+(Coins and hearts animations and textures are self made)
