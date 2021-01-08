@@ -398,7 +398,8 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 		rect = { app->player->position.x - 500 + 825,app->player->position.y - 250 + 300,359,57 };
 		fxVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 2, rect, "FX");
 		fxVolume->SetObserver(this);
-	}else if (control == fullscreen)	
+	}
+	else if (control == fullscreen)	
 	{
 		if (app->win->fullScreenWindow == true)
 		{
@@ -408,7 +409,8 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 		{
 			app->win->fullScreenWindow = true;
 		}
-	}else if (control == vsync)	
+	}
+	else if (control == vsync)	
 	{
 		if (app->maxFPS == 16)
 		{
@@ -420,14 +422,17 @@ bool SceneLevel1::OnGuiMouseClickEvent(GuiControl* control)
 			app->maxFPS = 16;
 			app->vsync = false;
 		}
-	}else if (control == musicVolume)	
+	}
+	else if (control == musicVolume)	
 	{
 		app->audio->volumeMusic = musicVolume->GetMusicValue();
 
-	}else if (control == fxVolume)
+	}
+	else if (control == fxVolume)
 	{
 		app->audio->volumeFx = fxVolume->GetMusicValue();
-	}else if (control == title)
+	}
+	else if (control == title)
 	{
 		//app->player->Disable();
 		/*app->entity->Disable();*/

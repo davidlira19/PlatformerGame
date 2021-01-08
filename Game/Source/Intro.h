@@ -9,38 +9,45 @@
 #include"Textures.h"
 #include"Welcome.h"
 
-class Intro :public Module {
+class Intro :public Module 
+{
 public:
-	Intro(bool startEnabled) : Module(startEnabled) {
+	Intro(bool startEnabled) : Module(startEnabled) 
+	{
 		counter = 0;
 	}
 
 	// Destructor
-	virtual ~Intro() {
+	virtual ~Intro() 
+	{
 
 	}
 
 	// Called before render is available
-	bool Awake() {
+	bool Awake() 
+	{
 		
 		return true;
 	}
 
 	// Called before the first frame
-	bool Start(bool newGame) {
+	bool Start(bool newGame) 
+	{
 		intro=app->tex->Load("Assets/Textures/logo_screen.png");
 		return true;
 	}
 
 	// Called each loop iteration
-	bool Update(float dt) {
+	bool Update(float dt) 
+	{
 		counter++;
 
 		return true;
 	}
 
 	// Called before all Updates
-	bool PostUpdate() {
+	bool PostUpdate() 
+	{
 
 		if (counter ==150) 
 		{
@@ -51,7 +58,8 @@ public:
 	}
 
 	// Called before quitting
-	bool CleanUp() {
+	bool CleanUp() 
+	{
 
 		app->tex->UnLoad(intro);
 		return true;

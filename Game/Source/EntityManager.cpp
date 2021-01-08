@@ -206,7 +206,8 @@ bool EntityManager::LoadState(pugi::xml_node* nodo)
 {
 	ListItem<Entity*>* listItem;
 	listItem = entityList.start;
-	while (listItem != nullptr) {
+	while (listItem != nullptr) 
+	{
 		//listItem->data->path.ResetPath();
 		delete listItem->data;
 		entityList.Del(listItem);

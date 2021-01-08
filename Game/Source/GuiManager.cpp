@@ -11,7 +11,8 @@ GuiManager::GuiManager(bool startEnabled) : Module(startEnabled)
 {
 
 }
-GuiManager::~GuiManager() {
+GuiManager::~GuiManager() 
+{
 
 }
 bool GuiManager::Start(bool newGame)

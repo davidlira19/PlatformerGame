@@ -378,7 +378,8 @@ bool Player::PostUpdate()
 		{
 			dead = false;
 			app->LoadGameRequest("save_game.xml");
-		}else if (lifes <= 0)
+		}
+		else if (lifes <= 0)
 		{
 			if (currentAnimation == &runRight || currentAnimation == &stopRight || currentAnimation == &jumpRight)
 			{
@@ -557,7 +558,8 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 					{
 						sum -= 1;
 						c1->rect.y -= 1;
-						if (c1->Intersects(c2->rect) == false) {
+						if (c1->Intersects(c2->rect) == false) 
+						{
 							c1->rect.y += 1;
 							sum += 1;
 							break;

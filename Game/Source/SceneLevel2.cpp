@@ -390,7 +390,8 @@ bool SceneLevel2::OnGuiMouseClickEvent(GuiControl* control)
 		menu = false;
 		app->player->godMode = false;
 		app->player->canMove = true;
-	}else if (control == settings)	
+	}
+	else if (control == settings)	
 	{
 		SDL_Rect rect = { app->player->position.x - 500 + 725,app->player->position.y - 250 + 400,91,96 };
 		fullscreen = app->gui->CreateGuiControl(GuiControlType::CHECKBOX, 8, rect, "FULLSCREEN");

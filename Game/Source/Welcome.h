@@ -46,7 +46,8 @@ public:
 		{
 			return true;
 		}
-		else {
+		else 
+		{
 			return false;
 		}
 	}
@@ -100,21 +101,24 @@ public:
 		if (control == start)
 		{
 			app->fade->FadeToBlack(this, (Module*)app->sceneLevel1, 60);
-		}else if (control == load)		
+		}
+		else if (control == load)		
 		{
 			
 			if (Level() == 1) 
 			{
 				app->sceneLevel1->isEnabled = true;
 				app->sceneLevel1->Start(true);
-			}else
+			}
+			else
 			{			
 				app->sceneLevel2->isEnabled = true;
 				app->sceneLevel2->Start(true);
 			}
 			this->Disable();
 			app->gui->Enable();
-		}else if (control == settings)	
+		}
+		else if (control == settings)	
 		{
 			menu = true;
 			SDL_Rect rect = {720,410,91,96 };
@@ -132,7 +136,8 @@ public:
 			rect = { 820,310,359,57 };
 			fxVolume = app->gui->CreateGuiControl(GuiControlType::SLIDER, 2, rect, "FX");
 			fxVolume->SetObserver(this);
-		}else if (control == fullscreen)	
+		}
+		else if (control == fullscreen)	
 		{
 			if (app->win->fullScreenWindow == true)
 			{
@@ -142,7 +147,8 @@ public:
 			{
 				app->win->fullScreenWindow = true;
 			}
-		}else if (control == vsync)		
+		}
+		else if (control == vsync)		
 		{
 			if (app->maxFPS == 16)
 			{
@@ -154,16 +160,20 @@ public:
 				app->maxFPS = 16;
 				app->vsync = false;
 			}
-		}else if (control == musicVolume)	
+		}
+		else if (control == musicVolume)	
 		{
 			app->audio->volumeMusic = musicVolume->GetMusicValue();
-		}else if (control == fxVolume)	
+		}
+		else if (control == fxVolume)	
 		{
 			app->audio->volumeFx = fxVolume->GetMusicValue();
-		}else if (control == credits)		
+		}
+		else if (control == credits)		
 		{
 			creditsCondition = true;
-		}else if (control == exit)	
+		}
+		else if (control == exit)	
 		{
 			SDL_Quit();
 		}
