@@ -14,7 +14,7 @@
 
 struct EnemySpawnpoint
 {
-	EntityTipe type = EntityTipe::NO_TYPE;
+	EntityType type = EntityType::NO_TYPE;
 	int x, y, direction;
 };
 
@@ -51,7 +51,7 @@ public:
 	// The enemy is destroyed and an explosion particle is fired
 
 	// Add an enemy into the queue to be spawned later
-	bool AddEntity(EntityTipe type, int x, int y);
+	bool AddEntity(EntityType type, int x, int y);
 
 	// Iterates the queue and checks for camera position
 	void HandleEnemiesSpawn();

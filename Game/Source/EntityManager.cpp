@@ -91,13 +91,13 @@ bool EntityManager::CleanUp()
 	return true;
 }
 
-bool EntityManager::AddEntity(EntityTipe type, int x, int y)
+bool EntityManager::AddEntity(EntityType type, int x, int y)
 {
 	bool ret = false;
 
 	for(int i=0;i< MAX_ENEMIES;i++)
 	{
-		if (spawnQueue[i].type == EntityTipe::NO_TYPE)
+		if (spawnQueue[i].type == EntityType::NO_TYPE)
 		{
 			spawnQueue[i].type = type;
 			spawnQueue[i].x = x;
@@ -113,10 +113,10 @@ void EntityManager::HandleEnemiesSpawn()
 {
 	for(int i=0;i<MAX_ENEMIES;i++)
 	{
-		if (spawnQueue[i].type != EntityTipe::NO_TYPE)
+		if (spawnQueue[i].type != EntityType::NO_TYPE)
 		{
 			SpawnEnemy(spawnQueue[i]);
-			spawnQueue[i].type = EntityTipe::NO_TYPE;
+			spawnQueue[i].type = EntityType::NO_TYPE;
 		}
 
 	}
@@ -142,21 +142,21 @@ void EntityManager::SpawnEnemy(const EnemySpawnpoint& info)
 	Entity* entity = nullptr;
 	switch (info.type)
 	{
-	case EntityTipe::EnemyAir:
+	case EntityType::ENEMY_AIR:
 		entity = new EnemyAir(info.x, info.y);
 		entity->airEnemiesTexture = birdTexture;
 		entity->birdFx = birdFx;
 		break;
-	case EntityTipe::EnemyGround:
+	case EntityType::ENEMY_GROUND:
 		entity = new EnemyGround(info.x, info.y);
 		entity->groundEnemiesTexture = zombieTexture;
 		entity->zombieFx = zombieFx;
 		break;
-	case EntityTipe::Coin:
+	case EntityType::COIN:
 		entity = new Coin(info.x, info.y);
 		entity->moneyTexture = coinTexture;
 		break;
-	case EntityTipe::Heart:
+	case EntityType::HEART:
 		entity = new Heart(info.x, info.y);
 		entity->lifeTexture = heartTexture;
 		break;
@@ -218,25 +218,25 @@ bool EntityManager::LoadState(pugi::xml_node* nodo)
 	auxiliar = nodo->child("data");
 	int num = auxiliar.attribute("num").as_int();
 	auxiliar = auxiliar.child("Enemy");
-	EntityTipe auxiliarTipe = EntityTipe::EnemyAir;
+	EntityType auxiliarTipe = EntityType::ENEMY_AIR;
 	for (int i = 0; i < num; i++)
 	{
 		SString string = auxiliar.attribute("type").as_string();
 		if (string == "EnemyAir")
 		{
-			auxiliarTipe = EntityTipe::EnemyAir;
+			auxiliarTipe = EntityType::ENEMY_AIR;
 		}
 		else if (string == "EnemyGround")
 		{
-			auxiliarTipe = EntityTipe::EnemyGround;
+			auxiliarTipe = EntityType::ENEMY_GROUND;
 		}
 		else if (string == "Coin")
 		{
-			auxiliarTipe = EntityTipe::Coin;
+			auxiliarTipe = EntityType::COIN;
 		}
 		else if (string == "Heart")
 		{
-			auxiliarTipe = EntityTipe::Heart;
+			auxiliarTipe = EntityType::HEART;
 		}
 		AddEntity(auxiliarTipe, auxiliar.attribute("x").as_int(), auxiliar.attribute("y").as_int());
 		auxiliar = auxiliar.next_sibling();
@@ -256,19 +256,19 @@ bool EntityManager::SaveState(pugi::xml_node* nodo)
 	{
 		auxiliar.append_child("Enemy").append_attribute("x").set_value(list->data->position.x);
 		auxiliar.last_child().append_attribute("y").set_value(list->data->position.y);
-		if (list->data->type == EntityTipe::EnemyAir)
+		if (list->data->type == EntityType::ENEMY_AIR)
 		{
 			auxiliar.last_child().append_attribute("type").set_value("EnemyAir");
 		}
-		else if (list->data->type == EntityTipe::EnemyGround)
+		else if (list->data->type == EntityType::ENEMY_GROUND)
 		{
 			auxiliar.last_child().append_attribute("type").set_value("EnemyGround");
 		}
-		else if (list->data->type == EntityTipe::Coin)
+		else if (list->data->type == EntityType::COIN)
 		{
 			auxiliar.last_child().append_attribute("type").set_value("Coin");
 		}
-		else if (list->data->type == EntityTipe::Heart)
+		else if (list->data->type == EntityType::HEART)
 		{
 			auxiliar.last_child().append_attribute("type").set_value("Heart");
 		}

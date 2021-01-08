@@ -41,7 +41,7 @@ void Entity::Update(float dt)
 	}
 	if (app->player->godMode == false)
 	{
-		if (type == EntityTipe::EnemyAir || type == EntityTipe::EnemyGround) 
+		if (type == EntityType::ENEMY_AIR || type == EntityType::ENEMY_GROUND) 
 		{
 			if (numCounter > 150) 
 			{
@@ -88,7 +88,7 @@ void Entity::Update(float dt)
 				}
 				if (deadZ == false)
 				{
-					if (type == EntityTipe::EnemyGround)
+					if (type == EntityType::ENEMY_GROUND)
 					{
 						if (app->map->numberToMap(position.x) == nextTile.x) 
 						{
@@ -151,7 +151,7 @@ void Entity::Update(float dt)
 							}
 						}
 					}
-					if (type == EntityTipe::EnemyAir)
+					if (type == EntityType::ENEMY_AIR)
 					{
 					
 						if (app->map->numberToMap(position.x) < nextTile.x)
@@ -192,7 +192,7 @@ void Entity::OnCollision(Collider* collideri, Collider* collidere)
 	{
 		if (collidere->type == Collider::PLAYER) 
 		{
-			if (type == EntityTipe::EnemyAir)
+			if (type == EntityType::ENEMY_AIR)
 			{
 				app->audio->PlayFx(birdFx);
 				app->player->points += 300;

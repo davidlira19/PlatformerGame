@@ -61,23 +61,23 @@ bool SceneLevel1::Start(bool newGame)
 		app->player->position.x = 1150;
 		app->player->position.y = 560;
 
-		app->entity->AddEntity(EntityTipe::EnemyAir, 1633, 200);
-		app->entity->AddEntity(EntityTipe::EnemyAir, 3343, 670);
-		app->entity->AddEntity(EntityTipe::EnemyAir, 4300, 550);
-		app->entity->AddEntity(EntityTipe::EnemyAir, 5005, 560);
+		app->entity->AddEntity(EntityType::ENEMY_AIR, 1633, 200);
+		app->entity->AddEntity(EntityType::ENEMY_AIR, 3343, 670);
+		app->entity->AddEntity(EntityType::ENEMY_AIR, 4300, 550);
+		app->entity->AddEntity(EntityType::ENEMY_AIR, 5005, 560);
 
 		//ZOMBIES
-		app->entity->AddEntity(EntityTipe::EnemyGround, 3022, 778);
-		app->entity->AddEntity(EntityTipe::EnemyGround, 3839, 652);
-		app->entity->AddEntity(EntityTipe::EnemyGround, 4625, 521);
+		app->entity->AddEntity(EntityType::ENEMY_GROUND, 3022, 778);
+		app->entity->AddEntity(EntityType::ENEMY_GROUND, 3839, 652);
+		app->entity->AddEntity(EntityType::ENEMY_GROUND, 4625, 521);
 
 		//COIN
-		app->entity->AddEntity(EntityTipe::Coin, 1860, 435);
-		app->entity->AddEntity(EntityTipe::Coin, 3000, 755);
-		app->entity->AddEntity(EntityTipe::Coin, 100, 100);
+		app->entity->AddEntity(EntityType::COIN, 1860, 435);
+		app->entity->AddEntity(EntityType::COIN, 3000, 755);
+		app->entity->AddEntity(EntityType::COIN, 100, 100);
 
 		//HEART
-		app->entity->AddEntity(EntityTipe::Heart, 1000, 435);
+		app->entity->AddEntity(EntityType::HEART, 1000, 435);
 	}
 	// Load map
 	app->map->Enable();

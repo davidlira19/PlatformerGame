@@ -8,13 +8,13 @@
 #include "PathFinding.h"
 #include "Render.h"
 
-enum class EntityTipe
+enum class EntityType
 {
 	NO_TYPE,
-	EnemyAir,
-	EnemyGround,
-	Coin,
-	Heart
+	ENEMY_AIR,
+	ENEMY_GROUND,
+	COIN,
+	HEART
 };
 
 class Entity
@@ -49,7 +49,7 @@ public:
 	bool pendienteDeElim = false;
 
 	// The enemy's texture
-	EntityTipe type;
+	EntityType type;
 
 	// Sound fx when destroyed
 	SDL_Texture* airEnemiesTexture;

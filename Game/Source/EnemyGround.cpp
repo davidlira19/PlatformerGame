@@ -142,7 +142,7 @@ void EnemyGround::OnCollision(Collider* collideri, Collider* collidere)
 	{
 		if (collidere->type == Collider::PLAYER)
 		{
-			if (type == EntityTipe::EnemyGround)
+			if (type == EntityType::ENEMY_GROUND)
 			{
 				deadZ = true;
 				if (cont == 0)
