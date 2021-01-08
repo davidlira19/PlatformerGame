@@ -201,13 +201,13 @@ bool SceneLevel1::Update(float dt)
 		}
 	}
 
-	if ((app->player->position.x >= 1000 && app->player->position.x <= 2140 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) || (app->player->position.x >= 4900 && app->player->position.x <= 5700 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN))
+	if ((app->player->position.x >= 1000 && app->player->position.x <= 2140 && app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) || (app->player->position.x >= 4900 && app->player->position.x <= 5700 && app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN))
 	{
 		app->player->position.x = 2141;
 		app->player->position.y = 435;
 	}
 
-	else if (app->player->position.x >= 2141 && app->player->position.x <= 4903 && app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+	else if (app->player->position.x >= 2141 && app->player->position.x <= 4903 && app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)
 	{
 		app->player->position.x = 4900;
 		app->player->position.y = 563;
